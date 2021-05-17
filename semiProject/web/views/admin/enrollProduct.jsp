@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    <%@ include file="/views/common/header.jsp"%>
+    
     <section>
 
         <h1 class="pe" style="margin-left: 40px;"> 상품 관리 </h1>
@@ -130,4 +132,4 @@
     <script></script>
 
 
-<%@ include file="/views/common/header.jsp"%>
+<%@ include file="/views/common/footer.jsp"%>
