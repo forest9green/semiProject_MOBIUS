@@ -380,7 +380,6 @@
         margin: 0 auto 7px;
         width: 150px;
         height: 80px;
-        
     }
     
 </style>
