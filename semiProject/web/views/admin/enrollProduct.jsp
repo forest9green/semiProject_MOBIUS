@@ -58,8 +58,8 @@
                         <th style="width:40px">상태</th>
                         
                         <tr>
-                            <td><input type="text" style="width:80px;"</td>
-                            <td><input type="text" style="width:80px;"</td>
+                            <td><input type="text" style="width:80px;"></td>
+                            <td><input type="text" style="width:80px;"></td>
                             <td>	
                                 <div class="dropdown">
                                     <div id="dropdown_category">
