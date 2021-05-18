@@ -37,16 +37,16 @@ public class UserDao {
 			
 			if(rs.next()) {
 				u=new User();
-				u.setUserId(rs.getString("userId"));
-				u.setUserPwd(rs.getString("userPw"));
-				u.setUserName(rs.getString("userName"));
+				u.setUserId(rs.getString("user_Id"));
+				u.setUserPwd(rs.getString("user_Pwd"));
+				u.setUserName(rs.getString("user_Name"));
 				u.setEmail(rs.getString("email"));
-				u.setEmailSmsCk(rs.getInt("emailSmsCk"));
-				u.setCellPhone(rs.getString("cellphone"));
-				u.setPhoneSmsCk(rs.getInt("phoneSmsCk"));
+				u.setEmailSmsCk(rs.getInt("email_Sms_Ck"));
+				u.setCellPhone(rs.getString("cellPhone"));
+				u.setPhoneSmsCk(rs.getInt("phone_Sms_Ck"));
 				u.setPhone(rs.getString("phone"));
-				u.setJoinDate(rs.getDate("joinDate"));
-				u.setRecentDate(rs.getDate("recentDate"));
+				u.setJoinDate(rs.getDate("join_Date"));
+				u.setRecentDate(rs.getDate("recent_Date"));
 				u.setMileage(rs.getInt("mileage"));
 				
 				
