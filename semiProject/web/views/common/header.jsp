@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.user.model.vo.User" %>
+<%
+	User loginUser = (User)session.getAttribute("loginUser");
+	Cookie[] cookies=request.getCookies();
+	String saveId=null;
+	if(cookies!=null){
+		for(Cookie c : cookies){
+			if(c.getName().equals("saveId")){
+				saveId=c.getValue();
+				break;
+			}
+		}
+	}
+
+%>    
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
@@ -25,7 +40,11 @@
                 <span>
                     <ul>
                         <li class="pa"><a href="">MyPage</a></li>
+                     <%if(loginUser==null) {%>
                         <li class="pa"><a href="<%=request.getContextPath()%>/views/member/loginPage.jsp">Login</a></li>
+                     <%}else{ %>
+                        <li class="pa"><a href="<%=request.getContextPath()%>/user/logout">Logout</a></li>
+                     <%} %>
                         <li class="pa"><a href="" >Join</a></li>
                         <li class="pa"><a href="">Order</a></li>
                         <li class="pa"><a href="">Cart</a></li>

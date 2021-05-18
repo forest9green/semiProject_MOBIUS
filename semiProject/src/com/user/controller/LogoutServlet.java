@@ -2,29 +2,24 @@ package com.user.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.user.model.service.UserService;
-import com.user.model.vo.User;
-
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet("/user/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/user/logout")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,43 +29,20 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
-		String userId=request.getParameter("userId");
-		String userPw=request.getParameter("userPw");
-		User u = new UserService().login(userId,userPw);
+
+		HttpSession session = request.getSession();
 		
-		String saveId=request.getParameter("saveId");
-		
-		if(saveId!=null) {
-			Cookie c = new Cookie("saveId",userId);
-			c.setMaxAge(7*24*60*60);
-			response.addCookie(c);
-		}else {
-			Cookie c = new Cookie("saveId","");
-			c.setMaxAge(0);
-			response.addCookie(c);
-		}
-	
-	
-		if(u!=null) {
-			HttpSession session=request.getSession();
-			session.setAttribute("loginUser",u);
-			request.setAttribute("msg", "로그인 성공");
-			request.setAttribute("loc", "/index.jsp");
+		if(session!=null) {
+			session.invalidate();
 			
-			
-		}else {
-			
-			request.setAttribute("msg","로그인 실패, 아이디/패스워드를 확인해주세요");
+			request.setAttribute("msg", "로그아웃되었습니다.");
 			request.setAttribute("loc", "/views/member/loginPage.jsp");
 			
+			request.getRequestDispatcher("views/common/msg.jsp")
+			.forward(request, response);
 		}
-		
-		request.getRequestDispatcher("/views/common/msg.jsp")
-		.forward(request, response);
-		
-
-		
+	
+	
 	
 	
 	}

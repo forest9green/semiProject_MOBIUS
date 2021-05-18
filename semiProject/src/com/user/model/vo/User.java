@@ -124,4 +124,13 @@ public class User {
 		this.mileage = mileage;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", email=" + email
+				+ ", emailSmsCk=" + emailSmsCk + ", cellPhone=" + cellPhone + ", phoneSmsCk=" + phoneSmsCk + ", phone="
+				+ phone + ", joinDate=" + joinDate + ", recentDate=" + recentDate + ", mileage=" + mileage + "]";
+	}
+	
+	
+
 }

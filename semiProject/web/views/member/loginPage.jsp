@@ -2,21 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp"%>
-<%@ page import="com.user.model.vo.User" %>
-<%
-	User loginUser=(User)session.getAttribute("loginUser");
-	Cookie[] cookies = request.getCookies();
-	String saveId=null;
-	if(cookies!=null){
-		for(Cookie c : cookies){
-			if(c.getName().equals("saveId")){
-				saveId=c.getValue();
-				break;
-			}
-		}
-	}
 
-%>
 
 <section>
     <div>    
@@ -24,7 +10,7 @@
             <div class="location_wrap">
                 <div class="location_cont">
                     <em>
-                        <a class="local_home" href="">HOME</a>
+                        <a class="local_home" href="<%=request.getContextPath() %>/index.jsp">HOME</a>
                          &gt; 로그인
                     </em>
                 </div>
@@ -40,9 +26,9 @@
                  
                                 <div class="login_input_sec">
                                     <div>
-                                        <input placeholder="아이디" type="text" id="userId"> 
-                                        <input placeholder="비밀번호" type="password" id="userPw">
-                                    </div>
+                                        <input placeholder="아이디" type="text" id="userId" name="userId"> 
+                                        <input placeholder="비밀번호" type="password" id="userPw" name="userPw">
+                                	</div>
                                     <button type="submit"><h2>로그인</h2></button>
                                     <div class="id_chk">
                                             <input type="checkbox" value="y" name="saveId" id="saveId"
@@ -50,9 +36,9 @@
                                             <label for="saveId">아이디 저장</label>
                                       
                                     </div>
-                        </form>        
-                            </div>
-                  			<div class="member_sns_login">
+                                  </div>
+                        </form>    
+                        <div class="member_sns_login">
                                 <a class="btn_kakao_login" href="">
                                     <img src="" alt="카카오 아이디 로그인">
                                 </a>
@@ -62,7 +48,9 @@
                                 <a class="btn_google-login" href="">
                                     <img src="" alt="구글 아이디 로그인">
                                 </a>
-                            </div>
+                     	</div>    
+                    </div>
+                  
                             <div class="btn_login_box">
                                 <ul>
                                     <li>
@@ -78,7 +66,6 @@
                 </div>    
             </div>
         </div>
-    </div>
 </section>    
 
 
