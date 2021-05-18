@@ -20,16 +20,17 @@
                         <h2>회원 로그인</h2>
                     </div>  
                     <div class="member_cont">
-                        <form id="formLogin" method="" action="">
+                        <form id="loginFrm" method="post" action="<%=request.getContextPath()%>/user/login" 
+                        onsubmit="return fn_login_validate()">
                             
                                 <div class="login_input_sec">
                                     <div>
-                                        <input placeholder="아이디" type="text" id="loginId"> 
-                                        <input placeholder="비밀번호" type="password" id="loginPwd">
+                                        <input placeholder="아이디" type="text" id="userId"> 
+                                        <input placeholder="비밀번호" type="password" id="userPw">
                                     </div>
                                     <button type="submit"><h2>로그인</h2></button>
                                     <div class="id_chk">
-                                            <input type="checkbox" value="y" name="saveId" id="saveId" checked>
+                                            <input type="checkbox" value="y" name="saveId" id="saveId" <%-- <%=saveId!=null?saveid:"" % --%>>>
                                             <label for="saveId">아이디 저장</label>
                                       
                                     </div>
@@ -62,6 +63,37 @@
         </div>
     </div>
 </section>    
+
+
+	<script>
+		const fn_login_validate=()=>{
+			const userId=$("#userId").val();
+			if(userId.trim().length<4){
+				alert("아이디는 4글자 이상입니다.");
+				return false;
+			}
+		
+			const pw=$("#userPw").val();
+			if(pw.trim()==0){
+				alert("비밀번호를 입력하세요.");
+				return false;
+		
+		
+		
+		}
+		
+		
+		
+		
+	</script>
+
+
+
+
+
+
+
+
 
 <style>
     #contents{

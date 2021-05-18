@@ -321,7 +321,7 @@
             </div>
             <div class="fixed_chat">
                 <a href="http://pf.kakao.com/_mxjxazs">
-                    <img src="https://lh3.googleusercontent.com/proxy/uoNsj-4TtBwQW4KWneSjFOLq7Zj05OGmhi4lh19hMKMAE73Q2CAJrY0-A3sU3ybP-bmt3lpMj8UVoVChQyfkl4NiFO4727tjn059YRMp9GO_H4dS2L_AYVnm73TuOB1SokAbRsk9D8g4LB9k_CMrUgWs8_wEKoSdDXUGyO36hrmN7IqMF7CuJfAzaLcMPKNUJa5rzNtsXVpngwhunSx6y46H4s14NR8Q9p2cyD5xcDc-I997oyLSHX6egxSRqEYnF8whRDWYNrOMyn2mpGT_L0fGXo6-mWTRn4JJdvaGBgp5QpTnKlOHYGWVENDDqNuuFTIEaGh0XX6R8ct61ALTJ6TwGfK73qg_qA0Zvq4hLuJ0vwauqTxmpQ-ZP1v8vQkulcV4lAFUP1FnT-6A0PU4-b2Dy7YutDHE9eYzc_g" alt="">
+                    <img src="<%=request.getContextPath() %>/images/plusFriend.png" alt="">
                 </a>
             </div>
         </div>
