@@ -2,6 +2,21 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp"%>
+<%@ page import="com.user.model.vo.User" %>
+<%
+	User loginUser=(User)session.getAttribute("loginUser");
+	Cookie[] cookies = request.getCookies();
+	String saveId=null;
+	if(cookies!=null){
+		for(Cookie c : cookies){
+			if(c.getName().equals("saveId")){
+				saveId=c.getValue();
+				break;
+			}
+		}
+	}
+
+%>
 
 <section>
     <div>    
@@ -22,7 +37,7 @@
                     <div class="member_cont">
                         <form id="loginFrm" method="post" action="<%=request.getContextPath()%>/user/login" 
                         onsubmit="return fn_login_validate()">
-                            
+                 
                                 <div class="login_input_sec">
                                     <div>
                                         <input placeholder="아이디" type="text" id="userId"> 
@@ -30,12 +45,14 @@
                                     </div>
                                     <button type="submit"><h2>로그인</h2></button>
                                     <div class="id_chk">
-                                            <input type="checkbox" value="y" name="saveId" id="saveId" <%-- <%=saveId!=null?saveid:"" % --%>>>
+                                            <input type="checkbox" value="y" name="saveId" id="saveId"
+                                            <%=saveId!=null?"checked":"" %>>
                                             <label for="saveId">아이디 저장</label>
                                       
                                     </div>
-                                
-                            </div>                                    <div class="member_sns_login">
+                        </form>        
+                            </div>
+                  			<div class="member_sns_login">
                                 <a class="btn_kakao_login" href="">
                                     <img src="" alt="카카오 아이디 로그인">
                                 </a>
@@ -56,7 +73,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </form>
+                        
                     </div>    
                 </div>    
             </div>
@@ -154,7 +171,7 @@
     .login_input_sec>div{
         float: left;
     }
-    .login_input_sec #loginId,#loginPwd{
+    .login_input_sec #userId,#userPw{
         display: block;
         width: 292px;
         height: 36px;

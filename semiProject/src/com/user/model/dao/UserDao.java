@@ -40,6 +40,16 @@ public class UserDao {
 				u.setUserId(rs.getString("userId"));
 				u.setUserPwd(rs.getString("userPw"));
 				u.setUserName(rs.getString("userName"));
+				u.setEmail(rs.getString("email"));
+				u.setEmailSmsCk(rs.getInt("emailSmsCk"));
+				u.setCellPhone(rs.getString("cellphone"));
+				u.setPhoneSmsCk(rs.getInt("phoneSmsCk"));
+				u.setPhone(rs.getString("phone"));
+				u.setJoinDate(rs.getDate("joinDate"));
+				u.setRecentDate(rs.getDate("recentDate"));
+				u.setMileage(rs.getInt("mileage"));
+				
+				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
