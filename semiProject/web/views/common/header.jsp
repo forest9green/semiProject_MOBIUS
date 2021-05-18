@@ -70,6 +70,6 @@
                         <li class="pe"><a href="">NOTICE</a></li>
                     </ul>
                 </span>
-                <span><h1 class="pf">Shop Title</h1></span>
+                <span><h1 class="pf"><a href="<%=request.getContextPath() %>">Shop Title</a></h1></span>
             </div>        
         </header>
