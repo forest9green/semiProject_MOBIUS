@@ -32,11 +32,12 @@ public class LogoutServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		
+		
 		if(session!=null) {
 			session.invalidate();
 			
 			request.setAttribute("msg", "로그아웃되었습니다.");
-			request.setAttribute("loc", "/views/member/loginPage.jsp");
+			request.setAttribute("loc", request.getContextPath()+"/views/index.jsp");
 			
 			request.getRequestDispatcher("views/common/msg.jsp")
 			.forward(request, response);
