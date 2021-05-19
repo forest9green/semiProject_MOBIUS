@@ -212,7 +212,7 @@
                 </tbody>
                 </table>
          
-                <form id="search" action="" method="get" style="margin-left:280px;margin-top:20px;">
+                <form id="search" action="" method="get" style="margin-left:250px;margin-top:20px;">
                     <input type="search" name="searchheader">
                     <input type="submit" value="&#xf002;">
                 </form>
