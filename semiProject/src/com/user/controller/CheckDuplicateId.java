@@ -7,19 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.user.model.service.UserService;
+import com.user.model.vo.User;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class CheckDuplicateId
  */
-@WebServlet("/user/logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/user/checkDuplicateId")
+public class CheckDuplicateId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public CheckDuplicateId() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +32,18 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		HttpSession session = request.getSession();
+	
+		String userId=request.getParameter("userId");
 		
+		User u = new UserService().checkDuplicateId(userId);
 		
-		if(session!=null) {
-			session.invalidate();
-			
-
-		}
-		request.setAttribute("msg", "로그아웃되었습니다.");
-		request.setAttribute("loc", "/views/member/loginPage.jsp");
-		
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member.checkDuplicateId.jsp")
+		.forward(request, response);
+	
+	
+	
+	
+	
 	
 	
 	

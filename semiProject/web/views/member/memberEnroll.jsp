@@ -8,7 +8,7 @@
         <div class="location_wrap">
             <div class="location_cont">
                 <em class="pd">
-                    <a href="" class="local_home">HOME</a>
+                    <a href="<%=request.getContextPath() %>/index.jsp" class="local_home">HOME</a>
                     > 회원가입 > 정보입력
                 </em>
             </div>
@@ -18,7 +18,8 @@
                 <h2 class="pf">회원가입</h2>
             </div>
             <div class="member_cont">
-                <form id="formJoin" name="formJoin" action="" method="post" novalidate>
+                <form id="formJoin" name="formJoin" action="<%=request.getContextPath() %>/user/memberenrollend"
+                 method="post" onsubmit="return fn_enroll_validate();" >
                     <div class="base_info_box">
                         <h3 class="pd">기본정보</h3>
                         <span class="important pc" style="margin-top: 40px;">*표시는 반드시 입력하셔야 하는 항목입니다.</span>
@@ -35,8 +36,8 @@
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="text" id="memId" name="memId" data-pattern="gdMemberId">
-                                                <input type="button" value="중복확인">
+                                                <input type="text" id="userId_" name="userId" data-pattern="gdMemberId">
+                                                <input type="button" value="중복확인" onclick="fn_id_duplicate();">
                                             </div>
                                         </td>
                                     </tr>
@@ -46,28 +47,31 @@
                                         </th>
                                         <td class="member_password">
                                             <div class="member_warning">
-                                                <input type="password" id="newPassword" name="memPw" autocomplete="off" class="ignore">
+                                                <input type="password" id="password_" name="userPw" autocomplete="off" class="ignore">
+                                           		<span class="pw-info pa">비밀번호는 8~20자리의 영문자와 숫자로 구성되어야합니다.</span>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr class="380">  
                                         <th>
                                             <span class="important">*비밀번호 확인</span>
+                                            
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="password" class="check_id ignore" name="memPwRe" autocomplete="off">
+                                                <input type="password" class="check_id ignore" name="memPwRe" id="password_2" autocomplete="off">
+                                            	<span id="pwck-container"></span>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr class="380">
                                         <th>
                                             <span class="important">*이름</span>
-                                            
+                                  
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="text" name="memNm" data-pattern="gdMemberNmglobal" maxlength="30">
+                                                <input type="text" name="userName" id="userName" data-pattern="gdMemberNmglobal" maxlength="30">
                                             </div>
                                         </td>
                                     </tr>
@@ -150,7 +154,7 @@
                         </div>
                     </div>
                     <div class="btn_center_box">
-                        <button type="button" id="btnCancel" class="btn_member_cancel pd" >취소</button>
+                        <button type="reset" id="btnCancel" class="btn_member_cancel pd" >취소</button>
                         <button type="button" class="btn_confirm pd" value="회원가입" >회원가입</button>
                     </div>
                 </form>
@@ -158,6 +162,57 @@
         </div>
     </div>
 </section>
+
+
+<script>
+	$(function(){
+		$("#password_2").blur((e)=>{
+			const pwck=$(e.target).val();
+			const pw=$("#password_").val();
+			if(pwck!=pw){
+				$("#pwck-container").html("비밀번호가 다릅니다");
+				$("#password_").focus();
+			}
+		})
+	})
+	
+	
+	
+	
+	
+	const fn_enroll_validate=()=>{
+		const userId=$("#userId_");
+		if(userId.val().length<4){
+			alert("아이디는 최소 4글자 이상이어야합니다.");
+			userId.focus();
+			return false;
+		}
+	}
+	
+	const fn_id_duplicate=()=>{
+		const url="<%=request.getContextPath()%>/user/checkDuplicateId";
+		const title="checkDuplicateId";
+		const status="left=500px,top=100px,width=300px,height=200px";
+		
+		open("",title,status);
+		
+		checkDuplicateId.userId.value=$("#userId_").val();
+		checkDuplicateId.method="post";
+		checkDuplicateId.action=url;
+		
+		checkDuplicateId.target=title;
+		
+		checkDuplicateId.submit();
+	}
+
+
+
+</script>
+
+
+
+
+
 
 <style>
     .location_wrap{
@@ -373,6 +428,12 @@
         height: 60px;
         border: 1px solid black;
         background-color: white;
+    }
+    .pw-info{
+               font-size: 10px;
+    }
+    #pwck-container{
+    	color:red;
     }
 </style>
 

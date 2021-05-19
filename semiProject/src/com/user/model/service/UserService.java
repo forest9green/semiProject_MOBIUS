@@ -21,6 +21,13 @@ public class UserService {
 		return u;
 	}
 	
+	public User checkDuplicateId(String userId) {
+		Connection conn = getConnection();
+		User u = dao.checkDuplicateId(conn,userId);
+		
+		close(conn);
+		return u;
+	}
 	
 	
 	

@@ -11,13 +11,14 @@ public class Product {
 	private Date pEnrollDate;
 	private int deleveryFee;
 	private String size;
+	private String pName;
 	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String pCode, String cateCode, int price, int stock, Date pEnrollDate, int deleveryFee,
-			String size) {
+	public Product(String pCode, String cateCode, int price, int stock, Date pEnrollDate, int deleveryFee, String size,
+			String pName) {
 		super();
 		this.pCode = pCode;
 		this.cateCode = cateCode;
@@ -26,6 +27,7 @@ public class Product {
 		this.pEnrollDate = pEnrollDate;
 		this.deleveryFee = deleveryFee;
 		this.size = size;
+		this.pName = pName;
 	}
 
 	public String getpCode() {
@@ -82,6 +84,14 @@ public class Product {
 
 	public void setSize(String size) {
 		this.size = size;
+	}
+
+	public String getpName() {
+		return pName;
+	}
+
+	public void setpName(String pName) {
+		this.pName = pName;
 	}
 
 }
