@@ -54,10 +54,10 @@
                             <div class="btn_login_box">
                                 <ul>
                                     <li>
-                                        <button id="btn_find_member">아아디/비밀번호 찾기</button>
+                                        <button id="btn_find_member" onclick="location.replace('<%=request.getContextPath()%>/views/member/findMember.jsp')">아아디/비밀번호 찾기</button>
                                     </li>
                                     <li>
-                                        <button id="btn_member_join">회원가입</button>
+                                        <button id="btn_member_join" onclick="location.replace('<%=request.getContextPath()%>/user/memberenrll')">회원가입</button>
                                     </li>
                                 </ul>
                             </div>

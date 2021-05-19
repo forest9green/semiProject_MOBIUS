@@ -7,7 +7,7 @@
     <div class="location_wrap">
         <div class="location_cont">
             <em class="pd">
-                <a href="" class="local_home">HOME</a>
+                <a href="<%=request.getContextPath() %>/index.jsp" class="local_home">HOME</a>
                 > 아이디/비밀번호 찾기
             </em>
         </div>
