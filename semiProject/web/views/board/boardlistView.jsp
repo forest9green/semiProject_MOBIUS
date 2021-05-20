@@ -23,7 +23,7 @@
         </table>
             
             <div class="ql_v_right">
-               <a href="" style="text-decoration:none;">문의하기</a> 
+               <a href="mypage/board/boardform" style="text-decoration:none;">문의하기</a> 
             </div>
     </div>    
     <table class="qlv_list" border="1" height="50px">
