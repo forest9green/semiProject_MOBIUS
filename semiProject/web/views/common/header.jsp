@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<title>가구 쇼핑몰</title>
+<title>솔리디 :: SOLIDI</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <script src="https://kit.fontawesome.com/39b56e5d0c.js" crossorigin="anonymous"></script>
@@ -70,6 +70,6 @@
                         <li class="pe"><a href="">NOTICE</a></li>
                     </ul>
                 </span>
-                <span><h1 class="pf"><a href="<%=request.getContextPath() %>">Shop Title</a></h1></span>
+                <span><h1 class="pf"><a href="<%=request.getContextPath() %>">SOLIDI</a></h1></span>
             </div>        
         </header>
