@@ -15,13 +15,13 @@ import com.user.model.vo.User;
  * Servlet implementation class CheckDuplicateId
  */
 @WebServlet("/user/checkDuplicateId")
-public class CheckDuplicateId extends HttpServlet {
+public class CheckDuplicateIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckDuplicateId() {
+    public CheckDuplicateIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +37,9 @@ public class CheckDuplicateId extends HttpServlet {
 		
 		User u = new UserService().checkDuplicateId(userId);
 		
-		request.getRequestDispatcher("/views/member.checkDuplicateId.jsp")
+		request.setAttribute("result", u);
+		
+		request.getRequestDispatcher("/views/member/checkDuplicateId.jsp")
 		.forward(request, response);
 	
 	
