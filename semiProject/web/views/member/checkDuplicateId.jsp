@@ -36,9 +36,9 @@
 			//1. 현재값을 부모창의 userId_에 대입
 			const userId='<%=request.getParameter("userId")%>';
 			//사용가능한 아이디면 아이디입력창에 대입시키기
-			opener.memberEnrollFrm.userId.value=userId;
+			opener.checkDuplicateId.userId.value=userId;
 			//비밀번호 입력창으로 포커스
-			opener.memberEnrollFrm.password.focus();
+			opener.checkDuplicateId.password.focus();
 			//윈도우창 닫기
 			close();
 		}

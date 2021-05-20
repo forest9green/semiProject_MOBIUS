@@ -63,8 +63,8 @@
                 <h2 class="pf">회원가입</h2>
             </div>
             <div class="member_cont">
-                <form id="formJoin" name="memberEnrollFrm" action="<%=request.getContextPath() %>/user/memberenrollend"
-                 method="post" onsubmit="return fn_enroll_validate();" >
+        	<form id="checkDuplicateId" name="checkDuplicateId" action="<%=request.getContextPath() %>/user/memberenrollend"
+                 					method="post" onsubmit="return fn_enroll_validate();" >
                     <div class="base_info_box">
                         <h3 class="pd">기본정보</h3>
                         <span class="important pc" style="margin-top: 40px;">*표시는 반드시 입력하셔야 하는 항목입니다.</span>
@@ -74,6 +74,7 @@
                                     <col width="25%">
                                     <col width="75%">
                                 </colgroup>
+                             
                                 <tbody>
                                     <tr>
                                         <th class="380">
@@ -128,7 +129,7 @@
                                             <div class="member_warning">
                                                 <input type="text" name="email" id="email" tabindex="-1" reqired>
                                                 <select name="emailDomail" id="emailDomain" >
-                                                    <option value="직접입력">직접입력</option>
+                                                    <option value="">직접입력</option>
                                                     <option value="@naver.com">@naver.com</option>
                                                     <option value="@nate.com">@nate.com</option>
                                                     <option value="@gmail.com">@gmail.com</option>
@@ -139,8 +140,8 @@
 
                                             <div class="member_warning_ js_email"></div>
                                             <div class="form_element">
-                                                <input type="checkbox" id="maillingFl" name="maillingFl" value="y">
-                                                <label for="maillingFl">정보/이벤트 메일 수신에 동의합니다.</label>
+                                                <input type="checkbox" id="emailSmsCk" name="emailSmsCk" value="1">
+                                                <label for="emailSmsCk">정보/이벤트 메일 수신에 동의합니다.</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -150,11 +151,11 @@
                                         </th>
                                         <td class="member_address">
                                             <div class="addresss_postcode">
-                                                <input type="text" id="cellPhone" name="cellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value>
+                                                <input type="text" id="cellPhone" name="cellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum">
                                             </div>
                                             <div class="form_element">
-                                                <input type="checkbox" id="smsFl" name="smsFl" value="y">
-                                                <label for="smsFl" class="check_s">정보/이벤트 SMS 수신에 동의합니다.</label>
+                                                <input type="checkbox" id="phoneSmsCk" name="phoneSmsCk" value="1">
+                                                <label for="phoneSmsCk" class="check_s">정보/이벤트 SMS 수신에 동의합니다.</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -164,10 +165,12 @@
                                         </th>
                                         <td>
                                             <div>
-                                                <input type="text" id="phone" name="phone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value>
+                                                <input type="text" id="phone" name="phone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" >
                                             </div>
                                         </td>
                                     </tr>
+                
+                            
                                     <tr>
                                         <th>
                                             <span class="important">*주소</span>
@@ -177,7 +180,7 @@
                                                 <input type="text" name="zonecode" id="sample6_postcode" readonly>
                                                 <input type="button" id="btnPostcode" class="btn_post_search" value="우편번호 찾기"
                                                 onclick="sample6_execDaumPostcode()">
-                                                <input type="hidden" name="zipcode" value>
+                                                <input type="hidden" name="zipcode">
                                             </div>
                                             <div class="address_input">
                                                 <div class="member_warning">
@@ -201,17 +204,17 @@
                     </div>
                     <div class="btn_center_box">
                         <button type="reset" id="btnCancel" class="btn_member_cancel pd" >취소</button>
-                        <button type="button" class="btn_confirm pd" value="회원가입" >회원가입</button>
+                        <input type="submit" class="btn_confirm pd" value="회원가입" >
+                    	
                     </div>
-                </form>
+               		 </form>
+				
             </div>
+           
         </div>
     </div>
 </section>
 
-<form action="" name="checkDuplicateId">
-	<input type="hidden" name="userId">
-</form>
 
 
 
@@ -233,15 +236,6 @@
 	
 	
 	
-	const fn_enroll_validate=()=>{
-		const userId=$("#userId_");
-		if(userId.val().length<4){
-			alert("아이디는 최소 4글자 이상이어야합니다.");
-			userId.focus();
-			return false;
-		}
-	}
-	
 	const fn_id_duplicate=()=>{
 		const userId=$("#userId_").val();
 		if(userId.trim().length>4){	
@@ -251,7 +245,7 @@
 			
 			open("",title,status);
 			
-			checkDuplicateId.userId.value=$("#userId_").val();
+			checkDuplicateId.userId.value=userId;
 			checkDuplicateId.method="post";
 			checkDuplicateId.action=url;
 			checkDuplicateId.target=title;
@@ -494,6 +488,9 @@
     }
     .pw-info{
         font-size: 10px;
+    }
+    #btnCancel{
+    	margin-right:50px;
     }
     
 </style>
