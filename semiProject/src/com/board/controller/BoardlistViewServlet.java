@@ -15,7 +15,7 @@ import com.board.model.vo.Board;
 /**
  * Servlet implementation class BoardlistViewServlet
  */
-@WebServlet("mypage/board")
+@WebServlet("/mypage/board")
 public class BoardlistViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,6 +45,7 @@ public class BoardlistViewServlet extends HttpServlet {
 			bTitle="";
 			bContent="";
 		}
+		
 		String searchTextUTF8=new String(bContent.getBytes("ISO-8859-1"),"UTF-8");
 		//모델
 		Board boardModel= new Board();
