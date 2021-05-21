@@ -91,4 +91,41 @@ public class UserDao {
 		}
 		return u;
 	}
+	
+		
+	public int insertMember(Connection conn, User u) {
+		PreparedStatement pstmt= null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertMember"));
+			pstmt.setString(1, u.getUserId());
+			pstmt.setString(2, u.getUserPwd());
+			pstmt.setString(3, u.getUserName());
+			pstmt.setString(4, u.getEmail());
+			pstmt.setInt(5, u.getEmailSmsCk());
+			pstmt.setString(6, u.getCellPhone());
+			pstmt.setInt(7, u.getPhoneSmsCk());
+			pstmt.setString(8, u.getPhone());
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

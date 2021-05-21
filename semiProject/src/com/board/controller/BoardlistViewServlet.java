@@ -3,6 +3,7 @@ package com.board.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +16,7 @@ import com.board.model.vo.Board;
 /**
  * Servlet implementation class BoardlistViewServlet
  */
-@WebServlet("mypage/board")
+@WebServlet("/mypage/board")
 public class BoardlistViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +36,7 @@ public class BoardlistViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int bNo=request.getParameter("board_no");
+		int bNo=Integer.parseInt(request.getParameter("board_no"));
 		String bTitle= request.getParameter("board_title");
 		String bContent= request.getParameter("board_content");
 		if(bNo==0) {

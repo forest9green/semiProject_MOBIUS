@@ -29,6 +29,17 @@ public class UserService {
 		return u;
 	}
 	
+	public int insertMember(User u) {
+		Connection conn = getConnection();
+		int result=dao.insertMember(conn,u);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

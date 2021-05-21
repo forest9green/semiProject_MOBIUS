@@ -1,9 +1,9 @@
 package com.board.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,13 +59,13 @@ public class BoardModifyServlet extends HttpServlet {
 		//POST 한글 파리미터 꺠짐
 		request.setCharacterEncoding("UTF-8");
 		// 파라미터
-		int bNo = request.getParameter("board_no");
+		int bNo = Integer.parseInt(request.getParameter("board_no"));
 		String bTitle = request.getParameter("board_title");
 		String userId = request.getParameter("user_id");
 		String bContent = request.getParameter("board_content");
-		Date bWriteDate = request.getParameter("board_writedate");
+		Date bWriteDate = new Date(request.getParameter("board_writedate"));
 		String bAnswer = request.getParameter("board_answer");
-		Date bAndate = request.getParameter("board_answerdate");
+		Date bAndate = new Date(request.getParameter("board_answerdate"));
 		// 모델
 		Board boardModel = new Board();
 		boardModel.setbNo(bNo);
