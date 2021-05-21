@@ -2,11 +2,11 @@ package com.address.model.vo;
 
 public class Address {
 
-	private int addrNo;
+	private String addrNo;
 	private String userId;
 	private String addName;
 	private String receiverName;
-	private int postCode;
+	private String postCode;
 	private String addr;
 	private int defaultAddr;
 	private String addCellPhone;
@@ -16,7 +16,7 @@ public class Address {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Address(int addrNo, String userId, String addName, String receiverName, int postCode, String addr,
+	public Address(String addrNo, String userId, String addName, String receiverName, String postCode, String addr,
 			int defaultAddr, String addCellPhone, String addPhone) {
 		super();
 		this.addrNo = addrNo;
@@ -30,11 +30,11 @@ public class Address {
 		this.addPhone = addPhone;
 	}
 
-	public int getAddrNo() {
+	public String getAddrNo() {
 		return addrNo;
 	}
 
-	public void setAddrNo(int addrNo) {
+	public void setAddrNo(String addrNo) {
 		this.addrNo = addrNo;
 	}
 
@@ -62,11 +62,11 @@ public class Address {
 		this.receiverName = receiverName;
 	}
 
-	public int getPostCode() {
+	public String getPostCode() {
 		return postCode;
 	}
 
-	public void setPostCode(int postCode) {
+	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
 
@@ -108,6 +108,8 @@ public class Address {
 				+ receiverName + ", postCode=" + postCode + ", addr=" + addr + ", defaultAddr=" + defaultAddr
 				+ ", addCellPhone=" + addCellPhone + ", addPhone=" + addPhone + "]";
 	}
+	
+	
 	
 	
 	
