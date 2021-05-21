@@ -47,9 +47,9 @@ public class BoardModifyServlet extends HttpServlet {
 		// View 사용될 객체 설정
 		request.setAttribute("boardModel", boardModel);
 		// View 보내기
-		RequestDispatcher requestDispatcher =
-				request.getRequestDispatcher("/web/board/boardForm.jsp");
-			requestDispatcher.forward(request, response);	
+		
+		request.getRequestDispatcher("/web/board/boardForm.jsp")
+		.forward(request, response);	
 		// 게시물 수정 처리
 		this.boardDao = new BoardDao();
 		this.boardDao.update(boardModel);
