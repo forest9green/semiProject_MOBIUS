@@ -2,6 +2,7 @@ package com.board.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import com.board.model.vo.Board;
 /**
  * Servlet implementation class BoardFormServlet
  */
-@WebServlet("mypage/board/boardform")
+@WebServlet("/mypage/board/boardform")
 public class BoardFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
