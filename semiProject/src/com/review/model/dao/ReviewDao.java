@@ -1,4 +1,5 @@
 package com.review.model.dao;
+import static com.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
