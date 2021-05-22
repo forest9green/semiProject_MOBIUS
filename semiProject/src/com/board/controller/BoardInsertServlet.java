@@ -1,6 +1,8 @@
 package com.board.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +14,6 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.board.model.dao.BoardDao;
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
-import com.common.MyRename;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -54,28 +55,28 @@ public class BoardInsertServlet extends HttpServlet {
 		boardModel.setbContent(bContent);
 		// 게시물 등록
 		this.boardDao = new BoardDao();
-		this.boardDao.insert(boardModel);
+		this.boardDao.insertBoard(boardModel);
 		// 페이지 이동
 		response.sendRedirect("boardListServlet");
 		
-		
-		int result=new BoardService().insertBoard(boardModel);
-		
-		String msg="";
-		String loc="";
-		if(result>0) {
-			msg="게시글 등록 성공";
-			loc="/board/boardList";
-		}else {
-			msg="게시글 등록 실패";
-			loc="/board/boardForm";
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		
-		request.getRequestDispatcher("/views/common/msg.jsp")
-		.forward(request, response);
 	}
+//		int result=new BoardService().insertBoard(boardModel);
+//		
+//		String msg="";
+//		String loc="";
+//		if(result>0) {
+//			msg="게시글 등록 성공";
+//			loc="/board/boardList";
+//		}else {
+//			msg="게시글 등록 실패";
+//			loc="/board/boardForm";
+//		}
+//		request.setAttribute("msg", msg);
+//		request.setAttribute("loc", loc);
+//		
+//		request.getRequestDispatcher("/views/common/msg.jsp")
+//		.forward(request, response);
+//	}
 
 
 	/**

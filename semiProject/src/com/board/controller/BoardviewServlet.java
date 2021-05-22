@@ -40,7 +40,7 @@ public class BoardviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// 파라미터
-				int bNo = request.getParameter("board_no");
+				int bNo = Integer.parseInt(request.getParameter("board_no"));
 				String bTitle = request.getParameter("board_title");
 				String bContent = request.getParameter("board_content");
 				String searchTextUTF8 = new String(bContent.getBytes("ISO-8859-1"), "UTF-8");

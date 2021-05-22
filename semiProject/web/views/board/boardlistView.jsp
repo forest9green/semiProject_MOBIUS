@@ -22,8 +22,8 @@
             </tr>
         </table>
             
-            <div class="ql_v_right">
-               <a href="mypage/board/boardform" style="text-decoration:none;">문의하기</a> 
+            <div class="ql_v_right" onclick="fn_boardInsert();">
+               <a href="/mypage/board/insert" style="text-decoration:none;">문의하기</a> 
             </div>
     </div>    
     <table class="qlv_list" border="1" height="50px">
@@ -132,6 +132,10 @@
 
 </style>
 
-<script></script>
+<script>
+ const fn_boardInsert=()=>{
+	 location.assign("<%=request.getContextPath()%>/mypage/board/boardinsert")
+ }
+</script>
 
 <%@ include file="/views/common/footer.jsp"%>

@@ -132,7 +132,20 @@ public class BoardDao {
 		}
 		return boardList;
 	}
-	
+	//게시판 찾기
+	public int searchBoard(Connection conn, Board b) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchBoard"));
+			rs=pstmt.executeQuery();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs, pstmt, conn);
+		}return result;
+	}
 	
 	
 	/**
@@ -174,9 +187,8 @@ public class BoardDao {
 	 * @param conn2 
 	 * @param boardModel
 	 * @return 
-	 * @return 
 	 */
-	public  void insertBoard(Board boardModel) {
+	public void insertBoard(Board boardModel) {
 		try {
 			// 데이터베이스 객체 생성
 			Class.forName(this.JDBC_DRIVER);

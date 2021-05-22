@@ -46,7 +46,7 @@ public class BoardFormServlet extends HttpServlet {
 		boardModel.setbContent(bContent);
 		// 게시물 등록
 		this.boardDao = new BoardDao();
-		this.boardDao.insert(boardModel);
+		this.boardDao.insertBoard(boardModel);
 		// 페이지 이동
 		response.sendRedirect("BoardlistViewServlet");
 } 
