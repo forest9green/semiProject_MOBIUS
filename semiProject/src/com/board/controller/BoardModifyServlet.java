@@ -84,7 +84,9 @@ public class BoardModifyServlet extends HttpServlet {
 		response.sendRedirect(
 			"BoardviewServlet?board_no="+bNo+"&board_content="+bContent);
 	}
-
+	/**
+	 * POST 접근 시 (수정처리 접근 시)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
