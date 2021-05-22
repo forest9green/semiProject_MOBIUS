@@ -3,6 +3,51 @@
     
 <%@ include file="/views/common/header.jsp"%>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	    function sample6_execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	       
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("sample6_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("sample6_detailAddress").focus();
+	            }
+	        }).open();
+	    }
+	</script>
+
 <section>
     <div>
         <div class="location_wrap">
@@ -18,8 +63,8 @@
                 <h2 class="pf">회원가입</h2>
             </div>
             <div class="member_cont">
-                <form id="formJoin" name="formJoin" action="<%=request.getContextPath() %>/user/memberenrollend"
-                 method="post" onsubmit="return fn_enroll_validate();" >
+        	<form id="memberEnrollFrm" name="memberEnrollFrm" action="<%=request.getContextPath() %>/user/memberenrollend"
+                 					method="post" onsubmit="return fn_enroll_validate();" >
                     <div class="base_info_box">
                         <h3 class="pd">기본정보</h3>
                         <span class="important pc" style="margin-top: 40px;">*표시는 반드시 입력하셔야 하는 항목입니다.</span>
@@ -29,6 +74,7 @@
                                     <col width="25%">
                                     <col width="75%">
                                 </colgroup>
+                             
                                 <tbody>
                                     <tr>
                                         <th class="380">
@@ -36,7 +82,7 @@
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="text" id="userId_" name="userId" data-pattern="gdMemberId">
+                                                <input type="text" id="userId_" name="userId" required>
                                                 <input type="button" value="중복확인" onclick="fn_id_duplicate();">
                                             </div>
                                         </td>
@@ -47,7 +93,7 @@
                                         </th>
                                         <td class="member_password">
                                             <div class="member_warning">
-                                                <input type="password" id="password_" name="userPw" autocomplete="off" class="ignore">
+                                                <input type="password" id="password_" name="password" autocomplete="off" class="ignore" required>
                                            		<span class="pw-info pa">비밀번호는 8~20자리의 영문자와 숫자로 구성되어야합니다.</span>
                                             </div>
                                         </td>
@@ -59,7 +105,7 @@
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="password" class="check_id ignore" name="memPwRe" id="password_2" autocomplete="off">
+                                                <input type="password" class="check_id ignore" name="memPwRe" id="password_2" required>
                                             	<span id="pwck-container"></span>
                                             </div>
                                         </td>
@@ -71,7 +117,7 @@
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="text" name="userName" id="userName" data-pattern="gdMemberNmglobal" maxlength="30">
+                                                <input type="text" name="userName" id="userName" data-pattern="gdMemberNmglobal" maxlength="30" required>
                                             </div>
                                         </td>
                                     </tr>
@@ -81,21 +127,21 @@
                                         </th>
                                         <td class="member_email">
                                             <div class="member_warning">
-                                                <input type="text" name="email" id="email" tabindex="-1">
-                                                <select name="emailDomail" id="emailDomain">
-                                                    <option value="직접입력">직접입력</option>
-                                                    <option value="naver.com">@naver.com</option>
-                                                    <option value="nate.com">@nate.com</option>
-                                                    <option value="gmail.com">@gmail.com</option>
-                                                    <option value="hanmail.com">@hanmail.com</option>
-                                                    <option value="daum.net">@daum.net</option>
+                                                <input type="text" name="email" id="email" tabindex="-1" reqired>
+                                                <select name="emailDomail" id="emailDomain" >
+                                                    <option value="">직접입력</option>
+                                                    <option value="@naver.com">@naver.com</option>
+                                                    <option value="@nate.com">@nate.com</option>
+                                                    <option value="@gmail.com">@gmail.com</option>
+                                                    <option value="@hanmail.com">@hanmail.com</option>
+                                                    <option value="@daum.net">@daum.net</option>
                                                     
                                                 </select>
 
                                             <div class="member_warning_ js_email"></div>
                                             <div class="form_element">
-                                                <input type="checkbox" id="maillingFl" name="maillingFl" value="y">
-                                                <label for="maillingFl">정보/이벤트 메일 수신에 동의합니다.</label>
+                                                <input type="checkbox" id="emailSmsCk" name="emailSmsCk" >
+                                                <label for="emailSmsCk">정보/이벤트 메일 수신에 동의합니다.</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -105,11 +151,11 @@
                                         </th>
                                         <td class="member_address">
                                             <div class="addresss_postcode">
-                                                <input type="text" id="cellPhone" name="cellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value>
+                                                <input type="text" id="cellPhone" name="cellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum">
                                             </div>
                                             <div class="form_element">
-                                                <input type="checkbox" id="smsFl" name="smsFl" value="y">
-                                                <label for="smsFl" class="check_s">정보/이벤트 SMS 수신에 동의합니다.</label>
+                                                <input type="checkbox" id="phoneSmsCk" name="phoneSmsCk">
+                                                <label for="phoneSmsCk" class="check_s">정보/이벤트 SMS 수신에 동의합니다.</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -119,28 +165,31 @@
                                         </th>
                                         <td>
                                             <div>
-                                                <input type="text" id="phone" name="phone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value>
+                                                <input type="text" id="phone" name="phone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" >
                                             </div>
                                         </td>
                                     </tr>
+                
+                            
                                     <tr>
                                         <th>
                                             <span class="important">*주소</span>
                                         </th>
                                         <td class="member_address">
                                             <div class="address_postcode">
-                                                <input type="text" name="zonecode" readonly>
-                                                <button type="button" id="btnPostcode" class="btn_post_search">우편번호검색</button>
-                                                <input type="hidden" name="zipcode" value>
+                                                <input type="text" name="zonecode" id="sample6_postcode" readonly>
+                                                <input type="button" id="btnPostcode" class="btn_post_search" value="우편번호 찾기"
+                                                onclick="sample6_execDaumPostcode()">
+                                                <input type="hidden" name="zipcode">
                                             </div>
                                             <div class="address_input">
                                                 <div class="member_warning">
-                                                    <input type="text" name="address" readonly>
+                                                    <input type="text" name="address" id="sample6_address" readonly>
                                                 </div>
                                                 <div class="member_warning">
-                                                    <input type="text" name="addressSub">
+                                                    <input type="text" name="addressSub" id="sample6_detailAddress">
                                                     <div class="form_element">
-                                                        <input type="checkbox" id="saveAdd" name="saveAdd" value="y">
+                                                        <input type="checkbox" id="saveAdd" name="saveAdd" >
                                                         <label for="saveAdd" class="check_s">기본배송지</label>
                                                     </div>
                                                 </div>
@@ -155,13 +204,20 @@
                     </div>
                     <div class="btn_center_box">
                         <button type="reset" id="btnCancel" class="btn_member_cancel pd" >취소</button>
-                        <button type="button" class="btn_confirm pd" value="회원가입" >회원가입</button>
+                        <input type="submit" class="btn_confirm pd" value="회원가입" >
+                    	
                     </div>
-                </form>
+               		 </form>
             </div>
+           
         </div>
     </div>
 </section>
+
+<form action="" name="checkDuplicateId">
+	<input type="hidden" name="userId">
+</form>
+
 
 
 <script>
@@ -170,42 +226,45 @@
 			const pwck=$(e.target).val();
 			const pw=$("#password_").val();
 			if(pwck!=pw){
-				$("#pwck-container").html("비밀번호가 다릅니다");
+				$("#pwck-container").html("비밀번호가 다릅니다").css("color","red");
 				$("#password_").focus();
+			}else{
+				$("#pwck-container").html("비밀번호가 일치합니다.").css("color","lightgreen");
+				$("#userName").focus();
 			}
-		})
-	})
+		});
+	});
 	
 	
 	
-	
-	
-	const fn_enroll_validate=()=>{
-		const userId=$("#userId_");
-		if(userId.val().length<4){
-			alert("아이디는 최소 4글자 이상이어야합니다.");
-			userId.focus();
-			return false;
-		}
-	}
 	
 	const fn_id_duplicate=()=>{
-		const url="<%=request.getContextPath()%>/user/checkDuplicateId";
-		const title="checkDuplicateId";
-		const status="left=500px,top=100px,width=300px,height=200px";
-		
-		open("",title,status);
-		
-		checkDuplicateId.userId.value=$("#userId_").val();
-		checkDuplicateId.method="post";
-		checkDuplicateId.action=url;
-		
-		checkDuplicateId.target=title;
-		
-		checkDuplicateId.submit();
+		const userId=$("#userId_").val();
+		if(userId.trim().length>4){	
+			const url="<%=request.getContextPath()%>/user/checkDuplicateId";
+			const title="checkDuplicateId";
+			const status="left=500px,top=100px,width=400px,height=250px";
+			
+			open("",title,status);
+			
+			checkDuplicateId.userId.value=userId;
+			checkDuplicateId.method="post";
+			checkDuplicateId.action=url;
+			checkDuplicateId.target=title;
+			
+			checkDuplicateId.submit();
+		}else{
+			alert("아이디는 5글자이상 입력해주세요");
+			userId.focus();	
+		}	
 	}
 
-
+	$("#emailDomain").change((e)=>{
+		console.log(e.target);
+		$("#email").val($("#email").val()+$(e.target).val());
+	})
+		
+		
 
 </script>
 
@@ -430,11 +489,12 @@
         background-color: white;
     }
     .pw-info{
-               font-size: 10px;
+        font-size: 10px;
     }
-    #pwck-container{
-    	color:red;
+    #btnCancel{
+    	margin-right:50px;
     }
+    
 </style>
 
 <%@ include file="/views/common/footer.jsp"%>

@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<title>가구 쇼핑몰</title>
+<title>솔리디 :: SOLIDI</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <script src="https://kit.fontawesome.com/39b56e5d0c.js" crossorigin="anonymous"></script>
@@ -39,8 +39,12 @@
                 </span>
                 <span>
                     <ul>
-                    	
-                        <li class="pa"><a href="">MyPage</a></li>
+
+                       <%if(loginUser!=null&&loginUser.getUserId().equals("admin")){ %> 
+                        <li class="pa"><a href="">관리자페이지</a></li>
+                       <%}else{ %>
+                       	<li class="pa"><a href="">mypage</a></li>	
+                       <%} %>
                      <%if(loginUser==null) {%>
                         <li class="pa"><a href="<%=request.getContextPath()%>/views/member/loginPage.jsp">Login</a></li>
                      <%}else{ %>
@@ -71,6 +75,19 @@
                         <li class="pe"><a href="">NOTICE</a></li>
                     </ul>
                 </span>
-                <span><h1 class="pf"><a href="<%=request.getContextPath() %>">Shop Title</a></h1></span>
+                <span><h1 class="pf"><a href="<%=request.getContextPath() %>">SOLIDI</a></h1></span>
             </div>        
         </header>
+        
+        
+        <script>
+            $("#item-category>li").hover((e)=>{
+                $(e.target).siblings().css("visibility","visible");
+                $(e.target).siblings().children().css("color","gray");
+            });
+            $("#item-category a").hover((e)=>{
+                $(e.target).css("color","black");
+            }, (e)=>{
+                $(e.target).css("color","gray");
+            });
+        </script>

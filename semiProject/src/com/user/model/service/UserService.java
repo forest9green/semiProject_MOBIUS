@@ -29,7 +29,25 @@ public class UserService {
 		return u;
 	}
 	
+	public int insertMember(User u) {
+		Connection conn = getConnection();
+		int result=dao.insertMember(conn,u);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 	
+	public User checkEmail(String userName,String email) {
+		Connection conn = getConnection();
+		User u = dao.checkEamil(conn,userName,email);
+		
+		close(conn);
+		return u;
+	}
 	
 	
 	
