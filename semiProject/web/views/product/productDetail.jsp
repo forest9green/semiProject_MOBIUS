@@ -3,11 +3,19 @@
 
 <%@ include file="/views/common/header.jsp"%>
 
+<%
+
+
+
+%>
+
 <section>
+
+
 
     <container id="">
         <div id="category_top" style="float:left;">
-            <a href="#"><div class="category_top pc" style="font-size:12px;float:left;">전체</div></a>
+            <a href="http://localhost:9090/semiProject/views/item/itemwholeView.jsp"><div class="category_top pc" style="font-size:12px;float:left;">전체</div></a>
             <div class="category_top pe" style="font-size:12px;float:left;">　>　</div>
             <a href="#"><div class="category_top pc" style="font-size:12px;float:left;">소파</div></a>
         </div>

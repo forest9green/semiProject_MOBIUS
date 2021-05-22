@@ -39,7 +39,11 @@
                 </span>
                 <span>
                     <ul>
-                        <li class="pa"><a href="">MyPage</a></li>
+                       <%if(loginUser!=null&&loginUser.getUserId().equals("admin")){ %> 
+                        <li class="pa"><a href="">관리자페이지</a></li>
+                       <%}else{ %>
+                       	<li class="pa"><a href="">mypage</a></li>	
+                       <%} %>
                      <%if(loginUser==null) {%>
                         <li class="pa"><a href="<%=request.getContextPath()%>/views/member/loginPage.jsp">Login</a></li>
                      <%}else{ %>
@@ -73,3 +77,16 @@
                 <span><h1 class="pf"><a href="<%=request.getContextPath() %>">SOLIDI</a></h1></span>
             </div>        
         </header>
+        
+        
+        <script>
+            $("#item-category>li").hover((e)=>{
+                $(e.target).siblings().css("visibility","visible");
+                $(e.target).siblings().children().css("color","gray");
+            });
+            $("#item-category a").hover((e)=>{
+                $(e.target).css("color","black");
+            }, (e)=>{
+                $(e.target).css("color","gray");
+            });
+        </script>

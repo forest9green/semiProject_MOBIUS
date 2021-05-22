@@ -19,7 +19,7 @@
                 <h2>아이디 찾기</h2>
             </div>
             <div class="member_cont">
-                <form action="" id="formFindId" method="post" novalidate>
+                <form action="<%=request.getContextPath() %>/user/findId" id="formFindId" method="post" >
                     <div class="find_id_box">
                         <div class="find_id_sec">
                             <h3 class="pd">본인확인 이메일 인증</h3>
@@ -27,7 +27,7 @@
                                 <table>
                                     <input type="text" id="userName" name="userName" placeholder="이름">
                                     <input type="text" id="userEmail" name="userEmail" class="input_email" placeholder="가입메일주소">
-                                    <button id="button">인증번호받기</button>
+                                    <button id="button" onclick="sendEmail();">인증번호받기</button>
                                     <input type="text" id="numCer" name="numCer" placeholder="인증번호 6자리 입력">
                                     
                                     
@@ -47,7 +47,7 @@
                 <h2>비밀번호 찾기</h2>
             </div>
             <div class="member_cont">
-                <form action="" id="formFindId" method="post" novalidate>
+                <form action="<%=request.getContextPath() %>/user/findId" id="formFindId" method="post" novalidate>
                     <div class="find_id_box">
                         <div class="find_id_sec">
                             <h3 class="pd">본인확인 이메일 인증</h3>
@@ -69,6 +69,34 @@
         </div>    
     </div>    
 </section>
+
+<script>
+	
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style>
     .location_wrap{

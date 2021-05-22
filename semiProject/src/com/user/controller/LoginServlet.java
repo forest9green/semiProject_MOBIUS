@@ -17,7 +17,7 @@ import com.user.model.vo.User;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/user/login")
+@WebServlet(name="loginServlet",urlPatterns="/user/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 	
 		String userId=request.getParameter("userId");
-		String userPw=request.getParameter("userPw");
+		String userPw=request.getParameter("password");
 		User u = new UserService().login(userId,userPw);
 		
 		String saveId=request.getParameter("saveId");

@@ -41,6 +41,13 @@ public class UserService {
 		return result;
 	}
 	
+	public User checkEmail(String userName,String email) {
+		Connection conn = getConnection();
+		User u = dao.checkEamil(conn,userName,email);
+		
+		close(conn);
+		return u;
+	}
 	
 	
 	

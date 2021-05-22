@@ -12,16 +12,28 @@
 <style>
 	div#checkId-container{text-align:center;padding-top:50px;}
 	span#duplicated{color:red;font-weight:bolder;}
+	span#success{color:lightgreen;font-weight:bolder;}
+	img{
+		width:300px;
+		text-align="center";
+		margin-bottom:30px;
+	}
 </style>
 </head>
 <body>
 	<div id="checkId-container">
 		<%if(result==null){ %>
-			[<span><%=request.getParameter("userId") %></span>]는 사용가능합니다.	
+			<div>
+				<img src="<%=request.getContextPath()%>/images/mainLogo.png">
+			</div>
+			[<span class="pd" id="success"><%=request.getParameter("userId") %></span>]는 사용가능합니다.	
 			<br><br>
-			<button type="button" onclick="fn_close();" >닫기</button>
+			<button type="button" onclick="fn_close();" >사용</button>
 		<%}else{ %>
-			[<span id="duplicated"><%=request.getParameter("userId") %></span>]는 사용중입니다.
+			<div>
+				<img src="<%=request.getContextPath()%>/images/mainLogo.png">
+			</div>
+			[<span class="pd" id="duplicated"><%=request.getParameter("userId") %></span>]는 사용중입니다.
 			<br><br>
 
 			<form action="<%=request.getContextPath() %>/user/checkDuplicateId" method="post">
@@ -36,9 +48,9 @@
 			//1. 현재값을 부모창의 userId_에 대입
 			const userId='<%=request.getParameter("userId")%>';
 			//사용가능한 아이디면 아이디입력창에 대입시키기
-			opener.checkDuplicateId.userId.value=userId;
+			opener.memberEnrollFrm.userId.value=userId;
 			//비밀번호 입력창으로 포커스
-			opener.checkDuplicateId.password.focus();
+			opener.memberEnrollFrm.password.focus();
 			//윈도우창 닫기
 			close();
 		}

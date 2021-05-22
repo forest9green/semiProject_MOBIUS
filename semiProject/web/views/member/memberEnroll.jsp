@@ -63,7 +63,7 @@
                 <h2 class="pf">회원가입</h2>
             </div>
             <div class="member_cont">
-        	<form id="checkDuplicateId" name="checkDuplicateId" action="<%=request.getContextPath() %>/user/memberenrollend"
+        	<form id="memberEnrollFrm" name="memberEnrollFrm" action="<%=request.getContextPath() %>/user/memberenrollend"
                  					method="post" onsubmit="return fn_enroll_validate();" >
                     <div class="base_info_box">
                         <h3 class="pd">기본정보</h3>
@@ -140,7 +140,7 @@
 
                                             <div class="member_warning_ js_email"></div>
                                             <div class="form_element">
-                                                <input type="checkbox" id="emailSmsCk" name="emailSmsCk" value="1">
+                                                <input type="checkbox" id="emailSmsCk" name="emailSmsCk" >
                                                 <label for="emailSmsCk">정보/이벤트 메일 수신에 동의합니다.</label>
                                             </div>
                                         </td>
@@ -154,7 +154,7 @@
                                                 <input type="text" id="cellPhone" name="cellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum">
                                             </div>
                                             <div class="form_element">
-                                                <input type="checkbox" id="phoneSmsCk" name="phoneSmsCk" value="1">
+                                                <input type="checkbox" id="phoneSmsCk" name="phoneSmsCk">
                                                 <label for="phoneSmsCk" class="check_s">정보/이벤트 SMS 수신에 동의합니다.</label>
                                             </div>
                                         </td>
@@ -189,7 +189,7 @@
                                                 <div class="member_warning">
                                                     <input type="text" name="addressSub" id="sample6_detailAddress">
                                                     <div class="form_element">
-                                                        <input type="checkbox" id="saveAdd" name="saveAdd" value="y">
+                                                        <input type="checkbox" id="saveAdd" name="saveAdd" >
                                                         <label for="saveAdd" class="check_s">기본배송지</label>
                                                     </div>
                                                 </div>
@@ -208,13 +208,15 @@
                     	
                     </div>
                		 </form>
-				
             </div>
            
         </div>
     </div>
 </section>
 
+<form action="" name="checkDuplicateId">
+	<input type="hidden" name="userId">
+</form>
 
 
 
@@ -241,7 +243,7 @@
 		if(userId.trim().length>4){	
 			const url="<%=request.getContextPath()%>/user/checkDuplicateId";
 			const title="checkDuplicateId";
-			const status="left=500px,top=100px,width=300px,height=200px";
+			const status="left=500px,top=100px,width=400px,height=250px";
 			
 			open("",title,status);
 			

@@ -27,7 +27,7 @@
                                 <div class="login_input_sec">
                                     <div>
                                         <input placeholder="아이디" type="text" id="userId" name="userId"> 
-                                        <input placeholder="비밀번호" type="password" id="userPw" name="userPw">
+                                        <input placeholder="비밀번호" type="password" id="password" name="password">
                                 	</div>
                                     <button type="submit"><h2>로그인</h2></button>
                                     <div class="id_chk">
@@ -39,15 +39,25 @@
                                   </div>
                         </form>    
                         <div class="member_sns_login">
-                                <a class="btn_kakao_login" href="">
-                                    <img src="" alt="카카오 아이디 로그인">
-                                </a>
-                                <a class="btn_naver_login" href="">
-                                    <img src="" alt="네이버 아이디 로그인">
-                                </a>
-                                <a class="btn_google-login" href="">
-                                    <img src="" alt="구글 아이디 로그인">
-                                </a>
+                                <ul>
+                                        <li onclick="kakaoLogin();">
+                                            <a href="javascript:void(0)">
+                                                <span>카카오 로그인</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                        	<a class="btn_naver_login" href="">
+                                    			<img src="" alt="네이버 아이디 로그인">
+                                			</a>
+                                        </li>
+                                        <li>
+                                        	<a class="btn_google-login" href="">
+			                                    <img src="" alt="구글 아이디 로그인">
+			                                </a>
+                                        
+                                        </li>
+                                    </ul>
+                               	
                      	</div>    
                     </div>
                   
@@ -82,7 +92,7 @@
 				alert("비밀번호를 입력하세요.");
 				return false;
 		
-		
+			}
 		
 		}
 		
@@ -92,7 +102,28 @@
 	</script>
 
 
-
+	<script>
+            Kakao.init('8890a67c089173194979845f9389950d');
+            console.log(Kakao.isInitialized());
+            function kakaoLogin() {
+                Kakao.Auth.login({
+                success: function (response) {
+                    Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                        console.log(response)
+                    },
+                    fail: function (error) {
+                        console.log(error)
+                    },
+                    })
+                },
+                fail: function (error) {
+                    console.log(error)
+                },
+                })
+            }
+        </script>
 
 
 
@@ -158,7 +189,7 @@
     .login_input_sec>div{
         float: left;
     }
-    .login_input_sec #userId,#userPw{
+    .login_input_sec #userId,#password{
         display: block;
         width: 292px;
         height: 36px;
