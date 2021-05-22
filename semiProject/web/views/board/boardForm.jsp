@@ -19,10 +19,12 @@
 	    </select>
     </div>
     <div class="form-group">
-        <label for="wr_subject">제목</label>
-        <input class="title" type="text" name="wr_subject" value="" id="wr_subject" required size="100" maxlength="200" placeholder="제목">
+    	<form id="bdfrm" method="post" action="" >
+	        <label for="wr_subject">제목</label>
+	        <input class="title" type="text" name="wr_subject" value="" id="wr_subject" required size="100" maxlength="200" placeholder="제목">
+    	</form>
+    	
     </div>
-
     <div class="form-group d-cke-none">
         <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="5000" style="width:100%; height: 200px;"
         placeholder="내용을 입력해주세요">
@@ -37,12 +39,12 @@
         <div class="btn-box">
             <ul>
                 <li>          
-                    <div class="cancel-btn pb" id="cancel" >
+                    <div class="cancel-btn pb" id="cancel" onclick="location.replace('<%=request.getContextPath()%>/views/board/boardlistView.jsp')">
                         <a href>취소</a>
                     </div> 
                 </li>
                 <li>    
-                    <div class="complete-btn pb" id="complete">
+                    <div class="complete-btn pb" id="complete" onclick="location.replace('<%=request.getContextPath()%>/views/board/boardlistView.jsp')">
                         <a href>작성완료</a>
                     </div>
                 </li>

@@ -58,9 +58,6 @@ public class BoardDao {
 				b.setpCode(rs.getString("product_code"));
 				b.setbTitle(rs.getString("board_title"));
 				b.setbContent(rs.getString("board_content"));
-				b.setbWriteDate(rs.getDate("board_writedate"));
-				b.setbAnswer(rs.getString("board_answer"));
-				b.setbAndate(rs.getDate("board_answerdate"));
 				list.add(b);
 			}
 		}catch(SQLException e) {
@@ -76,7 +73,7 @@ public class BoardDao {
 	 * @return
 	 */
 	public List<Board> selectList(Board boardModel) {
-		int pageNum =boardModel.getbNo();
+		int bNo =boardModel.getbNo();
 		String searchType = boardModel.getbTitle();
 		String searchText = boardModel.getbContent();
 		String whereSQL = "";
@@ -126,9 +123,6 @@ public class BoardDao {
 				boardModel.setpCode(rs.getString("product_code"));
 				boardModel.setbTitle(rs.getString("board_title"));
 				boardModel.setbContent(rs.getString("board_content"));
-				boardModel.setbWriteDate(rs.getDate("board_writedate"));
-				boardModel.setbAnswer(rs.getString("board_answer"));
-				boardModel.setbAndate(rs.getDate("board_answerdate"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -165,9 +159,6 @@ public class BoardDao {
 				boardModel.setpCode(rs.getString("product_code"));
 				boardModel.setbTitle(rs.getString("board_title"));
 				boardModel.setbContent(rs.getString("board_content"));
-				boardModel.setbWriteDate(rs.getDate("board_writedate"));
-				boardModel.setbAnswer(rs.getString("board_answer"));
-				boardModel.setbAndate(rs.getDate("board_answerdate"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -180,9 +171,11 @@ public class BoardDao {
 	
 	/**
 	 * 게시판 등록 처리
+	 * @param conn2 
 	 * @param boardModel
+	 * @return 
 	 */
-	public void insert(Board boardModel) {
+	public  void insertBoard(Board boardModel) {
 		try {
 			// 데이터베이스 객체 생성
 			Class.forName(this.JDBC_DRIVER);
@@ -190,11 +183,9 @@ public class BoardDao {
 			this.pstmt = this.conn.prepareStatement(
 				"INSERT INTO BOARD (B_TITLE, B_CONTENT, B_WRITEDATE, B_ANSWER, B_ANDATE) "+
 				"VALUES (?, ?, NOW(), ?, NOW())");
-			this.pstmt.setString(1, boardModel.getbTitle());
-			this.pstmt.setString(2, boardModel.getbContent());
-			this.pstmt.setDate(3, (Date) boardModel.getbWriteDate());
-			this.pstmt.setString(4, boardModel.getbAnswer());
-			this.pstmt.setDate(5, (Date) boardModel.getbAndate());
+			this.pstmt.setLong(1, boardModel.getbNo() );
+			this.pstmt.setString(2, boardModel.getbTitle());
+			this.pstmt.setString(3, boardModel.getbContent());
 			this.pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -202,6 +193,8 @@ public class BoardDao {
 			// 사용한 객체 종료
 			close(null, this.pstmt, this.conn);
 		}
+		
+		
 	}
 	
 	/**
@@ -216,11 +209,9 @@ public class BoardDao {
 			this.pstmt = this.conn.prepareStatement(
 				"UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, B_WRITEDATE = ?, B_ANSWER = ? "+
 				"WHERE B_NO = ?");
-			this.pstmt.setString(1, boardModel.getbTitle());
-			this.pstmt.setString(2, boardModel.getbContent());
-			this.pstmt.setDate(3, (Date) boardModel.getbWriteDate());
-			this.pstmt.setString(4, boardModel.getbAnswer());
-			this.pstmt.setDate(5, (Date) boardModel.getbAndate());
+			this.pstmt.setLong(1, boardModel.getbNo() );
+			this.pstmt.setString(2, boardModel.getbTitle());
+			this.pstmt.setString(3, boardModel.getbContent());
 			this.pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

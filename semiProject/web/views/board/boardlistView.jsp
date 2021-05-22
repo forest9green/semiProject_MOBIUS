@@ -55,15 +55,15 @@
     </table>
    <div class="qlv_last">
         <select style="height: 30px; margin-top:11px; width:80px">
-            <option value="">제목</option>
-            <option value="">내용</option>
+            <option value="bTitle">제목</option>
         </select>
         <form id="searchql" action="" method="get">
             <input type="search" name="searchql" style="height:30px; width:250px;" >
-            <input type="submit" id="submitql"value="">
+            <input type="submit" id="submitql" value="">
         </form>
     </div>
 </section>    
+
 <style>
     .qlv_ct{
         margin-left: 56px;
