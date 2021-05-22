@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.board.model.service.BoardService;
-import com.board.model.vo.Board;
+
 import com.review.model.service.ReviewService;
 import com.review.model.vo.Review;
 

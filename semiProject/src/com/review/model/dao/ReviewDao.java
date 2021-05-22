@@ -1,4 +1,5 @@
 package com.review.model.dao;
+import static com.common.JDBCTemplate.close;
 
 import static com.common.JDBCTemplate.close;
 
