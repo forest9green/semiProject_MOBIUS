@@ -9,37 +9,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 import com.board.model.dao.BoardDao;
+import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
+import com.common.MyRename;
+import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class BoardFormServlet
+ * Servlet implementation class BoardInsertServlet
  */
-@WebServlet("/mypage/board/boardform")
-public class BoardFormServlet extends HttpServlet {
+@WebServlet("/mypage/board/insert")
+public class BoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	//BOARD DAO
 	private BoardDao boardDao=null;
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor. 
      */
-    public BoardFormServlet() {
-        super();
+    public BoardInsertServlet() {
+    	super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
+	 * @param <RequestDispatcher>
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		// View 보내기
+		RequestDispatcher requestDispatcher =
+			request.getRequestDispatcher("/web/views/board/boardForm.jsp");
+		requestDispatcher.forward(request, response);
+
 		//  한글 파라미터 깨짐 처리
 		request.setCharacterEncoding("UTF-8");
 		// 파라미터
 		String bTitle = request.getParameter("board_title");
-		String userId = request.getParameter("user_id");
-		String bContent = request.getParameter("board_content");
+		String userId = request.getParameter("userId");
+		String bContent = request.getParameter("bContent");
 		// 모델
 		Board boardModel = new Board();
 		boardModel.setbTitle(bTitle);
@@ -49,16 +58,34 @@ public class BoardFormServlet extends HttpServlet {
 		this.boardDao = new BoardDao();
 		this.boardDao.insert(boardModel);
 		// 페이지 이동
-		response.sendRedirect("BoardlistViewServlet");
-} 
-	
+		response.sendRedirect("boardListServlet");
+		
+		
+		int result=new BoardService().insertBoard(boardModel);
+		
+		String msg="";
+		String loc="";
+		if(result>0) {
+			msg="게시글 등록 성공";
+			loc="/board/boardList";
+		}else {
+			msg="게시글 등록 실패";
+			loc="/board/boardForm";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request, response);
+	}
+
 
 	/**
-	 * post 접근시 (등록처리 접근시)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-
 	}
+
 }
