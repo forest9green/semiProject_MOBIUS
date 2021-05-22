@@ -71,9 +71,7 @@
 </section>
 
 <script>
-	const sendEmail=()=>{
-		
-	}
+	
 
 </script>
 
