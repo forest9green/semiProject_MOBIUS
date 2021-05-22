@@ -1,8 +1,6 @@
 package com.board.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +23,7 @@ public class BoardModifyServlet extends HttpServlet {
      */
     public BoardModifyServlet() {
         // TODO Auto-generated constructor stub
+    	super();
     }
 
 	/**
@@ -32,7 +31,7 @@ public class BoardModifyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int bNo = request.getParameter("board_no");
+		int bNo = Integer.parseInt(request.getParameter("board_no"));
 		String bTitle = request.getParameter("board_title");
 		String bContent = request.getParameter("board_content");
 		String userId = request.getParameter("user_id");
