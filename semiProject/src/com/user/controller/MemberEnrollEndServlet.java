@@ -70,7 +70,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			result2 = new AddressService().insertAddress(adr);
 		}
 		
-		String loc="/";
+		String loc="/views/member/loginPage.jsp";
 		String msg=result2>0?"회원가입 성공!":"회원가입 실패!";
 		
 		request.setAttribute("msg", msg);

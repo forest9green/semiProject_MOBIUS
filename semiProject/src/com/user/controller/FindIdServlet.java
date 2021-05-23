@@ -67,8 +67,7 @@ public class FindIdServlet extends HttpServlet {
 			prop.put("mail.smtp.port", "587");
 			prop.put("mail.smtp.auth", "true");
 			prop.put("mail.smtp.debug", "true");
-			prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			prop.put("mail.smtp.socketFactory.fallback", "false");
+			
 
 			try {
 				Authenticator auth = new SMTPAuthenticator();
