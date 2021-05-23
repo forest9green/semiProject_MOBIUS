@@ -10,7 +10,7 @@
             <div id="total_mile">
                 <div>
                     <span class="pd">사용 가능한 적립금</span>
-                    <span class="pa">0000원</span>
+                    <span class="pa"><%=loginUser.getMileage() %>원</span>
                 </div>
             </div>
             <table id="mile_table" class="pa" border>

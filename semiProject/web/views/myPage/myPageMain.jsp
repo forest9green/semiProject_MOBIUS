@@ -5,13 +5,14 @@
 
 <section>
     <div id="my_profile">
-        <span><h2 class="pe">안녕하세요, 00님!</h2></span>
+        <span><h2 class="pe">안녕하세요, <%=loginUser.getUserName() %>님!</h2></span>
         <span class="pc">쿠폰과 적립금으로 더욱 합리적인 쇼핑을 즐겨보세요.</span>
         <table id="cou_mile" class="pc">
             <tr>
                 <td style="text-align: end;">적립금</td>
-                <td>0000원</td>
-                <td style="text-align: start"><button type="button" class="inquiry_btn pb">조회</button></td>
+                <td><%=loginUser.getMileage() %>원</td>
+                <td style="text-align: start"><button type="button" class="inquiry_btn pb"
+                onclick="location.assign('<%=request.getContextPath()%>/mypage/mileageListuserId="+<%=loginUser.getUserId() %>)">조회</button></td>
                 <td>쿠폰</td>
                 <td>0개</td>
                 <td style="text-align: start"><button type="button" class="inquiry_btn pb" style="margin-left: 10px;">조회</button></td>
@@ -103,7 +104,7 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="">
+                    <a href="<%=request.getContextPath()%>/mypage/mileageList?userId="+<%=loginUser.getUserId() %>>
                         <h3><strong>MILEAGE</strong></h3>
                         <p style="font-size: 90%;">적립금은 상품 구매 시<br>사용하실 수 있습니다.</p>
                     </a>

@@ -41,16 +41,16 @@
                     <ul>
 
                        <%if(loginUser!=null&&loginUser.getUserId().equals("admin")){ %> 
-                        <li class="pa"><a href="">관리자페이지</a></li>
+                        <li class="pa"><a href="">Adminpage</a></li>
                        <%}else{ %>
-                       	<li class="pa"><a href="">mypage</a></li>	
+                       	<li class="pa"><a href="<%=request.getContextPath()%>/views/myPage/myPageMain.jsp">Mypage</a></li>	
                        <%} %>
                      <%if(loginUser==null) {%>
                         <li class="pa"><a href="<%=request.getContextPath()%>/views/member/loginPage.jsp">Login</a></li>
                      <%}else{ %>
                         <li class="pa"><a href="<%=request.getContextPath()%>/user/logout">Logout</a></li>
                      <%} %>
-                        <li class="pa"><a href="" >Join</a></li>
+                        <li class="pa"><a href="<%=request.getContextPath() %>/views/member/memberEnroll.jsp">Join</a></li>
                         <li class="pa"><a href="">Order</a></li>
                         <li class="pa"><a href="">Cart</a></li>
                     </ul>
@@ -71,11 +71,11 @@
                                 <li><a href="">의자</a></li>
                             </ul>
                         </li>
-                        <li class="pe" style="padding-bottom: 2px;"><a href="">SHOWROOM</a></li>
-                        <li class="pe"><a href="">NOTICE</a></li>
+                        <li class="pe" style="padding-bottom: 2px;"><a class="mm" href="">SHOWROOM</a></li>
+                        <li class="pe"><a class="mm" href="">NOTICE</a></li>
                     </ul>
                 </span>
-                <span><h1 class="pf"><a href="<%=request.getContextPath() %>">SOLIDI</a></h1></span>
+                <span><h1 class="pf"><a class="mm" href="<%=request.getContextPath() %>">SOLIDI</a></h1></span>
             </div>        
         </header>
         
