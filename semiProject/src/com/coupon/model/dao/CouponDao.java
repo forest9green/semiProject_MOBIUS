@@ -1,4 +1,4 @@
-package com.mileage.model.dao;
+package com.coupon.model.dao;
 
 import static com.common.JDBCTemplate.close;
 
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.mileage.model.vo.Mileage;
+import com.coupon.model.vo.Coupon;
 
-public class MileageDao {
+public class CouponDao {
 	
-	private Properties prop=new Properties();
+private Properties prop=new Properties();
 	
 	
-	public MileageDao() {
-		String path=MileageDao.class.getResource("/sql/mileage_sql.properties").getPath();
+	public CouponDao() {
+		String path=CouponDao.class.getResource("/sql/coupon_sql.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		} catch (IOException e) {
@@ -29,26 +29,29 @@ public class MileageDao {
 	}
 	
 	
-	public List<Mileage> selectMileageList(Connection conn, String userId, int cPage, int numPerPage){
+	public List<Coupon> selectCouponList(Connection conn, String userId, int cPage, int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Mileage> list=new ArrayList<>();
+		List<Coupon> list=new ArrayList<>();
 		
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectMileageList"));
+			pstmt=conn.prepareStatement(prop.getProperty("selectCouponList"));
 			pstmt.setString(1, userId);
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				Mileage m=new Mileage();
-				m.setOrderNo(rs.getString("order_no"));
-				m.setUserId(rs.getString("user_id"));
-				m.setmContent(rs.getString("m_content"));
-				m.setmPlus(rs.getInt("m_plus"));
-				m.setmMinus(rs.getInt("m_minus"));
-				list.add(m);
+				Coupon c=new Coupon();
+				c.setcNo(rs.getString("c_no"));
+				c.setUserId(rs.getString("user_id"));
+				c.setcName(rs.getString("c_name"));
+				c.setcDiscount(rs.getDouble("c_discount"));
+				c.setcIssueDate(rs.getDate("c_issue_date"));
+				c.setcFinishDate(rs.getDate("c_finish_date"));
+				c.setcLimit(rs.getInt("c_limit"));
+				c.setcUse(rs.getInt("c_use"));
+				list.add(c);
 			}
 			
 		} catch (SQLException e) {
@@ -62,13 +65,13 @@ public class MileageDao {
 	}
 	
 	
-	public int selectMileageCount(Connection conn, String userId) {
+	public int selectCouponCount(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectMileageCount"));
+			pstmt=conn.prepareStatement(prop.getProperty("selectCouponCount"));
 			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);

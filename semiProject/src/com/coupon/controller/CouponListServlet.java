@@ -1,4 +1,4 @@
-package com.mileage.controller;
+package com.coupon.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mileage.model.service.MileageService;
-import com.mileage.model.vo.Mileage;
+import com.coupon.model.service.CouponService;
+import com.coupon.model.vo.Coupon;
 
 /**
- * Servlet implementation class MileageListServlet
+ * Servlet implementation class CouponListServlet
  */
-@WebServlet("/mypage/mileageList")
-public class MileageListServlet extends HttpServlet {
+@WebServlet("/mypage/couponList")
+public class CouponListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MileageListServlet() {
+    public CouponListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,9 +41,9 @@ public class MileageListServlet extends HttpServlet {
 			cPage=1;
 		}
 		
-		List<Mileage> list=new MileageService().selectMileageList(userId,cPage,numPerPage);
+		List<Coupon> list=new CouponService().selectCouponList(userId,cPage,numPerPage);
 		
-		int totalData=new MileageService().selectMileageCount(userId);
+		int totalData=new CouponService().selectCouponCount(userId);
 		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
 		
 		int pageBarSize=10;
@@ -51,19 +51,18 @@ public class MileageListServlet extends HttpServlet {
 		int pageEnd=pageNo+pageBarSize-1;
 		
 		String pageBar="";
-		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/mypage/mileageList?userId="+userId+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/mypage/couponList?userId="+userId+"&cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
-		
-		request.setAttribute("mileages", list);
+
+		request.setAttribute("coupons", list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/views/myPage/mileageView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/myPage/couponView.jsp").forward(request, response);
 	}
 
 	/**

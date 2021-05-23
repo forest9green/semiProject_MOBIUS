@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="java.util.List, com.mileage.model.vo.Mileage" %>
+<%
+	List<Mileage> mileages=(List<Mileage>)request.getAttribute("mileages");
+	String pageBar=(String)request.getAttribute("pageBar");
+%>
 <%@ include file="/views/common/header.jsp"%>
 
 <section>
@@ -23,16 +27,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!--
-                        값이 없으면 <tr>보유하고 계신 적립금 내역이 없습니다.</tr> 추가
-                        값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 js 처리해야 함
-                    -->
+                    <%if(!mileages.isEmpty()) {
+                    	for(Mileage m:mileages){%>
+                    		<tr>
+                    			<td><%=m.getOrderNo() %></td>
+                    			<td><%=m.getOrderNo().substring(0,m.getOrderNo().indexOf('-')) %></td>
+                    			<%if(m.getmPlus()!=0) {%>
+                    				<td><%="+"+m.getmPlus() %></td>
+                    			<%}else{%>
+                    				<td><%="-"+m.getmMinus() %></td>
+                    			<%} %>
+                    			<td><%=m.getmContent() %></td>
+                    		</tr>
+                    	<%}
+                    } else{%>
+                    	<tr>
+                    		<td colspan="4">적립금 내역이 없습니다.</td>
+                    	</tr>
+                    <%} %>
                 </tbody>
             </table>
         </div>
         <div id="c_pagebar" class="pagebar">
-            <span><a href="">1</a></span>
-            <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
+            <%=pageBar %>
         </div>
     </div>
 </section>
@@ -75,19 +92,26 @@
     #mile_box>p+h2{
         font-size: 30px;
     }
-    .pagebar{
-        width: 100px;
-        margin: 50px auto;
-    }
-    .pagebar>span{
-        margin:0 6px 0 6px;
-    }
-    .pagebar>span a{
-        text-decoration: none;
-    }
-    .pagebar span>a:hover{
-        color:rgba(123, 209, 159, 0.856);
-    }
+    
+    /*pageBar 디자인*/
+	.pagebar{
+	    margin: 50px auto;
+	    display:flex;
+	    justify-content: center;
+	}
+	.pagebar>span, .pagebar>a{
+	    margin:0 6px 0 6px;
+	}
+	.pagebar>a{
+	    text-decoration: none;
+	    color:black;
+	}
+	.pagebar>span{
+		color:rgba(123, 209, 159);
+	}
+	.pagebar>a:hover{
+	    color:rgba(123, 209, 159);
+	}
 </style>
 
 <script></script>

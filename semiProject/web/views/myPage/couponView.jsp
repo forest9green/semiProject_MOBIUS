@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="java.util.List, com.coupon.model.vo.Coupon" %>
+<%
+	List<Coupon> coupons=(List<Coupon>)request.getAttribute("coupons");
+	String pageBar=(String)request.getAttribute("pageBar");
+%>
 <%@ include file="/views/common/header.jsp"%>
 
 <section>
@@ -12,22 +16,32 @@
                     <tr>
                         <th>번호</th>
                         <th width=450>쿠폰명</th>
-                        <th>구매금액</th>
-                        <th>결제수단</th>
+                        <th>구매금액(이상)</th>
                         <th>할인율</th>
                         <th>유효기간</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!--
-                        값이 없으면 <tr>보유하고 계신 쿠폰 내역이 없습니다.</tr> 추가
-                        값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 js 처리해야 함
-                    -->
+                    <%if(!coupons.isEmpty()) {
+                    	for(Coupon c:coupons) {%>
+                    		<tr>
+                    			<td><%=c.getcNo().substring(1) %></td>
+                    			<td><%=c.getcName() %></td>
+                    			<td><%=c.getcLimit() %></td>
+                    			<td><%=(int)(c.getcDiscount()*100)+"%" %></td>
+                    			<td><%=c.getcIssueDate()+" ~ "+c.getcFinishDate() %></td>
+                    		</tr>
+                    	<%}
+                    } else {%>
+                    	<tr>
+                    		<td colspan="5">보유한 쿠폰 내역이 없습니다.</td>
+                    	</tr>
+                    <%} %>
                 </tbody>
             </table>
         </div>
         <div id="c_pagebar" class="pagebar">
-            <span><a href="">1</a></span>
+            <%=pageBar %>
             <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
         </div>
     </div>
@@ -56,20 +70,26 @@
     #coupon_box>p+h2{
         font-size: 30px;
     }
-    .pagebar{
-        width: 100px;
-        margin: 50px auto;
-    }
-    .pagebar>span{
-        margin:0 6px 0 6px;
-    }
-    .pagebar>span a{
-        text-decoration: none;
-    }
-    .pagebar span>a:hover{
-        color:rgba(123, 209, 159, 0.856);
-        
-    }
+    
+    /*pageBar 디자인*/
+	.pagebar{
+	    margin: 50px auto;
+	    display:flex;
+	    justify-content: center;
+	}
+	.pagebar>span, .pagebar>a{
+	    margin:0 6px 0 6px;
+	}
+	.pagebar>a{
+	    text-decoration: none;
+	    color:black;
+	}
+	.pagebar>span{
+		color:rgba(123, 209, 159);
+	}
+	.pagebar>a:hover{
+	    color:rgba(123, 209, 159);
+	}
 </style>
 
 <script></script>

@@ -11,11 +11,11 @@
             <tr>
                 <td style="text-align: end;">적립금</td>
                 <td><%=loginUser.getMileage() %>원</td>
-                <td style="text-align: start"><button type="button" class="inquiry_btn pb"
-                onclick="location.assign('<%=request.getContextPath()%>/mypage/mileageListuserId="+<%=loginUser.getUserId() %>)">조회</button></td>
+                <td style="text-align: start"><input type="button" class="inquiry_btn pb" value="조회" onclick="fn_moveMileageView();"></td>
                 <td>쿠폰</td>
                 <td>0개</td>
-                <td style="text-align: start"><button type="button" class="inquiry_btn pb" style="margin-left: 10px;">조회</button></td>
+                <td style="text-align: start"><input type="button" class="inquiry_btn pb" value="조회" onclick="fn_moveCouponView();"
+                style="margin-left: 10px;"></td>
             </tr>
         </table>
     </div>
@@ -112,7 +112,7 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="">
+                    <a href="<%=request.getContextPath()%>/mypage/couponList?userId="+<%=loginUser.getUserId() %>">
                         <h3><strong>COUPON</strong></h3>
                         <p style="font-size: 90%;">고객님이 보유하고 계신<br>쿠폰 내역을 보여드립니다.</p>
                     </a>
@@ -121,6 +121,16 @@
         </ul>
     </div>
 </section>
+
+<script>
+	const fn_moveMileageView=()=>{
+		location.assign('<%=request.getContextPath()%>/mypage/mileageList?userId='+'<%=loginUser.getUserId() %>');
+	}
+	
+	const fn_moveCouponView=()=>{
+		location.assign('<%=request.getContextPath()%>/mypage/couponList?userId='+'<%=loginUser.getUserId() %>');
+	}
+</script>
 
 <style>
     #my_profile{
