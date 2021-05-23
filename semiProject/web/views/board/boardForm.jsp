@@ -7,7 +7,8 @@
 	<div id="contents" class="container">
     	<div class="subTitle">
 	        <h1>문의사항 작성<span></span></h1>
-    </div>
+    	</div>
+    <form action='<%=request.getContextPath()%>/board/boardInsert' method="post" enctype="multipart/form-data">	
     <div class="form-group">
 	    <label for="ca_name">분류</label>
 	     <select class="form-control form-control-sm w-auto" id="ca_name" name="ca_name" required>
@@ -39,12 +40,12 @@
         <div class="btn-box">
             <ul>
                 <li>          
-                    <div class="cancel-btn pb" id="cancel" onclick="location.replace('<%=request.getContextPath()%>/views/board/boardlistView.jsp')">
+                    <div class="cancel-btn pb" id="cancel" onclick="location.replace('<%=request.getContextPath()%>/views/board/boardlist.jsp')">
                         <a href>취소</a>
                     </div> 
                 </li>
                 <li>    
-                    <div class="complete-btn pb" id="complete" onclick="location.replace('<%=request.getContextPath()%>/views/board/boardlistView.jsp')">
+                    <div class="complete-btn pb" id="complete" type=submit value="작성완료" onclick="location.replace('<%=request.getContextPath()%>/views/board/boardlistView.jsp')">
                         <a href>작성완료</a>
                     </div>
                 </li>

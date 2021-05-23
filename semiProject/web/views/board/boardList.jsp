@@ -3,6 +3,7 @@
 <%@ page import="java.util.List,com.board.model.vo.Board" %>
 <%
 	List<Board> boards=(List<Board>)request.getAttribute("boards");
+	String pageBar=(String)request.getAttribute("pageBar");
 
 
 %>
@@ -37,20 +38,32 @@
         </tr>
         </thead>
         <tbody>
+        	<% if(!boards.isEmpty()){ 
+        	 for (Board b: boards){%>
             <tr>   
-                <td>1</td>
-                <td style="padding:5px;">배송언제오나요?</td>
-                <td>양호준</td>
-                <td>0416</td>
+                <td><%=b.getbNo()%><!-- 1 --></td>
+                <td style="padding:5px;">
+                	<a href="<%= request.getContextPath()%>/board/boardview?no=<%=b.getbNo()%>">
+                	<%=b.getbTitle()%><!-- 배송언제오나요? -->
+                	</a>
+                </td>
+                <td><%=b.getUserId()%><!-- 양호준 --></td>
+                <td><%=b.getbWriteDate()%><!-- 0416 --></td>
                 <td>답변완료</td>
             </tr> 
             <tr>
-                <td>2</td>
-                <td style="padding:5px;">환불가능?</td>
-                <td>양호준</td>
-                <td>0416</td>
+                <td><%=b.getbNo()%><!-- 2 --></td>
+                <td style="padding:5px;"><!-- 환불가능? -->
+                	<a href="<%= request.getContextPath()%>/board/boardview?no=<%=b.getbNo()%>">
+                	<%=b.getbTitle()%><!-- 배송언제오나요? -->
+                	</a>
+                </td>
+                <td><%=b.getUserId()%><!-- 양호준 --></td>
+                <td><%=b.getbWriteDate()%><!-- 0416 --></td>
                 <td>진행중</td>
             </tr>
+            <%} 
+            }%>
         </tbody>
     </table>
    <div class="qlv_last">
@@ -62,6 +75,9 @@
             <input type="submit" id="submitql" value="">
         </form>
     </div>
+    	<div id="pageBar">
+    		<%=pageBar %>
+    	</div>
 </section>    
 
 <style>
