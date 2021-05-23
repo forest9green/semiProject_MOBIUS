@@ -9,6 +9,5 @@ public class SMTPAuthenticator extends Authenticator{
 	protected PasswordAuthentication getPasswordAuthentication() {
 		return new PasswordAuthentication("xogml6915@gmail.com", "slrkanjsep7");
 		
-		
 	}
 }
