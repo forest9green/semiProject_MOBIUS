@@ -30,6 +30,6 @@ public class ReviewService {
 		Connection conn=getConnection();
 		Review r=dao.selectReview(conn,reviewNo);
 		close(conn);
-		return b;
+		return r;
 	}
 }

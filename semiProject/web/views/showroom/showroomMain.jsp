@@ -6,27 +6,27 @@
 <section>
 	<h1 class="pe"> SHOWROOM </h1>
 	<div class="showroom_main1">
-        <a href=""><img src="./img/showroom_bedroom.jpg" >
+        <a href=""><img src="../../images/showroom/showroom_bedroom.jpg" >
         <p class="pd">침실</p></a>
 	</div>
     <div class="showroom_main2">
-        <a href=""><img src="./img/showroom_livingroom.jpg" >
+        <a href=""><img src="../../images/showroom/showroom_livingroom.jpg" >
         <p class="pd">거실</p></a>
 	</div>
     <div class="showroom_main3">
-        <a href=""><img src="./img/showroom_diningroom.jpg" >
+        <a href=""><img src="../../images/showroom/showroom_diningroom.jpg" >
         <p class="pd">주방</p></a>
 	</div>
     <div class="showroom_main4">
-        <a href=""><img src="./img/showroom_bathroom.jpg" >
+        <a href=""><img src="../../images/showroom/showroom_bathroom.jpg" >
         <p class="pd">욕실</p></a>
 	</div>
     <div class="showroom_main5">
-        <a href=""><img src="./img/showroom_entrance.jpg" >
+        <a href=""><img src="../../images/showroom/showroom_entrance.jpg" >
         <p class="pd">현관</p></a>
 	</div>
     <div class="showroom_main6">
-        <a href=""><img src="./img/showroom_homeoffice.jpg" >
+        <a href=""><img src="../../images/showroom/showroom_homeoffice.jpg" >
        <p class="pd">홈오피스</p></a>
 	</div>
 </section>
@@ -87,7 +87,7 @@
         height:300px;
         text-align:center;
     }
-</style>
+</style>	
 <script></script>
 
 <%@ include file="/views/common/footer.jsp"%>

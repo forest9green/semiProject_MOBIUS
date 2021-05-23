@@ -39,6 +39,7 @@
                 </span>
                 <span>
                     <ul>
+
                        <%if(loginUser!=null&&loginUser.getUserId().equals("admin")){ %> 
                         <li class="pa"><a href="">관리자페이지</a></li>
                        <%}else{ %>
@@ -49,7 +50,7 @@
                      <%}else{ %>
                         <li class="pa"><a href="<%=request.getContextPath()%>/user/logout">Logout</a></li>
                      <%} %>
-                        <li class="pa"><a href="<%=request.getContextPath()%>/user/memberenrll" >Join</a></li>
+                        <li class="pa"><a href="" >Join</a></li>
                         <li class="pa"><a href="">Order</a></li>
                         <li class="pa"><a href="">Cart</a></li>
                     </ul>
@@ -61,16 +62,16 @@
                         <li>
                             <ul id="item-category">
                                 <li class="pe">ITEM</li>
-                                <li><a href="">전체</a></li>
-                                <li><a href="">세일</a></li>
-                                <li><a href="">소파</a></li>
-                                <li><a href="">침대</a></li>
-                                <li><a href="">옷장</a></li>
-                                <li><a href="">책상</a></li>
-                                <li><a href="">의자</a></li>
+                                <li><a href="http://localhost:9090/semiProject/views/item/itemwholeView.jsp">전체</a></li>
+                                <li><a href="http://localhost:9090/semiProject/views/item/itemsaleView.jsp">세일</a></li>
+                                <li><a href="http://localhost:9090/semiProject/views/item/itemsofaView.jsp">소파</a></li>
+                                <li><a href="http://localhost:9090/semiProject/views/item/itembedView.jsp">침대</a></li>
+                                <li><a href="http://localhost:9090/semiProject/views/item/itemdrawerView.jsp">옷장</a></li>
+                                <li><a href="http://localhost:9090/semiProject/views/item/itemdeskView.jsp">책상</a></li>
+                                <li><a href="http://localhost:9090/semiProject/views/item/itemchairView.jsp">의자</a></li>
                             </ul>
                         </li>
-                        <li class="pe" style="padding-bottom: 2px;"><a href="">SHOWROOM</a></li>
+                        <li class="pe" style="padding-bottom: 2px;"><a href="http://localhost:9090/semiProject/views/showroom/showroomMain.jsp">SHOWROOM</a></li>
                         <li class="pe"><a href="">NOTICE</a></li>
                     </ul>
                 </span>

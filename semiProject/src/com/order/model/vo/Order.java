@@ -1,8 +1,8 @@
-package com.orderinfo.model.vo;
+package com.order.model.vo;
 
 import java.util.Date;
 
-public class OrderInfo {
+public class Order {
 	
 	private String orderNo;
 	private String userId;
@@ -16,9 +16,9 @@ public class OrderInfo {
 	private Date orderDate;
 	private String oPaystate;
 
-	public OrderInfo() {}
+	public Order() {}
 
-	public OrderInfo(String orderNo, String userId, int addrNo, String orderMemo, int oTotal, int oDelivery,
+	public Order(String orderNo, String userId, int addrNo, String orderMemo, int oTotal, int oDelivery,
 			int oDiscount, int oPayment, String oPaymethod, Date orderDate, String oPaystate) {
 		super();
 		this.orderNo = orderNo;

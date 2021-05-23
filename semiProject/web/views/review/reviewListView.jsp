@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.List, com.review.model.vo.Review" %>
+<%
+	List<Review> reviews=(List<Review>)request.getAttribute("reviews");
+	String pagBar=(String)request.getAttribute("pageBar");
+%>
 <%@ include file="/views/common/header.jsp"%>
  <section>
      <div id="review_box" class="box">
@@ -18,10 +22,11 @@
                          </tr>
                      </thead>
                      <tbody>
-
+						<%if(!reviews.isEmpty()){ 
+						for(Review r: reviews){%>
                          <tr>
-                             <td></td>
-                             <td></td>
+                             <td><a href="<%=request.getContextPath()%>/review/"> <%= %></a></td>
+                             <td> </td>
                              <td>
                                  <div class="starRev">
                                      <span class="starR">별1</span>
@@ -40,12 +45,14 @@
                                  </ul>
                              </td>
                          </tr>
+                        <%} 
+                     	}%>
                      </tbody>
+
                  </table>
              </div>
-             <div id="w_pagebar" class="pagebar">
-                 <span><a href="">1</a></span>
-               
+             <div id="pageBar" class="">
+					<%= %>               
              </div>
 
      </div>

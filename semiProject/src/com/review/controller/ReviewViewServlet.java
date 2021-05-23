@@ -29,7 +29,7 @@ public class ReviewViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int ReviewNo= Integer.parseInt(request.getParamenter("no"));
+		int ReviewNo= Integer.parseInt(request.getParameter("no"));
 		
 		Review r= new ReviewService().selectReview(ReviewNo);
 		request.setAttribute("Review",r);
