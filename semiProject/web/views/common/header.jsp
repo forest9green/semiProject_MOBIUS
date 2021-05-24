@@ -50,7 +50,7 @@
                      <%}else{ %>
                         <li class="pa"><a href="<%=request.getContextPath()%>/user/logout">Logout</a></li>
                      <%} %>
-                        <li class="pa"><a href="<%=request.getContextPath() %>/views/member/memberEnroll.jsp">Join</a></li>
+                        <li class="pa"><a href="<%=request.getContextPath() %>/views/member/memberE	nroll.jsp">Join</a></li>
                         <li class="pa"><a href="">Order</a></li>
                         <li class="pa"><a href="">Cart</a></li>
                     </ul>
@@ -72,7 +72,7 @@
                             </ul>
                         </li>
                         <li class="pe" style="padding-bottom: 2px;"><a class="mm" href="<%=request.getContextPath() %>/views/showroom/showroomMain.jsp">SHOWROOM</a></li>
-                        <li class="pe"><a class="mm" href="">NOTICE</a></li>
+                        <li class="pe"><a class="mm" href="<%=request.getContextPath() %>/views/notice/noticeMain.jsp">NOTICE</a></li>
                     </ul>
                 </span>
                 <span><h1 class="pf"><a class="mm" href="<%=request.getContextPath() %>">SOLIDI</a></h1></span>

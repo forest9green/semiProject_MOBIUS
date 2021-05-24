@@ -7,23 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.board.model.service.BoardService;
-import com.board.model.vo.Board;
-import com.oreilly.servlet.MultipartRequest;
-
 /**
- * Servlet implementation class BoardInsertServlet
+ * Servlet implementation class BoardUpdateEndServlet
  */
-@WebServlet("/myPage/board/boardinsert")
-public class BoardInsertServlet extends HttpServlet {
+@WebServlet("/myPage/board/updateEnd")
+public class BoardUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardInsertServlet() {
+    public BoardUpdateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,10 +27,7 @@ public class BoardInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userId=request.getParameter("userId");
-		request.getRequestDispatcher("/views/board/boardForm.jsp")
-		.forward(request, response);
-	
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

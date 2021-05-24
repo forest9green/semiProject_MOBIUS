@@ -23,8 +23,8 @@
             </tr>
         </table>
             
-            <div class="ql_v_right" onclick="fn_boardInsert();">
-               <a href="/mypage/board/insert" style="text-decoration:none;">문의하기</a> 
+            <div class="ql_v_right">
+               <a href="<%=request.getContextPath()%>/myPage/board/boardinsert" style="text-decoration:none;">문의하기</a> 
             </div>
     </div>    
     <table class="qlv_list" border="1" height="50px">
@@ -150,7 +150,7 @@
 
 <script>
  const fn_boardInsert=()=>{
-	 location.assign("<%=request.getContextPath()%>/mypage/board/boardinsert")
+	 location.assign("<%=request.getContextPath()%>/myPage/board/boardinsert")
  }
 </script>
 

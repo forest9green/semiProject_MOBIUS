@@ -26,20 +26,21 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 	} 
-	public List<Board> selectBoardList(Connection conn, int cPage, int numPerpage){
+	public List<Board> selectBoardList(Connection conn, int cPage, int numPerpage, String userId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Board> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectBoardList"));
-			pstmt.setInt(1, (cPage-1)*numPerpage+1);
-			pstmt.setInt(2, cPage*numPerpage);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()){
 				Board b=new Board();
-				b.setbNo(rs.getString("board_no"));
-				b.setbTitle(rs.getString("board_title"));
-				b.setUserId(rs.getString("board_writer"));
+				b.setbNo(rs.getString("bNo"));
+				b.setbTitle(rs.getString("B_TITLE"));
+				b.setUserId(rs.getString("USER_ID"));
 				b.setbContent(rs.getString("board_content"));
 				b.setbWriteDate(rs.getDate("board_date"));
 				list.add(b);
@@ -53,12 +54,13 @@ public class BoardDao {
 		
 	}
 	
-	public int selectBoardCount(Connection conn) {
+	public int selectBoardCount(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectBoardCount"));
+			pstmt.setString(1,userId);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);
 		}catch(SQLException e) {
@@ -92,7 +94,7 @@ public class BoardDao {
 			close(pstmt);
 		}return b;
 	}
-	public int insertBoard(Connection conn, Board b) {
+	public int insertBoard(Connection conn, Board b, String userId) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
