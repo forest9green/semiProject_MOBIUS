@@ -88,7 +88,7 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="">
+                    <a href="<%=request.getContextPath()%>/myPage/member/PwCk.jsp">
                         <h3><strong>PROFILE</strong></h3>
                         <p style="font-size: 90%;">고객님의 개인정보를<br>관리하는 공간입니다.</p>
                     </a>

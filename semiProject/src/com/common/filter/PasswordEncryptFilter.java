@@ -17,7 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 //필터링의 기준은 주소매핑만하는것이 아니라 서블릿이름으로도 가능
 @WebFilter(
 		servletNames = {
-		"loginServlet","enrollendservlet"
+		"loginServlet","enrollendservlet","updatememberservlet"
+		,"checkpasswordservlet"
 		
 })
 public class PasswordEncryptFilter implements Filter {

@@ -21,7 +21,7 @@
                     </div>  
                     <div class="member_cont">
                         <div class="login_input_sec">
-                            <h4 pc>고객님의 정보와 일치하는 아이디 : </h4>  
+                            <h4 pc>고객님의 정보와 일치하는 아이디 : <%=loginUser.getUserId() %></h4>  
                         </div>
                         <div class="btn_login_box">
                             <ul>

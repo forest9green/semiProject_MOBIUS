@@ -54,47 +54,39 @@ public class FindIdServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String from ="xogml6915@gmail.com";
-		String to = u.getEmail();
-		String subject = "인증번호 확인";
-		String content = "인증번호 : eeeee55555";
+		
 		
 		
 		if(u!=null) {
-			Properties prop = new Properties();
-			prop.put("mail.smtp.starttls.enable", "true");
-			prop.put("mail.smtp.host", "smtp.gmail.com");
-			prop.put("mail.smtp.port", "587");
-			prop.put("mail.smtp.auth", "true");
-			prop.put("mail.smtp.debug", "true");
-			
+			String mailServer = "smtp.gmail.com";
+			 Properties props = new Properties();
+			 props.put("mail.smtp.host", mailServer);
+			 props.put("mail.smtp.auth", "true");
+			 
+			 Authenticator myAuth = new MyAuthenticator();
+			 
+			 Session sess = Session.getInstance(props,myAuth);
+			 
+			 try {
+				 String to = "xogml6915@naver.com";
+				 String from = "xogml6915@gmail.com";
+				 String subject = "테스트";
+				 String content = "테스트용 메일입니다.";
+			 
+				 Message msg = new MimeMessage(sess);
+				 InternetAddress address = new InternetAddress(to);
+				 
+				 msg.setRecipient(Message.RecipientType.TO, address);
+				 msg.setFrom(new InternetAddress(from));
+				 msg.setSubject(content);
+				 msg.setContent(content,"text/html;charset=UTF-8");
+				 msg.setSentDate(new Date());
+				 Transport.send(msg);
+			 }catch(Exception e) {
+				 e.printStackTrace();
+			 }
+			 
 
-			try {
-				Authenticator auth = new SMTPAuthenticator();
-				Session session = Session.getInstance(prop,auth);
-				
-				session.setDebug(true);
-				
-				MimeMessage msg = new MimeMessage(session);
-				msg.setSubject(subject);
-				
-				Address fromAddr = new InternetAddress(from);
-				msg.setFrom(fromAddr);
-				
-				Address toAddr = new InternetAddress(to);
-				msg.addRecipient(Message.RecipientType.TO, toAddr);
-				
-				msg.setContent(content,"text/html;charset=UTF-8");
-				
-				Transport.send(msg);
-			}catch(Exception e) {
-				e.printStackTrace();
-				System.out.println("메일 전송 실패");
-			}
-			
-			
-			System.out.println("메일전송 성공");
-			
 			
 			
 			

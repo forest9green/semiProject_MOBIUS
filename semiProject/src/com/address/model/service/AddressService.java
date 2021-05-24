@@ -24,7 +24,16 @@ public class AddressService {
 		return result2;
 	}
 	
-	
+	public int updateAddress(Address adr) {
+		Connection conn = getConnection();
+		int result2 = dao.updateAddress(conn,adr);
+		
+		if(result2>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result2;
+	}
 	
 	
 	

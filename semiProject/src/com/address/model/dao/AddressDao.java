@@ -49,4 +49,31 @@ public class AddressDao {
 		
 	}
 	
+	
+	public int updateAddress(Connection conn, Address adr) {
+		PreparedStatement pstmt= null;
+		int result2 = 0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateAddress"));
+			pstmt.setString(1, adr.getPostCode());
+			pstmt.setString(2, adr.getAddr());
+			pstmt.setString(3, adr.getUserId());
+			
+			result2 = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		}
+		return result2;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

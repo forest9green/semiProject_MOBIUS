@@ -449,9 +449,12 @@
     .check_s{
         min-width: 13px;
     }
-    #zonecode{
+    #sample6_postcode{
         float: left;
         width: 190px;
+    }
+    #btnPostcode{
+    	margin-left: 10px;
     }
     .address_input{
         float: left;
