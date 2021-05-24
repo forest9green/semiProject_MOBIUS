@@ -1,6 +1,7 @@
-package com.mileage.controller;
+package com.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mileage.model.service.MileageService;
-import com.mileage.model.vo.Mileage;
+import com.product.model.service.ProductService;
+import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class MileageListServlet
+ * Servlet implementation class ProductListServlet
  */
-@WebServlet("/myPage/mileageList")
-public class MileageListServlet extends HttpServlet {
+@WebServlet("/product/productList")
+public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MileageListServlet() {
+    public ProductListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +32,10 @@ public class MileageListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId=request.getParameter("userId");
+		//세일 메뉴 일때는 걍 list를 null로 보내버려라!
+		String category=request.getParameter("category");
+		String cateCode="";
+		List<Product> list=new ArrayList<>();
 		
 		int cPage;
 		int numPerPage=10;
@@ -41,9 +45,21 @@ public class MileageListServlet extends HttpServlet {
 			cPage=1;
 		}
 		
-		List<Mileage> list=new MileageService().selectMileageList(userId,cPage,numPerPage);
+		int totalData=0;
 		
-		int totalData=new MileageService().selectMileageCount(userId);
+		if(category!=null) {
+			cateCode=new ProductService().searchCateCode(category);
+			list=new ProductService().selectProductList(cateCode,cPage,numPerPage);
+			totalData=new ProductService().selectProductCount(cateCode);
+			request.setAttribute("category", category);
+			
+		} else{
+			//카테고리가 전체임
+			request.setAttribute("category", "전체");
+			list=new ProductService().selectProductList(cPage,numPerPage);
+			totalData=new ProductService().selectProductCount();
+		}
+		
 		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
 		
 		int pageBarSize=10;
@@ -56,14 +72,14 @@ public class MileageListServlet extends HttpServlet {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/mypage/mileageList?userId="+userId+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/product/productList?cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		
-		request.setAttribute("mileages", list);
+		request.setAttribute("products", list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/views/myPage/mileageView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/product/productList.jsp").forward(request, response);
 	}
 
 	/**

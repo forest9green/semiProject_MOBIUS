@@ -10,7 +10,7 @@
             <table id="addr_table" class="pb" border>
                 <thead>
                     <tr>
-                        <th><input type="checkbox"></th><!--일괄 체크 처리-->
+                        <th><input type="checkbox" id="checkall"></th><!--일괄 체크 처리-->
                         <th>기본 배송지</th>
                         <th>배송지명</th>
                         <th>수령인</th>
@@ -23,7 +23,7 @@
                 <tbody>
                     <!--회원가입할 때 입력한 배송지-->
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox" name="chk"></td>
                         <td><button type="button">지정</button></td><!-- 클릭 시 기본 배송지로 지정하시겠습니까? 메세지, 확인 누르면 누르면 클래스 blackback이 추가되고, 기본 배송지로 지정됨(기본 배송지는 1개만 되니까 다른 기본 배송지가 있을 경우 해제됨)-->
                         <td>미지정</td>
                         <td>이름</td>
@@ -103,20 +103,6 @@
     #addr_box>p+h2{
         font-size: 30px;
     }
-    .pagebar{
-        width: 100px;
-        margin: 50px auto;
-    }
-    .pagebar>span{
-        margin:0 6px 0 6px;
-    }
-    .pagebar>span a{
-        text-decoration: none;
-    }
-    .pagebar span>a:hover{
-        color:rgba(123, 209, 159, 0.856);
-        
-    }
     #addr_warn{
         width:945px;
         border: black 1px dotted;
@@ -125,6 +111,26 @@
     #addr_warn>p{
         margin:0px;
     }
+    
+    /*pageBar 디자인*/
+	.pagebar{
+	    margin: 50px auto;
+	    display:flex;
+	    justify-content: center;
+	}
+	.pagebar>span, .pagebar>a{
+	    margin:0 6px 0 6px;
+	}
+	.pagebar>a{
+	    text-decoration: none;
+	    color:black;
+	}
+	.pagebar>span{
+		color:rgba(123, 209, 159);
+	}
+	.pagebar>a:hover{
+	    color:rgba(123, 209, 159);
+	}
 </style>
 
 <script></script>
