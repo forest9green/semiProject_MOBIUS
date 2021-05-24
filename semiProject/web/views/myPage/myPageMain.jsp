@@ -80,15 +80,15 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="">
-                        <h3><strong>BOARD</strong></h3>
+                    <a href="<%=request.getContextPath()%>/myPage/board/boardlist">
+                        <h3><strong>BOARD </strong></h3>
                         <p style="font-size: 90%;">고객님께서 작성하신<br>문의 게시물을 관리하는 공간입니다.</p>
                     </a>
                 </div>
             </li>
             <li>
                 <div class="box">
-                    <a href="">
+                    <a href="<%=request.getContextPath()%>/myPage/member/PwCk.jsp">
                         <h3><strong>PROFILE</strong></h3>
                         <p style="font-size: 90%;">고객님의 개인정보를<br>관리하는 공간입니다.</p>
                     </a>

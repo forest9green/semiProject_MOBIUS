@@ -14,16 +14,18 @@ import com.user.model.service.UserService;
 import com.user.model.vo.User;
 
 /**
- * Servlet implementation class MemberEnrollEndServlet
+ * Servlet implementation class UpdateMemberServlet
  */
-@WebServlet(name="enrollendservlet",urlPatterns="/user/memberenrollend")
-public class MemberEnrollEndServlet extends HttpServlet {
+@WebServlet(
+		name="updatememberservlet",urlPatterns="/myPage/user/updateMember"
+		)
+public class UpdateMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberEnrollEndServlet() {
+    public UpdateMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,30 +36,34 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String userId= request.getParameter("userId");
+		String userId = request.getParameter("memId");
 		String password = request.getParameter("password");
-		String userName= request.getParameter("userName");
-		String email = request.getParameter("email");
+		String userName = request.getParameter("newUserName");
+		String email = request.getParameter("newEmail");
 		int emailSmsCk =0;
-		if((request.getParameter("emailSmsCk")!=null)){
+		if((request.getParameter("maillingFl")!=null)){
 			emailSmsCk=1;
-			System.out.println(emailSmsCk);
 		}
-		String cellPhone = request.getParameter("cellPhone");
-		int phoneSmsCk=0;
-		if(request.getParameter("phoneSmsCk")!=null) {
+		
+		String cellPhone = request.getParameter("newCellPhone");
+		int phoneSmsCk = 0;
+		if(request.getParameter("smsFl")!=null) {
 			phoneSmsCk=1;
 		}
-		String phone = request.getParameter("phone");
 	
+		String phone = request.getParameter("newPhone");
+		
 		User u = new User(userId,password,userName,email,emailSmsCk,cellPhone,phoneSmsCk,phone,null,null,0);
 		
-		int result = new UserService().insertMember(u);
+		int result = new UserService().updateMember(u);
 		
-		int result2=0;
+		String msg = "";
+		String loc="";
+		
+		int result2 =0;
 		
 		if(result>0) {
-	
+			
 			String postCode = request.getParameter("zonecode");
 			String addr = request.getParameter("address")+" "+request.getParameter("addressSub");
 			int defaultAddr = 0;
@@ -66,18 +72,44 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			}
 			
 			Address adr = new Address(null,userId,null,userName,postCode,addr,defaultAddr,cellPhone,phone);
+			result2 = new AddressService().updateAddress(adr);
 			
-			result2 = new AddressService().insertAddress(adr);
+			
+			
+			
+			
+			msg="회원정보 수정완료!";
+			loc="/index.jsp";
+		}else {
+			msg="회원정보 수정실패!";
+			loc="/views/member/updateMember.jsp";
 		}
-		
-		String loc="/views/member/loginPage.jsp";
-		String msg=result2>0?"회원가입 성공!":"회원가입 실패!";
-		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		
 		request.getRequestDispatcher("/views/common/msg.jsp")
 		.forward(request, response);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	}

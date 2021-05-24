@@ -34,7 +34,7 @@ public class ReviewViewServlet extends HttpServlet {
 		Review r= new ReviewService().selectReview(ReviewNo);
 		request.setAttribute("Review",r);
 		
-		request.getRequestDispatcher("/views/review/ReviewView.jsp")
+		request.getRequestDispatcher("/views/review/reviewView.jsp")
 		.forward(request, response);
 		
 	}

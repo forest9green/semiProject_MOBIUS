@@ -40,8 +40,8 @@
         <div class="btn-box">
             <ul>
                 <li>          
-                    <div class="cancel-btn pb" id="cancel" onclick="location.replace('<%=request.getContextPath()%>/views/board/boardlist.jsp')">
-                        <a href>취소</a>
+                    <div class="cancel-btn pb" id="cancel">
+                        <a href="<%=request.getContextPath()%>/myPage/board/boardlist">취소</a>
                     </div> 
                 </li>
                 <li>    
