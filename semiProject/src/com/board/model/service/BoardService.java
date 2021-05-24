@@ -15,29 +15,29 @@ public class BoardService {
 	
 	private BoardDao dao=new BoardDao();
 	
-	public List<Board> selectBoardList(int cPage, int numPerpage){
+	public List<Board> selectBoardList(int cPage, int numPerpage, String userId){
 		Connection conn=getConnection();
-		List<Board> list=dao.selectBoardList(conn,cPage,numPerpage);
+		List<Board> list=dao.selectBoardList(conn,cPage,numPerpage, userId);
 		close(conn);
 		return list;
 	}
 	
-	public int selectBoardCount() {
+	public int selectBoardCount(String userId) {
 		Connection conn=getConnection();
-		int result=dao.selectBoardCount(conn);
+		int result=dao.selectBoardCount(conn, userId);
 		close(conn);
 		return result;
 	}
 
-	public Board selectBoard(String bNo ) {
+	public Board selectBoard(String bNo) {
 		Connection conn=getConnection();
 		Board b=dao.selectBoard(conn, bNo);
 		close(conn);
 		return b;
 	}
-	public int insertBoard(Board b) {
+	public int insertBoard(Board b, String userId) {
 		Connection conn=getConnection();
-		int result=dao.insertBoard(conn, b);
+		int result=dao.insertBoard(conn, b, userId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

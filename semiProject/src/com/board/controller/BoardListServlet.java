@@ -15,7 +15,7 @@ import com.board.model.vo.Board;
 /**
  * Servlet implementation class BoardListServlet
  */
-@WebServlet("/board/boardlist")
+@WebServlet("/myPage/board/boardlist")
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,48 +32,35 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String userId= request.getParameter("userId");
 		int cPage;
-		int numPerpage=5;
+		int numPerpage=10;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
 		
-		List<Board> list=new BoardService().selectBoardList(cPage,numPerpage);
+		List<Board> list=new BoardService().selectBoardList(cPage,numPerpage ,userId);
 		
-		int totalData=new BoardService().selectBoardCount();
+		
+		int totalData=new BoardService().selectBoardCount(userId);
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
-		int pageBarSize=5;
+		int pageBarSize=10;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
-		String pageBar="";
-		
-		if(pageNo==1) {
-			pageBar+="<span>[이전]</span>";
-		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/board/boardList?cPage="+(pageNo-1)+"'>[이전]</a>";
-		}
-		
+		String pageBar="";		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/board/boardList?cPage="+pageNo+"'>"+pageNo+"</a>";
+				+"/board/boardList?userId"+userId+"&cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
-		}
-		
-		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
-		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/board/boardList?cPage="+pageNo+"'>[다음]</a>";
 		}
 		
 		request.setAttribute("boards",list);

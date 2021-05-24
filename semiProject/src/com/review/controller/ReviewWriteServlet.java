@@ -1,11 +1,17 @@
 package com.review.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.review.model.vo.Review;
 
 /**
  * Servlet implementation class ReviewWriteServlet
@@ -26,7 +32,21 @@ public class ReviewWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			request.setAttribute("msg", "잘못된 방식으로 요청되었습니다.");
+			request.setAttribute("loc", "/review/revieListView.jsp");
+			request.getRequestDispatcher("views/common/msg.jsp")
+			.forward(request, response);
+			return;
+		}
+		String path=getServletContext().getRealPath("/upload/review/");
+		
+		MultipartRequest mr=new MultipartRequest(request,path,(1024*1024*10),
+				"UTF-8");
+		
+		Review r=new Review();
+		r.setrTitle(mr.getParameter("reviewTitle"));
 	}
 
 	/**
