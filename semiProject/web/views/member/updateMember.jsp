@@ -63,7 +63,7 @@
                 <h2 class="pf">계정관리</h2>
             </div>
             <div class="member_cont">
-                <form id="formJoin" name="formJoin" action="<%=request.getContextPath() %>/myPage/user/updateMember" method="post" >
+                <form id="formJoin" name="formJoin" action="" method="post" >
                     <div class="base_info_box">
                         <h3 class="pd">회원정보 수정</h3>
                         
@@ -198,8 +198,8 @@
                         </div>
                     </div>
                     <div class="btn_center_box">
-                        <input type="submit" id="btnCancel" class="btn_member_cancel pd" value="수정" >
-                        <button type="button" class="btn_confirm pd" value="회원가입" >탈퇴</button>
+                        <input type="submit" id="btnCancel" class="btn_member_cancel pd" value="수정" onclick="javascript: form.action='<%=request.getContextPath() %>/myPage/user/updateMember';" >
+                        <input type="submit" class="btn_confirm pd" value="탈퇴" onclick="javascript: form.action='<%=request.getContextPath() %>/myPage/user/deleteMember';">
                     </div>
                 </form>
             </div>
@@ -221,6 +221,22 @@
 			}
 		});
 	});
+	
+	const fn_delete_member=()=>{
+		const userId=$("#memId").val();
+		const url = "<%=request.getContextPath()%>/myPage/user/deleteMember";
+		const title = "deleteMember";
+		
+		deleteMember.userId.value=userId;
+		deleteMember.method="post";
+		deleteMember.action=url;
+		deletemember.target="title";
+		
+		deleteMember.submit();
+		
+		
+		
+	}
 	
 	
 </script>

@@ -174,7 +174,7 @@ public class UserDao {
 		return result;
 	}
 	
-	public User checkPassword(Connection conn, String userId,String password) {
+	public User checkPassword(Connection conn, String userId,String email) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		User u = null;
@@ -182,7 +182,7 @@ public class UserDao {
 		try {
 			pstmt= conn.prepareStatement(prop.getProperty("selectUser"));
 			pstmt.setString(1, userId);
-			pstmt.setString(2, password);
+			pstmt.setString(2, email);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				u=new User();
@@ -207,6 +207,65 @@ public class UserDao {
 		}
 		return u;
 	}
+	
+	public User checkPw(Connection conn, String userId, String userName, String email) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		User u = null;
+		
+		try {
+			pstmt= conn.prepareStatement(prop.getProperty("checkPw"));
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userName);
+			pstmt.setString(3, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				u=new User();
+				u.setUserId(rs.getString("user_Id"));
+				u.setUserPwd(rs.getString("user_Pwd"));
+				u.setUserName(rs.getString("user_Name"));
+				u.setEmail(rs.getString("email"));
+				u.setEmailSmsCk(rs.getInt("email_Sms_Ck"));
+				u.setCellPhone(rs.getString("cellPhone"));
+				u.setPhoneSmsCk(rs.getInt("phone_Sms_Ck"));
+				u.setPhone(rs.getString("phone"));
+				u.setJoinDate(rs.getDate("join_Date"));
+				u.setRecentDate(rs.getDate("recent_Date"));
+				u.setMileage(rs.getInt("mileage"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
+		return u;
+	}
+	
+	public int deleteMember(Connection conn, String userId) {
+		PreparedStatement pstmt =null;
+		int result=0;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("deleteMember"));
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return result;
+		
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 	

@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String key = (String)request.getAttribute("key");
+%>
     
 <%@ include file="/views/common/header.jsp"%>
+
+
 
 <section> 
     <div class="location_wrap">
@@ -36,7 +41,7 @@
                             
                         </div>
                         <div class="btn_member_sec">
-                            <button class="btn_member_white pe" id="next_btn" >다음</button>
+                            <button class="btn_member_white pe" id="next_btn" onclick="next_btn();" >다음</button>
                         </div>
                     </div>
                 </form>
@@ -47,13 +52,13 @@
                 <h2>비밀번호 찾기</h2>
             </div>
             <div class="member_cont">
-                <form action="<%=request.getContextPath() %>/user/findId" id="formFindId" method="post" novalidate>
+                <form action="<%=request.getContextPath() %>/user/findPassword" id="formFindId" method="post" novalidate>
                     <div class="find_id_box">
                         <div class="find_id_sec">
                             <h3 class="pd">본인확인 이메일 인증</h3>
                             <div class="login_input pc">
-                                <input type="text" id="userId" name="userId" placeholder="아이디">
-                                <input type="text" id="userName" name="userName" placeholder="이름">
+                                <input type="text" id="finduserId" name="userId" placeholder="아이디">
+                                <input type="text" id="finduserName" name="userName" placeholder="이름">
                                 <input type="text" id="userEmail2" name="userEmail" class="input_email" id="numCer2"  placeholder="가입메일주소">
                                 <button>인증번호받기</button>
                                 <input type="text" id="" name="numCer" placeholder="인증번호 6자리 입력">
@@ -71,11 +76,18 @@
 </section>
 
 <script>
-	
-
+	const next_btn=()=>{
+		const numCer = $("#numCer").val();
+		if(key==numCer){
+			location.replace("<%=request.getContextPath()%>/views/member/findId.jsp");
+		}else{
+			alert("인증번호가 일치하지않습니다.");
+			numCer.focus();
+		}
+	}
 </script>
 
-
+	
 
 
 
