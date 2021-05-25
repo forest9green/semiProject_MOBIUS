@@ -3,53 +3,56 @@
 <%@ page import="com.product.model.vo.Product" %>
 <%
 	Product p=(Product)request.getAttribute("product");
+	String category=(String)request.getAttribute("category");
 %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <section>
     <div class="box">
         <div id="category_top">
-            <a href="<%=request.getContextPath() %>/product/productList"><div class="pb">전체</div></a>
+            <a href="<%=request.getContextPath() %>/product/productList?category=전체"><div class="pb">전체</div></a>
             <div class="pa">　>　</div>
-            <a href=""><div class="pb">소파</div></a>
+            <a href="<%=request.getContextPath() %>/product/productList?category=<%=category%>"><div class="pb"><%=category %></div></a>
         </div>
         <div id="product">
             <div id="product_top">
                 <div class="img_div">
-                    <img src="">
+                    <img src="<%=request.getContextPath()%>/images/product/<%=p.getCateCode()%>/<%=p.getpCode()%>-1.jpg">
                 </div>
                 <div class="top_info">
-                    <div class="pe" style="font-size:20px;">Mobius 기본 흰색 소파</div>
-                    <div class="pd" style="font-size:25px;">300,000원</div>
-                    <br><hr>
+                    <div class="pe" style="font-size:20px;"><%=p.getpName() %></div>
+                    <div class="pd" style="font-size:25px;"><%=p.getPrice() %>원</div><br><br><hr>
                     <div class="pc" style="font-size:16px;float:left;">크기</div>
-                    <div class="pc" style="font-size:16px;margin-left:240px;">000*000*000</div>
+                    <div class="pc" style="font-size:16px;margin-left:100px;margin-bottom:10px"><%=p.getSize() %></div>
                     <div class="pc" style="font-size:16px;float:left;">배송비</div>
-                    <div class="pc" style="font-size:16px;margin-left:240px;">59,000원</div>
-                    <div class="pb" style="font-size:13px;">조건에 따라 추가비용 발생 가능 (상품 상세 정보 참고)</div>
-                    <hr>
+                    <div class="pc" style="font-size:16px;margin-left:100px;"><%=p.getDeliveryFee() %>원</div>
+                    <div class="pb" style="font-size:13px;">조건에 따라 추가비용 발생 가능 (상품 상세 정보 참고)</div><hr>
                     <div>
-                        <button id="buy_now pc" style="width:130px;">위시리스트에 추가</button>
-                        <button id="basket pc" style="width:120px;">장바구니에 담기</button>
-                        <button id="buy_now pc" style="width:125px;">바로 구매</button>
+                        <button class="pc" style="width:130px;">위시리스트에 추가</button>
+                        <button class="pc" style="width:120px;">장바구니에 담기</button>
+                        <button class="buy_now pc" style="width:125px;">바로 구매</button>
                     </div>
                 </div>
             </div>
             <div id="product_bottom">
-                <table class="info_menu">
-                    <tr>
-                        <td class="pd">상품</td>
-                        <td class="pd">리뷰</td>
-                        <td class="pd">문의</td>
-                    </tr>
-                </table>
+                <div class="info_menu">
+                    <a href="#pInfo"><div class="pd word6">DETAIL</div></a>
+                    <a href="#pReview"><div class="pd word6">REVIEW</div></a>
+                    <a href="#pBoard"><div class="pd word6">Q&A</div></a>
+                </div>
                 <div id="pInfo">
-                    <h3 class="dTitle pd" style="margin-top:0px">상품 정보</h3>
-                    <div id="pInfoPhoto">상품 사진 넣기</div>
+                    <h3 class="dTitle pd" style="margin-top:0px">DETAIL</h3>
+                    <div id="pInfoPhoto">
+                    	<div class="pd" style="font-size:20px;"><%=p.getpName() %></div>
+                    	<div class="pa"><%=p.getSize() %></div><br>
+                    	<img src="<%=request.getContextPath()%>/images/product/<%=p.getCateCode()%>/<%=p.getpCode()%>-1.jpg"><br>
+                    	<img src="<%=request.getContextPath()%>/images/product/<%=p.getCateCode()%>/<%=p.getpCode()%>-2.jpg"><br>
+                    	<img src="<%=request.getContextPath()%>/images/product/<%=p.getCateCode()%>/<%=p.getpCode()%>-3.jpg">
+                    </div>
                 </div>
 
                 <div id="pReview">
-                    <h3 class="dTitle pd">상품 리뷰</h3>
+                    <h3 class="dTitle pd">REVIEW</h3>
                     <div class='RatingStar'>
                         <div class='RatingScore'>
                             <div class='outer-star'><div class='inner-star'></div></div>
@@ -74,7 +77,7 @@
                 </div>
 
                 <div id="pBoard">
-                    <h3 class="dTitle pd">문의사항</h3>
+                    <h3 class="dTitle pd">Q&A</h3>
                     <div class="pc" style="font-size:14px;">
                         구매한 상품의 취소/반품은 이곳을 통해 신청 가능합니다.<br>
                         후기게시판을 통한 취소나 환불, 반품 등은 처리되지 않습니다.<br>
@@ -96,11 +99,11 @@
                     <table class="sub_news" border="1" cellspacing="0">
                         <thead>
                             <tr class="pd">
-                                <th width=100>카테고리</th>
+                                <th width=80>카테고리</th>
                                 <th scope="col" width=250>제목</th>
-                                <th scope="col">작성자</th>
-                                <th scope="col">작성일</th>
-                                <th scope="col" width=100>현황</th>
+                                <th scope="col" width=100>작성자</th>
+                                <th scope="col" width=100>작성일</th>
+                                <th scope="col" width=80>현황</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -152,21 +155,35 @@
         margin-bottom:50px;
     }
     .info_menu{
-        width:836.25px;
+        width:856.26px;
         height:60px;
         background-color:rgb(193, 233, 210);;
         text-align:center;
+        display:flex;
+        align-items: center;
+    }
+    .info_menu>a{
+    	text-decoration: none;
+        color:black;
+        font-size:18px;
+    }
+    .info_menu>a:hover{
+        text-decoration: underline;
+    }
+    .word6{
+    	width:285.42px;
     }
     .img_div>img{
-        width:300px;
-        height:300px;
+        width:400px;
+        height:350px;
+        object-fit:cover;
     }
     .top_info{
-        margin-left: 150px;;
+        margin-left: 70px;;
     }
     .top_info button{
         height:45px;
-        margin-top:65px;
+        margin-top:81px;
     }
     .dTitle{
         background-color: rgb(177, 214, 193);
@@ -185,6 +202,7 @@
         display:flex;
         flex-direction: column;
         align-items: center;
+        padding:50px;
     }
     .RatingScore{
         display:flex;

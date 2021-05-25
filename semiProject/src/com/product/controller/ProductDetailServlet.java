@@ -31,7 +31,12 @@ public class ProductDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pCode=request.getParameter("pCode");
+		String cateCode=pCode.substring(0,2);
+		
+		String category=new ProductService().searchCategory(cateCode);
 		Product p=new ProductService().searchProduct(pCode);
+		
+		request.setAttribute("category", category);
 		request.setAttribute("product", p);
 		request.getRequestDispatcher("/views/product/productDetail.jsp").forward(request, response);
 	}

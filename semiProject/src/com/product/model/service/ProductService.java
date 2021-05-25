@@ -60,5 +60,13 @@ public class ProductService {
 		close(conn);
 		return p;
 	}
+	
+	
+	public String searchCategory(String cateCode) {
+		Connection conn=getConnection();
+		String category=dao.searchCategory(conn,cateCode);
+		close(conn);
+		return category;
+	}
 
 }

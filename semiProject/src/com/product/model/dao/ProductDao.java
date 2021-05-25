@@ -203,6 +203,28 @@ public class ProductDao {
 		return p;
 	}
 	
+	
+	public String searchCategory(Connection conn, String cateCode) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String category=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchCategory"));
+			pstmt.setString(1, cateCode);
+			rs=pstmt.executeQuery();
+			if(rs.next()) category=rs.getString(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return category;
+	}
+	
 }
 
 

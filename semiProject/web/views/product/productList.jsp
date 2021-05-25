@@ -77,6 +77,17 @@
 		}));
 		$("#pSelectFrm").submit();
 	})
+    $(".wish").click((e)=>{
+        alert("위시리스트에 추가되었습니다.")
+    })
+    $(".cart").click((e)=>{
+        alert("장바구니에 추가되었습니다.")
+    })
+    $(".sproductsbtn").hover((e)=>{
+        $(e.target).css("background-color","rgb(233, 248, 240)");
+    },(e)=>{
+        $(e.target).css({"background-color":"white","font-size":"15px"});
+    })
 </script>
 
 <style>
@@ -166,19 +177,5 @@
         color:rgba(123, 209, 159);
     }
 </style>
-
-<script>
-    $(".wish").click((e)=>{
-        alert("위시리스트에 추가되었습니다.")
-    })
-    $(".cart").click((e)=>{
-        alert("장바구니에 추가되었습니다.")
-    })
-    $(".sproductsbtn").hover((e)=>{
-                $(e.target).css("background-color","rgb(233, 248, 240)");
-            },(e)=>{
-                $(e.target).css({"background-color":"white","font-size":"15px"});
-            })
-</script>
 
 <%@ include file="/views/common/footer.jsp"%>  
