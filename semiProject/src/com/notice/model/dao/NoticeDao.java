@@ -39,11 +39,11 @@ public class NoticeDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Notice n=new Notice();
-				n.setNotice_No(rs.getInt("notice_No"));
-				n.setN_Title(rs.getString("n_Title"));
-				n.setN_Content(rs.getString("n_Content"));
-				n.setN_ImgPath(rs.getString("n_ImgPath"));
-				n.setN_Date(rs.getDate("n_Date"));
+				n.setnoticeNo(rs.getString("NOTICE_NO"));
+				n.setnTitle(rs.getString("N_TITLE"));
+				n.setnContent(rs.getString("N_CONTENT"));
+				n.setnImgPath(rs.getString("N_IMGPATH"));
+				n.setnDate(rs.getDate("N_DATE"));
 				list.add(n);
 			}
 		} catch(SQLException e) {
@@ -82,10 +82,10 @@ public int insertNotice(Connection conn,Notice n) {
 	int result=0;
 	try {
 		pstmt=conn.prepareStatement(prop.getProperty("insertNotice"));
-		pstmt.setString(1, n.getN_Title());
-		pstmt.setString(2, n.getN_Content());
-		pstmt.setDate(3, (Date) n.getN_Date());
-		pstmt.setString(4, n.getN_ImgPath());
+		pstmt.setString(1, n.getnTitle());
+		pstmt.setString(2, n.getnContent());
+		pstmt.setDate(3, (Date) n.getnDate());
+		pstmt.setString(4, n.getnImgPath());
 		result=pstmt.executeUpdate();
 	}catch(SQLException e) {
 		e.printStackTrace();
@@ -99,11 +99,11 @@ public int noticeUpdate(Connection conn,Notice n) {
 	int result=0;
 	try {
 		pstmt=conn.prepareStatement(prop.getProperty("noticeUpdate"));
-		pstmt.setInt(1, n.getNotice_No());
-		pstmt.setString(2, n.getN_Title());
-		pstmt.setString(3, n.getN_Content());
-		pstmt.setDate(4, (Date) n.getN_Date());
-		pstmt.setString(5, n.getN_ImgPath());
+		pstmt.setString(1, n.getnoticeNo());
+		pstmt.setString(2, n.getnTitle());
+		pstmt.setString(3, n.getnContent());
+		pstmt.setDate(4, (Date) n.getnDate());
+		pstmt.setString(5, n.getnImgPath());
 		result=pstmt.executeUpdate();
 	}catch(SQLException e) {
 		e.printStackTrace();
