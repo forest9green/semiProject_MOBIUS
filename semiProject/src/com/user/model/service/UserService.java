@@ -60,11 +60,31 @@ public class UserService {
 		return result;
 	}
 	
-	public User checkPassword(String userId,String password) {
+	public User checkPassword(String userId,String email) {
 		Connection conn = getConnection();
-		User u = dao.checkPassword(conn,userId,password);
+		User u = dao.checkPassword(conn,userId,email);
 		
 		close(conn);
 		return u;
 	}
+	
+	
+	public User checkPw(String userId, String userName, String email) {
+		Connection conn = getConnection();
+		User u = dao.checkPw(conn,userId,userName,email);
+		close(conn);
+		return u;
+	}
+	
+	public int deleteMember(String userId) {
+		Connection conn = getConnection();
+		int result = dao.deleteMember(conn, userId);
+		if (result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
+	
 }

@@ -30,12 +30,12 @@ public class BoardViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String bNo=(request.getParameter("no"));
+		String bNo=(request.getParameter("bNo"));
 		
 		Board b= new BoardService().selectBoard(bNo);
 		
 		request.setAttribute("board", b);
-		request.getRequestDispatcher("/views/board/boardview.jsp")
+		request.getRequestDispatcher("/views/board/boardView.jsp")
 		.forward(request, response);
 	}
 

@@ -18,8 +18,9 @@ public class NoticeService {
 	public List<Notice> selectNoticeList(){
 		Connection conn=getConnection();
 		List<Notice> list = dao.selectNoticeList(conn);
+		close(conn);
 		return list;
-	
+		
 	
 	}
 

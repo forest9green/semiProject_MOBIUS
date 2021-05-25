@@ -8,32 +8,31 @@
     	<div class="subTitle">
 	        <h1>문의사항 작성<span></span></h1>
     	</div>
-    <form action='<%=request.getContextPath()%>/board/boardInsert' method="post" enctype="multipart/form-data">	
-    <div class="form-group">
-	    <label for="ca_name">분류</label>
-	     <select class="form-control form-control-sm w-auto" id="ca_name" name="ca_name" required>
-	            <option value="">선택하세요</option>
-	            <option value="교환/환불">교환/환불</option>
-	            <option value="배송">배송</option>
-	            <option value="상품">상품</option>
-	            <option value="기타문의사항">기타문의사항</option>
-	    </select>
-    </div>
-    <div class="form-group">
-    	<form id="bdfrm" method="post" action="" >
+<form action='<%=request.getContextPath()%>/board/boardinsertend' method="post" enctype="multipart/form-data">	
+	<div class="qalist">
+	             <label for="ca_name">분류</label>
+	                 <select class="form-control form-control-sm w-auto" id="ca_name" name="ca_name" required>
+	                         <option value="">선택하세요</option>
+	                         <option value="교환환불">교환/환불</option>
+	                         <option value="배송">배송</option>
+	                         <option value="상품">상품</option>
+	                         <option value="기타">기타문의사항</option>
+	                 </select>
+	                 
+	             <!-- 제목 -->
 	        <label for="wr_subject">제목</label>
-	        <input class="title" type="text" name="wr_subject" value="" id="wr_subject" required size="100" maxlength="200" placeholder="제목">
-    	</form>
-    	
-    </div>
-    <div class="form-group d-cke-none">
-        <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="5000" style="width:100%; height: 200px;"
-        placeholder="내용을 입력해주세요">
-            </textarea>
-        </div>
-
-        <div class="form-group">
-        </div>
+	        <input class="title" type="text" name="wr_subject" value="제목" id="wr_subject" required size="100" maxlength="200" placeholder="제목">
+	    
+	
+	        <!-- 내용 -->
+	        <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="5000" style="width:100%; height: 200px;"
+	        placeholder="내용을 입력해주세요">
+	        </textarea>
+	</div>        
+</form>	   
+	
+	    
+	</div>
         
 
     
@@ -45,7 +44,7 @@
                     </div> 
                 </li>
                 <li>    
-                    <div class="complete-btn pb" id="complete" type=submit value="작성완료" onclick="location.replace('<%=request.getContextPath()%>/views/board/boardlistView.jsp')">
+                    <div class="complete-btn pb" id="complete" type=submit value="작성완료" >
                         <a href>작성완료</a>
                     </div>
                 </li>

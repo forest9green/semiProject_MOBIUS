@@ -35,7 +35,7 @@ public class BoardService {
 		close(conn);
 		return b;
 	}
-	public int insertBoard(Board b, String userId) {
+	public int insertBoard(Board b,  String userId) {
 		Connection conn=getConnection();
 		int result=dao.insertBoard(conn, b, userId);
 		if(result>0) commit(conn);
