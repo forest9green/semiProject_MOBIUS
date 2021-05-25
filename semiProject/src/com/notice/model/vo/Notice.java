@@ -4,64 +4,66 @@ import java.util.Date;
 
 public class Notice {
 
-	private int notice_No;
-	private String n_Title;
-	private String n_Content;
-	private String n_ImgPath;
-	private Date n_Date;
+	private String noticeNo;
+	private String nTitle;
+	private String nContent;
+	private String nImgPath;
+	private Date nDate;
 
 	public Notice() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notice(int notice_No, String n_Title, String n_Content, String n_ImgPath, Date n_Date) {
+	public Notice(String noticeNo, String nTitle, String nContent, String nImgPath, Date nDate) {
 		super();
-		this.notice_No = notice_No;
-		this.n_Title = n_Title;
-		this.n_Content = n_Content;
-		this.n_ImgPath = n_ImgPath;
-		this.n_Date = n_Date;
+		this.noticeNo = noticeNo;
+		this.nTitle = nTitle;
+		this.nContent = nContent;
+		this.nImgPath = nImgPath;
+		this.nDate = nDate;
 	}
 
-	public int getNotice_No() {
-		return notice_No;
+	public String getnoticeNo() {
+		return noticeNo;
 	}
 
-	public void setNotice_No(int notice_No) {
-		this.notice_No = notice_No;
+	public void setnoticeNo(String noticeNo) {
+		this.noticeNo = noticeNo;
 	}
 
-	public String getN_Title() {
-		return n_Title;
+	public String getnTitle() {
+		return nTitle;
 	}
 
-	public void setN_Title(String n_Title) {
-		this.n_Title = n_Title;
+	public void setnTitle(String nTitle) {
+		this.nTitle = nTitle;
 	}
 
-	public String getN_Content() {
-		return n_Content;
+	public String getnContent() {
+		return nContent;
 	}
 
-	public void setN_Content(String n_Content) {
-		this.n_Content = n_Content;
+	public void setnContent(String nContent) {
+		this.nContent = nContent;
 	}
 
-	public String getN_ImgPath() {
-		return n_ImgPath;
+	public String getnImgPath() {
+		return nImgPath;
 	}
 
-	public void setN_ImgPath(String n_ImgPath) {
-		this.n_ImgPath = n_ImgPath;
+	public void setnImgPath(String nImgPath) {
+		this.nImgPath = nImgPath;
 	}
 
-	public Date getN_Date() {
-		return n_Date;
+	public Date getnDate() {
+		return nDate;
 	}
 
-	public void setN_Date(Date n_Date) {
-		this.n_Date = n_Date;
+	public void setnDate(Date nDate) {
+		this.nDate = nDate;
 	}
+
+	
 	
 	
 
