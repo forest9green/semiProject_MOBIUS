@@ -19,13 +19,13 @@
     </div>
     
     <div id="bo_v_info">
-        <span class="bo_name"><%= %>양호준</span>
+        <span class="bo_name"><%=b.getUserId() %></span>
         <span class="bo_time"><%=b.getbWriteDate()%><!-- 21-05-06 --></span>
     </div>
     <div class="card-header text-left">
-        <span class="bo_cttitle">양호준님의 문의글</span>
+        <span class="bo_cttitle"><%=b.getUserId() %>님의 문의글</span>
     </div>
-
+	
     <div class="bo_v_con">
         <span class="bo_contents"><%=b.getbContent()%><!-- 상품 언제 도착하나요? --></span>
     </div>
@@ -36,7 +36,7 @@
                 <a class="boabtn btn-light sakje" href="" onclick="">삭제</a>     
             </div>
             <div class="bo_v_right">
-                <a class="boabtn btn-secondary" onclick="location.assign('<%=request.getContextPath()%>/board/boardlist')">목록</a>
+                <a class="boabtn btn-secondary" href="<%=request.getContextPath()%>/myPage/board/boardlist?userId="+<%=loginUser.getUserId()%>)">목록</a>
                 <!-- <a class="boabtn btn-primary" href="">문의하기</a> -->
              </div>
         </div>    

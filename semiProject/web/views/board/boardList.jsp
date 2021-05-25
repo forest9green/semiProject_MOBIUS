@@ -4,8 +4,8 @@
 <%
 	List<Board> boards=(List<Board>)request.getAttribute("boards");
 	String pageBar=(String)request.getAttribute("pageBar");
-
-
+/* 	out.print(boards);
+ */
 %>
 <%@ include file="/views/common/header.jsp"%>
         
@@ -32,7 +32,7 @@
         <tr>
             <th class="qlv_list_first">번호</th>
             <th class="qlv_list_second">제목</th>
-            <th class="qlv_list_third">작성자</th>
+            <th class="qlv_list_third">작성ID</th>
             <th class="qlv_list_fourth">날짜</th>
             <th class="qlv_list_fifth">현황</th>
         </tr>
@@ -43,44 +43,49 @@
             <tr>   
                 <td><%=b.getbNo()%><!-- 1 --></td>
                 <td style="padding:5px;">
-                	<a href="<%= request.getContextPath()%>/board/boardview?no=<%=b.getbNo()%>">
-                	<%=b.getbTitle()%><!-- 배송언제오나요? -->
+                	<a href="<%= request.getContextPath()%>/board/boardview?bNo=<%=b.getbNo()%>">
+                	<%=b.getbTitle()%>
                 	</a>
                 </td>
-                <td><%=b.getUserId()%><!-- 양호준 --></td>
-                <td><%=b.getbWriteDate()%><!-- 0416 --></td>
+                <td><%=b.getUserId()%></td>
+                <td><%=b.getbWriteDate()%></td>
                 <td>답변완료</td>
             </tr> 
-            <tr>
+<%--             <tr>
                 <td><%=b.getbNo()%><!-- 2 --></td>
-                <td style="padding:5px;"><!-- 환불가능? -->
+                <td style="padding:5px;">
                 	<a href="<%= request.getContextPath()%>/board/boardview?no=<%=b.getbNo()%>">
-                	<%=b.getbTitle()%><!-- 배송언제오나요? -->
+                	<%=b.getbTitle()%>
                 	</a>
                 </td>
-                <td><%=b.getUserId()%><!-- 양호준 --></td>
-                <td><%=b.getbWriteDate()%><!-- 0416 --></td>
+                <td><%=b.getUserId()%></td>
+                <td><%=b.getbWriteDate()%></td>
                 <td>진행중</td>
-            </tr>
+            </tr> --%>
             <%} 
             }%>
         </tbody>
     </table>
    <div class="qlv_last">
-        <select style="height: 30px; margin-top:11px; width:80px">
+        <select style="height: 30.5px; margin-top:11.5px; width:80px">
             <option value="bTitle">제목</option>
         </select>
         <form id="searchql" action="" method="get">
             <input type="search" name="searchql" style="height:30px; width:250px;" >
-            <input type="submit" id="submitql" value="">
+            <input type="submit" id="submitql" value="검색">
         </form>
     </div>
     	<div id="pageBar">
-    		<%=pageBar %>
+    		<%=request.getAttribute("pageBar") %>
     	</div>
 </section>    
 
 <style>
+	#pageBar{
+		display: flex;
+    	justify-content: center;
+    	margin-top:20px;
+	}
     .qlv_ct{
         margin-left: 56px;
     }
@@ -129,10 +134,10 @@
         font-weight: 900;
         width: 50px;
         height: 30px;
-        margin-left: -6px;
+        margin-left: -3px;
         margin-top: 10px;
         position: relative;
-        top: 1.1px;
+        top: 1.6px;
     }
     #bo_cate a {
     display: block;

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.sql.Date;
 
 import com.board.model.vo.Board;
 
@@ -38,11 +39,11 @@ public class BoardDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()){
 				Board b=new Board();
-				b.setbNo(rs.getString("bNo"));
+				b.setbNo(rs.getString("B_NO"));
 				b.setbTitle(rs.getString("B_TITLE"));
 				b.setUserId(rs.getString("USER_ID"));
-				b.setbContent(rs.getString("board_content"));
-				b.setbWriteDate(rs.getDate("board_date"));
+				b.setbContent(rs.getString("B_CONTENT"));
+				b.setbWriteDate(rs.getDate("B_WRITEDATE"));
 				list.add(b);
 			}
 		}catch(SQLException e) {
@@ -75,17 +76,19 @@ public class BoardDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Board b=null;
+		System.out.println(bNo);
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectBoard"));
 			pstmt.setString(1, bNo);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				b=new Board();
-				b.setbNo(rs.getString("bNo"));
-				b.setbTitle(rs.getString("bTitle"));
-				b.setUserId(rs.getString("userId"));
-				b.setbContent(rs.getString("bContent"));
-				b.setbWriteDate(rs.getDate("bWriteDate"));
+				b.setbNo(rs.getString("B_NO"));
+				b.setbTitle(rs.getString("B_TITLE"));
+				b.setUserId(rs.getString("USER_ID"));
+				b.setbContent(rs.getString("B_CONTENT"));
+				b.setbWriteDate(rs.getDate("B_WRITEDATE"));
+				System.out.println(b);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -99,10 +102,13 @@ public class BoardDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
-			pstmt.setString(1, b.getbTitle());
+			pstmt.setString(1, b.getbNo());
 			pstmt.setString(2, b.getUserId());
-			pstmt.setString(3, b.getbContent());
-			result=pstmt.executeUpdate();
+			pstmt.setString(3, b.getbCategory());
+			pstmt.setString(4, b.getbTitle());
+			pstmt.setString(5, b.getbContent());
+			pstmt.setDate(6, new Date(b.getbWriteDate().getTime()));
+			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
