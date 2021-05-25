@@ -6,7 +6,7 @@
             <div class="location_wrap">
                 <div class="location_cont">
                     <em class="pd">
-                        <a href="" class="local_home">HOME</a>
+                        <a href="<%=request.getContextPath() %>/index.jsp" class="local_home">HOME</a>
                         > 비밀번호 확인
                     </em>
                 </div>
@@ -18,18 +18,20 @@
                         <h2 class="pf">비밀번호 확인</h2>
                     </div>
                     <div class="member_cont">
-                        <form action="" id="formFindId" method="post" novalidate>
+                        <form action="<%=request.getContextPath() %>/myPage/user/pwCk" id="formFindId" method="post">
                             <div class="box6">
                                 <div class="input_box pd">
+                                	<input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
                                     <label id="lb_new_pw" for="neww_pw"> 비밀번호</label>
-                                    <input type="password" id="new_pw" name="new_pw" class="input_txt" >
+                                    <input type="password" id="new_pw" name="password" class="input_txt" >
                                 </div>
                                 
                                 
                             </div>
                             <div class="btn_area pf">
-                                <button type="button" class="btn_confirm pd" value="회원가입" >이전</button>
-                                <button type="button" class="btn_confirm pd" value="회원가입" >확인</button>
+                            	<input type="reset" class="btn_confirm pd" value="이전" >
+                            	<input type="submit" class="btn_confirm pd" value="확인" >
+                             
                             </div>
                         </form>
                     </div>
@@ -39,6 +41,22 @@
             </div>    
         </section>
             
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         <style>
             .location_wrap{

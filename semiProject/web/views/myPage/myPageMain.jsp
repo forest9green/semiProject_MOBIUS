@@ -88,7 +88,7 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="">
+                    <a href="<%=request.getContextPath()%>/myPage/member/PwCk.jsp">
                         <h3><strong>PROFILE</strong></h3>
                         <p style="font-size: 90%;">고객님의 개인정보를<br>관리하는 공간입니다.</p>
                     </a>
@@ -104,7 +104,7 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="<%=request.getContextPath()%>/mypage/mileageList?userId="+<%=loginUser.getUserId() %>>
+                    <a href="<%=request.getContextPath()%>/myPage/mileageList?userId="+<%=loginUser.getUserId() %>>
                         <h3><strong>MILEAGE</strong></h3>
                         <p style="font-size: 90%;">적립금은 상품 구매 시<br>사용하실 수 있습니다.</p>
                     </a>
@@ -124,11 +124,11 @@
 
 <script>
 	const fn_moveMileageView=()=>{
-		location.assign('<%=request.getContextPath()%>/mypage/mileageList?userId='+'<%=loginUser.getUserId() %>');
+		location.assign('<%=request.getContextPath()%>/myPage/mileageList?userId='+'<%=loginUser.getUserId() %>');
 	}
 	
 	const fn_moveCouponView=()=>{
-		location.assign('<%=request.getContextPath()%>/mypage/couponList?userId='+'<%=loginUser.getUserId() %>');
+		location.assign('<%=request.getContextPath()%>/myPage/couponList?userId='+'<%=loginUser.getUserId() %>');
 	}
 </script>
 

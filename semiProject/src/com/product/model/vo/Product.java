@@ -94,4 +94,11 @@ public class Product {
 		this.pName = pName;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [pCode=" + pCode + ", cateCode=" + cateCode + ", price=" + price + ", stock=" + stock
+				+ ", pEnrollDate=" + pEnrollDate + ", deliveryFee=" + deliveryFee + ", size=" + size + ", pName="
+				+ pName + "]";
+	}
+
 }

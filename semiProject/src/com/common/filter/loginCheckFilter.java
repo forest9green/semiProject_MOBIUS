@@ -10,23 +10,18 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet Filter implementation class PasswordEncrytFilter
+ * Servlet Filter implementation class loginCheckFilter
  */
-//필터링의 기준은 주소매핑만하는것이 아니라 서블릿이름으로도 가능
-@WebFilter(
-		servletNames = {
-		"loginServlet","enrollendservlet","updatememberservlet"
-		,"checkpasswordservlet"
-		
-})
-public class PasswordEncryptFilter implements Filter {
+@WebFilter({ "/myPage/*", "/admin/*" })
+public class loginCheckFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public PasswordEncryptFilter() {
+    public loginCheckFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -41,12 +36,16 @@ public class PasswordEncryptFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		// place your code here
-		PasswordEncryptWrapper pew=new PasswordEncryptWrapper((HttpServletRequest)request);
-		
+		HttpSession session=((HttpServletRequest)request).getSession(false);
+		if(session==null || session.getAttribute("loginUser")==null) {
+			request.setAttribute("msg","로그인 후 이용할 수 있습니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
+
 		// pass the request along the filter chain
-		chain.doFilter(pew, response);
+		chain.doFilter(request, response);
 	}
 
 	/**

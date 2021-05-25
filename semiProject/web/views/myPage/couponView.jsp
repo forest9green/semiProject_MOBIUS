@@ -42,7 +42,6 @@
         </div>
         <div id="c_pagebar" class="pagebar">
             <%=pageBar %>
-            <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
         </div>
     </div>
 </section>

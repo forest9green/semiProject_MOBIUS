@@ -43,7 +43,7 @@
                        <%if(loginUser!=null&&loginUser.getUserId().equals("admin")){ %> 
                         <li class="pa"><a href="">Adminpage</a></li>
                        <%}else{ %>
-                       	<li class="pa"><a href="<%=request.getContextPath()%>/views/myPage/myPageMain.jsp">Mypage</a></li>	
+                       	<li class="pa"><a href="<%=request.getContextPath()%>/myPage/main">Mypage</a></li>	
                        <%} %>
                      <%if(loginUser==null) {%>
                         <li class="pa"><a href="<%=request.getContextPath()%>/views/member/loginPage.jsp">Login</a></li>
@@ -62,17 +62,18 @@
                         <li>
                             <ul id="item-category">
                                 <li class="pe">ITEM</li>
-                                <li><a href="<%=request.getContextPath() %>/views/item/itemwholeView.jsp">전체</a></li>
-                                <li><a href="<%=request.getContextPath() %>/views/item/itemsaleView.jsp">세일</a></li>
-                                <li><a href="<%=request.getContextPath() %>/views/item/itemsofaView.jsp">소파</a></li>
-                                <li><a href="<%=request.getContextPath() %>/views/item/itembedView.jsp">침대</a></li>
-                                <li><a href="<%=request.getContextPath() %>/views/item/itemdrawerView.jsp">옷장</a></li>
-                                <li><a href="<%=request.getContextPath() %>/views/item/itemdeskView.jsp">책상</a></li>
-                                <li><a href="<%=request.getContextPath() %>/views/item/itemchairView.jsp">의자</a></li>
+                                <li><a href="<%=request.getContextPath() %>/product/productList">전체</a></li>
+                                <li><a href="<%=request.getContextPath() %>">세일</a></li>
+                                <li><a href="<%=request.getContextPath() %>/product/productList?category=소파">소파</a></li>
+                                <li><a href="<%=request.getContextPath() %>/product/productList?category=침대">침대</a></li>
+                                <li><a href="<%=request.getContextPath() %>/product/productList?category=옷장">옷장</a></li>
+                                <li><a href="<%=request.getContextPath() %>/product/productList?category=서랍">서랍</a></li>
+                                <li><a href="<%=request.getContextPath() %>/product/productList?category=책상">책상</a></li>
+                                <li><a href="<%=request.getContextPath() %>/product/productList?category=의자">의자</a></li>
                             </ul>
                         </li>
                         <li class="pe" style="padding-bottom: 2px;"><a class="mm" href="<%=request.getContextPath() %>/views/showroom/showroomMain.jsp">SHOWROOM</a></li>
-                        <li class="pe"><a class="mm" href="<%=request.getContextPath() %>/views/notice/noticeMain.jsp">NOTICE</a></li>
+                        <li class="pe"><a class="mm" href="<%=request.getContextPath() %>/notice/noticeMain">NOTICE</a></li>
                     </ul>
                 </span>
                 <span><h1 class="pf"><a class="mm" href="<%=request.getContextPath() %>">SOLIDI</a></h1></span>

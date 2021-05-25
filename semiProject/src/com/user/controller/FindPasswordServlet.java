@@ -21,16 +21,16 @@ import com.user.model.service.UserService;
 import com.user.model.vo.User;
 
 /**
- * Servlet implementation class FindIdServlet
+ * Servlet implementation class FindPasswordServlet
  */
-@WebServlet("/user/findId")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/user/findPassword")
+public class FindPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdServlet() {
+    public FindPasswordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,22 +40,19 @@ public class FindIdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		
-		
-		
-		String userName= request.getParameter("userName");
+
+		String userId = request.getParameter("userId");
+		String userName = request.getParameter("userName");
 		String email = request.getParameter("userEmail");
 		
-		User u = new UserService().checkEmail(userName,email);
-		
+		User u = new UserService().checkPw(userId,userName,email);
 		request.setCharacterEncoding("UTF-8");
 		
 		String msgn ="";
 		String loc ="";
 		
-		
 		if(u!=null) {
+			
 			 String mailServer = "smtp.gmail.com";
 			 Properties props = new Properties();
 			 props.put("mail.smtp.host", mailServer);
@@ -70,7 +67,7 @@ public class FindIdServlet extends HttpServlet {
 			 String key = "";
 			 
 			 try {
-				 String to = u.getEmail();
+				 String to = "xogml6915@naver.com";
 				 String from = "xogml6915@gmail.com";
 				 String subject = "테스트";
 				 for(int i=0;i<3;i++) {
@@ -91,19 +88,25 @@ public class FindIdServlet extends HttpServlet {
 				 msg.setSentDate(new Date());
 				 Transport.send(msg);
 				 
-				 request.setAttribute("key", key);
+				 
+				 loc="/views/member/findMember.jsp";
+				 msgn="메일이 전송되었습니다.";
+				 
 			 }catch(Exception e) {
-				 msgn="이름 또는 이메일이 일치하지않습니다.";
-				 loc="views/member/findId.jsp";
+				 e.printStackTrace();
 			 }
-			 
 		}
-	
-		 request.getRequestDispatcher("/views/member/findMember.jsp")
-		 .forward(request, response);	
+		
+		 request.setAttribute("msg", msgn);
+		 request.setAttribute("loc", loc);
+		 
+		 request.getRequestDispatcher("/views/common/msg.jsp")
+		 .forward(request, response);
 		
 		
-	
+		
+		
+		
 	}
 
 	/**

@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp"%>
-
-
+ 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <section>
     <div>    
         <div id="contents">
@@ -46,9 +46,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                        	<a class="btn_naver_login" href="">
-                                    			<img src="" alt="네이버 아이디 로그인">
-                                			</a>
+                                        	<div id="naver_id_login"></div>
                                         </li>
                                         <li>
                                         	<a class="btn_google-login" href="">
@@ -125,7 +123,15 @@
             }
         </script>
 
-
+		<script type="text/javascript">
+		  	var naver_id_login = new naver_id_login("HA68oZmhIBwSBeLwVPpA", "http://localhost:9090/semiProject/views/member/loginPage.jsp");
+		  	var state = naver_id_login.getUniqState();
+		  	naver_id_login.setButton("white", 2,40);
+		  	naver_id_login.setDomain("http://localhost:9090/semiProject/views/member/loginPage.jsp");
+		  	naver_id_login.setState(state);
+		  	naver_id_login.setPopup();
+		  	naver_id_login.init_naver_id_login();
+		 </script>
 
 
 
@@ -176,7 +182,7 @@
         border: 1px solid #dbdbdb;
         display: block;
         width: 500px;
-        height: 400px;
+        height: 300px;
     }
     #formLogin{
         display: block;
@@ -249,9 +255,9 @@
     }
     .btn_login_box{
         overflow: hidden;
-        margin: 20px 0 0 0;
+        margin: 20px 0 0 60px;
         padding: 40px 10px 0 10px;
-        border-top: 1px solid #dcdcdc;
+        
         display: block;
     }
     .btn_login_box>ul{
@@ -304,6 +310,9 @@
         text-align: center;
         align-items: flex-start;
         box-sizing: border-box;
+    }
+    #naver_id_login{
+    	width: 500px;
     }
 </style>
 
