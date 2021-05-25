@@ -3,16 +3,7 @@
 
 <%@ include file="/views/common/header.jsp"%>
 
-<%
-
-
-
-%>
-
 <section>
-
-
-
     <container id="">
         <div id="category_top" style="float:left;">
             <a href="http://localhost:9090/semiProject/views/item/itemwholeView.jsp"><div class="category_top pc" style="font-size:12px;float:left;">전체</div></a>
@@ -68,21 +59,21 @@
     <div class="review">
         <div class="review_count pd" style="font-size:25px; margin-left:10%;margin-top:5%;">리뷰    
          
-        <div id="review_border card"></div>
+		<div id="review_border card"></div>
         <div class="row" >
-            <div class="column" id="wrap" > 
-              <div class="card" style=margin-top:3%;>
-                <div class='RatingStar'>
-                    <div class='RatingScore'>
-                        <div class='outer-star'><div class='inner-star'></div></div>
-                        <div class="grade pd" style=font-size:25px;float:left;margin-left:20px;float:right;margin-right:750px;margin-top:5px;> 총 2</div>
-                    </div>
+			<div class="column" id="wrap" > 
+				<div class="card" style=margin-top:3%;>
+					<div class='RatingStar'>
+	                    <div class='RatingScore'>
+	                        <div class='outer-star'><div class='inner-star'></div>
+	                        <div class="grade pd" style=font-size:25px;float:left;margin-left:20px;float:right;margin-right:750px;margin-top:5px;> 총 2</div>
+	                    </div>
                     </div>
                 </div>
-                </div>
-        </div>
+			</div>
+		</div>
 
-                <section class="review_article" style="width:820px;height:630px;margin-left:10px;">
+                <div class="review_article" style="width:820px;height:630px;margin-left:10px;">
                     <div class="review_user pd">김*현</div>
                     <div class="star_date">
                         <div class='outer-star' style="font-size:13px;float:left;"><div class='inner-star'></div></div>
@@ -122,7 +113,7 @@
                            <a class="arrow nnext" href="#"></a>
                         </div>
                      </div>
-                </section>
+                </div>
                     
          
 
@@ -260,7 +251,7 @@
     </script>
 
 
-    </section>    
+    </div>    
 
 
 
@@ -269,10 +260,6 @@
 
 <!--section에 적용될 style, script 내용 넣어주세요-->
 <style>
-
-
-
-
     .btn{
         cursor:pointer;
     }

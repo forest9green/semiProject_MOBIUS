@@ -36,7 +36,7 @@ public class ProductDao {
 		
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("searchCateCode"));
-			pstmt.setString(1, cateCode);
+			pstmt.setString(1, category);
 			rs=pstmt.executeQuery();
 			if(rs.next()) cateCode=rs.getString(1);
 			
@@ -51,13 +51,17 @@ public class ProductDao {
 	}
 	
 	
-	public List<Product> selectProductList(Connection conn, String cateCode, int cPage, int numPerPage){
+	public List<Product> selectProductList(Connection conn, String orderBy, String cateCode, int cPage, int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Product> list=new ArrayList<>();
 		
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("searchProductList"));
+			if(!orderBy.equals("R_STAR DESC")) {
+				pstmt=conn.prepareStatement(prop.getProperty("searchProductList").replace("$", orderBy));				
+			}else {
+				pstmt=conn.prepareStatement(prop.getProperty("searchProductListStar"));
+			}
 			pstmt.setString(1, cateCode);
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
@@ -86,13 +90,17 @@ public class ProductDao {
 	}
 	
 	
-	public List<Product> selectProductList(Connection conn, int cPage, int numPerPage){
+	public List<Product> selectProductList(Connection conn, String orderBy, int cPage, int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Product> list=new ArrayList<>();
 		
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("searchAllProductList"));
+			if(!orderBy.equals("R_STAR DESC")) {
+				pstmt=conn.prepareStatement(prop.getProperty("searchAllProductList").replace("$", orderBy));				
+			}else {
+				pstmt=conn.prepareStatement(prop.getProperty("searchAllProductListStar"));
+			}
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);
 			pstmt.setInt(2, cPage*numPerPage);
 			rs=pstmt.executeQuery();
@@ -160,6 +168,38 @@ public class ProductDao {
 		}
 		
 		return result;
+	}
+	
+	
+	public Product searchProduct(Connection conn, String pCode) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Product p=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchProduct"));
+			pstmt.setString(1, pCode);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				p=new Product();
+				p.setpCode(rs.getString("p_code"));
+				p.setCateCode(rs.getString("cate_code"));
+				p.setPrice(rs.getInt("price"));
+				p.setStock(rs.getInt("price"));
+				p.setpEnrollDate(rs.getDate("p_enroll_date"));
+				p.setDeliveryFee(rs.getInt("delivery_fee"));
+				p.setSize(rs.getString("size"));
+				p.setpName(rs.getString("p_name"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return p;
 	}
 	
 }

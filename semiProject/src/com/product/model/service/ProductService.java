@@ -22,17 +22,17 @@ public class ProductService {
 	}
 	
 	
-	public List<Product> selectProductList(String cateCode, int cPage, int numPerPage){
+	public List<Product> selectProductList(String cateCode, String orderBy, int cPage, int numPerPage){
 		Connection conn=getConnection();
-		List<Product> list=dao.selectProductList(conn,cateCode,cPage,numPerPage);
+		List<Product> list=dao.selectProductList(conn,cateCode,orderBy,cPage,numPerPage);
 		close(conn);
 		return list;
 	}
 	
 	
-	public List<Product> selectProductList(int cPage, int numPerPage){
+	public List<Product> selectProductList(String orderBy, int cPage, int numPerPage){
 		Connection conn=getConnection();
-		List<Product> list=dao.selectProductList(conn,cPage,numPerPage);
+		List<Product> list=dao.selectProductList(conn,orderBy,cPage,numPerPage);
 		close(conn);
 		return list;
 	}
@@ -51,6 +51,14 @@ public class ProductService {
 		int result=dao.selectProductCount(conn);
 		close(conn);
 		return result;
+	}
+	
+	
+	public Product searchProduct(String pCode) {
+		Connection conn=getConnection();
+		Product p=dao.searchProduct(conn,pCode);
+		close(conn);
+		return p;
 	}
 
 }
