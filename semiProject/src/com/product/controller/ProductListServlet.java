@@ -32,11 +32,14 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//세일 메뉴 일때는 걍 list를 null로 보내버려라!
 		String category=request.getParameter("category");
 		String orderBy=request.getParameter("pListSelect");
+		if(orderBy==null) {
+			orderBy="P_ENROLL_DATE DESC";
+		}
 		String cateCode="";
 		List<Product> list=new ArrayList<>();
+		
 		int cPage;
 		int numPerPage=9;
 		try {
@@ -47,7 +50,7 @@ public class ProductListServlet extends HttpServlet {
 		
 		int totalData=0;
 		
-		if(category!=null) {
+		if(!category.equals("전체")) {
 			if(category.equals("세일")) {
 				list=null;
 			}else {
@@ -62,6 +65,7 @@ public class ProductListServlet extends HttpServlet {
 			request.setAttribute("category", "전체");
 			list=new ProductService().selectProductList(orderBy,cPage,numPerPage);
 			totalData=new ProductService().selectProductCount();
+			System.out.println("totalData"+totalData);
 		}
 
 		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
@@ -76,7 +80,7 @@ public class ProductListServlet extends HttpServlet {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/product/productList?cPage="+pageNo+"&orderBy="+orderBy+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/product/productList?cPage="+pageNo+"&pListSelect="+orderBy+"&category="+category+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}

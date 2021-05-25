@@ -58,7 +58,7 @@
 		        	<div class="noP">상품이 없습니다.</div>
 		        <%}
 	     	}else{%>
-	     		<div class="noP">상품이 없습니다.</div>
+	     		<div class="noP">세일 상품이 없습니다.</div>
 	     	<%} %>
 	   </div>
 	   <div id="c_pagebar" class="pagebar">
@@ -71,6 +71,9 @@
 		$("#pSelectFrm").attr("action","<%=request.getContextPath()%>/product/productList");
 		$("#pSelectFrm").append($("<input>").attr({
 			type:"hidden",name:"cPage",value:"<%=request.getParameter("cPage")%>"
+		}));
+		$("#pSelectFrm").append($("<input>").attr({
+			type:"hidden",name:"category",value:"<%=category %>"
 		}));
 		$("#pSelectFrm").submit();
 	})

@@ -58,13 +58,14 @@ public class ProductDao {
 		
 		try {
 			if(!orderBy.equals("R_STAR DESC")) {
-				pstmt=conn.prepareStatement(prop.getProperty("searchProductList").replace("$", orderBy));				
+				pstmt=conn.prepareStatement(prop.getProperty("searchProductList").replace("$", orderBy));	
 			}else {
 				pstmt=conn.prepareStatement(prop.getProperty("searchProductListStar"));
 			}
 			pstmt.setString(1, cateCode);
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
+			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Product p=new Product();

@@ -62,7 +62,7 @@
                         <li>
                             <ul id="item-category">
                                 <li class="pe">ITEM</li>
-                                <li><a href="<%=request.getContextPath() %>/product/productList">전체</a></li>
+                                <li><a href="<%=request.getContextPath() %>/product/productList?category=전체">전체</a></li>
                                 <li><a href="<%=request.getContextPath() %>/product/productList?category=세일">세일</a></li>
                                 <li><a href="<%=request.getContextPath() %>/product/productList?category=소파">소파</a></li>
                                 <li><a href="<%=request.getContextPath() %>/product/productList?category=침대">침대</a></li>
