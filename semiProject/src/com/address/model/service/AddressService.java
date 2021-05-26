@@ -28,11 +28,29 @@ public class AddressService {
 	}
 	
 	
-	public List<Address> selectAddress(String userId){
+	public List<Address> selectAddress(String userId, int cPage, int numPerPage){
 		Connection conn=getConnection();
-		List<Address> list=dao.selectAddress(conn,userId);
+		List<Address> list=dao.selectAddress(conn,userId,cPage,numPerPage);
 		close(conn);
 		return list;
+	}
+	
+	
+	public int selectAddressCount(String userId) {
+		Connection conn=getConnection();
+		int result=dao.selectAddressCount(conn,userId);
+		close(conn);
+		return result;
+	}
+	
+	
+	public int clearDefaultAddr(String addrNo) {
+		Connection conn=getConnection();
+		int result=dao.clearDefaultAddr(conn,addrNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 	
