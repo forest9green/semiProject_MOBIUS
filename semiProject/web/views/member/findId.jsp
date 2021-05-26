@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%
+	String userId = (String)request.getParameter("userId");
+%>
 <%@ include file="/views/common/header.jsp"%>
 
 <section>
@@ -21,7 +23,7 @@
                     </div>  
                     <div class="member_cont">
                         <div class="login_input_sec">
-                            <h4 pc>고객님의 정보와 일치하는 아이디 : <%=loginUser.getUserId() %></h4>  
+                            <h4 pc>고객님의 정보와 일치하는 아이디 : <%=userId %></h4>  
                         </div>
                         <div class="btn_login_box">
                             <ul>
@@ -29,7 +31,7 @@
                                     <button id="btn_find_member" class="pd">비밀번호 찾기</button>
                                 </li>
                                 <li>
-                                    <button id="btn_member_join" class="pd">로그인</button>
+                                    <button id="btn_member_login" class="pd">로그인</button>
                                 </li>
                             </ul>
                         </div>
@@ -40,6 +42,29 @@
         </div>
     </div>
 </section>
+    
+    <script>
+    	$("#btn_find_member").click(function(){
+    		location.replace("<%=request.getContextPath()%>/views/member/findPassword.jsp");
+    	});
+    
+    	$("#btn_member_login").click(function(){
+    		location.replace("<%=request.getContextPath()%>/views/member/loginPage.jsp");
+    	})
+    
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 <style>
     #contents{
@@ -121,7 +146,7 @@
         display: list-item;
         margin-left: 40px;
     }
-    #btn_member_join{
+    #btn_member_login{
         width: 200px;
         height: 60px;
         margin: 0;
@@ -130,6 +155,7 @@
         border: 1px solid #666666;
         background: white;
         text-align: middle;
+        margin-top:10px;
     }
     #btn_find_member{
         width: 200px;
@@ -140,6 +166,7 @@
         border: 1px solid #666666;
         background: white;
         text-align: middle;
+        margin-top:10px;
     }
     button{
         appearance: auto;
@@ -149,6 +176,10 @@
         align-items: flex-start;
         box-sizing: border-box;
 
+    }
+    
+    section{
+    	height:600px;
     }
 </style>
 

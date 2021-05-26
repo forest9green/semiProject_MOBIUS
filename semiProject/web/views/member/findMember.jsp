@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 	String key = (String)request.getAttribute("key");
+	String key2 =(String)request.getAttribute("key2");
+	User u = (User)request.getAttribute("u");
 %>
     
 <%@ include file="/views/common/header.jsp"%>
@@ -24,67 +26,100 @@
                 <h2>아이디 찾기</h2>
             </div>
             <div class="member_cont">
-                <form action="<%=request.getContextPath() %>/user/findId" id="formFindId" method="post" >
+                
                     <div class="find_id_box">
                         <div class="find_id_sec">
                             <h3 class="pd">본인확인 이메일 인증</h3>
                             <div class="login_input pc">
+                               <form action="<%=request.getContextPath() %>/user/findId" id="formFindId" name="formFindId" method="post" > 
                                 <table>
-                                    <input type="text" id="userName" name="userName" placeholder="이름">
-                                    <input type="text" id="userEmail" name="userEmail" class="input_email" placeholder="가입메일주소">
-                                    <button id="button" onclick="sendEmail();">인증번호받기</button>
-                                    <input type="text" id="numCer" name="numCer" placeholder="인증번호 6자리 입력">
-                                    
-                                    
-                                </table>    
+                                    <input type="text" id="userName" name="userName" placeholder="이름" value="<%=u!=null&&u.getUserName()!=null?u.getUserName():"" %>">
+                                    <input type="text" id="userEmail" name="userEmail" class="input_email" placeholder="가입메일주소" value="<%=u!=null&&u.getEmail()!=null?u.getEmail():""%>">
+                                    <button id="submit" onclick="fn_submit();">인증번호받기</button>
+  
+                                </table> 
+                               </form>    
+                               <input type="text" id="numCer" name="numCer" placeholder="인증번호 6자리 입력">
                             </div>
                             
                         </div>
+                        
                         <div class="btn_member_sec">
-                            <button class="btn_member_white pe" id="next_btn" onclick="next_btn();" >다음</button>
+                            <button type="button" class="btn_member_white pe" id="next_btn"  >다음</button>
                         </div>
                     </div>
-                </form>
+                
             </div>
-        </div>
+        </div>      
         <div class="content-box pf">
             <div class="member_tit">
                 <h2>비밀번호 찾기</h2>
             </div>
             <div class="member_cont">
-                <form action="<%=request.getContextPath() %>/user/findPassword" id="formFindId" method="post" novalidate>
+               
                     <div class="find_id_box">
                         <div class="find_id_sec">
                             <h3 class="pd">본인확인 이메일 인증</h3>
                             <div class="login_input pc">
-                                <input type="text" id="finduserId" name="userId" placeholder="아이디">
-                                <input type="text" id="finduserName" name="userName" placeholder="이름">
-                                <input type="text" id="userEmail2" name="userEmail" class="input_email" id="numCer2"  placeholder="가입메일주소">
-                                <button>인증번호받기</button>
-                                <input type="text" id="" name="numCer" placeholder="인증번호 6자리 입력">
+                            <form action="<%=request.getContextPath() %>/user/findPassword" id="formFindPw" name="formFindPw" method="post" >
+                                <table>
+	                                <input type="text" id="finduserId" name="finduserId" placeholder="아이디" value="<%=u!=null&&u.getUserId()!=null?u.getUserId():"" %>">
+	                                <input type="text" id="finduserName" name="finduserName" placeholder="이름" value="<%=u!=null&&u.getUserName()!=null?u.getUserName() :""%>">
+	                                <input type="text" id="userEmail2" name="userEmail2" class="input_email" id="numCer2"  placeholder="가입메일주소" value="<%=u!=null&&u.getEmail()!=null?u.getEmail():""%>">
+	                                <button id="submit2" onclick="fn_submit2();">인증번호받기</button>
+                             	</table>
+                             </form>
+                                <input type="text" id="numCer2" name="numCer2" placeholder="인증번호 6자리 입력">	
                             </div>
+                            
                             
                         </div>
                         <div class="btn_member_sec">
-                            <button class="btn_member_white pe" >다음</button>
+                            <button type="button" class="btn_member_white pe" id="submit_btn">다음</button>
                         </div>
                     </div>
-                </form>
+                
             </div>
         </div>    
     </div>    
 </section>
+<form method="post" id="userIdForm" action="<%=request.getContextPath() %>/views/member/findId.jsp"> 
+	<input type="hidden" name="userId" value="<%=u!=null&&u.getUserId()!=null?u.getUserId():"" %>"> 
+</form>  
+<form method="post" id="userPwForm" action="<%=request.getContextPath() %>/views/member/findPassword.jsp"> 
+	<input type="hidden" name="userId" value="<%=u!=null&&u.getUserId()!=null?u.getUserId():"" %>"> 
+</form>
+
 
 <script>
-	const next_btn=()=>{
-		const numCer = $("#numCer").val();
-		if(key==numCer){
-			location.replace("<%=request.getContextPath()%>/views/member/findId.jsp");
-		}else{
-			alert("인증번호가 일치하지않습니다.");
-			numCer.focus();
-		}
+	
+	const fn_submit=()=>{
+		alert("메일이 전송되었습니다. 메일이 없을 경우 입력한 정보를 확인해주세요");
+		
 	}
+	const fn_submit2=()=>{
+		alter("메일이 전송되었습니다. 메일이 없을 경우 입력한 정보를 확인해주세요")
+	}
+	
+	$("#next_btn").click(function(){
+		const numCer = $("#numCer").val();
+		const loginForm=$("#userIdForm");
+		
+		if(numCer=="<%=key%>"){
+			loginForm.submit();
+			
+			
+		}
+	})
+	
+	$("#submit_btn").click(function(){
+		const numCer2 = $("#numCer2").val();
+		const loginForm=$("#userPwForm");
+		if(numCer2=="<%=key2%>"){
+			loginForm.submit();
+		}
+	})
+	
 </script>
 
 	
@@ -194,6 +229,12 @@
     }
     #next_btn{
         margin-top: 50px;
+    }
+    #submit{
+    	margin-left:5px;
+    }
+    #submit2{
+    	margin-left:5px;
     }
 </style>
 

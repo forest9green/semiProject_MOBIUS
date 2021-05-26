@@ -92,13 +92,13 @@ public class FindIdServlet extends HttpServlet {
 				 Transport.send(msg);
 				 
 				 request.setAttribute("key", key);
+				 request.setAttribute("u", u);
 			 }catch(Exception e) {
-				 msgn="이름 또는 이메일이 일치하지않습니다.";
-				 loc="views/member/findId.jsp";
+				e.printStackTrace();
 			 }
 			 
 		}
-	
+		
 		 request.getRequestDispatcher("/views/member/findMember.jsp")
 		 .forward(request, response);	
 		

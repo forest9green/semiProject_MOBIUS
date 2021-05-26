@@ -9,7 +9,7 @@
             <div class="boatitle">  
                 <h1 class="mooni">문의사항</h1>                
             </div>  
-            
+       	<form action="<%=request.getContextPath() %>/myPage/board/boardupdateEnd" method="post">
             <div>
                 <h2 id="bo_title">
                     <span class="bo_badge bo_badge-light bo_badge-lg font-weight-light">배송문의</span>
@@ -26,7 +26,7 @@
             </div>
  
             <div class="bo_v_con">
-                <textarea rows="30" cols="50" type="text"  name ="bd_content" class="bo_contents"><%=b.getbContent() %></textarea>
+                <textarea rows="30" cols="50" type="text"  name ="bd_content" class="bo_contents"><%=b.getbContent() %></textarea> --%>
             </div>
             <hr class="silsun">
                 <div id="bo_v_top">
@@ -39,7 +39,7 @@
                         <!-- <a class="boabtn btn-primary" href="">문의하기</a> -->
                      </div>
                 </div>    
-
+			</form>
                      <h3>답변</h3>
                 
 

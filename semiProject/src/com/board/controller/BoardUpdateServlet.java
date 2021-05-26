@@ -13,7 +13,7 @@ import com.board.model.vo.Board;
 /**
  * Servlet implementation class BoardUpdateServlet
  */
-@WebServlet("/myPage/board/boardform")
+@WebServlet("/myPage/board/boardupdate")
 public class BoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,6 @@ public class BoardUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userId=request.getParameter("userId");
-		
 		Board b=new BoardService().selectBoard(request.getParameter("bNo"));
 		
 		request.setAttribute("board",b);

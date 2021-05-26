@@ -86,6 +86,7 @@ public class BoardDao {
 				b.setbNo(rs.getString("B_NO"));
 				b.setbTitle(rs.getString("B_TITLE"));
 				b.setUserId(rs.getString("USER_ID"));
+//				b.setbCategory(rs.getString("B_CATEGORY"));
 				b.setbContent(rs.getString("B_CONTENT"));
 				b.setbWriteDate(rs.getDate("B_WRITEDATE"));
 				System.out.println(b);
@@ -101,7 +102,7 @@ public class BoardDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
+			pstmt=conn.prepareStatement(prop.getProperty("writeBoard"));
 			pstmt.setString(1, b.getbNo());
 			pstmt.setString(2, b.getUserId());
 			pstmt.setString(3, b.getbCategory());
@@ -116,4 +117,21 @@ public class BoardDao {
 		}return result;
 		
 	}
+	public int updateBoard(Connection conn, Board b, String userId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateBoard"));
+			pstmt.setString(1, b.getbNo());
+			pstmt.setString(2, b.getUserId());
+			pstmt.setString(3, b.getbTitle());
+			pstmt.setString(4, b.getbContent());
+			pstmt.setString(5, b.getbCategory());
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }
+

@@ -8,8 +8,8 @@
     	<div class="subTitle">
 	        <h1>문의사항 작성<span></span></h1>
     	</div>
-<form action='<%=request.getContextPath()%>/board/boardinsertend' method="post" enctype="multipart/form-data">	
-	<div class="qalist">
+	<form action='<%=request.getContextPath()%>/myPage/board/boardinsert' method="post" enctype="multipart/form-data">	
+		<div class="qalist">
 	             <label for="ca_name">분류</label>
 	                 <select class="form-control form-control-sm w-auto" id="ca_name" name="ca_name" required>
 	                         <option value="">선택하세요</option>
@@ -28,29 +28,22 @@
 	        <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="5000" style="width:100%; height: 200px;"
 	        placeholder="내용을 입력해주세요">
 	        </textarea>
-	</div>        
-</form>	   
-	
-	    
-	</div>
-        
-
-    
+		</div>        
         <div class="btn-box">
             <ul>
                 <li>          
                     <div class="cancel-btn pb" id="cancel">
-                        <a href="<%=request.getContextPath()%>/myPage/board/boardlist">취소</a>
+                        <a href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">취소</a>
                     </div> 
                 </li>
                 <li>    
                     <div class="complete-btn pb" id="complete" type=submit value="작성완료" >
-                        <a href>작성완료</a>
+                        <a href="">작성완료</a>
                     </div>
                 </li>
             </ul>
         </div>
-	</div>
+       </form>
 </section>
 
 <style>

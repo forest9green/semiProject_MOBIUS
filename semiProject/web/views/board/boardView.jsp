@@ -32,11 +32,11 @@
     <hr class="silsun">
         <div id="bo_v_top">
             <div class="bo_v_left">
-                <a class="boabtn btn-light sujeong" href="" >수정</a>
+                <a class="boabtn btn-light sujeong" onclick="location.assign('<%=request.getContextPath() %>/board/boardform?bNo=<%=b.getbNo()%>')">수정</a>
                 <a class="boabtn btn-light sakje" href="" onclick="">삭제</a>     
             </div>
             <div class="bo_v_right">
-                <a class="boabtn btn-secondary" href="<%=request.getContextPath()%>/myPage/board/boardlist?userId="+<%=loginUser.getUserId()%>)">목록</a>
+                <a class="boabtn btn-secondary" href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">목록</a>
                 <!-- <a class="boabtn btn-primary" href="">문의하기</a> -->
              </div>
         </div>    
