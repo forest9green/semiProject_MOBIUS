@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="java.util.List, com.address.model.vo.Address" %>
+<%
+	List<Address> addresses=(List<Address>)request.getAttribute("addresses");
+%>
 <%@ include file="/views/common/header.jsp"%>
 
 <section>
@@ -21,21 +24,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!--회원가입할 때 입력한 배송지-->
-                    <tr>
-                        <td><input type="checkbox" name="chk"></td>
-                        <td><button type="button">지정</button></td><!-- 클릭 시 기본 배송지로 지정하시겠습니까? 메세지, 확인 누르면 누르면 클래스 blackback이 추가되고, 기본 배송지로 지정됨(기본 배송지는 1개만 되니까 다른 기본 배송지가 있을 경우 해제됨)-->
-                        <td>미지정</td>
-                        <td>이름</td>
-                        <td>000-</td>
-                        <td>01000000000</td>
-                        <td>우편번호</td>
-                        <td>주소</td>
-                    </tr>
-                    <!--
-                        추가로 등록된 배송지가 있을 경우 tr이 추가되며,
-                        10개 단위로 페이징 처리함
-                    -->
+                    <%if(!addresses.isEmpty()) {
+                    	for(Address a:addresses) {%>
+		                    <tr>
+		                        <td><input type="checkbox" name="chk"></td>
+		                        <td><button type="button">지정</button></td><!-- 클릭 시 기본 배송지로 지정하시겠습니까? 메세지, 확인 누르면 누르면 클래스 blackback이 추가되고, 기본 배송지로 지정됨(기본 배송지는 1개만 되니까 다른 기본 배송지가 있을 경우 해제됨)-->
+		                        <td>미지정</td>
+		                        <td>이름</td>
+		                        <td>000-</td>
+		                        <td>01000000000</td>
+		                        <td>우편번호</td>
+		                        <td>주소</td>
+		                    </tr>
+	                    <%}
+                   	}%>
                 </tbody>
             </table>
             <div id="addr_btn">

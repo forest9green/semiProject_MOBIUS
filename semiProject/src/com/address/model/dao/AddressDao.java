@@ -1,14 +1,18 @@
 package com.address.model.dao;
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.address.model.vo.Address;
 import com.user.model.dao.UserDao;
-import static com.common.JDBCTemplate.close;
 
 public class AddressDao {
 	
@@ -47,6 +51,40 @@ public class AddressDao {
 		}
 		return result2;
 		
+	}
+	
+	
+	public List<Address> selectAddress(Connection conn, String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Address> list=new ArrayList<>();
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectAddress"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Address a=new Address();
+				a.setAddrNo(rs.getString("addr_no"));
+				a.setUserId(rs.getString("user_id"));
+				a.setAddName(rs.getString("add_name"));
+				a.setReceiverName(rs.getString("receiver_name"));
+				a.setPostCode(rs.getString("postcode"));
+				a.setAddr(rs.getString("addr"));
+				a.setDefaultAddr(rs.getInt("default_addr"));
+				a.setAddCellPhone(rs.getString("add_cellphone"));
+				a.setAddPhone(rs.getString("add_phone"));
+				list.add(a);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
 	}
 	
 	
