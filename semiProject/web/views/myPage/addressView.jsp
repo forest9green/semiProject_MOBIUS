@@ -105,7 +105,7 @@
             }else{
             	//기본 배송지가 존재하지 않으므로 선택한 주소를 기본배송지로 지정
             	if(confirm("기본 배송지로 지정하시겠습니까?")){
-	            	location.assign('<%=request.getContextPath()%>/myPage/setDefaultAddr?userId=<%=loginUser.getUserId()%>&AddrNo='+addrNo);            		
+	            	location.assign('<%=request.getContextPath()%>/myPage/setDefaultAddr?userId=<%=loginUser.getUserId()%>&addrNo='+addrNo);            		
             	}
             }
 		}

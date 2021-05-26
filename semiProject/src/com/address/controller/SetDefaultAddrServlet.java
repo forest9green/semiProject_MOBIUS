@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.address.model.service.AddressService;
+
 /**
  * Servlet implementation class SetDefaultAddrServlet
  */
@@ -26,8 +28,22 @@ public class SetDefaultAddrServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String userId=request.getParameter("userId");
+		String addrNo=request.getParameter("addrNo");
+		
+		int result=new AddressService().setDefaultAddr(addrNo);
+		
+		String msg="";
+		if(result>0) {
+			msg="기본 배송지로 설정되었습니다.";
+		}else {
+			msg="기본 배송지 설정에 실패하였습니다.";
+		}
+		
+		request.setAttribute("queryString", "?userId="+userId);
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/myPage/addressView");
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

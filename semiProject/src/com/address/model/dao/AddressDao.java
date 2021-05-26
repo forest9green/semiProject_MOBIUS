@@ -116,9 +116,28 @@ public class AddressDao {
 	public int clearDefaultAddr(Connection conn, String addrNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		
+
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("clearDefaultAddr"));
+			pstmt.setString(1, addrNo);
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int setDefaultAddr(Connection conn, String addrNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("setDefaultAddr"));
 			pstmt.setString(1, addrNo);
 			result=pstmt.executeUpdate();
 			

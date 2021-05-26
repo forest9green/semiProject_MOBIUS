@@ -54,6 +54,16 @@ public class AddressService {
 	}
 	
 	
+	public int setDefaultAddr(String addrNo) {
+		Connection conn=getConnection();
+		int result=dao.setDefaultAddr(conn,addrNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
 	public int updateAddress(Address adr) {
 		Connection conn = getConnection();
 		int result2 = dao.updateAddress(conn,adr);
