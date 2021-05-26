@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @WebFilter(
 		servletNames = {
 		"loginServlet","enrollendservlet","updatememberservlet"
-		,"checkpasswordservlet"
+		,"checkpasswordservlet","updatepasswordservlet"
 		
 })
 public class PasswordEncryptFilter implements Filter {
