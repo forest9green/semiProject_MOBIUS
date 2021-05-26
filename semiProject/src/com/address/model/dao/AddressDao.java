@@ -17,7 +17,7 @@ public class AddressDao {
 	
 	public AddressDao() {
 		try {
-			String filePath=UserDao.class.getResource("/sql/user_sql.properties").getPath();
+			String filePath=UserDao.class.getResource("/sql/address_sql.properties").getPath();
 			prop.load(new FileReader(filePath));
 		}catch(Exception e) {
 			e.printStackTrace();
