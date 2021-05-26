@@ -31,14 +31,13 @@ public class DeleteMemberServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		String userId = request.getParameter("userId");
-		
 		int result = new UserService().deleteMember(userId);
 	
 		String msg = "";
 		String loc = "";
 		if(result>0) {
 			msg = "탈퇴가 완료되었습니다.";
-			loc = "/views/index.jsp";
+			loc = "/index.jsp";
 		}else {
 			msg = "탈퇴에 실패했습니다. 비밀번호를 다시 확인합니다.";
 			loc = "/views/member/PwCk.jsp";
