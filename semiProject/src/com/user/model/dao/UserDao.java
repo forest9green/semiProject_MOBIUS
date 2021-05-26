@@ -174,7 +174,7 @@ public class UserDao {
 		return result;
 	}
 	
-	public User checkPassword(Connection conn, String userId,String email) {
+	public User checkPassword(Connection conn, String userId,String password) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		User u = null;
@@ -182,7 +182,7 @@ public class UserDao {
 		try {
 			pstmt= conn.prepareStatement(prop.getProperty("selectUser"));
 			pstmt.setString(1, userId);
-			pstmt.setString(2, email);
+			pstmt.setString(2, password);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				u=new User();
@@ -264,7 +264,21 @@ public class UserDao {
 	}
 	
 	
-	
+	public int updatePassword(Connection conn, String userId, String password) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updatePassword"));
+			pstmt.setString(1, password);
+			pstmt.setString(2, userId);
+				result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

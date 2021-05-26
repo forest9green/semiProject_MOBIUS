@@ -24,7 +24,7 @@ public class ProductService {
 	
 	public List<Product> selectProductList(String cateCode, String orderBy, int cPage, int numPerPage){
 		Connection conn=getConnection();
-		List<Product> list=dao.selectProductList(conn,cateCode,orderBy,cPage,numPerPage);
+		List<Product> list=dao.selectProductList(conn,orderBy,cateCode,cPage,numPerPage);
 		close(conn);
 		return list;
 	}
@@ -59,6 +59,14 @@ public class ProductService {
 		Product p=dao.searchProduct(conn,pCode);
 		close(conn);
 		return p;
+	}
+	
+	
+	public String searchCategory(String cateCode) {
+		Connection conn=getConnection();
+		String category=dao.searchCategory(conn,cateCode);
+		close(conn);
+		return category;
 	}
 
 }

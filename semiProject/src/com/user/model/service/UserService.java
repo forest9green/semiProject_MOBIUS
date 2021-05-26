@@ -49,7 +49,7 @@ public class UserService {
 		return u;
 	}
 	
-	public int updateMember(User u ) {
+	public int updateMember(User u) {
 		Connection conn = getConnection();
 		int result = dao.updateMember(conn,u);
 		
@@ -60,9 +60,9 @@ public class UserService {
 		return result;
 	}
 	
-	public User checkPassword(String userId,String email) {
+	public User checkPassword(String userId,String password) {
 		Connection conn = getConnection();
-		User u = dao.checkPassword(conn,userId,email);
+		User u = dao.checkPassword(conn,userId,password);
 		
 		close(conn);
 		return u;
@@ -85,6 +85,13 @@ public class UserService {
 		return result;
 	}
 	
-	
+	public int updatePassword (String userId, String password) {
+		Connection conn = getConnection();
+		int result = dao.updatePassword(conn,userId,password);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	
 }

@@ -58,13 +58,14 @@ public class ProductDao {
 		
 		try {
 			if(!orderBy.equals("R_STAR DESC")) {
-				pstmt=conn.prepareStatement(prop.getProperty("searchProductList").replace("$", orderBy));				
+				pstmt=conn.prepareStatement(prop.getProperty("searchProductList").replace("$", orderBy));	
 			}else {
 				pstmt=conn.prepareStatement(prop.getProperty("searchProductListStar"));
 			}
 			pstmt.setString(1, cateCode);
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
+			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Product p=new Product();
@@ -200,6 +201,28 @@ public class ProductDao {
 		}
 		
 		return p;
+	}
+	
+	
+	public String searchCategory(Connection conn, String cateCode) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String category=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchCategory"));
+			pstmt.setString(1, cateCode);
+			rs=pstmt.executeQuery();
+			if(rs.next()) category=rs.getString(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return category;
 	}
 	
 }

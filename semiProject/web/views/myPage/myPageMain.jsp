@@ -112,7 +112,7 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="<%=request.getContextPath()%>/mypage/couponList?userId="+<%=loginUser.getUserId() %>">
+                    <a href="<%=request.getContextPath()%>/myPage/couponList?userId="+<%=loginUser.getUserId() %>">
                         <h3><strong>COUPON</strong></h3>
                         <p style="font-size: 90%;">고객님이 보유하고 계신<br>쿠폰 내역을 보여드립니다.</p>
                     </a>

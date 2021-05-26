@@ -41,16 +41,16 @@ public class FindPasswordServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String userId = request.getParameter("userId");
-		String userName = request.getParameter("userName");
-		String email = request.getParameter("userEmail");
+		String userId = request.getParameter("finduserId");
+		String userName = request.getParameter("finduserName");
+		String email = request.getParameter("userEmail2");
 		
 		User u = new UserService().checkPw(userId,userName,email);
 		request.setCharacterEncoding("UTF-8");
 		
 		String msgn ="";
 		String loc ="";
-		
+		String key2 ="";
 		if(u!=null) {
 			
 			 String mailServer = "smtp.gmail.com";
@@ -64,19 +64,19 @@ public class FindPasswordServlet extends HttpServlet {
 			 Session sess = Session.getInstance(props,myAuth);
 			 
 			 Random random = new Random();
-			 String key = "";
+			 
 			 
 			 try {
-				 String to = "xogml6915@naver.com";
+				 String to = u.getEmail();
 				 String from = "xogml6915@gmail.com";
 				 String subject = "테스트";
 				 for(int i=0;i<3;i++) {
 					 int index= random.nextInt(25)+65;
-					 key+=(char)index;
+					 key2+=(char)index;
 				 }
 				 int numIndex = random.nextInt(9999)+1000;
-				 key+=numIndex;
-				 String content = "인증번호 : "+key;
+				 key2+=numIndex;
+				 String content = "인증번호 : "+key2;
 				 
 				 Message msg = new MimeMessage(sess);
 				 InternetAddress address = new InternetAddress(to);
@@ -89,18 +89,16 @@ public class FindPasswordServlet extends HttpServlet {
 				 Transport.send(msg);
 				 
 				 
-				 loc="/views/member/findMember.jsp";
-				 msgn="메일이 전송되었습니다.";
-				 
+				request.setAttribute("key2", key2);
+				request.setAttribute("u", u);
 			 }catch(Exception e) {
 				 e.printStackTrace();
 			 }
 		}
 		
-		 request.setAttribute("msg", msgn);
-		 request.setAttribute("loc", loc);
 		 
-		 request.getRequestDispatcher("/views/common/msg.jsp")
+		 
+		 request.getRequestDispatcher("/views/member/findMember.jsp")
 		 .forward(request, response);
 		
 		

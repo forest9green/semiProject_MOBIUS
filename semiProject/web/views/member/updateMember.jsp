@@ -63,7 +63,7 @@
                 <h2 class="pf">계정관리</h2>
             </div>
             <div class="member_cont">
-                <form id="formJoin" name="formJoin" action="" method="post" >
+                <form id="formJoin" name="formJoin" action="<%=request.getContextPath() %>/myPage/user/updateMember" method="post" >
                     <div class="base_info_box">
                         <h3 class="pd">회원정보 수정</h3>
                         
@@ -80,7 +80,7 @@
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="text" id="memId" name="memId" data-pattern="gdMemberId" value="<%=loginUser.getUserId() %>" readonly>
+                                                <input type="text" id="memId" name="memId" value="<%=loginUser.getUserId() %>" readonly>
                                                
                                             </div>
                                         </td>
@@ -91,7 +91,7 @@
                                         </th>
                                         <td class="member_password">
                                             <div class="member_warning">
-                                                <input type="password" id="memPw" name="password" autocomplete="off" class="ignore">
+                                                <input type="password" id="memPw" name="password" class="ignore" required>
                                                 <div></div>
                                             </div>
                                         </td>
@@ -102,7 +102,7 @@
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="password" class="check_id ignore" name="password_new" autocomplete="off" id="memPwRe">
+                                                <input type="password" class="check_id ignore" name="password_new" id="memPwRe" required>
                                                 <span id="newPwck-container"></span>
                                             </div>
                                         </td>
@@ -114,7 +114,7 @@
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="text" name="newUserName" id="newUserName" data-pattern="gdMemberNmglobal" maxlength="30">
+                                                <input type="text" name="newUserName" id="newUserName" maxlength="30" required>
                                             </div>
                                         </td>
                                     </tr>
@@ -148,7 +148,7 @@
                                         </th>
                                         <td class="member_address">
                                             <div class="addresss_postcode">
-                                                <input type="text" id="newCellPhone" name="newCellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value>
+                                                <input type="text" id="newCellPhone" name="newCellPhone" maxlength="12" placeholder="- 없이 입력하세요." required>
                                             </div>
                                             <div class="form_element">
                                                 <input type="checkbox" id="smsFl" name="smsFl"  >
@@ -162,50 +162,35 @@
                                         </th>
                                         <td>
                                             <div>
-                                                <input type="text" id="newPhone" name="newPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value>
+                                                <input type="text" id="newPhone" name="newPhone" maxlength="12" placeholder="- 없이 입력하세요.">
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>
-                                            <span class="important">주소</span>
-                                        </th>
-                                        <td class="member_address">
-                                            <div class="address_postcode">
-                                                <input type="text" name="zonecode" id="sample6_postcode2" readonly>
-                                                <input type="button" id="btnPostcode2" class="btn_post_search" value="우편번호 찾기"
-                                                onclick="sample6_execDaumPostcode()">
-                                            </div>
-                                            <div class="address_input">
-                                                <div class="member_warning">
-                                                    <input type="text" name="address" id="sample6_address2" readonly
-                                                    class="form-element2">
-                                                </div>
-                                                <div class="member_warning">
-                                                    <input type="text" id="sample6_detailAddress2" name="addressSub" class="form-element2">
-                                                    <div class="form-element2">
-                                                   		<input type="checkbox" id="saveAdd2" name="saveAdd" >
-                                                        <label for="saveAdd2" class="check_s">기본배송지</label>
-                                                	</div>
-                                                </div>
-                                            </div>
-                                            
-                                        </td>
-                                        
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                   </form>  
                     <div class="btn_center_box">
-                        <input type="submit" id="btnCancel" class="btn_member_cancel pd" value="수정" onclick="javascript: form.action='<%=request.getContextPath() %>/myPage/user/updateMember';" >
-                        <input type="submit" class="btn_confirm pd" value="탈퇴" onclick="javascript: form.action='<%=request.getContextPath() %>/myPage/user/deleteMember';">
+                        <input type="submit" id="btnCancel" class="btn_member_cancel pd" value="수정" >
+                	 
+               		 
+               		 <form id="deleteBox" name="formdelete" action="<%=request.getContextPath() %>/myPage/user/deleteMember" method="post">
+							 <input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+							 <input type="submit" class="btn_confirm pd" value="탈퇴" >
+					</form>      
+                       
                     </div>
-                </form>
             </div>
         </div>
     </div>
 </section>
+
+
+
+
+
 
 <script>
 	$(function(){
@@ -221,22 +206,6 @@
 			}
 		});
 	});
-	
-	const fn_delete_member=()=>{
-		const userId=$("#memId").val();
-		const url = "<%=request.getContextPath()%>/myPage/user/deleteMember";
-		const title = "deleteMember";
-		
-		deleteMember.userId.value=userId;
-		deleteMember.method="post";
-		deleteMember.action=url;
-		deletemember.target="title";
-		
-		deleteMember.submit();
-		
-		
-		
-	}
 	
 	
 </script>
@@ -324,6 +293,7 @@
     }
     .base_info_sec table{
         width: 100%;
+        height: 550px;
     }
     .base_info_sec th:first-child{
         border-left: none;
@@ -454,7 +424,7 @@
     }
     .btn_center_box{
         margin: 35px 0 0 0;
-        text-align: center;
+        margin-left: 100px;
         font-size: 16px;
     }
     .btn_center_box button{
@@ -485,6 +455,11 @@
    }
    .form-element2{
        width: 300px;
+   }
+   #deleteBox{
+   		display:inline-block;
+   		margin-left:100px;
+   		
    }
 </style>
 

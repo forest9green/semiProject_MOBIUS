@@ -1,27 +1,25 @@
-package com.product.controller;
+package com.user.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.product.model.service.ProductService;
-import com.product.model.vo.Product;
+import com.user.model.service.UserService;
 
 /**
- * Servlet implementation class ProductDetailServlet
+ * Servlet implementation class UpdatePasswordServlet
  */
-@WebServlet("/product/productDetail")
-public class ProductDetailServlet extends HttpServlet {
+@WebServlet(name="updatepasswordservlet",urlPatterns="/user/updatePassword")
+public class UpdatePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductDetailServlet() {
+    public UpdatePasswordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +28,26 @@ public class ProductDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pCode=request.getParameter("pCode");
-		String cateCode=pCode.substring(0,2);
+		// TODO Auto-generated method stub
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
 		
-		String category=new ProductService().searchCategory(cateCode);
-		Product p=new ProductService().searchProduct(pCode);
+		int result = new UserService().updatePassword(userId, password);
+			String msg="";
+			String loc = "";
+		if(result>0) {
+			msg = "비밀번호 변경이 완료되었습니다.";
+			loc = "/views/member/loginPage.jsp";
+		}else {
+			msg="비밀번호 변경이 실패했습니다.";
+			loc="/views/member/findPassword.jsp";
+		}
 		
-		request.setAttribute("category", category);
-		request.setAttribute("product", p);
-		request.getRequestDispatcher("/views/product/productDetail.jsp").forward(request, response);
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+	
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request, response);
 	}
 
 	/**
@@ -46,7 +55,8 @@ public class ProductDetailServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		
 	}
 
 }
