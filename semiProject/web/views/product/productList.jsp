@@ -78,15 +78,12 @@
 		$("#pSelectFrm").submit();
 	})
     $(".wish").click((e)=>{
-        alert("위시리스트에 추가되었습니다.")
-    })
+    	const pCodeRoot=$(e.target).parents().eq(1).prev().attr("href");
+    	const pCode=pCodeRoot.substring(pCodeRoot.indexOf("=")+1);
+        <%-- location.assign('<%=request.getContextPath()%>/product/addWishList?userId=<%=loginUser.getUserId()%>&pCode='+pCode); --%>
+    });
     $(".cart").click((e)=>{
         alert("장바구니에 추가되었습니다.")
-    })
-    $(".sproductsbtn").hover((e)=>{
-        $(e.target).css("background-color","rgb(233, 248, 240)");
-    },(e)=>{
-        $(e.target).css({"background-color":"white","font-size":"15px"});
     })
 </script>
 
