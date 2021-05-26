@@ -20,7 +20,7 @@
 	
     <%}else{ 
     	for(Notice n : list){%>
-		 <a href=""><div class="ntc">   
+		 <a href="<%= request.getContextPath()%>/notice/noticeView?noticeNo=<%=n.getnoticeNo()%>"><div class="ntc">   
 		    <div class="column" id="wrap"> 
 					<div><img class="notice" src="<%=request.getContextPath()%>/upload/notice/<%=n.getnImgPath()%>"></div>
 		    	<h3 class="pe" style="width:350px;text-align:center;"><%=n.getnTitle() %> </h3>
