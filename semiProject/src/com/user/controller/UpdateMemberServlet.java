@@ -60,23 +60,9 @@ public class UpdateMemberServlet extends HttpServlet {
 		String msg = "";
 		String loc="";
 		
-		int result2 =0;
+
 		
 		if(result>0) {
-			
-			String postCode = request.getParameter("zonecode");
-			String addr = request.getParameter("address")+" "+request.getParameter("addressSub");
-			int defaultAddr = 0;
-			if(request.getParameter("saveAdd")!=null) {
-				defaultAddr=1;
-			}
-			
-			Address adr = new Address(null,userId,null,userName,postCode,addr,defaultAddr,cellPhone,phone);
-			result2 = new AddressService().updateAddress(adr);
-			
-			
-			
-			
 			
 			msg="회원정보 수정완료!";
 			loc="/index.jsp";

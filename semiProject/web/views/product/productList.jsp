@@ -58,7 +58,7 @@
 		        	<div class="noP">상품이 없습니다.</div>
 		        <%}
 	     	}else{%>
-	     		<div class="noP">상품이 없습니다.</div>
+	     		<div class="noP">세일 상품이 없습니다.</div>
 	     	<%} %>
 	   </div>
 	   <div id="c_pagebar" class="pagebar">
@@ -72,8 +72,19 @@
 		$("#pSelectFrm").append($("<input>").attr({
 			type:"hidden",name:"cPage",value:"<%=request.getParameter("cPage")%>"
 		}));
+		$("#pSelectFrm").append($("<input>").attr({
+			type:"hidden",name:"category",value:"<%=category %>"
+		}));
 		$("#pSelectFrm").submit();
 	})
+    $(".wish").click((e)=>{
+    	const pCodeRoot=$(e.target).parents().eq(1).prev().attr("href");
+    	const pCode=pCodeRoot.substring(pCodeRoot.indexOf("=")+1);
+        <%-- location.assign('<%=request.getContextPath()%>/product/addWishList?userId=<%=loginUser.getUserId()%>&pCode='+pCode); --%>
+    });
+    $(".cart").click((e)=>{
+        alert("장바구니에 추가되었습니다.")
+    })
 </script>
 
 <style>
@@ -163,19 +174,5 @@
         color:rgba(123, 209, 159);
     }
 </style>
-
-<script>
-    $(".wish").click((e)=>{
-        alert("위시리스트에 추가되었습니다.")
-    })
-    $(".cart").click((e)=>{
-        alert("장바구니에 추가되었습니다.")
-    })
-    $(".sproductsbtn").hover((e)=>{
-                $(e.target).css("background-color","rgb(233, 248, 240)");
-            },(e)=>{
-                $(e.target).css({"background-color":"white","font-size":"15px"});
-            })
-</script>
 
 <%@ include file="/views/common/footer.jsp"%>  
