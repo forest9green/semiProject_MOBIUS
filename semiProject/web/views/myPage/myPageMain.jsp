@@ -80,8 +80,8 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="<%=request.getContextPath()%>/myPage/board/boardlist?userId="+<%=loginUser.getUserId()%>>
-                        <h3><strong>BOARD </strong></h3>
+                    <a href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">
+                        <h3><strong>BOARD</strong></h3>
                         <p style="font-size: 90%;">고객님께서 작성하신<br>문의 게시물을 관리하는 공간입니다.</p>
                     </a>
                 </div>

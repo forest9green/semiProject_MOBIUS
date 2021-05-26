@@ -34,6 +34,8 @@ public class BoardInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userId=request.getParameter("userId");
+		
+		
 		request.getRequestDispatcher("/views/board/boardForm.jsp")
 		.forward(request, response);
 	
