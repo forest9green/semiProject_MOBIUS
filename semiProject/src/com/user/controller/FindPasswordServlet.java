@@ -45,13 +45,13 @@ public class FindPasswordServlet extends HttpServlet {
 		String userName = request.getParameter("finduserName");
 		String email = request.getParameter("userEmail2");
 		
-		User u = new UserService().checkPw(userId,userName,email);
+		User u2 = new UserService().checkPw(userId,userName,email);
 		request.setCharacterEncoding("UTF-8");
 		
 		String msgn ="";
 		String loc ="";
 		String key2 ="";
-		if(u!=null) {
+		if(u2!=null) {
 			
 			 String mailServer = "smtp.gmail.com";
 			 Properties props = new Properties();
@@ -67,7 +67,7 @@ public class FindPasswordServlet extends HttpServlet {
 			 
 			 
 			 try {
-				 String to = u.getEmail();
+				 String to = u2.getEmail();
 				 String from = "xogml6915@gmail.com";
 				 String subject = "테스트";
 				 for(int i=0;i<3;i++) {
@@ -90,7 +90,7 @@ public class FindPasswordServlet extends HttpServlet {
 				 
 				 
 				request.setAttribute("key2", key2);
-				request.setAttribute("u", u);
+				request.setAttribute("u2", u2);
 			 }catch(Exception e) {
 				 e.printStackTrace();
 			 }
