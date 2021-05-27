@@ -25,6 +25,10 @@
 </section>
 
 <style>
+
+	a {
+	color:black;text-decoration:none;
+	}
 	
     .box{
         width:1100px;

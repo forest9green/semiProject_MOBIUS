@@ -41,7 +41,7 @@
                     <ul>
 
                        <%if(loginUser!=null&&loginUser.getUserId().equals("admin")){ %> 
-                        <li class="pa"><a href="<%=request.getContextPath()%>/admin/adminMain">Adminpage</a></li>
+                        <li class="pa"><a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp">Adminpage</a></li>
                        <%}else{ %>
                        	<li class="pa"><a href="<%=request.getContextPath()%>/myPage/main">Mypage</a></li>	
                        <%} %>

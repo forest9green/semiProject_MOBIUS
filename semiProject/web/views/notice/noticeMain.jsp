@@ -32,6 +32,10 @@
     
 <style>
 
+	a {
+	color:black;text-decoration:none;
+	}
+
 	.no_notice{
 	width:300px;
 	height:200px;

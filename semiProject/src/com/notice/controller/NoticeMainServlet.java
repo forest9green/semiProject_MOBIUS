@@ -1,4 +1,4 @@
-package com.notice.model.controller;
+package com.notice.controller;
 
 import java.io.IOException;
 import java.util.List;

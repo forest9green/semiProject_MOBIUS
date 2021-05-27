@@ -9,7 +9,7 @@
                 <div class="category">
                     <ul class="pd"><a href="<%=request.getContextPath() %>/views/admin/adminMain.jsp" class="black">메인</a></ul><br>
                     <ul class="pd">회원
-                        <li><a href="<%=request.getContextPath() %>/views/admin/user/manageUserMain.jsp" class="pc black">- 회원 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/views/admin/user/manageUserMain.jsp" class="pc choice">- 회원 관리</a></li>
                         <li><a href="<%=request.getContextPath() %>/views/admin/order/manageOrderInfoDetail.jsp" class="pc black">- 주문 관리</a></li>
                         <li><a href="<%=request.getContextPath() %>/views/admin/cer/manageCERcancel.jsp" class="pc black">- 취소/교환/환불 처리</a></li>
                         <li><a href="<%=request.getContextPath() %>/views/admin/board/manageBoard.jsp" class="pc black">- 문의사항 관리</a></li>
@@ -18,45 +18,43 @@
                         <li><a href="<%=request.getContextPath() %>/views/admin/product/manageProduct.jsp" class="pc black">- 상품 관리</a></li>
                     </ul><br>
                     <ul class="pd">설정
-                        <li><a href="<%=request.getContextPath() %>/views/admin/notice/manageNotice.jsp" class="choice" class="pc black">- 공지사항 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/views/admin/notice/manageNotice.jsp" class="pc black">- 공지사항 관리</a></li>
                     </ul>
                 </div>
 
                 <div class="main"> 
-                    <h3 class="pd greenright">공지사항 관리</h3>
+                    <h3 class="pd greenright">회원 관리</h3>
+                    <div id="user_btn">
+                        <button type="button">회원 정보</button>
+                        <button type="button">쿠폰</button>
+                        <button type="button">적립금</button>
+                        <button type="button" class="choice2">구매내역</button>
+                    </div>
                     <div id="user_content">
-                        <form id="searchPay" action="" method="post">
-                            <input type="text" name="search" placeholder="제목">
-                            <!--포함된 단어가 있으면 출력되도록 sql짜기-->
-                            <input type="submit" class="whitebtn" value="검색">
-                        </form>
                         <table id="output_table" class="pa" border=1>
                             <thead>
                                 <tr>
-                                    <th width=20><input type="checkbox" id="checkall"></th>
-                                    <th width=250>제목</th>
-                                    <th width=100>작성일</th>
-                                    <th width=50>정보</th>
+                                    <th width=100>날짜</th>
+                                    <th width=150>주문번호</th>
+                                    <th width=100>결제금액</th>
+                                    <th width=100>상태</th>
+                                    <th width=80>정보</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!--
-                                    값이 없으면 <tr>문의사항 내역이 없습니다.</tr> 추가
+                                    값이 없으면 <tr>구매 내역이 없습니다.</tr> 추가
                                     값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 처리해야 함
                                 -->
                                 <tr>
-                                    <td><input type="checkbox" name="chk"></td>
                                     <td></td>
                                     <td></td>
-                                    <td><button class="whitebtn">수정</button></td>
+                                    <td></td>
+                                    <td></td><!--주문 내역 상세 테이블의 주문상태 출력-->
+                                    <td><button class="whitebtn">자세히 보기</button></td><!--클릭 시 주문관리-주문접수내역의 주문서로 이동-->
                                 </tr>
                             </tbody>
                         </table>
-                        <div id="btn">
-                            <button type="button" class="pb" style="background-color: white;">선택 삭제</button>
-                            <button type="button" class="pb blackbtn">글쓰기</button>
-                            <!--open()으로 작은 window창 열어서 등록 처리-->
-                        </div>
                     </div>
                     <div id="admin_pagebar" class="pagebar">
                         <span><a href="">1</a></span>
@@ -66,24 +64,16 @@
             </div>    
         </section>
 
-        <script>
-            $(document).ready(function(){
-                $("#checkall").click(function(){
-                    //상단의 체크박스 클릭 여부에 따라 전체체크/해제 로직
-                    if($("#checkall").prop("checked")){
-                        $("input[name=chk]").prop("checked",true);
-                    }else{
-                        $("input[name=chk]").prop("checked",false);
-                    }
-                })
-            })
-        </script>
 
         <style>
             .choice{
                 color:green;
                 text-decoration: underline;
                 font-weight: bold;
+            }
+            .choice2{
+                background-color: rgb(56, 163, 56);
+                color:white;
             }
             .greenright{
                 color:green;
@@ -112,6 +102,9 @@
                 color:black;
                 text-decoration: none;
             }
+            .black:hover{
+                text-decoration: underline;
+            }
             .category a:first-child{
                 margin-top: 10px;
             }
@@ -126,17 +119,15 @@
             #user_content{
                 min-height:400px;
             }
-            #searchPay{
-                margin:20px 0 0 0;
-                position:relative;
-                left:669px;
+            #user_btn{
+                margin: 30px 0 20px 0;
             }
-            .whitebtn{
-                border:1px gray solid;
-                background-color: white;
-                position:relative;
-                top: 1px;
-                height:22px;
+            #user_btn>button{
+                width:90px;
+                height:40px;
+                font-size: 15px;
+                font-family: "Noto Sans KR";
+                font-weight: 400;
             }
             #output_table{
                 margin:10px 0 10px 0;
@@ -149,21 +140,14 @@
             #output_table tr{
                 height:40px;
             }
-            #btn>button{
-                border: 1px gray solid;
-                width:70px;
-                height:32px;
-                text-align: center;
-            }
-            .blackbtn{
-                position: relative;
-                left:734px;
-                background-color:black;
-                color:white;
+            .whitebtn{
+                border:1px gray solid;
+                background-color: white;
+                height:22px;
             }
             .pagebar{
                 width: 100px;
-                margin: 20px auto;
+                margin: 10px auto;
             }
             .pagebar>span{
                 margin:0 6px 0 6px;
@@ -175,5 +159,6 @@
                 color:rgba(123, 209, 159, 0.856);
             }
         </style>
+
 
 <%@ include file="/views/common/footer.jsp"%>
