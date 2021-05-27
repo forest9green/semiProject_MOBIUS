@@ -92,15 +92,21 @@ public class AddressService {
 	}
 	
 	
-	public int updateAddress(Address adr) {
-		Connection conn = getConnection();
-		int result2 = dao.updateAddress(conn,adr);
-		
-		if(result2>0) commit(conn);
-		else rollback(conn);
-		
+	public Address selectAddressOne(String addrNo) {
+		Connection conn=getConnection();
+		Address a=dao.selectAddressOne(conn,addrNo);
 		close(conn);
-		return result2;
+		return a;
+	}
+	
+	
+	public int updateAddress(Address a) {
+		Connection conn = getConnection();
+		int result = dao.updateAddress(conn,a);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 }

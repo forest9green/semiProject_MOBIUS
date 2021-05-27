@@ -1,4 +1,4 @@
-package com.wish.controller;
+package com.address.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.wish.model.service.WishListService;
-import com.wish.model.vo.WishList;
+import com.address.model.service.AddressService;
+import com.address.model.vo.Address;
 
 /**
- * Servlet implementation class AddWishListServlet
+ * Servlet implementation class modifyAddressServlet
  */
-@WebServlet("/myPage/addWishList")
-public class AddWishListServlet extends HttpServlet {
+@WebServlet("/myPage/modifyAddress")
+public class modifyAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddWishListServlet() {
+    public modifyAddressServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +30,12 @@ public class AddWishListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId=request.getParameter("userId");
-		String pCode=request.getParameter("pCode");
+		String addrNo=request.getParameter("addrNo");
 		
-		WishList w=new WishList(userId,pCode);
+		Address a=new AddressService().selectAddressOne(addrNo);
 		
-		int result=new WishListService().addWish(w);
-		
-		String msg="";
-		if(result>0) {
-			msg="위시리스트에 추가되었습니다.";
-		}else {
-			msg="추가 실패";
-		}
-		
+		request.setAttribute("address", a);
+		request.getRequestDispatcher("/views/myPage/addressModify.jsp").forward(request, response);
 	}
 
 	/**

@@ -220,24 +220,64 @@ public class AddressDao {
 	}
 	
 	
-	public int updateAddress(Connection conn, Address adr) {
+	public Address selectAddressOne(Connection conn, String addrNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Address a=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectAddressOne"));
+			pstmt.setString(1, addrNo);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				a=new Address();
+				a.setAddrNo(rs.getString("addr_no"));
+				a.setUserId(rs.getString("user_id"));
+				a.setAddName(rs.getString("add_name"));
+				a.setReceiverName(rs.getString("receiver_name"));
+				a.setPostCode(rs.getString("postcode"));
+				a.setAddr(rs.getString("addr"));
+				a.setDefaultAddr(rs.getInt("default_addr"));
+				a.setAddCellPhone(rs.getString("add_cellphone"));
+				a.setAddPhone(rs.getString("add_phone"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return a;
+	}
+	
+	
+	public int updateAddress(Connection conn, Address a) {
 		PreparedStatement pstmt= null;
-		int result2 = 0;
+		int result = 0;
 		
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("updateAddress"));
-			pstmt.setString(1, adr.getPostCode());
-			pstmt.setString(2, adr.getAddr());
-			pstmt.setString(3, adr.getUserId());
+			pstmt.setString(1, a.getAddName());
+			pstmt.setString(2, a.getReceiverName());
+			pstmt.setString(3, a.getPostCode());
+			pstmt.setString(4, a.getAddr());
+			pstmt.setInt(5, a.getDefaultAddr());
+			pstmt.setString(6, a.getAddCellPhone());
+			pstmt.setString(7, a.getAddPhone());
+			pstmt.setString(8, a.getAddrNo());
 			
-			result2 = pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
-			
 		}
-		return result2;
+		
+		return result;
 	}
 
 }

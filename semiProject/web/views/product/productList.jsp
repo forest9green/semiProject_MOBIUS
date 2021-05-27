@@ -80,7 +80,7 @@
 	
     $(".wish").click((e)=>{
     	const pcode=$($(e.target)[0]).attr("title");
-        location.assign('<%=request.getContextPath()%>/wish/addWishList?userId=<%=loginUser.getUserId()%>&pCode='+pcode);
+        <%-- location.assign('<%=request.getContextPath()%>/myPage/addWishList?userId=<%=loginUser.getUserId()%>&pCode='+pcode); --%>
     });
 	
     $(".cart").click((e)=>{

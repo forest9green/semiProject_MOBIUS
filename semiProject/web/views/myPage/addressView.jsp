@@ -47,7 +47,7 @@
 		                        <td><%=a.getAddCellPhone() %></td>
 		                        <td><%=a.getPostCode() %></td>
 		                        <td style="text-align:left;padding-left:5px"><%=a.getAddr() %></td>
-		                        <td><button type="button">수정</button></td>
+		                        <td><button type="button" value="<%=a.getAddrNo()%>" class="modifybtn">수정</button></td>
 		                    </tr>
 	                    <%}
                    	} else {%>
@@ -136,6 +136,11 @@
 	    }
 	    location.replace('<%=request.getContextPath()%>/myPage/deleteAddress?userId=<%=loginUser.getUserId()%>&checkAddrNos='+checkAddrNos);
 	}
+	
+	$(".modifybtn").click((e)=>{
+		const addrNo=$(e.target).val();
+		location.assign('<%=request.getContextPath()%>/myPage/modifyAddress?addrNo='+addrNo);
+	});
 </script>
 
 <style>
