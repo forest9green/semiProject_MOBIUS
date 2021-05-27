@@ -145,6 +145,9 @@
                 padding-left:20px;
                 background-color: white;
             }
+            body{
+				margin:0px;
+			}
         </style>
 
 

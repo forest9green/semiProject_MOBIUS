@@ -26,8 +26,17 @@ public class InsertAddressServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String userId=request.getParameter("userId");
+		String addName=request.getParameter("addName");
+		String receiverName=request.getParameter("receiverName");
+		String postCode=request.getParameter("zonecode");
+		String addr=request.getParameter("address")+" "+request.getParameter("addressSub");
+		String addCellPhone=request.getParameter("addCellPhone");
+		String addPhone=request.getParameter("addPhone");
+		int defaultAddr=0;
+		if(request.getParameter("DefaultAddr")!=null) {
+			defaultAddr=1;
+		}
 	}
 
 	/**

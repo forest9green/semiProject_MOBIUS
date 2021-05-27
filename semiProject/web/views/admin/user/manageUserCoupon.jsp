@@ -184,6 +184,9 @@
             .pagebar span>a:hover{
                 color:rgba(123, 209, 159, 0.856);
             }
+            body{
+				margin:0px;
+			}
         </style>
 
 
