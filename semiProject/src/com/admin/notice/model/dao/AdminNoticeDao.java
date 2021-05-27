@@ -1,4 +1,4 @@
-package com.admin.model.dao;
+package com.admin.notice.model.dao;
 
 import static com.common.JDBCTemplate.close;
 
@@ -15,11 +15,11 @@ import java.util.Properties;
 import com.notice.model.dao.NoticeDao;
 import com.notice.model.vo.Notice;
 
-public class AdminDao {
+public class AdminNoticeDao {
 private Properties prop=new Properties();
 	
-	public AdminDao() {
-		String path=NoticeDao.class.getResource("/sql/admin_sql.properties").getPath();
+	public AdminNoticeDao() {
+		String path=NoticeDao.class.getResource("/sql/adminNotice_sql.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		}catch(IOException e) {
@@ -38,10 +38,7 @@ private Properties prop=new Properties();
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Notice n=new Notice();
-				n.setnoticeNo(rs.getString("noticeNo"));
 				n.setnTitle(rs.getString("nTitle"));
-				n.setnContent(rs.getString("nContent"));
-				n.setnImgPath(rs.getString("nImgPath"));
 				n.setnDate(rs.getDate("nDate"));
 				list.add(n);
 			}
@@ -54,7 +51,7 @@ private Properties prop=new Properties();
 		return list;
 	}
 	
-	public int selectNoticeCount(Connection conn) {
+	public int selectNoticeCount(Connection conn, String noticeNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
