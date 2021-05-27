@@ -21,7 +21,7 @@
                         <th>일반전화</th>
                         <th>휴대전화</th>
                         <th>우편번호</th>
-                        <th width=420>주소</th>
+                        <th width=350>주소</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -29,7 +29,7 @@
                     <%if(!addresses.isEmpty()) {
                     	for(Address a:addresses) {%>
 		                    <tr>
-		                        <td><input type="checkbox" name="chk"></td>
+		                        <td><input type="checkbox" name="chk" value="<%=a.getAddrNo()%>"></td>
 		                        <td>
 		                        	<%if(a.getDefaultAddr()==1) {%>
 		                        		<button type="button" class="defaultbtn blackback" value="<%=a.getAddrNo()%>">지정</button>
@@ -58,7 +58,7 @@
                 </tbody>
             </table>
             <div id="addr_btn">
-                <button type="button" class="pb">삭제</button>
+                <button type="button" class="pb" onclick="fn_deleteAddress();">삭제</button>
                 <button type="button" class="pb" onclick="fn_insertAddress();">배송지 등록</button>
             </div>
         </div>
@@ -75,6 +75,17 @@
 </section>
 
 <script>
+	$(document).ready(function(){
+	    $("#checkall").click(function(){
+	        //상단의 체크박스 클릭 여부에 따라 전체체크/해제 로직
+	        if($("#checkall").prop("checked")){
+	            $("input[name=chk]").prop("checked",true);
+	        }else{
+	            $("input[name=chk]").prop("checked",false);
+	        }
+	    })
+	});
+	
 	$("button.defaultbtn").click((e)=>{
 		const addrNo=$(e.target).val();
 		
@@ -115,6 +126,15 @@
 	
 	const fn_insertAddress=()=>{
 		location.assign('<%=request.getContextPath()%>/myPage/addressForm');
+	}
+	
+	const fn_deleteAddress=()=>{
+		const checkValue = $("input[name=chk]:checked").length;
+	    let checkAddrNos = new Array(checkValue);
+	    for(let i=0; i<checkValue; i++){                          
+	    	checkAddrNos[i] = $("input[name=chk]:checked")[i].value;
+	    }
+	    location.replace('<%=request.getContextPath()%>/myPage/deleteAddress?userId=<%=loginUser.getUserId()%>&checkAddrNos='+checkAddrNos);
 	}
 </script>
 

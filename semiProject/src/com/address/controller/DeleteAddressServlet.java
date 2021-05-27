@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.address.model.service.AddressService;
-import com.address.model.vo.Address;
 
 /**
- * Servlet implementation class InsertAddressServlet
+ * Servlet implementation class DeleteAddressServlet
  */
-@WebServlet("/myPage/insertAddress")
-public class InsertAddressServlet extends HttpServlet {
+@WebServlet("/myPage/deleteAddress")
+public class DeleteAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertAddressServlet() {
+    public DeleteAddressServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,34 +30,21 @@ public class InsertAddressServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId=request.getParameter("userId");
-		String addName=request.getParameter("addName");
-		String receiverName=request.getParameter("receiverName");
-		String postCode=request.getParameter("zonecode");
-		String addr=request.getParameter("address")+" "+request.getParameter("addressSub");
-		String addCellPhone=request.getParameter("addCellPhone");
-		String addPhone=request.getParameter("addPhone");
-		int defaultAddr=0;
-		if(request.getParameter("defaultAddr")!=null) {
-			//기본 배송지로 지정 체크
-			
-			//기존의 기본배송지가 있는지 확인
-			String oldAddrNo=new AddressService().selectDefaultAddr(userId);
-			if(oldAddrNo!=null) {
-				//기존 기본 배송지가 있음
-				int result=new AddressService().clearDefaultAddr(oldAddrNo);//기존 기본 배송지 삭제
-			}//기존 기본 배송지가 없음
-			
-			defaultAddr=1;
+		String[] checkAddrNos=request.getParameterValues("checkAddrNos")[0].split(",");
+		
+		int result=0;
+		for(String addrNo : checkAddrNos) {
+			result=new AddressService().deleteAddress(addrNo);
+			if(result!=1) {
+				break;
+			}
 		}
 		
-		Address a=new Address(null,userId,addName,receiverName,postCode,addr,defaultAddr,addCellPhone,addPhone);
-		
-		int result2=new AddressService().insertAnotherAddress(a);
 		String msg="";
-		if(result2>0) {
-			msg="신규 배송지 등록 성공";
+		if(result>0) {
+			msg="삭제되었습니다.";
 		}else {
-			msg="신규 배송지 등록 실패";
+			msg="삭제에 실패했습니다.";
 		}
 		
 		request.setAttribute("msg", msg);

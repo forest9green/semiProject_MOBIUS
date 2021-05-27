@@ -151,6 +151,75 @@ public class AddressDao {
 	}
 	
 	
+	public String selectDefaultAddr(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String oldAddrNo=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectDefaultAddr"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) oldAddrNo=rs.getString(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return oldAddrNo;
+	}
+	
+	
+	public int insertAnotherAddress(Connection conn, Address a) {
+		PreparedStatement pstmt=null;
+		int result = 0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertAnotherAddress"));
+			pstmt.setString(1, a.getUserId());
+			pstmt.setString(2, a.getAddName());
+			pstmt.setString(3, a.getReceiverName());
+			pstmt.setString(4, a.getPostCode());
+			pstmt.setString(5, a.getAddr());
+			pstmt.setInt(6, a.getDefaultAddr());
+			pstmt.setString(7, a.getAddCellPhone());
+			pstmt.setString(8, a.getAddPhone());
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int deleteAddress(Connection conn, String addrNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteAddress"));
+			pstmt.setString(1, addrNo);
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 	public int updateAddress(Connection conn, Address adr) {
 		PreparedStatement pstmt= null;
 		int result2 = 0;

@@ -64,6 +64,34 @@ public class AddressService {
 	}
 	
 	
+	public String selectDefaultAddr(String userId) {
+		Connection conn=getConnection();
+		String oldAddrNo=dao.selectDefaultAddr(conn,userId);
+		close(conn);
+		return oldAddrNo;
+	}
+	
+	
+	public int insertAnotherAddress(Address a) {
+		Connection conn = getConnection();
+		int result = dao.insertAnotherAddress(conn,a);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
+	public int deleteAddress(String addrNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteAddress(conn,addrNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
 	public int updateAddress(Address adr) {
 		Connection conn = getConnection();
 		int result2 = dao.updateAddress(conn,adr);

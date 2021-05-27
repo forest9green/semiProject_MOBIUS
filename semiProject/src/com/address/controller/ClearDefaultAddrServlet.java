@@ -36,9 +36,9 @@ public class ClearDefaultAddrServlet extends HttpServlet {
 		
 		String msg="";
 		if(result>0) {
-			msg="기본 배송지로 설정되었습니다.";
+			msg="기본 배송지가 해제되었습니다.";
 		}else {
-			msg="기본 배송지 설정에 실패하였습니다.";
+			msg="기본 배송지 해제에 실패하였습니다.";
 		}
 		
 		request.setAttribute("queryString", "?userId="+userId);
