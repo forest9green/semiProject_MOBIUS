@@ -161,8 +161,6 @@
         font-size: 17px;
         background-color: white;
     }
-    
-    
 </style>
 
 <%@ include file="/views/common/footer.jsp"%>

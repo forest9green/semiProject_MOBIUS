@@ -215,6 +215,9 @@
             .disnone{
                 display:none;
             }
+            body{
+				margin:0px;
+			}
         </style>
 
 
