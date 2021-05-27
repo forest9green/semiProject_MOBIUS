@@ -123,6 +123,9 @@
                 height: 35px;
                 width:60px;
             }
+            body{
+				margin:0px;
+			}
         </style>
 
 

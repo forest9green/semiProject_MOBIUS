@@ -214,6 +214,9 @@
             .margint{
                 margin-top: 15px;
             }
+            body{
+				margin:0px;
+			}
         </style>
 
 

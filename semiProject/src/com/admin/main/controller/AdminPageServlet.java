@@ -1,4 +1,4 @@
-package com.address.controller;
+package com.admin.main.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class InsertAddressServlet
+ * Servlet implementation class AdminPageServlet
  */
-@WebServlet("/myPage/insertAddress")
-public class InsertAddressServlet extends HttpServlet {
+@WebServlet("/admin/adminMain")
+public class AdminPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertAddressServlet() {
+    public AdminPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,17 +26,13 @@ public class InsertAddressServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId=request.getParameter("userId");
-		String addName=request.getParameter("addName");
-		String receiverName=request.getParameter("receiverName");
-		String postCode=request.getParameter("zonecode");
-		String addr=request.getParameter("address")+" "+request.getParameter("addressSub");
-		String addCellPhone=request.getParameter("addCellPhone");
-		String addPhone=request.getParameter("addPhone");
-		int defaultAddr=0;
-		if(request.getParameter("DefaultAddr")!=null) {
-			defaultAddr=1;
-		}
+		// TODO Auto-generated method stub
+		
+		request.getRequestDispatcher("/views/admin/adminMain.jsp")
+		.forward(request, response);
+		
+		
+		
 	}
 
 	/**

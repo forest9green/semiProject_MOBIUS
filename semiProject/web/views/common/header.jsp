@@ -41,7 +41,7 @@
                     <ul>
 
                        <%if(loginUser!=null&&loginUser.getUserId().equals("admin")){ %> 
-                        <li class="pa"><a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp">Adminpage</a></li>
+						<li class="pa"><a href="<%=request.getContextPath()%>/admin/adminMain">Admin</a></li>
                        <%}else{ %>
                        	<li class="pa"><a href="<%=request.getContextPath()%>/myPage/main">Mypage</a></li>	
                        <%} %>
@@ -53,7 +53,7 @@
                      <%if(loginUser==null){ %>
                         <li class="pa"><a href="<%=request.getContextPath() %>/views/member/memberEnroll.jsp">Join</a></li>
                      <%}else{ %>
-                     	<li class="pa"><a href="<%=request.getContextPath() %>/views/member/updateMember.jsp">modify</a></li>
+                     	<li class="pa"><a href="<%=request.getContextPath() %>/views/member/updateMember.jsp">Modify</a></li>
                      <%} %>  
                         <li class="pa"><a href="">Order</a></li>
                         <li class="pa"><a href="">Cart</a></li>
