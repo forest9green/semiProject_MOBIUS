@@ -1,4 +1,4 @@
-package com.user.controller;
+package com.admin.main.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -27,8 +27,12 @@ public class AdminPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		request.getRequestDispatcher("/views/admin/adminMain.jsp")
 		.forward(request, response);
+		
+		
+		
 	}
 
 	/**
