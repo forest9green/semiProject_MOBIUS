@@ -55,10 +55,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div id="btn">
-                            <button type="button" class="pb blackbtn">등록</button>
-                            <!--open()으로 작은 window창 열어서 등록 처리-->
-                        </div>
                     </div>
                     <div id="admin_pagebar" class="pagebar">
                         <span><a href="">1</a></span>
@@ -149,12 +145,6 @@
                 width:70px;
                 height:32px;
                 text-align: center;
-            }
-            .blackbtn{
-                position: relative;
-                left:810px;
-                background-color:black;
-                color:white;
             }
             .pagebar{
                 width: 100px;

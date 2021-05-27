@@ -11,62 +11,51 @@
         <span class="pb mgbt0" style="font-size:15px;">배송지 등록</span><br>
         <span class="pa" id="span2">* 필수 입력 사항입니다.</span>
         <br><hr>
-        <table id="addrEnroll_table" class="pc">
-            <tr>
-                <td>배송지명 <span style="color:red;">*</span></td>
-                <td><input type="text" size=50 required placeholder="최대 7자까지 작성할 수 있습니다."></td>
-            </tr>
-            <tr>
-                <td>성명 <span style="color:red;">*</span></td>
-                <td><input type="text" size=50 required></td>
-            </tr>
-            <tr>
-                <td>주소 <span style="color:red;">*</span></td>
-                <td>
-					<div class="address_postcode">
-                        <input type="text" name="zonecode" id="sample6_postcode" placeholder="우편번호" readonly>
-                        <input type="button" id="btnPostcode" class="btn_post_search" value="우편번호 찾기" onclick="sample6_execDaumPostcode()">
-                        <input type="hidden" name="zipcode">
-                    </div>
-                    <div class="address_input">
-                        <input type="text" name="address" id="sample6_address" placeholder="주소" readonly><br>
-                        <input type="text" name="addressSub" id="sample6_detailAddress" placeholder="상세주소">
-                    </div>
-				</td>
-				<style>
-					.address_input>input{
-						width:348.8px;
-						margin-top:4px;
-					}
-					.btn_post_search{
-						border: 1px gray solid;
-				        height:31px;
-				        text-align: center;
-				        background-color: whiteoat;
-				        position:relative;
-				        top:1px;
-			        }
-				</style>
-            </tr>
-            <tr>
-                <td>일반전화</td>
-                <td><input type="text" size=50 placeholder="'-' 제외"></td>
-            </tr>
-            <tr>
-                <td>휴대전화 <span style="color:red;">*</span></td>
-                <td><input type="text" size=50 required placeholder="'-' 제외" maxlength="11"></td>
-            </tr>
-        </table>
-        <hr>
-        <div id="addrEnroll_btn">
-            <div >
-                <input type="checkbox" id="defaultAddr"><label for="defaultAddr" class="pa">기본 배송지로 설정</label><br>
-            </div>
-            <div>
-                <input type="submit" value="등록" class="pc">
-                <input type="reset" value="취소" class="pc">
-            </div>
-        </div>
+        <form method="post" action="<%=request.getContextPath() %>/myPage/insertAddress" onsubmit="return fn_address_enroll_validate();">
+        	<input="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+	        <table id="addrEnroll_table" class="pc">
+	            <tr>
+	                <td>배송지명 <span style="color:red;">*</span></td>
+	                <td><input type="text" name="addName" size=50 required placeholder="최대 7자까지 작성할 수 있습니다." maxlength="7"></td>
+	            </tr>
+	            <tr>
+	                <td>수령인 <span style="color:red;">*</span></td>
+	                <td><input type="text" name="receiverName" size=50 required></td>
+	            </tr>
+	            <tr>
+	                <td>주소 <span style="color:red;">*</span></td>
+	                <td>
+						<div class="address_postcode">
+	                        <input type="text" name="zonecode" id="sample6_postcode" placeholder="우편번호" readonly>
+	                        <input type="button" id="btnPostcode" class="btn_post_search pointer" value="우편번호 찾기" onclick="sample6_execDaumPostcode()">
+	                    </div>
+	                    <div class="address_input">
+	                        <input type="text" name="address" id="sample6_address" placeholder="주소" readonly><br>
+	                        <input type="text" name="addressSub" id="sample6_detailAddress" placeholder="상세주소" required>
+	                    </div>
+					</td>
+	            </tr>
+	            <tr>
+	                <td>일반전화</td>
+	                <td><input type="text" name="addPhone" size=50 placeholder="'-' 제외"></td>
+	            </tr>
+	            <tr>
+	                <td>휴대전화 <span style="color:red;">*</span></td>
+	                <td><input type="text" name="addCellPhone" size=50 required placeholder="'-' 제외" maxlength="11"></td>
+	            </tr>
+	        </table>
+	        <hr>
+	        <div id="addrEnroll_btn">
+	            <div>
+	                <input type="checkbox" id="defaultAddr" name="defaultAddr" class=" pointer">
+	                <label for="defaultAddr" class="pa pointer">기본 배송지로 설정</label><br>
+	            </div><br>
+	            <div>
+	                <input type="submit" value="등록" class="pc pointer">
+	                <input type="reset" value="취소" class="pc pointer" onclick="fn_returnAddressView();">
+	            </div>
+	        </div>
+        </form>
     </div>
 </section>
 
@@ -111,6 +100,18 @@
                 document.getElementById("sample6_detailAddress").focus();
             }
         }).open();
+    }
+    
+    const fn_address_enroll_validate=()=>{
+    	if($("#sample6_postcode").val().length==0||$("sample6_address").val().length==0){
+    		alert("필수 입력 사항입니다.");
+    		$("#sample6_postcode").focus();
+    		return false;
+    	}
+    }
+    
+    const fn_returnAddressView=()=>{
+    	location.replace("<%=request.getContextPath()%>/myPage/addressView?userId=<%=loginUser.getUserId() %>");
     }
 </script>
 
@@ -161,6 +162,21 @@
         font-size: 17px;
         background-color: white;
     }
+	.address_input>input{
+		width:348.8px;
+		margin-top:4px;
+	}
+	.btn_post_search{
+		border: 1px gray solid;
+		height:31px;
+		text-align: center;
+		background-color: whiteoat;
+		position:relative;
+		top:1px;
+	}
+	.pointer:hover{
+		cursor:pointer;
+	}
 </style>
 
 <%@ include file="/views/common/footer.jsp"%>
