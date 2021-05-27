@@ -4,7 +4,7 @@
 <%@ include file="/views/common/header.jsp"%>
 
 <section>
-	<div id="contents" class="container">
+	<div id="contents" class="container"></div>
     	<div class="subTitle">
 	        <h1>문의사항 작성<span></span></h1>
     	</div>
@@ -19,34 +19,36 @@
 	                         <option value="기타">기타문의사항</option>
 	                 </select>
 	                 
+	       <div class="bfi">
 	             <!-- 제목 -->
-	        <label for="wr_subject">제목</label>
-	        <input class="title" type="text" name="wr_subject" value="제목" id="wr_subject" required size="100" maxlength="200" placeholder="제목">
-	    
-	
-	        <!-- 내용 -->
-	        <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="5000" style="width:100%; height: 200px;"
-	        placeholder="내용을 입력해주세요">
-	        </textarea>
-		</div>        
-        <div class="btn-box">
-            <ul>
-                <li>          
-                    <div class="cancel-btn pb" id="cancel">
-                        <a href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">취소</a>
-                    </div> 
-                </li>
-                <li>    
-                    <div class="complete-btn pb" id="complete" type=submit value="작성완료" >
-                        <a href="">작성완료</a>
-                    </div>
-                </li>
-            </ul>
+		        <label for="wr_subject">제목</label>
+		        <input class="title" type="text" name="wr_subject" value="제목" id="wr_subject" required size="100" maxlength="200" placeholder="제목">
+		        <!-- 내용 -->
+		        <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="5000" style="width:100%; height: 200px;"
+		        placeholder="내용을 입력해주세요" >
+		        </textarea>
+			</div>        
+	        <div class="btn-box">
+	            <ul>
+	                <li>          
+	                    <div class="cancel-btn pb" id="cancel">
+	                        <a href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">취소</a>
+	                    </div> 
+	                </li>
+	                <li>    
+	                    <div class="complete-btn pb" id="complete"  >
+	                        <button class="btn-bf-submit" type="submit">작성완료</button>
+	                    </div>
+	                </li>
+	            </ul>
+        	</div>
         </div>
        </form>
 </section>
 
 <style>
+	.btn-bf-submit{
+	}
     .form-group{
         font-family: "Noto Sans KR";
         font-weight: 300;

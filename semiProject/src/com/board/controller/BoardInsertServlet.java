@@ -16,7 +16,7 @@ import com.oreilly.servlet.MultipartRequest;
 /**
  * Servlet implementation class BoardInsertServlet
  */
-@WebServlet("/myPage/board/boardinsert")
+@WebServlet("/board/boardinsert")
 public class BoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,9 +35,11 @@ public class BoardInsertServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String userId=request.getParameter("userId");
 		
-		
+//		String path=getServletContext().getRealPath("/upload/board");
 		request.getRequestDispatcher("/views/board/boardForm.jsp")
 		.forward(request, response);
+
+
 	
 	}
 
