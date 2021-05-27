@@ -2,92 +2,96 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp"%>
+    
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
 
 <section>
 	<h1 class="pe"> SHOWROOM </h1>
-	<div class="showroom_main1">
-        <a href=""><img src="../../images/showroom/showroom_bedroom.jpg" >
-        <p class="pd">침실</p></a>
-	</div>
-    <div class="showroom_main2">
-        <a href=""><img src="../../images/showroom/showroom_livingroom.jpg" >
-        <p class="pd">거실</p></a>
-	</div>
-    <div class="showroom_main3">
-        <a href=""><img src="../../images/showroom/showroom_diningroom.jpg" >
-        <p class="pd">주방</p></a>
-	</div>
-    <div class="showroom_main4">
-        <a href=""><img src="../../images/showroom/showroom_bathroom.jpg" >
-        <p class="pd">욕실</p></a>
-	</div>
-    <div class="showroom_main5">
-        <a href=""><img src="../../images/showroom/showroom_entrance.jpg" >
-        <p class="pd">현관</p></a>
-	</div>
-    <div class="showroom_main6">
-        <a href=""><img src="../../images/showroom/showroom_homeoffice.jpg" >
-       <p class="pd">홈오피스</p></a>
+	
+	<div id="sh_content">
+		<div class="sh_menu mb">
+	        <a href=""><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_bedroom.jpg">
+	        <div class="nonediv">BEDROOM</div></a>
+		</div>
+		<div class="sh_menu mb">
+	        <a href=""><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_livingroom.jpg">
+	        <div class="nonediv">LIVINGROOM</div></a>
+		</div>
+		<div class="sh_menu mb">
+	        <a href="" class="beDue"><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_diningroom.jpg">
+	        <div class="nonediv">DININGROOM</div></a>
+		</div>
+		<div class="sh_menu">
+	        <a href="" class="beDue"><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_bathroom.jpg">
+	        <div class="nonediv">BATHROOM</div></a>
+		</div>
+		<div class="sh_menu">
+	        <a href="" class="beDue"><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_entrance.jpg">
+	        <div class="nonediv">ENTRANCE</div></a>
+		</div>
+		<div class="sh_menu">
+	        <a href=""><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_homeoffice.jpg">
+	        <div class="nonediv">HOMEOFIICE</div></a>
+		</div>
 	</div>
 </section>
+
+<script>
+	$(".beDue").click((e)=>{
+		alert("상품 준비중입니다! 쇼룸 업데이트를 기대해주세요.");
+	})
+	
+</script>
     
 <style>
-    .showroom_main1{
-        text-align:center;
-        font-weight:bold;
-        font-size:23px;
-        display:inline-block;
-        margin-bottom:50px;
-    }
-    .showroom_main2{
-        text-align:center;
-        font-weight:bold;
-        font-size:23px;
-        display:inline-block;
-    }
-    .showroom_main3{
-        text-align:center;
-        font-weight:bold;
-        font-size:23px;
-        display:inline-block;
-    }
-    .showroom_main4{
-        text-align:center;
-        font-weight:bold;
-        font-size:23px;
-        display:inline-block;
-    }
-    .showroom_main5{
-        text-align:center;
-        font-weight:bold;
-        font-size:23px;
-        display:inline-block;
-    }
-    .showroom_main6{
-        text-align:center;
-        font-weight:bold;
-        font-size:23px;
-        display:inline-block;
-    }
-    h1 {
+    section>h1{
     margin-top : -5px;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
     font-size : 40px;
 	}
-    a {
+	#sh_content{
+		display:flex;
+		flex-wrap: wrap;
+    	height:800px;
+    	justify-content: space-around;
+	}
+    #sh_content a{
         text-decoration: none;
         color : black;  
 	}
-    img {
-        margin-left:12px;
-        margin-right:5px;
-        padding-left:25px;
-        padding-right:25px;
-        width:300px ;
-        height:300px;
+	.sh_menu>a{
+		position:relative;
+	}
+    #sh_content img{
+    	/* position:absolute; */
+        width:350px ;
+        height:350px;
+        object-fit:cover;
         text-align:center;
+        z-index:1;
     }
-</style>	
-<script></script>
+    .nonediv{
+    	position:absolute;
+    	background-color:rgba(71, 71, 71, 0.5);
+    	color:white;
+    	width:350px ;
+        height:350px;
+        top:-332px;
+    	font-family: 'DM Serif Display', serif;
+    	font-size:60px;
+    	display:flex;
+	    justify-content: center;
+	    align-items: flex-end;
+	    opacity:0;
+	    transition: opacity 0.2s linear;
+	    z-index:2;
+    }
+    .nonediv:hover{
+    	opacity:1;
+    }
+    .mb{
+    	margin-bottom:60px;
+    }
+</style>
 
 <%@ include file="/views/common/footer.jsp"%>
