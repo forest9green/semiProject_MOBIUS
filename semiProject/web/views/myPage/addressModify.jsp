@@ -6,9 +6,9 @@
 <section>
     <div id="addrEnroll_box">
         <h2 class="pe mgbt0" style="font-size:30px;" >ADDRESS</h2>
-        <span class="pb mgbt0" style="font-size:20px;">배송지 등록</span>
+        <span class="pb mgbt0" style="font-size:15px;">배송지 수정</span><br>
         <span class="pa" id="span2">* 필수 입력 사항입니다.</span>
-        <hr>
+        <br><hr>
         <table id="addrEnroll_table" class="pc">
             <tr>
                 <td>배송지명 <span style="color:red;">*</span></td>

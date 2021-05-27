@@ -40,7 +40,7 @@ public class loginCheckFilter implements Filter {
 		HttpSession session=((HttpServletRequest)request).getSession(false);
 		if(session==null || session.getAttribute("loginUser")==null) {
 			request.setAttribute("msg","로그인 후 이용할 수 있습니다.");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/views/member/loginPage.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 
