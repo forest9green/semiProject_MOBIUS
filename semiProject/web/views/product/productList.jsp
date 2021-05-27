@@ -76,14 +76,16 @@
 			type:"hidden",name:"category",value:"<%=category %>"
 		}));
 		$("#pSelectFrm").submit();
-	})
+	});
+	
     $(".wish").click((e)=>{
     	const pcode=$($(e.target)[0]).attr("title");
-        location.assign('<%=request.getContextPath()%>/product/addWishList?userId=<%=loginUser.getUserId()%>&pCode='+pcode);
+        location.assign('<%=request.getContextPath()%>/wish/addWishList?userId=<%=loginUser.getUserId()%>&pCode='+pcode);
     });
+	
     $(".cart").click((e)=>{
         alert("장바구니에 추가되었습니다.")
-    })
+    });
 </script>
 
 <style>
