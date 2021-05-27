@@ -124,11 +124,11 @@
 
 <script>
 	const fn_moveMileageView=()=>{
-		location.assign('<%=request.getContextPath()%>/myPage/mileageList?userId='+'<%=loginUser.getUserId() %>');
+		location.assign('<%=request.getContextPath()%>/myPage/mileageList?userId=<%=loginUser.getUserId() %>');
 	}
 	
 	const fn_moveCouponView=()=>{
-		location.assign('<%=request.getContextPath()%>/myPage/couponList?userId='+'<%=loginUser.getUserId() %>');
+		location.assign('<%=request.getContextPath()%>/myPage/couponList?userId=<%=loginUser.getUserId() %>');
 	}
 </script>
 
@@ -195,6 +195,7 @@
     }
     .inquiry_btn:hover{
         background-color: #f8f6f6;
+        cursor:pointer;
     }
     .inquiry_btn>a{
         text-decoration: none;

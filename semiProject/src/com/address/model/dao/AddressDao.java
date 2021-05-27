@@ -54,7 +54,7 @@ public class AddressDao {
 	}
 	
 	
-	public List<Address> selectAddress(Connection conn, String userId){
+	public List<Address> selectAddress(Connection conn, String userId, int cPage, int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Address> list=new ArrayList<>();
@@ -62,6 +62,9 @@ public class AddressDao {
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectAddress"));
 			pstmt.setString(1, userId);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Address a=new Address();
@@ -88,6 +91,66 @@ public class AddressDao {
 	}
 	
 	
+	public int selectAddressCount(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectAddressCount"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int clearDefaultAddr(Connection conn, String addrNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("clearDefaultAddr"));
+			pstmt.setString(1, addrNo);
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int setDefaultAddr(Connection conn, String addrNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("setDefaultAddr"));
+			pstmt.setString(1, addrNo);
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 	public int updateAddress(Connection conn, Address adr) {
 		PreparedStatement pstmt= null;
 		int result2 = 0;
@@ -107,11 +170,5 @@ public class AddressDao {
 		}
 		return result2;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
