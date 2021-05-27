@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%
+	List<User> users = (List<User>)request.getAttribute("users");
+
+
+%>       
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -31,33 +37,39 @@
                     <table id="output_table" class="pa" border=1>
                         <thead>
                             <tr>
-                                <th width=20><input type="checkbox" id="checkall"></th>
                                 <th width=100>아이디</th>
                                 <th width=100>총 구매액</th>
-                                <th width=100>최근 접속일</th>
+                                <th width=100>회원가입일</th>
                                 <th width=80>정보</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!--
-                                값이 없으면 <tr>회원이 없습니다.</tr> 추가
-                                값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 처리해야 함
-                            -->
-                            <tr>
-                                <td><input type="checkbox" name="chk"></td>
-                                <td>아이디</td>
-                                <td>000,000원</td>
-                                <td>최근 접속일</td>
-                                <td><button class="whitebtn">자세히 보기</button></td><!--클릭 시 회원관리-회원정보(manageUserMain.jsp) 화면으로 이동-->
-                            </tr>
+                            <%if(users.isEmpty()){ %>
+                            	<tr>
+                            		<td colspan="9" align="center">
+                            			검색결과가 없습니다.
+                            		</td>
+                            	</tr>
+                            <%}else{ %>
+                            	<%for(User u : users){ %>
+		                        <form action="<%=request.getContextPath() %>/" method="post">    
+		                            <tr>
+		                                <td name="userId" value="<%=u.getUserId()%>"><%=u.getUserId() %></td>
+		                                <td>000,000원</td>
+		                                <td><%=u.getJoinDate() %></td>
+		                                <td><button class="whitebtn">자세히 보기</button></td><!--클릭 시 회원관리-회원정보(manageUserMain.jsp) 화면으로 이동-->
+		                            </tr>
+		                        </form>    
+	                            <%} %>
+                            <%} %>
                         </tbody>
                     </table>
                     <div id="btn">
+                    	<button type="button" class="pb">전체 선택</button>
                         <button type="button" class="pb">선택 삭제</button>
                     </div>
                     <div id="admin_pagebar" class="pagebar">
-                        <span><a href="">1</a></span>
-                        <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
+                        <%=request.getAttribute("pageBar") %>
                     </div>
                 </div>
             </div>    
@@ -152,8 +164,8 @@
                 background-color: white;
             }
             .pagebar{
-                width: 100px;
                 margin: 10px auto;
+                text-align:center;
             }
             .pagebar>span{
                 margin:0 6px 0 6px;

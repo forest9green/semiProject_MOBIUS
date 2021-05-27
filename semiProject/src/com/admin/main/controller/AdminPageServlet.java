@@ -1,4 +1,4 @@
-package com.board.controller;
+package com.admin.main.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,23 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.board.model.service.BoardService;
-import com.board.model.vo.Board;
-import com.oreilly.servlet.MultipartRequest;
-
 /**
- * Servlet implementation class BoardInsertServlet
+ * Servlet implementation class AdminPageServlet
  */
-@WebServlet("/board/boardinsert")
-public class BoardInsertServlet extends HttpServlet {
+@WebServlet("/admin/adminMain")
+public class AdminPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardInsertServlet() {
+    public AdminPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +27,12 @@ public class BoardInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userId=request.getParameter("userId");
 		
-//		String path=getServletContext().getRealPath("/upload/board");
-		request.getRequestDispatcher("/views/board/boardForm.jsp")
+		request.getRequestDispatcher("/views/admin/adminMain.jsp")
 		.forward(request, response);
-
-
-	
+		
+		
+		
 	}
 
 	/**
