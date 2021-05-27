@@ -22,6 +22,7 @@
                         <th>휴대전화</th>
                         <th>우편번호</th>
                         <th width=420>주소</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,18 +47,19 @@
 		                        <td><%=a.getAddCellPhone() %></td>
 		                        <td><%=a.getPostCode() %></td>
 		                        <td style="text-align:left;padding-left:5px"><%=a.getAddr() %></td>
+		                        <td><button type="button">수정</button></td>
 		                    </tr>
 	                    <%}
                    	} else {%>
                    		<tr>
-                    		<td colspan="8">적립금 내역이 없습니다.</td>
+                    		<td colspan="9">저장된 배송지가 없습니다.</td>
                     	</tr>
                    	<%} %>
                 </tbody>
             </table>
             <div id="addr_btn">
                 <button type="button" class="pb">삭제</button>
-                <button type="button" class="pb">배송지 등록</button>
+                <button type="button" class="pb" onclick="fn_insertAddress();">배송지 등록</button>
             </div>
         </div>
         <div id="c_pagebar" class="pagebar">
@@ -110,6 +112,10 @@
             }
 		}
 	})
+	
+	const fn_insertAddress=()=>{
+		location.assign('<%=request.getContextPath()%>/myPage/addressForm');
+	}
 </script>
 
 <style>
@@ -167,6 +173,10 @@
     #addr_warn>p{
         margin:0px;
     }
+
+	button:hover{
+		cursor:pointer;
+	}
     
     /*pageBar 디자인*/
 	.pagebar{
