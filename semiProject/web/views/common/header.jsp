@@ -53,7 +53,7 @@
                      <%if(loginUser==null){ %>
                         <li class="pa"><a href="<%=request.getContextPath() %>/views/member/memberEnroll.jsp">Join</a></li>
                      <%}else{ %>
-                     	<li class="pa"><a href="<%=request.getContextPath() %>/views/member/updateMember.jsp">modify</a></li>
+                     	<li class="pa"><a href="<%=request.getContextPath() %>/views/member/updateMember.jsp">Modify</a></li>
                      <%} %>  
                         <li class="pa"><a href="">Order</a></li>
                         <li class="pa"><a href="">Cart</a></li>
