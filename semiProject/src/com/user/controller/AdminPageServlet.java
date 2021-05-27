@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AdminPageServlet
  */
-@WebServlet("/admin/adminPage")
+@WebServlet("/admin/adminMain")
 public class AdminPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,7 +27,7 @@ public class AdminPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/admin/notice/adminMain.jsp")
+		request.getRequestDispatcher("/views/admin/adminMain.jsp")
 		.forward(request, response);
 	}
 
