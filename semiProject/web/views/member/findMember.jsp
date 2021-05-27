@@ -4,6 +4,7 @@
 	String key = (String)request.getAttribute("key");
 	String key2 =(String)request.getAttribute("key2");
 	User u = (User)request.getAttribute("u");
+	User u2 = (User)request.getAttribute("u2");
 %>
     
 <%@ include file="/views/common/header.jsp"%>
@@ -63,9 +64,9 @@
                             <div class="login_input pc">
                             <form action="<%=request.getContextPath() %>/user/findPassword" id="formFindPw" name="formFindPw" method="post" >
                                 <table>
-	                                <input type="text" id="finduserId" name="finduserId" placeholder="아이디" value="<%=u!=null&&u.getUserId()!=null?u.getUserId():"" %>">
-	                                <input type="text" id="finduserName" name="finduserName" placeholder="이름" value="<%=u!=null&&u.getUserName()!=null?u.getUserName() :""%>">
-	                                <input type="text" id="userEmail2" name="userEmail2" class="input_email" id="numCer2"  placeholder="가입메일주소" value="<%=u!=null&&u.getEmail()!=null?u.getEmail():""%>">
+	                                <input type="text" id="finduserId" name="finduserId" placeholder="아이디" value="<%=u2!=null&&u2.getUserId()!=null?u2.getUserId():"" %>">
+	                                <input type="text" id="finduserName" name="finduserName" placeholder="이름" value="<%=u2!=null&&u2.getUserName()!=null?u2.getUserName() :""%>">
+	                                <input type="text" id="userEmail2" name="userEmail2" class="input_email" id="numCer2"  placeholder="가입메일주소" value="<%=u2!=null&&u2.getEmail()!=null?u2.getEmail():""%>">
 	                                <button id="submit2" onclick="fn_submit2();">인증번호받기</button>
                              	</table>
                              </form>
@@ -87,7 +88,7 @@
 	<input type="hidden" name="userId" value="<%=u!=null&&u.getUserId()!=null?u.getUserId():"" %>"> 
 </form>  
 <form method="post" id="userPwForm" action="<%=request.getContextPath() %>/views/member/findPassword.jsp"> 
-	<input type="hidden" name="userId" value="<%=u!=null&&u.getUserId()!=null?u.getUserId():"" %>"> 
+	<input type="hidden" name="userId" value="<%=u2!=null&&u2.getUserId()!=null?u2.getUserId():"" %>"> 
 </form>
 
 
@@ -98,7 +99,7 @@
 		
 	}
 	const fn_submit2=()=>{
-		alter("메일이 전송되었습니다. 메일이 없을 경우 입력한 정보를 확인해주세요")
+		alert("메일이 전송되었습니다. 메일이 없을 경우 입력한 정보를 확인해주세요")
 	}
 	
 	$("#next_btn").click(function(){

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.address.model.service.AddressService;
 import com.address.model.vo.Address;
+import com.coupon.model.service.CouponService;
 
 /**
  * Servlet implementation class AddressViewServlet
@@ -32,8 +33,36 @@ public class AddressViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId=request.getParameter("userId");
-		List<Address> list=new AddressService().selectAddress(userId);
+		
+		int cPage;
+		int numPerPage=10;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		
+		List<Address> list=new AddressService().selectAddress(userId,cPage,numPerPage);
+		
+		int totalData=new AddressService().selectAddressCount(userId);
+		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
+		
+		int pageBarSize=10;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		String pageBar="";
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+				pageBar+="<a href='"+request.getContextPath()+"/myPage/addressView?userId="+userId+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		
 		request.setAttribute("addresses", list);
+		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/myPage/addressView.jsp").forward(request, response);
 	}
 

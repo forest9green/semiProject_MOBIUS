@@ -3,6 +3,7 @@
 <%@ page import="java.util.List, com.address.model.vo.Address" %>
 <%
 	List<Address> addresses=(List<Address>)request.getAttribute("addresses");
+	String pageBar=(String)request.getAttribute("pageBar");
 %>
 <%@ include file="/views/common/header.jsp"%>
 
@@ -21,6 +22,7 @@
                         <th>휴대전화</th>
                         <th>우편번호</th>
                         <th width=420>주소</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,26 +30,40 @@
                     	for(Address a:addresses) {%>
 		                    <tr>
 		                        <td><input type="checkbox" name="chk"></td>
-		                        <td><button type="button">지정</button></td><!-- 클릭 시 기본 배송지로 지정하시겠습니까? 메세지, 확인 누르면 누르면 클래스 blackback이 추가되고, 기본 배송지로 지정됨(기본 배송지는 1개만 되니까 다른 기본 배송지가 있을 경우 해제됨)-->
-		                        <td>미지정</td>
-		                        <td>이름</td>
-		                        <td>000-</td>
-		                        <td>01000000000</td>
-		                        <td>우편번호</td>
-		                        <td>주소</td>
+		                        <td>
+		                        	<%if(a.getDefaultAddr()==1) {%>
+		                        		<button type="button" class="defaultbtn blackback" value="<%=a.getAddrNo()%>">지정</button>
+		                        	<%} else { %>
+		                        		<button type="button" class="defaultbtn" value="<%=a.getAddrNo()%>">지정</button>
+		                        	<%} %>
+		                        </td>
+		                        <td><%=a.getAddName() %></td>
+		                        <td><%=a.getReceiverName() %></td>
+		                        <td>
+		                        	<%if(a.getAddPhone()!=null) {%>
+		                        		<%=a.getAddPhone() %>
+		                        	<%} %>
+	                        	</td>
+		                        <td><%=a.getAddCellPhone() %></td>
+		                        <td><%=a.getPostCode() %></td>
+		                        <td style="text-align:left;padding-left:5px"><%=a.getAddr() %></td>
+		                        <td><button type="button">수정</button></td>
 		                    </tr>
 	                    <%}
-                   	}%>
+                   	} else {%>
+                   		<tr>
+                    		<td colspan="9">저장된 배송지가 없습니다.</td>
+                    	</tr>
+                   	<%} %>
                 </tbody>
             </table>
             <div id="addr_btn">
                 <button type="button" class="pb">삭제</button>
-                <button type="button" class="pb">배송지 등록</button>
+                <button type="button" class="pb" onclick="fn_insertAddress();">배송지 등록</button>
             </div>
         </div>
-        <div id="a_pagebar" class="pagebar">
-            <span><a href="">1</a></span>
-            <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
+        <div id="c_pagebar" class="pagebar">
+        	<%=pageBar %>
         </div>
         <div id="addr_warn">
             <p class="pb">
@@ -57,6 +73,50 @@
         </div>
     </div>
 </section>
+
+<script>
+	$("button.defaultbtn").click((e)=>{
+		const addrNo=$(e.target).val();
+		
+		if($(e.target).hasClass("blackback")){
+			//기본 배송지인 걸 해제하는 로직
+			if(confirm("기본 배송지를 해제하시겠습니까?")){
+				location.assign('<%=request.getContextPath()%>/myPage/clearDefaultAddr?userId=<%=loginUser.getUserId()%>&addrNo='+addrNo);
+			}
+			
+		}else{
+			//기본 배송지로 설정하는 로직
+			let changeDefaultAddr=false;
+			let oldAddrNo="";
+			
+			//기본 배송지로 설정된 게 있는 지 먼저 확인
+			$("button.defaultbtn").each((i,v)=>{
+                if($(v).hasClass("blackback")){
+                	//이미 기본 배송지가 존재함
+                	if(confirm("설정된 기본 배송지가 존재합니다. 변경하시겠습니까?")){
+                		//기존의 기본 배송지를 해제하고 새로 설정함
+                		oldAddrNo=$(v).val();
+                		changeDefaultAddr=true;
+                	}//기존의 기본 배송지 유지
+                }//기본 배송지가 존재하지 않으므로 선택한 주소를 기본배송지로 지정
+            })
+            
+            if(changeDefaultAddr){
+            	//기존의 기본 배송지를 해제하고 새로 설정함
+            	location.assign('<%=request.getContextPath()%>/myPage/changeDefaultAddr?userId=<%=loginUser.getUserId()%>&oldAddrNo='+oldAddrNo+'&newAddrNo='+addrNo);
+            }else{
+            	//기본 배송지가 존재하지 않으므로 선택한 주소를 기본배송지로 지정
+            	if(confirm("기본 배송지로 지정하시겠습니까?")){
+	            	location.assign('<%=request.getContextPath()%>/myPage/setDefaultAddr?userId=<%=loginUser.getUserId()%>&addrNo='+addrNo);            		
+            	}
+            }
+		}
+	})
+	
+	const fn_insertAddress=()=>{
+		location.assign('<%=request.getContextPath()%>/myPage/addressForm');
+	}
+</script>
 
 <style>
     #addr_box{
@@ -113,6 +173,10 @@
     #addr_warn>p{
         margin:0px;
     }
+
+	button:hover{
+		cursor:pointer;
+	}
     
     /*pageBar 디자인*/
 	.pagebar{
@@ -135,6 +199,5 @@
 	}
 </style>
 
-<script></script>
 
 <%@ include file="/views/common/footer.jsp"%>
