@@ -9,7 +9,7 @@
             <div class="boatitle">  
                 <h1 class="mooni">문의사항</h1>                
             </div>  
-       	<form action="<%=request.getContextPath() %>/myPage/board/boardupdateEnd" method="post">
+       	<form action="<%=request.getContextPath() %>/myPage/board/boardupdateEnd" method="post" >
             <div class="boardtitlett">
                 <h2 id="bo_title">
                     <span class="bo_badge bo_badge-light bo_badge-lg font-weight-light">배송문의</span>
@@ -18,15 +18,15 @@
             </div>
             
             <div id="bo_v_info">
-                <span class="bo_name"><%=b.getUserId() %></span>
-                <span class="bo_time">21-05-06</span>
+                <span class="bo_name" name="userId"><%=b.getUserId() %></span>
+                <span class="bo_time" >21-05-06</span>
             </div>
             <div class="card-header text-left">
                 <span class="bo_cttitle"><%=b.getUserId() %>님의 문의글</span>
             </div>
  
             <div class="bo_v_con">
-                <textarea cols="50" rows="10" class="bo_qc"><%=b.getbContent() %></textarea>
+                <textarea cols="50" rows="10" class="bo_qc" name="bContent"><%=b.getbContent() %></textarea>
             </div>
             <hr class="silsun">
                 <div id="bo_v_top">

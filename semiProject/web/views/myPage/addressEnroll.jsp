@@ -12,7 +12,7 @@
         <span class="pa" id="span2">* 필수 입력 사항입니다.</span>
         <br><hr>
         <form method="post" action="<%=request.getContextPath() %>/myPage/insertAddress" onsubmit="return fn_address_enroll_validate();">
-        	<input="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+        	<input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
 	        <table id="addrEnroll_table" class="pc">
 	            <tr>
 	                <td>배송지명 <span style="color:red;">*</span></td>

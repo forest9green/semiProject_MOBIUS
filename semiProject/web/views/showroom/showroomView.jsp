@@ -18,31 +18,6 @@
                 </div>
             </span>
         </div>
-
-        <div class="showPhoto">
-            <div class="sPhoto"><img src="./img/sofa1.jpg" ></div>
-            <span class="spInfo">
-                <img class="plus_img" src="./img/link_button.png" >
-                <div class="pBox pc">
-                    <span style="font-size: large;font-weight: bold;">SKURUP 스쿠루프</span><br>
-                    <span style="font-size:small;">벽부착등</span><br>
-                    49,900원
-                </div>
-            </span>
-        </div>
-
-        <div class="showPhoto">
-            <div class="sPhoto"><img src="./img/sofa1.jpg" ></div>
-            <span class="spInfo">
-                <img class="plus_img" src="./img/link_button.png" >
-                <div class="pBox pc">
-                    <span style="font-size: large;font-weight: bold;">SKURUP 스쿠루프</span><br>
-                    <span style="font-size:small;">벽부착등</span><br>
-                    49,900원
-                </div>
-            </span>
-        </div>
-
     </div>
 
 </section>

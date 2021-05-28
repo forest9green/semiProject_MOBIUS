@@ -32,7 +32,7 @@
     <hr class="silsun">
         <div id="bo_v_top">
             <div class="bo_v_left">
-                <a class="boabtn btn-light sujeong" onclick="location.assign('<%=request.getContextPath() %>/board/boardupdate?bNo=<%=b.getbNo()%>')">수정</a>
+                <a class="boabtn btn-light sujeong" onclick="location.assign('<%=request.getContextPath() %>/myPage/board/boardupdate?bNo=<%=b.getbNo()%>')">수정</a>
                 <a class="boabtn btn-light sakje" href="" onclick="">삭제</a>     
             </div>
             <div class="bo_v_right">

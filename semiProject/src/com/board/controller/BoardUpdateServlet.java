@@ -13,7 +13,7 @@ import com.board.model.vo.Board;
 /**
  * Servlet implementation class BoardUpdateServlet
  */
-@WebServlet("/board/boardupdate")
+@WebServlet("/myPage/board/boardupdate")
 public class BoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

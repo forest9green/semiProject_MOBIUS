@@ -40,6 +40,9 @@ public class ProductListServlet extends HttpServlet {
 		String cateCode="";
 		List<Product> list=new ArrayList<>();
 		
+		
+		System.out.println(request.getHeader("referrer"));
+		
 		int cPage;
 		int numPerPage=9;
 		try {

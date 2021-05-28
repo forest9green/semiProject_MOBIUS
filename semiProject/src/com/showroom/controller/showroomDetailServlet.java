@@ -1,4 +1,4 @@
-package com.board.controller;
+package com.showroom.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardFormServlet
+ * Servlet implementation class showroomDetailServlet
  */
-@WebServlet("/myPage/board/boardform")
-public class BoardFormServlet extends HttpServlet {
+@WebServlet("/showroom/srDetail")
+public class showroomDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardFormServlet() {
+    public showroomDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,8 +27,7 @@ public class BoardFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/board/boardForm.jsp")
-		.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
