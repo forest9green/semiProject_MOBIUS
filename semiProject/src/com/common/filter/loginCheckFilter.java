@@ -42,6 +42,7 @@ public class loginCheckFilter implements Filter {
 			request.setAttribute("msg","로그인 후 이용할 수 있습니다.");
 			request.setAttribute("loc", "/views/member/loginPage.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
 		}
 
 		// pass the request along the filter chain
