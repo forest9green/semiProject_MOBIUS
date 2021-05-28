@@ -58,10 +58,10 @@ public class Notice {
 	public Date getnDate() {
 		return nDate;
 	}
-
 	public void setnDate(Date nDate) {
 		this.nDate = nDate;
 	}
+
 
 	
 	
