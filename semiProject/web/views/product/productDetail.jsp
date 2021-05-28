@@ -153,9 +153,10 @@
     #product_top{
         display:flex;
         margin-bottom:50px;
+    	justify-content: space-between;
     }
     .info_menu{
-        width:856.26px;
+        width:950px;
         height:60px;
         background-color:rgb(193, 233, 210);;
         text-align:center;
@@ -174,12 +175,9 @@
     	width:285.42px;
     }
     .img_div>img{
-        width:400px;
+        width:450px;
         height:350px;
         object-fit:cover;
-    }
-    .top_info{
-        margin-left: 70px;;
     }
     .top_info button{
         height:45px;

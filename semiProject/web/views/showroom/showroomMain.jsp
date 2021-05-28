@@ -10,11 +10,11 @@
 	
 	<div id="sh_content">
 		<div class="sh_menu mb">
-	        <a href="<%=request.getContextPath()%>/showroom/srDetail?srImgPath=침실"><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_bedroom.jpg">
+	        <a href="<%=request.getContextPath()%>/showroom/srDetail?srMenu=침실"><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_bedroom.jpg">
 	        <div class="nonediv">BEDROOM</div></a>
 		</div>
 		<div class="sh_menu mb">
-	        <a href="<%=request.getContextPath()%>/showroom/srDetail?srImgPath=거실"><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_livingroom.jpg">
+	        <a href="<%=request.getContextPath()%>/showroom/srDetail?srMenu=거실"><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_livingroom.jpg">
 	        <div class="nonediv">LIVINGROOM</div></a>
 		</div>
 		<div class="sh_menu mb">
@@ -30,7 +30,7 @@
 	        <div class="nonediv">ENTRANCE</div></a>
 		</div>
 		<div class="sh_menu">
-	        <a href="<%=request.getContextPath()%>/showroom/srDetail?srImgPath=홈오피스"><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_homeoffice.jpg">
+	        <a href="<%=request.getContextPath()%>/showroom/srDetail?srMenu=홈오피스"><img src="<%=request.getContextPath()%>/images/showroom/main/showroom_homeoffice.jpg">
 	        <div class="nonediv">HOMEOFIICE</div></a>
 		</div>
 	</div>

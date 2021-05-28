@@ -1,27 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="java.util.List, com.showroom.model.vo.ShowRoomDetail" %>
+<%
+	String srMenu=(String)request.getAttribute("srMenu");
+	List<ShowRoomDetail> showrooms=(List<ShowRoomDetail>)request.getAttribute("showrooms");
+	String room="";
+%>
 <%@ include file="/views/common/header.jsp"%>
 
 <section>
-    <h1 class="pe" style="font-size: 35px;"> SHOWROOM - 거실 </h1>
+    <h1 class="pe" style="font-size: 35px;"> SHOWROOM - <%=srMenu %> </h1>
     <div id="show_box">
-
-        <div class="showPhoto">
-            <div class="sPhoto"><img src="./img/sofa1.jpg" ></div>
-            <span class="spInfo">
-                <img class="plus_img" src="./img/link_button.png" >
-                <div class="pBox pc">
-                    <span style="font-size: large;font-weight: bold;">SKURUP 스쿠루프</span><br>
-                    <span style="font-size:small;">벽부착등</span><br>
-                    49,900원
-                </div>
-            </span>
-        </div>
+		<%if(!showrooms.isEmpty()) {
+			for(ShowRoomDetail s:showrooms) {
+				switch(s.getSrMenu()){
+					case "거실": room="living"; break;
+					case "침실": room="bed"; break;
+					case "홈오피스": room="homeoffice";
+				}%>
+		        <div class="showPhoto">
+		            <div class="sPhoto"><img src="<%=request.getContextPath()%>/images/showroom/<%=room%>/<%=s.getSrImgPath()%>"></div>
+		            <span class="spInfo" value="<%=s.getpCode()%>">
+		                <img class="plus_img" src="https://img.icons8.com/officel/480/000000/plus.png">
+		                <div class="pBox pc">
+		                	<a href="<%=request.getContextPath()%>/product/productDetail?pCode=<%=s.getpCode()%>">
+			                    <span><span style="font-size: large;font-weight: bold;"><%=s.getpName() %></span><br>
+			                    <%=s.getPrice() %>원</span>
+		                	</a>
+		                </div>
+		            </span>
+		        </div>
+	        <%}
+		}%>
     </div>
-
+    <div class="returnMainBtn">
+		<button class="pb" onclick="location.assign('<%=request.getContextPath() %>/views/showroom/showroomMain.jsp')">목록으로</button>
+    </div>
 </section>
-<!--section에 적용될 style, script 내용 넣어주세요-->
+
+<script></script>
+
 <style>
     #show_box{
         width:1000px;
@@ -40,18 +58,17 @@
     .spInfo{
         display:flex;
         position:relative;
-        top:-150px;
-        left:100px;
-        width: 300px;
+        top:-400px;
+        left:500px;
+        width: 400px;
         margin:0;
     }
     .plus_img{
-        /* margin:20px; */
-        width:25px;
-        height:25px;
+        width:30px;
+        height:30px;
     }
     .pBox{
-        height:80px;
+        height:50px;
         background-color: rgba(178, 179, 178, 0.8);
         padding:15px;
         position:relative;
@@ -65,7 +82,30 @@
     .pBox:hover{
         opacity: 1;
     }
+    .plus_img:hover{
+    	cursor:pointer;
+    }
+    .returnMainBtn{
+    	display:flex;
+    	justify-content: center;
+    }
+    .returnMainBtn>button{
+    	border:1px gray solid;
+    	width:90px;
+    	height:32px;
+    	font-size:16px;
+    }
+    button:hover{
+    	cursor:pointer;
+    }
+    .pBox>a{
+    	text-decoration: none;
+    	color:black;
+    }
+    .pBox span:hover{
+    	text-decoration: underline;
+    	text-weight:bold;
+    }
 </style>
-<script></script>
 
 <%@ include file="/views/common/footer.jsp"%>
