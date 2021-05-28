@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminWriteNoticeServlet
+ * Servlet implementation class AdminModifyNoticeEndServlet
  */
-@WebServlet("/admin/notice/writeNotice")
-public class AdminWriteNoticeServlet extends HttpServlet {
+@WebServlet("/admin/notice/noticeModifyEnd")
+public class AdminModifyNoticeEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminWriteNoticeServlet() {
+    public AdminModifyNoticeEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +27,7 @@ public class AdminWriteNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		request.getRequestDispatcher("/views/admin/notice/writeNotice.jsp")
-		.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

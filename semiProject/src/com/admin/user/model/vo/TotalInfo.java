@@ -1,4 +1,4 @@
-package com.admin.user.vo;
+package com.admin.user.model.vo;
 
 import java.util.Date;
 

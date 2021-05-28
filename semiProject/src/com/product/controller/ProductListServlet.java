@@ -41,7 +41,7 @@ public class ProductListServlet extends HttpServlet {
 		List<Product> list=new ArrayList<>();
 		
 		
-		System.out.println(request.getHeader("referrer"));
+//		System.out.println(request.getHeader("referrer"));
 		
 		int cPage;
 		int numPerPage=9;

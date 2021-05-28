@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="com.admin.user.vo.TotalInfo" %>
+<%@ page import="com.admin.user.model.vo.TotalInfo" %>
 <%
 	List<TotalInfo> users = (List<TotalInfo>)request.getAttribute("users");
 
@@ -51,14 +51,15 @@
                             			검색결과가 없습니다.
                             		</td>
                             	</tr>
+                         
                             <%}else{ %>
                             	<%for(TotalInfo info : users){ %>
-		                        <form action="<%=request.getContextPath() %>/" method="post">    
+		                        <form action="<%=request.getContextPath() %>/admin/member/info" method="post">    
 		                            <tr>
-		                                <td name="" value="<%=info.getUserId()%>"><%=info.getUserId() %></td>
+		                                <td> <input type="hidden" name="userId" value="<%=info.getUserId()%>"><%=info.getUserId() %></td>
 		                                <td><%=info.getSum() %></td>
 		                                <td><%=info.getJoinDate() %></td>
-		                                <td><button class="whitebtn">자세히 보기</button></td><!--클릭 시 회원관리-회원정보(manageUserMain.jsp) 화면으로 이동-->
+		                                <td><button type="submit" class="whitebtn">자세히 보기</button></td><!--클릭 시 회원관리-회원정보(manageUserMain.jsp) 화면으로 이동-->
 		                            </tr>
 		                        </form>    
 	                            <%} %>

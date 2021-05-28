@@ -38,11 +38,11 @@ private Properties prop=new Properties();
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Notice n=new Notice();
-				n.setnoticeNo(rs.getString("noticeNo"));
-				n.setnTitle(rs.getString("nTitle"));
-				n.setnContent(rs.getString("nContent"));
-				n.setnImgPath(rs.getString("nImgPath"));
-				n.setnDate(rs.getDate("nDate"));
+				n.setnoticeNo(rs.getString("notice_No"));
+				n.setnTitle(rs.getString("n_Title"));
+				n.setnContent(rs.getString("n_Content"));
+				n.setnImgPath(rs.getString("n_ImgPath"));
+				n.setnDate(rs.getDate("n_Date"));
 				list.add(n);
 			}
 		}catch(SQLException e) {
@@ -66,6 +66,23 @@ private Properties prop=new Properties();
 			e.printStackTrace();
 		}finally {
 			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
+	public int insertNotice(Connection conn, Notice n) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertNotice"));
+			pstmt.setString(1, n.getnTitle());
+			pstmt.setString(2, n.getnContent());
+			pstmt.setString(3, n.getnImgPath());
+//			pstmt.setDate(5, n.getnDate());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
 			close(pstmt);
 		}return result;
 	}
