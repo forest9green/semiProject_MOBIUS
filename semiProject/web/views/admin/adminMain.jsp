@@ -159,6 +159,9 @@
                 padding-top: 30px;
                 text-align: center;
             }
+            body{
+				margin:0px;
+			}
         </style>
 	<script>
 	    $("#item-category>li").hover((e)=>{

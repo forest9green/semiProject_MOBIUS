@@ -175,6 +175,9 @@
     .pagebar>a:hover{
         color:rgba(123, 209, 159);
     }
+    body{
+		margin:0px;
+	}
 </style>
 
 <%@ include file="/views/common/footer.jsp"%>  
