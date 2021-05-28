@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BoardFormServlet
  */
-@WebServlet("/board/boardform")
+@WebServlet("/myPage/board/boardform")
 public class BoardFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

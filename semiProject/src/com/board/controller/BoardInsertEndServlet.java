@@ -15,7 +15,7 @@ import com.board.model.vo.Board;
 /**
  * Servlet implementation class BoardInsertEnd
  */
-@WebServlet("/board/boardinsertend")
+@WebServlet("/myPage/board/boardinsertend")
 public class BoardInsertEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -57,10 +57,10 @@ public class BoardInsertEndServlet extends HttpServlet {
 		String loc="";
 		if(result>0) {
 			msg="문의사항등록 성공";
-			loc="/board/boardList";
+			loc="myPage/board/boardList";
 		}else {
 			msg="문의사항등록 실패";
-			loc="/board/boardForm";
+			loc="myPage/board/boardForm";
 		}
 		request.setAttribute("msg",msg);
 		request.setAttribute("loc",loc);
