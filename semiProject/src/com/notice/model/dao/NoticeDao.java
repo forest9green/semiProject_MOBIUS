@@ -101,8 +101,28 @@ public int selectNoticeCount(Connection conn) {
 		close(pstmt);
 	}return result;
 }
+
+public int insertNotice(Connection conn, Notice n) {
 	
+	PreparedStatement pstmt=null;
+	int result=0;
+	System.out.println(prop.getProperty("insertNotice"));
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertNotice"));
+			pstmt.setString(1, n.getnTitle());
+			pstmt.setString(2, n.getnContent());
+			pstmt.setString(3, n.getnImgPath());
+//			pstmt.setDate(5, n.getnDate());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}	
 }
+	
+
 
 
 

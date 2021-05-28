@@ -17,7 +17,7 @@
     </div>
         
     <div  class="pb" class="notice_content" style="font-size : 15px; padding-top:5%; padding-left:5%; padding-bottom:5%" >
-    <div><img class="notice" style="margin-left:200px;" src="<%=request.getContextPath()%>/upload/notice/<%=n.getnImgPath()%>" ></div>
+    <div><img class="notice" style="margin-left:200px;width:600px;height:600px;" src="<%=request.getContextPath()%>/upload/notice/<%=n.getnImgPath()%>" ></div>
     <div class="pc" style="text-align:center;margin-top:100px;"><%=n.getnContent() %></div>
     </div>
 

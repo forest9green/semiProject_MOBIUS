@@ -5,6 +5,7 @@
 
 <%
 	List<Notice> list=(List<Notice>)request.getAttribute("notice");
+	String pageBar=(String)request.getAttribute("pageBar");
 
 %>
 
@@ -39,7 +40,6 @@
                             <input type="submit" class="whitebtn" value="검색">
                         </form>
                         <table id="output_table" class="pa" border=1>
-                        <%if(list==null||list.isEmpty()){ %>
                             <thead>
                                 <tr>
                                     <th width=20><input type="checkbox" id="checkall"></th>
@@ -48,43 +48,25 @@
                                     <th width=50>정보</th>
                                 </tr>
                             </thead>
+                            	<% for(Notice n : list){%>
                             <tbody>
                                 <tr>
                                     <td><input type="checkbox" name="chk"></td>
-                                    <td>공지사항 내역이 없습니다.</td>
-                                    <td></td>
-                                    <td><button class="whitebtn">수정</button></td>
-                                </tr> 
-                            </tbody>
-                            <%}else{
-                            	for(Notice n : list){%>
-                            	<thead>
-                                <tr>
-                                    <th width=20><input type="checkbox" id="checkall"></th>
-                                    <th width=250>제목</th>
-                                    <th width=100>작성일</th>
-                                    <th width=50>정보</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="checkbox" name="chk"></td>
-                                    <td><%=n.getnTitle() %></td>
+                                    <td><a href="<%= request.getContextPath()%>/notice/noticeView?noticeNo=<%=n.getnoticeNo()%>"><%=n.getnTitle() %></a></td>
                                     <td><%=n.getnDate() %></td>
                                     <td><button class="whitebtn">수정</button></td>
                                 </tr> 
                             </tbody>
-                            <%}
-                            	}%>
+                            <%} %>
                         </table>
                         <div id="btn">
                             <button type="button" class="pb" style="background-color: white;">선택 삭제</button>
-                            <button type="button" class="pb blackbtn">글쓰기</button>
+                            <a href="<%= request.getContextPath()%>/admin/notice/writeNotice"><button type="button" class="pb blackbtn" >글쓰기</button></a>
                             <!--open()으로 작은 window창 열어서 등록 처리-->
                         </div>
                     </div>
                     <div id="admin_pagebar" class="pagebar">
-                        <span><a href="">1</a></span>
+                        <span><%=pageBar %></span>
                         <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
                     </div>
                 </div>
@@ -105,6 +87,11 @@
         </script>
 
         <style>
+        	
+        	a{
+        	color:black;
+        	text-decoration:none;}
+        
             .choice{
                 color:green;
                 text-decoration: underline;
