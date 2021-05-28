@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.admin.user.model.service.AdminMainService;
-import com.admin.user.vo.TotalInfo;
+import com.admin.user.model.service.AdminUserService;
+import com.admin.user.model.vo.TotalInfo;
 
 /**
  * Servlet implementation class MemberListServlet
@@ -42,10 +42,10 @@ public class MemberListServlet extends HttpServlet {
 			
 			int numPerpage = 10;
 			
-			List<TotalInfo> list = new AdminMainService().memberList(cPage,numPerpage);
+			List<TotalInfo> list = new AdminUserService().memberList(cPage,numPerpage);
 			
 			
-			int totalData = new AdminMainService().selectUserCount();
+			int totalData = new AdminUserService().selectUserCount();
 			int totalPage = (int)Math.ceil((double)totalData/numPerpage);
 			
 			int pageBarSize = 10;

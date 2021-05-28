@@ -1,5 +1,7 @@
 package com.admin.user.model.dao;
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,16 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.admin.user.vo.TotalInfo;
+import com.admin.user.model.vo.AdminUserInfo;
+import com.admin.user.model.vo.TotalInfo;
 
-import static com.common.JDBCTemplate.close;
-
-public class AdminMainDao {
+public class AdminUserDao {
 
 private Properties prop=new Properties();
 	
-	public AdminMainDao() {
-		String path=AdminMainDao.class.getResource("/sql/adminUser_sql.properties").getPath();
+	public AdminUserDao() {
+		String path=AdminUserDao.class.getResource("/sql/adminUser_sql.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		}catch(IOException e) {
@@ -83,7 +84,38 @@ private Properties prop=new Properties();
 	}
 
 	
-	
+	public AdminUserInfo UserInfo(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		AdminUserInfo user = null;
+		
+		int rownum=1;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectUser"));
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, rownum);
+		
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new AdminUserInfo();
+				user.setUserId(rs.getString("user_id"));
+				user.setUserName(rs.getString("user_name"));
+				user.setEmail(rs.getString("email"));
+				user.setCellPhone(rs.getString("cellphone"));
+				user.setPhone(rs.getString("phone"));
+				user.setEnrollDate(rs.getDate("join_date"));
+				user.setAddr(rs.getString("addr"));
+				user.setRecentAddr(rs.getString("o_address"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
+		return user;
+	}
 	
 	
 	

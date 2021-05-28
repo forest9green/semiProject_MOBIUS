@@ -6,13 +6,13 @@ import static com.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.admin.user.model.dao.AdminMainDao;
-import com.admin.user.vo.TotalInfo;
-import com.user.model.vo.User;
+import com.admin.user.model.dao.AdminUserDao;
+import com.admin.user.model.vo.AdminUserInfo;
+import com.admin.user.model.vo.TotalInfo;
 
-public class AdminMainService {
+public class AdminUserService {
 	
-	private AdminMainDao dao = new AdminMainDao();
+	private AdminUserDao dao = new AdminUserDao();
 	
 
 	public List<TotalInfo> memberList(int cPage,int numPerpage){
@@ -32,7 +32,12 @@ public class AdminMainService {
 	}
 	
 	
-	
+	public AdminUserInfo UserInfo(String userId) {
+		Connection conn= getConnection();
+		AdminUserInfo user = dao.UserInfo(conn,userId);
+		close(conn);
+		return user;
+	}
 	
 	
 	
