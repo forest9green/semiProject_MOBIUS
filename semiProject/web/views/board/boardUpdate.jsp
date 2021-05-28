@@ -9,7 +9,7 @@
             <div class="boatitle">  
                 <h1 class="mooni">문의사항</h1>                
             </div>  
-       	<form action="<%=request.getContextPath() %>/myPage/board/boardupdateEnd" method="post" >
+       	<form name="updateFrm" action="<%=request.getContextPath() %>/myPage/board/boardupdateEnd" method="post" >
             <div class="boardtitlett">
                 <h2 id="bo_title">
                     <span class="bo_badge bo_badge-light bo_badge-lg font-weight-light">배송문의</span>
@@ -18,27 +18,31 @@
             </div>
             
             <div id="bo_v_info">
-                <span class="bo_name" name="userId"><%=b.getUserId() %></span>
+                <span class="bo_name" ><%=b.getUserId() %></span>
                 <span class="bo_time" >21-05-06</span>
             </div>
             <div class="card-header text-left">
-                <span class="bo_cttitle"><%=b.getUserId() %>님의 문의글</span>
+                <span class="bo_cttitle" ><%=b.getUserId() %>님의 문의글</span>
             </div>
  
             <div class="bo_v_con">
                 <textarea cols="50" rows="10" class="bo_qc" name="bContent"><%=b.getbContent() %></textarea>
             </div>
+	            <input type="hidden" name="bNo" value="<%= b.getbNo()%>">
+	            <input type="hidden" name="bTitle" value="<%= b.getbTitle()%>">
+	            <input type="hidden" name="bCategory" value="<%= b.getbCategory()%>">
+          		<input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+          </form>
             <hr class="silsun">
                 <div id="bo_v_top">
                     <div class="bo_v_left">
-                        <a class="boabtn btn-light sujeong" href="" >수정완료</a>
-                        <a class="boabtn btn-light sakje" href="" onclick="del(this.href); return false;">삭제</a>     
+                        <a class="boabtn btn-light sujeong" href="javascript:void(0);" onclick="fn_updateBoard();" >수정완료</a>
+                        <a class="boabtn btn-light sakje" href="" >삭제</a>     
                     </div>
                     <div class="bo_v_right">
                         <a class="boabtn btn-secondary" href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">목록</a>
                      </div>
                 </div>    
-			</form>
                      <h3>답변</h3>
                 
 
@@ -47,6 +51,11 @@
                      </div>   
                        
       </section>
+      <script>
+      	function fn_updateBoard(){
+      		document.updateFrm.submit();
+      	}
+      </script>
 <style>
 	.bo_qc{
 		 width:100%;

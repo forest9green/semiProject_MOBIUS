@@ -38,7 +38,10 @@ public class BoardService {
 	public int insertBoard(Board b,  String userId) {
 		Connection conn=getConnection();
 		int result=dao.insertBoard(conn, b, userId);
-		if(result>0) commit(conn);
+		if(result>0) {
+			commit(conn);
+			result=dao.selectSeqCur(conn);
+		}
 		else rollback(conn);
 		close(conn);
 		return result;

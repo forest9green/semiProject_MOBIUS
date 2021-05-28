@@ -104,7 +104,7 @@ public class BoardDao {
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
 			pstmt.setString(1, b.getUserId());
-			pstmt.setString(2, b.getpCode());
+			pstmt.setString(2, b.getbNo());
 			pstmt.setString(3, b.getbCategory());
 			pstmt.setString(4, b.getbTitle());
 			pstmt.setString(5, b.getbContent());
@@ -133,5 +133,25 @@ public class BoardDao {
 			close(pstmt);
 		}return result;
 	}
+	public int selectSeqCur(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectSeqCur"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
 }
+
 

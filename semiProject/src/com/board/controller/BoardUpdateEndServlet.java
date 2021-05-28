@@ -49,11 +49,11 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		
 		int result=new BoardService().updateBoard(b, userId);
 		
-		String loc="/views/board/boardView.jsp";
+		String loc="/board/boardview?bNo="+b.getbNo();
 		String msg=result>0?"문의사항 수정 완료":"문의사항 수정 실패";
 		
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
+		request.setAttribute("loc", loc);	
 		
 		request.getRequestDispatcher("/views/common/msg.jsp")
 		.forward(request, response);
