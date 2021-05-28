@@ -1,4 +1,4 @@
-package com.admin.main.model.dao;
+package com.admin.user.model.dao;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.admin.main.vo.TotalInfo;
+import com.admin.user.vo.TotalInfo;
+
 import static com.common.JDBCTemplate.close;
 
 public class AdminMainDao {

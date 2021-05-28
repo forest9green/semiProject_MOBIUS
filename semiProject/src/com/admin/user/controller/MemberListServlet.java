@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.admin.main.model.service.AdminMainService;
-import com.admin.main.vo.TotalInfo;
+import com.admin.user.model.service.AdminMainService;
+import com.admin.user.vo.TotalInfo;
 
 /**
  * Servlet implementation class MemberListServlet
