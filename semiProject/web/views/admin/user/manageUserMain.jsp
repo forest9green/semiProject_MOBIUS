@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
+<%@ page import="com.admin.main.vo.TotalInfo" %>
 <%
-	List<User> users = (List<User>)request.getAttribute("users");
+	List<TotalInfo> users = (List<TotalInfo>)request.getAttribute("users");
 
 
 %>       
@@ -13,9 +14,9 @@
             <h2 class="pe title">관리자 페이지</h2> 
             <div class="content" style="display:flex">
                 <div class="category">
-                    <ul class="pd"><a href="<%=request.getContextPath() %>/views/admin/adminMain.jsp" class="black">메인</a></ul><br>
+                    <ul class="pd"><a href="<%=request.getContextPath() %>/admin/adminMain" class="black">메인</a></ul><br>
                     <ul class="pd">회원
-                        <li><a href="<%=request.getContextPath() %>/views/admin/user/manageUserMain.jsp" class="pc choice">- 회원 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/user/memberList" class="pc choice">- 회원 관리</a></li>
                         <li><a href="<%=request.getContextPath() %>/views/admin/order/manageOrderInfoDetail.jsp" class="pc black">- 주문 관리</a></li>
                         <li><a href="<%=request.getContextPath() %>/views/admin/cer/manageCERcancel.jsp" class="pc black">- 취소/교환/환불 처리</a></li>
                         <li><a href="<%=request.getContextPath() %>/views/admin/board/manageBoard.jsp" class="pc black">- 문의사항 관리</a></li>
@@ -30,7 +31,7 @@
 
                 <div class="main"> 
                     <h3 class="pd greenright">회원 관리</h3>
-                    <form id="searchId" action="" method="post">
+                    <form id="searchId" action="<%=request.getContextPath() %>/admin/user/searchId" method="post">
                         <input type="search" name="searchId" placeholder="아이디">
                         <input type="submit" class="whitebtn" value="검색">
                     </form>
@@ -51,12 +52,12 @@
                             		</td>
                             	</tr>
                             <%}else{ %>
-                            	<%for(User u : users){ %>
+                            	<%for(TotalInfo info : users){ %>
 		                        <form action="<%=request.getContextPath() %>/" method="post">    
 		                            <tr>
-		                                <td name="userId" value="<%=u.getUserId()%>"><%=u.getUserId() %></td>
-		                                <td>000,000원</td>
-		                                <td><%=u.getJoinDate() %></td>
+		                                <td name="" value="<%=info.getUserId()%>"><%=info.getUserId() %></td>
+		                                <td><%=info.getSum() %></td>
+		                                <td><%=info.getJoinDate() %></td>
 		                                <td><button class="whitebtn">자세히 보기</button></td><!--클릭 시 회원관리-회원정보(manageUserMain.jsp) 화면으로 이동-->
 		                            </tr>
 		                        </form>    
@@ -64,10 +65,7 @@
                             <%} %>
                         </tbody>
                     </table>
-                    <div id="btn">
-                    	<button type="button" class="pb">전체 선택</button>
-                        <button type="button" class="pb">선택 삭제</button>
-                    </div>
+                   
                     <div id="admin_pagebar" class="pagebar">
                         <%=request.getAttribute("pageBar") %>
                     </div>

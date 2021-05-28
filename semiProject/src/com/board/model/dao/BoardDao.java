@@ -103,9 +103,11 @@ public class BoardDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertBoard"));
-			pstmt.setString(1, b.getbTitle());
-			pstmt.setString(2, b.getbContent());
-			pstmt.setString(3, b.getUserId());
+			pstmt.setString(1, b.getUserId());
+			pstmt.setString(2, b.getpCode());
+			pstmt.setString(3, b.getbCategory());
+			pstmt.setString(4, b.getbTitle());
+			pstmt.setString(5, b.getbContent());
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -119,11 +121,12 @@ public class BoardDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("updateBoard"));
-			pstmt.setString(1, b.getbNo());
-			pstmt.setString(2, b.getUserId());
-			pstmt.setString(3, b.getbTitle());
-			pstmt.setString(4, b.getbContent());
-			pstmt.setString(5, b.getbCategory());
+			pstmt.setString(1, b.getUserId());
+			pstmt.setString(2, b.getbTitle());
+			pstmt.setString(3, b.getbContent());
+			pstmt.setString(4, b.getbCategory());
+			pstmt.setString(5, b.getbNo());
+			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

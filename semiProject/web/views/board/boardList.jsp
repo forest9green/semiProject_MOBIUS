@@ -24,7 +24,7 @@
         </table>
             
             <div class="ql_v_right">
-               <a href="<%=request.getContextPath()%>/board/boardform?userId=<%=loginUser.getUserId()%>" style="text-decoration:none;">문의하기</a> 
+               <a href="<%=request.getContextPath()%>/myPage/board/boardform?userId=<%=loginUser.getUserId()%>" style="text-decoration:none;">문의하기</a> 
             </div>
     </div>    
     <table class="qlv_list" border="1" height="50px">

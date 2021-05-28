@@ -3,6 +3,7 @@ package com.admin.notice.controller;
 import java.io.IOException;
 import java.util.List;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,22 +34,22 @@ public class AdminManageNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String noticeNo=(request.getParameter("noticeNo"));
 		int cPage;
-		int numPerpage=10;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
 		
+		int numPerpage=10;
 		
-		List<Notice> list=new AdminNoticeService().selectNoticeList(cPage,numPerpage,noticeNo);
 		
-		int totalData=new AdminNoticeService().selectNoticeCount(noticeNo);
+		List<Notice> list=new AdminNoticeService().selectNoticeList(cPage,numPerpage);
+		
+		int totalData=new AdminNoticeService().selectNoticeCount();
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
-		int pageBarSize=5;
+		int pageBarSize=10;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		String pageBar="";
@@ -58,7 +59,8 @@ public class AdminManageNoticeServlet extends HttpServlet {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/admin/notice/manageNotice?noticeNo"+noticeNo+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+				+"/admin/notice/manageNotice?cPage="+pageNo+
+				"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -66,7 +68,8 @@ public class AdminManageNoticeServlet extends HttpServlet {
 		request.setAttribute("notice",list);
 		request.setAttribute("pageBar",pageBar);
 		
-		request.getRequestDispatcher("/admin/notice/manageNotice.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/notice/manageNotice.jsp")
+		.forward(request, response);
 	}	
 
 	
