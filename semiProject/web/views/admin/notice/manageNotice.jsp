@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="java.util.List,com.notice.model.vo.Notice" %>
+
+<%
+	List<Notice> list=(List<Notice>)request.getAttribute("notice");
+
+%>
+
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -7,18 +15,18 @@
             <h2 class="pe title">관리자 페이지</h2> 
             <div class="content" style="display:flex">
                 <div class="category">
-                    <ul class="pd"><a href="<%=request.getContextPath() %>/views/admin/adminMain.jsp" class="black">메인</a></ul><br>
+                    <ul class="pd"><a href="<%=request.getContextPath() %>/views/admin/adminMain" class="black">메인</a></ul><br>
                     <ul class="pd">회원
-                        <li><a href="<%=request.getContextPath() %>/views/admin/user/manageUserMain.jsp" class="pc black">- 회원 관리</a></li>
-                        <li><a href="<%=request.getContextPath() %>/views/admin/order/manageOrderInfoDetail.jsp" class="pc black">- 주문 관리</a></li>
-                        <li><a href="<%=request.getContextPath() %>/views/admin/cer/manageCERcancel.jsp" class="pc black">- 취소/교환/환불 처리</a></li>
-                        <li><a href="<%=request.getContextPath() %>/views/admin/board/manageBoard.jsp" class="pc black">- 문의사항 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/views/admin/user/manageUserMain" class="pc black">- 회원 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/views/admin/order/manageOrderInfoDetail" class="pc black">- 주문 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/views/admin/cer/manageCERcancel" class="pc black">- 취소/교환/환불 처리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/views/admin/board/manageBoard" class="pc black">- 문의사항 관리</a></li>
                     </ul><br>
                     <ul class="pd">상품
-                        <li><a href="<%=request.getContextPath() %>/views/admin/product/manageProduct.jsp" class="pc black">- 상품 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/views/admin/product/manageProduct" class="pc black">- 상품 관리</a></li>
                     </ul><br>
                     <ul class="pd">설정
-                        <li><a href="<%=request.getContextPath() %>/views/admin/notice/manageNotice.jsp" class="choice pc black">- 공지사항 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/notice/manageNotice" class="choice" class="pc black">- 공지사항 관리</a></li>
                     </ul>
                 </div>
 
@@ -31,6 +39,7 @@
                             <input type="submit" class="whitebtn" value="검색">
                         </form>
                         <table id="output_table" class="pa" border=1>
+                        <%if(list==null||list.isEmpty()){ %>
                             <thead>
                                 <tr>
                                     <th width=20><input type="checkbox" id="checkall"></th>
@@ -40,17 +49,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--
-                                    값이 없으면 <tr>문의사항 내역이 없습니다.</tr> 추가
-                                    값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 처리해야 함
-                                -->
                                 <tr>
                                     <td><input type="checkbox" name="chk"></td>
-                                    <td></td>
+                                    <td>공지사항 내역이 없습니다.</td>
                                     <td></td>
                                     <td><button class="whitebtn">수정</button></td>
-                                </tr>
+                                </tr> 
                             </tbody>
+                            <%}else{
+                            	for(Notice n : list){%>
+                            	<thead>
+                                <tr>
+                                    <th width=20><input type="checkbox" id="checkall"></th>
+                                    <th width=250>제목</th>
+                                    <th width=100>작성일</th>
+                                    <th width=50>정보</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" name="chk"></td>
+                                    <td><%=n.getnTitle() %></td>
+                                    <td><%=n.getnDate() %></td>
+                                    <td><button class="whitebtn">수정</button></td>
+                                </tr> 
+                            </tbody>
+                            <%}
+                            	}%>
                         </table>
                         <div id="btn">
                             <button type="button" class="pb" style="background-color: white;">선택 삭제</button>
