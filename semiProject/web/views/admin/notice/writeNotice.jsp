@@ -3,7 +3,10 @@
 
 <%@ include file="/views/common/header.jsp"%>
     
+
+    
     <section>
+    
             <h2 class="pe title">관리자 페이지</h2> 
             <div class="content" style="display:flex">
                 <div class="category">
@@ -25,14 +28,14 @@
                 <div class="main"> 
                     <h3 class="pd greenright">공지사항 관리</h3>
                     <div id="user_content">
-                        <form action="">
+                        <form action="<%=request.getContextPath() %>/admin/notice/noticeWriteEnd" method="post" enctype="multipart/form-data">
                             <div class="pb">
                                 <span class="pb">제목</span>
-                                <input type="text">
+                                <input type="text" name="n_Title" id="n_Title">
                                 <h3>내용</h3>
-                                <textarea name="" id="" cols="118" rows="10"></textarea><br>
+                                <textarea name="n_Content" id="n_Content" cols="118" rows="10"></textarea><br>
                                 <span class="pb">썸네일</span>
-                                <input type="file">
+                                <input type="file" name="upfile">
                             </div>
                             <div id="btn">
                                 <input type="reset" class="blackbtn" value="취소">
