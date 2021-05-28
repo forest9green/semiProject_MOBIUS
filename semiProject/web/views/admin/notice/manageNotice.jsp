@@ -39,7 +39,6 @@
                             <input type="submit" class="whitebtn" value="검색">
                         </form>
                         <table id="output_table" class="pa" border=1>
-                        <%if(list==null||list.isEmpty()){ %>
                             <thead>
                                 <tr>
                                     <th width=20><input type="checkbox" id="checkall"></th>
@@ -48,24 +47,7 @@
                                     <th width=50>정보</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="checkbox" name="chk"></td>
-                                    <td>공지사항 내역이 없습니다.</td>
-                                    <td></td>
-                                    <td><button class="whitebtn">수정</button></td>
-                                </tr> 
-                            </tbody>
-                            <%}else{
-                            	for(Notice n : list){%>
-                            	<thead>
-                                <tr>
-                                    <th width=20><input type="checkbox" id="checkall"></th>
-                                    <th width=250>제목</th>
-                                    <th width=100>작성일</th>
-                                    <th width=50>정보</th>
-                                </tr>
-                            </thead>
+                            	<% for(Notice n : list){%>
                             <tbody>
                                 <tr>
                                     <td><input type="checkbox" name="chk"></td>
@@ -74,8 +56,7 @@
                                     <td><button class="whitebtn">수정</button></td>
                                 </tr> 
                             </tbody>
-                            <%}
-                            	}%>
+                            <%} %>
                         </table>
                         <div id="btn">
                             <button type="button" class="pb" style="background-color: white;">선택 삭제</button>
