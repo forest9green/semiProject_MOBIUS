@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.user.model.vo.User;
+import com.admin.main.vo.TotalInfo;
 import static com.common.JDBCTemplate.close;
 
 public class AdminMainDao {
@@ -26,29 +26,30 @@ private Properties prop=new Properties();
 		}
 	}
 	
-	public List<User> memberList(Connection conn, int cPage, int numPerpage){
+	public List<TotalInfo> memberList(Connection conn, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
-		List<User> list = new ArrayList();
+		List<TotalInfo> list = new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectMemberAll"));
 			pstmt.setInt(1, (cPage-1)*numPerpage+1);
 			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				User u = new User();
-				u.setUserId(rs.getString("user_Id"));
-				u.setUserPwd(rs.getString("user_Pwd"));
-				u.setUserName(rs.getString("user_Name"));
-				u.setEmail(rs.getString("email"));
-				u.setEmailSmsCk(rs.getInt("email_Sms_Ck"));
-				u.setCellPhone(rs.getString("cellPhone"));
-				u.setPhoneSmsCk(rs.getInt("phone_Sms_Ck"));
-				u.setPhone(rs.getString("phone"));
-				u.setJoinDate(rs.getDate("join_Date"));
-				u.setRecentDate(rs.getDate("recent_Date"));
-				u.setMileage(rs.getInt("mileage"));
-				list.add(u);
+				TotalInfo info = new TotalInfo();
+				info.setUserId(rs.getString("user_Id"));
+				info.setUserPwd(rs.getString("user_Pwd"));
+				info.setUserName(rs.getString("user_Name"));
+				info.setEmail(rs.getString("email"));
+				info.setEmailSmsCk(rs.getInt("email_Sms_Ck"));
+				info.setCellPhone(rs.getString("cellPhone"));
+				info.setPhoneSmsCk(rs.getInt("phone_Sms_Ck"));
+				info.setPhone(rs.getString("phone"));
+				info.setJoinDate(rs.getDate("join_Date"));
+				info.setRecentDate(rs.getDate("recent_Date"));
+				info.setMileage(rs.getInt("mileage"));
+				info.setSum(rs.getInt("sum"));
+				list.add(info);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -56,7 +57,6 @@ private Properties prop=new Properties();
 			close(rs);
 			close(pstmt);
 		}
-
 		return list;
 		
 	}
@@ -78,7 +78,6 @@ private Properties prop=new Properties();
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(result);
 		return result;
 	}
 

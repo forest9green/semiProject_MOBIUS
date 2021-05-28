@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.admin.main.model.dao.AdminMainDao;
+import com.admin.main.vo.TotalInfo;
 import com.user.model.vo.User;
 
 public class AdminMainService {
@@ -14,11 +15,12 @@ public class AdminMainService {
 	private AdminMainDao dao = new AdminMainDao();
 	
 
-	public List<User> memberList(int cPage,int numPerpage){
+	public List<TotalInfo> memberList(int cPage,int numPerpage){
 		Connection conn = getConnection();
-		List<User> list = dao.memberList(conn,cPage,numPerpage);
+		List<TotalInfo> list = dao.memberList(conn,cPage,numPerpage);
 		close(conn);
 		return list;
+		
 	}
 	
 	

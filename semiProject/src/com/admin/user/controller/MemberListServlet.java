@@ -1,4 +1,4 @@
-package com.admin.main.controller;
+package com.admin.user.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,10 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.admin.main.model.service.AdminMainService;
-import com.user.model.vo.User;
+import com.admin.main.vo.TotalInfo;
 
 /**
  * Servlet implementation class MemberListServlet
@@ -43,7 +42,7 @@ public class MemberListServlet extends HttpServlet {
 			
 			int numPerpage = 10;
 			
-			List<User> list = new AdminMainService().memberList(cPage,numPerpage);
+			List<TotalInfo> list = new AdminMainService().memberList(cPage,numPerpage);
 			
 			
 			int totalData = new AdminMainService().selectUserCount();
