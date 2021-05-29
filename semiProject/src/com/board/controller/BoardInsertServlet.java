@@ -32,42 +32,13 @@ public class BoardInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String userId=request.getParameter("userId");
-		
-		Board b=new Board();
-		b.setbNo("bNo");
-		b.setbTitle("bTitle");
-		b.setbContent("bContent");
-
-		
-		BoardService boardService = new BoardService();	
-		boardService.insertBoard(b,userId);
-		
-		request.setAttribute("board", b);
+		// TODO Auto-generated method stub		
 		
 		request.getRequestDispatcher("/views/board/boardForm.jsp")
 		.forward(request, response);
 		
-		int result=0;
-		//등록성공하면 등록성공 메세지출력 후 리스트화면으로 이동
-		//등록실패하면 등록실패 메세지출력 후 등록화면으로 이동
-		String msg="";
-		String loc="";
-		if(result>0) {
-			msg="문의사항등록 성공";
-			loc="myPage/board/boardList";
-		}else {
-			msg="문의사항등록 실패";
-			loc="/board/boardForm";
-		}
-		request.setAttribute("msg",msg);
-		request.setAttribute("loc",loc);
-		request.getRequestDispatcher("/views/common/msg.jsp")
-		.forward(request, response);
 		
-
-
+		
 
 	
 	}
