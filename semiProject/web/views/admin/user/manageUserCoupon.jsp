@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.List,com.coupon.model.vo.Coupon" %>
+<%
+	List<Coupon> clist = (List<Coupon>)request.getAttribute("clist");
+%>
 <%@ include file="/views/common/header.jsp"%>
 
         <section>
@@ -43,23 +46,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--
-                                    값이 없으면 <tr>쿠폰 내역이 없습니다.</tr> 추가
-                                    값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 처리해야 함
-                                -->
-                                <tr>
-                                    <td><input type="checkbox" name="chk"></td>
-                                    <td>쿠폰명</a></td>
-                                    <td>10%</td>
-                                    <td>쿠폰 발급일</td>
-                                    <td>쿠폰 종료일</td>
-                                    <td>사용 여부</td>
-                                </tr>
+                               <%if(clist.isEmpty()){ %>
+                               		<tr>
+                            		<td colspan="9" align="center">
+                            			검색결과가 없습니다.
+                            		</td>
+                            		</tr>
+                               <%}else{ %>
+	                                <%for(Coupon c : clist){ %>
+		                                <tr>
+		                                    <form action="" name="insertCoupon">
+												<input text="hidden" name="userId" value="<%=c.getcName()%>">
+											</form>
+		                                    <td><input type="checkbox" name="chk"></td>
+		                                    <td><%=c.getcName() %></td>
+		                                    <td><%=c.getcDiscount() %></td>
+											<td><%=c.getcIssueDate() %></td>
+											<td><%=c.getcFinishDate() %></td>
+											<%if(c.getcUse()==1){ %>
+		                                		<td>사용완료</td>
+		                                	<%}else {%>
+		                                		<td>미사용</td>
+		                                	<%} %>
+		                                </tr>
+	                                <%} %>
+                                <%} %>
                             </tbody>
                         </table>
                         <div id="btn">
                             <button type="button" class="pb" style="background-color: white;">선택 삭제</button>
-                            <button type="button" class="pb blackbtn">등록</button>
+                            <button type="button" class="pb blackbtn" onclick="fn_insert_coupon();">등록</button>
                             <!--open()으로 작은 window창 열어서 등록 처리-->
                         </div>
                     </div>
@@ -70,6 +86,8 @@
                 </div>
             </div>    
         </section>
+        
+        
         <script>
             $(document).ready(function(){
                 $("#checkall").click(function(){
@@ -81,6 +99,20 @@
                     }
                 })
             })
+            
+            const fn_insert_coupon=()=>{
+            	const url="<%=request.getContextPath()%>/admin/user/insertCoupon.jsp";
+            	const title = "insertCoupon";
+            	const status = "left=500px,top=100px,width=500px,height=400px";
+            	
+            	open("",title,status);
+            	
+            	insertCoupon.method="post";
+            	insertCoupon.action=url;
+            	insertCoupon.target=title;
+            	
+            	insertCouopon.submit();
+            }
         </script>
 
 

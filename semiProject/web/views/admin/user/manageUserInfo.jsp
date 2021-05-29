@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.admin.user.model.vo.AdminUserInfo" %>
+<%
+	AdminUserInfo info = (AdminUserInfo)request.getAttribute("user");
+%>
 <%@ include file="/views/common/header.jsp"%>
 
        <section>
             <h2 class="pe title">관리자 페이지</h2> 
             <div class="content" style="display:flex">
                 <div class="category">
-                    <ul class="pd"><a href="<%=request.getContextPath() %>/views/admin/adminMain.jsp" class="black">메인</a></ul><br>
+                    <ul class="pd"><a href="<%=request.getContextPath() %>/admin/adminMain" class="black">메인</a></ul><br>
                     <ul class="pd">회원
                         <li><a href="<%=request.getContextPath() %>/admin/user/memberList" class="pc choice">- 회원 관리</a></li>
                         <li><a href="<%=request.getContextPath() %>/views/admin/order/manageOrderInfoDetail.jsp" class="pc black">- 주문 관리</a></li>
@@ -26,35 +29,47 @@
                     <h3 class="pd greenright">회원 관리</h3>
                     <div id="user_btn">
                         <button type="button" class="choice2">회원 정보</button>
-                        <button type="button">쿠폰</button>
+                        <button type="button" id="fn_move_coupon">쿠폰</button>
                         <button type="button">적립금</button>
                         <button type="button">구매내역</button>
                     </div>
                     <div id="user_content" class="pb">
                         <div class="cBox1">
                             <ul><h4>기본 정보</h4>
-                                <li>아이디 : </li>
-                                <li>이름 : </li>
-                                <li>이메일 : </li>
-                                <li>휴대폰번호 : </li>
-                                <li>일반전화번호 :</li>
-                                <li>가입일 : </li>
+                                <li>아이디 : <%=info.getUserId() %> </li>
+                                <li>이름 : <%=info.getUserName() %></li>
+                                <li>이메일 : <%=info.getEmail() %> </li>
+                                <li>휴대폰번호 : <%=info.getCellPhone() %></li>
+                                <li>일반전화번호 : <%=info.getPhone() %></li>
+                                <li>가입일 : <%=info.getEnrollDate() %></li>
                             </ul>
                         </div>
                         <div>
                             <div class="cBox2">
                                 <h4>기본 배송지</h4>
-                                배송지 입력
+                                <span>
+                                	<%=info.getAddr() %>
+                                </span>
                             </div>
                             <div class="cBox2">
                                 <h4>최근 배송지</h4>
-                                배송지 입력
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>    
         </section>
+
+<form action="<%=request.getContextPath() %>/admin/user/coupon" method="post" id="moveCoupon">
+	<input type="hidden" name="userId" value="<%=info.getUserId()%>">
+</form>	
+	
+		<script>
+		$("#fn_move_coupon").click(function(){
+			$("#moveCoupon").submit();
+		})
+		</script>
 
 
         <style>

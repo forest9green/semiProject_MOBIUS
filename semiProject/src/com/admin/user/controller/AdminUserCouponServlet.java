@@ -1,6 +1,7 @@
 package com.admin.user.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.admin.user.model.service.AdminUserService;
-import com.admin.user.model.vo.AdminUserInfo;
+import com.coupon.model.vo.Coupon;
 
 /**
- * Servlet implementation class AdminMemberServlet
+ * Servlet implementation class AdminUserCouponServlet
  */
-@WebServlet("/admin/member/info")
-public class AdminMemberServlet extends HttpServlet {
+@WebServlet("/admin/user/coupon")
+public class AdminUserCouponServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberServlet() {
+    public AdminUserCouponServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +33,11 @@ public class AdminMemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userId = request.getParameter("userId");
-		AdminUserInfo user = new AdminUserService().UserInfo(userId);
-
 		
+		List<Coupon> clist = new AdminUserService().CouponList(userId);
 		
-		request.setAttribute("user", user);
-		
-		request.getRequestDispatcher("/views/admin/user/manageUserInfo.jsp")
+		request.setAttribute("clist", clist);
+		request.getRequestDispatcher("/views/admin/user/manageUserCoupon.jsp")
 		.forward(request, response);
 	}
 

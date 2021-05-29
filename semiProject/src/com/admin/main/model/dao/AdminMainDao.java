@@ -1,4 +1,4 @@
-package com.admin.main.model.service;
+package com.admin.main.model.dao;
 
 import static com.common.JDBCTemplate.close;
 
@@ -43,10 +43,11 @@ public class AdminMainDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				AdminMainInfo info=new AdminMainInfo();
+				info.setrNum(rs.getInt("rnum"));
 				info.setCateCode(rs.getString("cate_code"));
 				info.setpCode(rs.getString("p_code"));
 				info.setPrice(rs.getInt("price"));
-				info.setStock(rs.getInt("price"));
+				info.setStock(rs.getInt("stock"));
 				info.setpEnrollDate(rs.getDate("p_enroll_date"));
 				info.setDeliveryFee(rs.getInt("delivery_fee"));
 				info.setSize(rs.getString("size"));
@@ -114,7 +115,7 @@ public class AdminMainDao {
 			while(rs.next()) {
 				Board b = new Board();
 				b.setbNo(rs.getString("b_no"));
-				b.setUserId(rs.getString("userId"));
+				b.setUserId(rs.getString("user_Id"));
 				b.setpCode(rs.getString("p_code"));
 				b.setbCategory(rs.getString("b_category"));
 				b.setbTitle(rs.getString("b_title"));

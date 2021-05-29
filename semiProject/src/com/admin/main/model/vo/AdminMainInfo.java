@@ -3,6 +3,7 @@ package com.admin.main.model.vo;
 import java.util.Date;
 
 public class AdminMainInfo {
+	private int rNum;
 	private String cateCode;
 	private String pCode;
 	private int price;
@@ -17,9 +18,10 @@ public class AdminMainInfo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AdminMainInfo(String cateCode, String pCode, int price, int stock, Date pEnrollDate, int deliveryFee,
-			String size, String pName, String category) {
+	public AdminMainInfo(int rNum, String cateCode, String pCode, int price, int stock, Date pEnrollDate,
+			int deliveryFee, String size, String pName, String category) {
 		super();
+		this.rNum = rNum;
 		this.cateCode = cateCode;
 		this.pCode = pCode;
 		this.price = price;
@@ -29,6 +31,14 @@ public class AdminMainInfo {
 		this.size = size;
 		this.pName = pName;
 		this.category = category;
+	}
+
+	public int getrNum() {
+		return rNum;
+	}
+
+	public void setrNum(int rNum) {
+		this.rNum = rNum;
 	}
 
 	public String getCateCode() {
@@ -105,10 +115,11 @@ public class AdminMainInfo {
 
 	@Override
 	public String toString() {
-		return "AdminMainInfo [cateCode=" + cateCode + ", pCode=" + pCode + ", price=" + price + ", stock=" + stock
-				+ ", pEnrollDate=" + pEnrollDate + ", deliveryFee=" + deliveryFee + ", size=" + size + ", pName="
-				+ pName + ", category=" + category + "]";
+		return "AdminMainInfo [rNum=" + rNum + ", cateCode=" + cateCode + ", pCode=" + pCode + ", price=" + price
+				+ ", stock=" + stock + ", pEnrollDate=" + pEnrollDate + ", deliveryFee=" + deliveryFee + ", size="
+				+ size + ", pName=" + pName + ", category=" + category + "]";
 	}
+
 	
 	
 	

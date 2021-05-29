@@ -9,6 +9,7 @@ import java.util.List;
 import com.admin.user.model.dao.AdminUserDao;
 import com.admin.user.model.vo.AdminUserInfo;
 import com.admin.user.model.vo.TotalInfo;
+import com.coupon.model.vo.Coupon;
 
 public class AdminUserService {
 	
@@ -39,7 +40,12 @@ public class AdminUserService {
 		return user;
 	}
 	
-	
+	public List<Coupon> CouponList(String userId){
+		Connection conn = getConnection();
+		List<Coupon> clist = dao.CouponList(conn,userId);
+		close(conn);
+		return clist;
+	}
 	
 	
 	
