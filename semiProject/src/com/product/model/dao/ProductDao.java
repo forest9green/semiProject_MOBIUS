@@ -110,7 +110,7 @@ public class ProductDao {
 				p.setpCode(rs.getString("p_code"));
 				p.setCateCode(rs.getString("cate_code"));
 				p.setPrice(rs.getInt("price"));
-				p.setStock(rs.getInt("price"));
+				p.setStock(rs.getInt("stock"));
 				p.setpEnrollDate(rs.getDate("p_enroll_date"));
 				p.setDeliveryFee(rs.getInt("delivery_fee"));
 				p.setSize(rs.getString("size"));
