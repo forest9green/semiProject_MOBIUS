@@ -10,9 +10,7 @@ public class AdminUserInfo {
 	private String cellPhone;
 	private String phone;
 	private Date enrollDate;
-	private String addr;
-	private String recentAddr;
-	
+	private String addr;	
 	public AdminUserInfo() {
 		// TODO Auto-generated constructor stub
 	}
@@ -27,7 +25,6 @@ public class AdminUserInfo {
 		this.phone = phone;
 		this.enrollDate = enrollDate;
 		this.addr = addr;
-		this.recentAddr = recentAddr;
 	}
 
 	public String getUserId() {
@@ -86,20 +83,16 @@ public class AdminUserInfo {
 		this.addr = addr;
 	}
 
-	public String getRecentAddr() {
-		return recentAddr;
-	}
-
-	public void setRecentAddr(String recentAddr) {
-		this.recentAddr = recentAddr;
-	}
-
 	@Override
 	public String toString() {
 		return "AdminUserInfo [userId=" + userId + ", userName=" + userName + ", email=" + email + ", cellPhone="
-				+ cellPhone + ", phone=" + phone + ", enrollDate=" + enrollDate + ", addr=" + addr + ", recentAddr="
-				+ recentAddr + "]";
+				+ cellPhone + ", phone=" + phone + ", enrollDate=" + enrollDate + ", addr=" + addr + "]";
 	}
+
+
+	
+
+	
 	
 	
 	

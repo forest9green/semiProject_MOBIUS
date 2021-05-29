@@ -12,7 +12,7 @@
 <section>
 	<h1 id="pTitle" class="pe"><%=category %></h1>
 	<div id="wh_sp_v_top">
-		<form id="pSelectFrm" action="">
+		<form id="pSelectFrm" action="" method="post">
 			<select id="pListSelect" name="pListSelect" class="pb">
 			    <option value="P_ENROLL_DATE DESC" <%=orderBy.equals("P_ENROLL_DATE DESC")?"selected":"" %>>최신순</option>
 			    <option value="R_STAR DESC" <%=orderBy.equals("R_STAR DESC")?"selected":"" %>>인기순</option>
