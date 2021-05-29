@@ -24,7 +24,7 @@
                         <li><a href="<%=request.getContextPath() %>/views/admin/board/manageBoard" class="pc black">- 문의사항 관리</a></li>
                     </ul><br>
                     <ul class="pd">상품
-                        <li><a href="<%=request.getContextPath() %>/views/admin/product/manageProduct" class="pc black">- 상품 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/manageProductMain" class="pc black">- 상품 관리</a></li>
                     </ul><br>
                     <ul class="pd">설정
                         <li><a href="<%=request.getContextPath() %>/admin/notice/manageNotice" class="choice" class="pc black">- 공지사항 관리</a></li>
