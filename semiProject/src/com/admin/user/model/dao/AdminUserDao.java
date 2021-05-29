@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.admin.user.model.vo.AdminUserInfo;
 import com.admin.user.model.vo.TotalInfo;
+import com.coupon.model.vo.Coupon;
 
 public class AdminUserDao {
 
@@ -106,7 +107,6 @@ private Properties prop=new Properties();
 				user.setPhone(rs.getString("phone"));
 				user.setEnrollDate(rs.getDate("join_date"));
 				user.setAddr(rs.getString("addr"));
-				user.setRecentAddr(rs.getString("o_address"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -117,7 +117,36 @@ private Properties prop=new Properties();
 		return user;
 	}
 	
-	
+	public List<Coupon> CouponList(Connection conn , String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		List<Coupon> clist = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("couponList"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Coupon c = new Coupon();
+				c.setcNo(rs.getString("c_no"));
+				c.setUserId(rs.getString("user_id"));
+				c.setcName(rs.getString("c_name"));
+				c.setcDiscount(rs.getDouble("c_discount"));
+				c.setcIssueDate(rs.getDate("c_issue_date"));
+				c.setcFinishDate(rs.getDate("c_finish_date"));
+				c.setcLimit(rs.getInt("c_limit"));
+				c.setcUse(rs.getInt("c_use"));
+				clist.add(c);
+
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return clist;
+
+	}
 	
 	
 	

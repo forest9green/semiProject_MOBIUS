@@ -1,4 +1,4 @@
-package com.admin.main.model.dao;
+package com.admin.main.model.service;
 
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.getConnection;
@@ -6,7 +6,7 @@ import static com.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.admin.main.model.service.AdminMainDao;
+import com.admin.main.model.dao.AdminMainDao;
 import com.admin.main.model.vo.AdminMainInfo;
 import com.board.model.vo.Board;
 import com.order.model.vo.Order;

@@ -44,7 +44,8 @@
                             	</tr>
 	                            <%}else{ %>
 	                            	<%for(AdminMainInfo info : plist){ %>		                       
-			                            <tr>
+			                            <tr class="rank2">
+			                                <td><%=info.getrNum() %>.</td>
 			                                <td><%=info.getCategory()%> / </td>
 			                                <td><%=info.getpCode() %> / </td>
 			                                <td><%=info.getpName() %></td>
@@ -92,6 +93,7 @@
 	                            <%}else{ %>
 	                            	<%for(Board b : blist){ %>		                       
 			                            <tr>
+			                            	<td></td>
 			                                <td><%=b.getbTitle()%> / </td>
 			                                <td><%=b.getUserId()%></td>
 			                                <br>
@@ -168,10 +170,12 @@
             .rank{
                 border: 1px solid black;
                 height: 150px;
-                text-align: center;
+                text-align: left;
                 padding-top: 20px ;
             }
-            
+            .rank2{
+            	taxt-align:left;
+            }
             .order_tit{
                 border: 1px solid black;
                 text-align: center;
@@ -195,7 +199,7 @@
             .qna_info{
                 border: 1px solid black;
                 height: 130px;
-                padding-top: 30px;
+                padding: 15px 0 15px 0;
                 text-align: center;
             }
             body{
