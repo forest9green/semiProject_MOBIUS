@@ -1,5 +1,7 @@
 package com.admin.user.model.dao;
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,16 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.admin.user.vo.TotalInfo;
+import com.admin.user.model.vo.AdminUserInfo;
+import com.admin.user.model.vo.TotalInfo;
+import com.coupon.model.vo.Coupon;
 
-import static com.common.JDBCTemplate.close;
-
-public class AdminMainDao {
+public class AdminUserDao {
 
 private Properties prop=new Properties();
 	
-	public AdminMainDao() {
-		String path=AdminMainDao.class.getResource("/sql/adminUser_sql.properties").getPath();
+	public AdminUserDao() {
+		String path=AdminUserDao.class.getResource("/sql/adminUser_sql.properties").getPath();
 		try {
 			prop.load(new FileReader(path));
 		}catch(IOException e) {
@@ -83,9 +85,68 @@ private Properties prop=new Properties();
 	}
 
 	
+	public AdminUserInfo UserInfo(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		AdminUserInfo user = null;
+		
+		int rownum=1;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectUser"));
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, rownum);
+		
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new AdminUserInfo();
+				user.setUserId(rs.getString("user_id"));
+				user.setUserName(rs.getString("user_name"));
+				user.setEmail(rs.getString("email"));
+				user.setCellPhone(rs.getString("cellphone"));
+				user.setPhone(rs.getString("phone"));
+				user.setEnrollDate(rs.getDate("join_date"));
+				user.setAddr(rs.getString("addr"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
+		return user;
+	}
 	
-	
-	
+	public List<Coupon> CouponList(Connection conn , String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		List<Coupon> clist = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("couponList"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Coupon c = new Coupon();
+				c.setcNo(rs.getString("c_no"));
+				c.setUserId(rs.getString("user_id"));
+				c.setcName(rs.getString("c_name"));
+				c.setcDiscount(rs.getDouble("c_discount"));
+				c.setcIssueDate(rs.getDate("c_issue_date"));
+				c.setcFinishDate(rs.getDate("c_finish_date"));
+				c.setcLimit(rs.getInt("c_limit"));
+				c.setcUse(rs.getInt("c_use"));
+				clist.add(c);
+
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return clist;
+
+	}
 	
 	
 	

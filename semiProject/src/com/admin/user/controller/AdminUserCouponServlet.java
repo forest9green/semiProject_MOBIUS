@@ -1,4 +1,4 @@
-package com.showroom.controller;
+package com.admin.user.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.showroom.model.service.ShowRoomService;
-import com.showroom.model.vo.ShowRoomDetail;
+import com.admin.user.model.service.AdminUserService;
+import com.coupon.model.vo.Coupon;
 
 /**
- * Servlet implementation class showroomDetailServlet
+ * Servlet implementation class AdminUserCouponServlet
  */
-@WebServlet("/showroom/srDetail")
-public class showroomDetailServlet extends HttpServlet {
+@WebServlet("/admin/user/coupon")
+public class AdminUserCouponServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public showroomDetailServlet() {
+    public AdminUserCouponServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +31,14 @@ public class showroomDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String srMenu=request.getParameter("srMenu");
+		// TODO Auto-generated method stub
+		String userId = request.getParameter("userId");
 		
-		List<ShowRoomDetail> list=new ShowRoomService().selectSR(srMenu);
+		List<Coupon> clist = new AdminUserService().CouponList(userId);
 		
-		request.setAttribute("srMenu", srMenu);
-		request.setAttribute("showrooms", list);
-		request.getRequestDispatcher("/views/showroom/showroomView.jsp").forward(request, response);
+		request.setAttribute("clist", clist);
+		request.getRequestDispatcher("/views/admin/user/manageUserCoupon.jsp")
+		.forward(request, response);
 	}
 
 	/**

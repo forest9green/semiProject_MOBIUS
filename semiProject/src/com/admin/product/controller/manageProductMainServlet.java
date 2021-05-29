@@ -1,4 +1,4 @@
-package com.product.controller;
+package com.admin.product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,16 +14,16 @@ import com.product.model.service.ProductService;
 import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class ProductListServlet
+ * Servlet implementation class AdminProductListServlet
  */
-@WebServlet("/product/productList")
-public class ProductListServlet extends HttpServlet {
+@WebServlet("/admin/manageProductMain")
+public class manageProductMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListServlet() {
+    public manageProductMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +33,15 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String category=request.getParameter("category");
-		String orderBy=request.getParameter("pListSelect");
-		if(orderBy==null) {
-			orderBy="P_ENROLL_DATE DESC";
+		String pKeyword=request.getParameter("pKeyword");
+		if(category==null) {
+			category="전체";
 		}
 		String cateCode="";
 		List<Product> list=new ArrayList<>();
 		
-		
-//		System.out.println(request.getHeader("referrer"));
-		
 		int cPage;
-		int numPerPage=9;
+		int numPerPage=10;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
@@ -54,23 +51,26 @@ public class ProductListServlet extends HttpServlet {
 		int totalData=0;
 		
 		if(!category.equals("전체")) {
-			if(category.equals("세일")) {
-				list=null;
+			//카테고리가 전체가 아님
+			if(pKeyword==null) {
+				//검색어가 없음
+				
 			}else {
-				cateCode=new ProductService().searchCateCode(category);
-				list=new ProductService().selectProductList(cateCode,orderBy,cPage,numPerPage);
-				totalData=new ProductService().selectProductCount(cateCode);
+				//검색어가 있음
 			}
-			request.setAttribute("category", category);
 			
-		} else{
-			//카테고리가 전체임
-			request.setAttribute("category", "전체");
-			list=new ProductService().selectProductList(orderBy,cPage,numPerPage);
-			totalData=new ProductService().selectProductCount();
-			System.out.println("totalData"+totalData);
+		} else {
+			//카테고리가 전체
+			if(pKeyword==null) {
+				//검색어가 없음
+				list=new ProductService().selectProductList("P_ENROLL_DATE DESC",cPage,numPerPage);
+				totalData=new ProductService().selectProductCount();
+				
+			}else {
+				//검색어가 있음
+			}
 		}
-
+		
 		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
 		
 		int pageBarSize=10;
@@ -83,14 +83,14 @@ public class ProductListServlet extends HttpServlet {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/product/productList?cPage="+pageNo+"&pListSelect="+orderBy+"&category="+category+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/admin/manageProductMain?cPage="+pageNo+"&category="+category+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		
-		request.setAttribute("products", list);
+		request.setAttribute("products",list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/views/product/productList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/product/manageProduct.jsp").forward(request, response);
 	}
 
 	/**

@@ -1,7 +1,6 @@
-package com.showroom.controller;
+package com.admin.user.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.showroom.model.service.ShowRoomService;
-import com.showroom.model.vo.ShowRoomDetail;
+import com.admin.user.model.service.AdminUserService;
+import com.admin.user.model.vo.AdminUserInfo;
 
 /**
- * Servlet implementation class showroomDetailServlet
+ * Servlet implementation class AdminMemberServlet
  */
-@WebServlet("/showroom/srDetail")
-public class showroomDetailServlet extends HttpServlet {
+@WebServlet("/admin/member/info")
+public class AdminMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public showroomDetailServlet() {
+    public AdminMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +30,16 @@ public class showroomDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String srMenu=request.getParameter("srMenu");
+		// TODO Auto-generated method stub
+		String userId = request.getParameter("userId");
+		AdminUserInfo user = new AdminUserService().UserInfo(userId);
+
 		
-		List<ShowRoomDetail> list=new ShowRoomService().selectSR(srMenu);
 		
-		request.setAttribute("srMenu", srMenu);
-		request.setAttribute("showrooms", list);
-		request.getRequestDispatcher("/views/showroom/showroomView.jsp").forward(request, response);
+		request.setAttribute("user", user);
+		
+		request.getRequestDispatcher("/views/admin/user/manageUserInfo.jsp")
+		.forward(request, response);
 	}
 
 	/**

@@ -10,7 +10,7 @@
     	<div class="subTitle">
 	        <h1>문의사항 작성<span></span></h1>
     	</div>
-	<form action='<%=request.getContextPath()%>/myPage/board/boardinsert' method="post" >	
+	<form name="insertFrm" action='<%=request.getContextPath()%>/myPage/board/boardinsertend' method="post" >	
 		<input type='hidden' name="userId" value="<%=loginUser.getUserId() %>">
 		<div class="qalist">
 	             <label for="ca_name">분류</label>
@@ -22,16 +22,16 @@
 	                         <option value="배송" >배송</option>
 	                         <option value="기타" >기타문의사항</option>
 	                 </select>
-	                 
+	       </div>          
 	       <div class="bfi">
 	             <!-- 제목 -->
 		        <label for="wr_subject">제목</label>
-		        <span></span>
-		        <input class="title" type="text" name="bTitle" id="wr_subject" required size="100" maxlength="200" placeholder="제목">
+		        <input class="title" type="text" name="bTitle" id="wr_subject" required size="100" maxlength="200" placeholder="제목" >
 		        <!-- 내용 -->
 		        <textarea id="wr_content" name="bContent" class="smarteditor2" maxlength="5000" style="width:100%; height: 200px;"
 		        placeholder="내용을 입력해주세요" ></textarea>
 			</div>        
+	 </form> 
 	        <div class="btn-box">
 	            <ul>
 	                <li>          
@@ -40,16 +40,19 @@
 	                    </div> 
 	                </li>
 	                <li>    
-	                    <div class="complete-btn pb" id="complete"  >
-	                        <button class="btn-bf-submit" type="submit">작성완료</button>
+	                    <div class="complete-btn pb" id="complete">
+	                        <button class="btn-bf-submit" onclick="fn_insertBoard()">작성완료</button>
 	                    </div>
 	                </li>
 	            </ul>
         	</div>
-        </div>
-       </form>
+       			
 </section>
-
+<script>
+	function fn_insertBoard(){
+		document.insertFrm.submit();
+	}
+</script>
 <style>
 	.btn-bf-submit{
 	}

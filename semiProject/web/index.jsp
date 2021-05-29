@@ -39,7 +39,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
-                                                <a href="">
+                                                <a href="<%=request.getContextPath()%>/product/productList">
                                                     <strong class="item_name pc">
                                                         리너셀렉트 바이브<br> 멀티케어 3인용 소파 
                                                     </strong>

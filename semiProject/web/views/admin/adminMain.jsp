@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.List, com.admin.main.model.vo.AdminMainInfo,com.order.model.vo.Order,com.board.model.vo.Board" %>    
+<%
+	List<AdminMainInfo> plist = (List<AdminMainInfo>)request.getAttribute("plist");
+	List<Order> olist = (List<Order>)request.getAttribute("olist");
+	List<Board> blist = (List<Board>)request.getAttribute("blist");
+%>
 
 
 <%@ include file="/views/common/header.jsp"%>
@@ -17,7 +22,7 @@
                         <li><a href="<%=request.getContextPath() %>/views/admin/board/manageBoard.jsp" class="pc black">- 문의사항 관리</a></li>
                     </ul><br>
                     <ul class="pd">상품
-                        <li><a href="<%=request.getContextPath() %>/views/admin/product/manageProduct.jsp" class="pc black">- 상품 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/manageProductMain" class="pc black">- 상품 관리</a></li>
                     </ul><br>
                     <ul class="pd">설정
                         <li><a href="<%=request.getContextPath() %>/views/admin/notice/manageNotice.jsp" class="pc black">- 공지사항 관리</a></li>
@@ -31,12 +36,25 @@
                         <div class="main2 pd" >판매율 top5</div>
                             <div class="rank pc">
                                 <!--해당하는 상품에 모두 링크되어야 합니다!-->
-                                1. 상품카테고리/상품코드/상품명<br>
-                                2. 상품카테고리/상품코드/상품명<br>
-                                3. 상품카테고리/상품코드/상품명<br>
-                                4. 상품카테고리/상품코드/상품명<br>
-                                5. 상품카테고리/상품코드/상품명
+                               <%if(plist.isEmpty()){ %>
+                            	<tr>
+                            		<td colspan="9" align="center">
+                            			검색결과가 없습니다.
+                            		</td>
+                            	</tr>
+	                            <%}else{ %>
+	                            	<%for(AdminMainInfo info : plist){ %>		                       
+			                            <tr class="rank2">
+			                                <td><%=info.getrNum() %>.</td>
+			                                <td><%=info.getCategory()%> / </td>
+			                                <td><%=info.getpCode() %> / </td>
+			                                <td><%=info.getpName() %></td>
+			                                <br>
+			                            </tr>
+			                        <%} %>
+	                            <%} %>
                             </div>  
+                          
                     </div>
                     <div class="content_box pc">
                         <img src="https://ppss.kr/wp-content/uploads/2014/11/%EC%B0%A8%ED%8A%B8%ED%94%BC%EC%B3%90-001.png" alt="" style="width: 350px;height: 210px;">
@@ -45,20 +63,43 @@
                         <div class="order_tit pd">오늘 들어온 주문</div>
                         <div class="order_info pc">
                             <!--해당 주문의 주문내역서가 링크되어야 합니다-->
-                            <li>주문번호 / 주문아이디</li>
-                            <li>주문번호 / 주문아이디</li>
-                            <li>주문번호 / 주문아이디</li>
-                            <li>주문번호 / 주문아이디</li>
+                            <%if(olist.isEmpty()){ %>
+                            	<tr>
+                            		<td colspan="9" align="center">
+                            			아직 들어온 주문이 없습니다.
+                            		</td>
+                            	</tr>
+	                            <%}else{ %>
+	                            	<%for(Order o : olist){ %>		                       
+			                            <tr>
+			                                <td><%=o.getOrderNo()%> / </td>
+			                                <td><%=o.getUserId()%></td>
+			                                <br>
+			                            </tr>
+			                        <%} %>
+	                            <%} %>
                         </div>
                     </div>
                     <div class="content_box">
                         <div class="qna_tit pd">오늘 들어온 문의사항</div>
                         <div class="qna_info pc">
                             <!--문의 게시물에 링크되어야 합니다!-->
-                            <li>제목 / 작성자아이디</li>
-                            <li>제목 / 작성자아이디</li>
-                            <li>제목 / 작성자아이디</li>
-                            <li>제목 / 작성자아이디</li>
+                            <%if(blist.isEmpty()){ %>
+                            	<tr>
+                            		<td colspan="9" align="center">
+                            			오늘 작성된 문의사항이없습니다.
+                            		</td>
+                            	</tr>
+	                            <%}else{ %>
+	                            	<%for(Board b : blist){ %>		                       
+			                            <tr>
+			                            	<td></td>
+			                                <td><%=b.getbTitle()%> / </td>
+			                                <td><%=b.getUserId()%></td>
+			                                <br>
+			                            </tr>
+			                        <%} %>
+	                            <%} %>
                         </div>
                     </div>
                 </div>
@@ -129,10 +170,12 @@
             .rank{
                 border: 1px solid black;
                 height: 150px;
-                text-align: center;
+                text-align: left;
                 padding-top: 20px ;
             }
-            
+            .rank2{
+            	taxt-align:left;
+            }
             .order_tit{
                 border: 1px solid black;
                 text-align: center;
@@ -156,9 +199,12 @@
             .qna_info{
                 border: 1px solid black;
                 height: 130px;
-                padding-top: 30px;
+                padding: 15px 0 15px 0;
                 text-align: center;
             }
+            body{
+				margin:0px;
+			}
         </style>
 	<script>
 	    $("#item-category>li").hover((e)=>{
