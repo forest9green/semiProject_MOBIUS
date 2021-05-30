@@ -8,6 +8,12 @@
 	String orderBy=request.getParameter("pListSelect")==null?"":request.getParameter("pListSelect");
 %>
 <%@ include file="/views/common/header.jsp"%>
+<%
+	String userId="";
+	if(loginUser!=null){
+		userId=loginUser.getUserId();
+	}
+%>
 
 <section>
 	<h1 id="pTitle" class="pe"><%=category %></h1>
@@ -79,13 +85,49 @@
 	});
 	
     $(".wish").click((e)=>{
-    	const pcode=$($(e.target)[0]).attr("title");
-    	//ajax로 처리
+    	if(<%=loginUser==null%>){
+    		location.assign("<%=request.getContextPath()%>/views/member/loginPage.jsp");
+    		
+    	}else{
+		   	$.ajax({
+		    	url:"<%=request.getContextPath()%>/myPage/addWishList",
+		    	data:{
+		    		"userId":'<%=userId%>',
+		    		"pCode":$($(e.target)[0]).attr("title")
+		    		},
+		  			success:data=>{
+		  				if(data>0){
+			  				if(confirm("위시리스트에 추가되었습니다. 위시리스트로 이동하시겠습니까?")){
+			  					location.assign("<%=request.getContextPath()%>/myPage/wishList?userId=<%=userId%>");
+			  				}
+		  				}else{
+		  					alert("이미 위시리스트에 추가된 상품입니다.");
+		  				}
+		  			}
+		   	})
+    	}
     });
 	
     $(".cart").click((e)=>{
-    	const pcode=$($(e.target)[0]).attr("title");
-    	//ajax로 처리
+    	if(<%=loginUser==null%>){
+    		location.assign("<%=request.getContextPath()%>/views/member/loginPage.jsp");
+    		
+    	}else{
+		   	$.ajax({
+		    	url:"<%=request.getContextPath()%>/myPage/addCart",
+		    	data:{
+		    		"userId":'<%=userId%>',
+		    		"pCode":$($(e.target)[0]).attr("title")
+		    		},
+		  			success:data=>{
+		  				if(data>0){
+			  				if(confirm("장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?")){
+			  					location.assign("<%=request.getContextPath()%>/myPage/cart?userId=<%=userId%>");
+			  				}
+		  				}
+		  			}
+		   	})
+    	}
     });
 </script>
 
@@ -156,6 +198,12 @@
  .noP{
  	margin:0 auto;
  }
+ .cart:hover{
+	cursor:pointer; 
+}
+.wish:hover{
+	cursor:pointer; 
+}
  /*pageBar 디자인*/
     .pagebar{
         margin: 50px auto;

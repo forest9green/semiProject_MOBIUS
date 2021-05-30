@@ -1,5 +1,7 @@
 package com.wish.model.dao;
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -37,6 +39,8 @@ public class WishListDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		
 		return result;
