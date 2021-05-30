@@ -6,9 +6,11 @@ import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.cart.model.dao.CartDao;
 import com.cart.model.vo.Cart;
+import com.cart.model.vo.CartProduct;
 import com.wish.model.vo.WishList;
 
 public class CartService {
@@ -36,6 +38,23 @@ public class CartService {
 	public int addCart(WishList cart) {
 		Connection conn=getConnection();
 		int result=dao.addCart(conn, cart);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
+	
+	public List<CartProduct> selectCart(String userId){
+		Connection conn=getConnection();
+		List<CartProduct> list=dao.selectCart(conn,userId);
+		close(conn);
+		return list;
+	}
+	
+	
+	public int changeAmount(Cart c) {
+		Connection conn=getConnection();
+		int result=dao.changeAmount(conn,c);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		return result;

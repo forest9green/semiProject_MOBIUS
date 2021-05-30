@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.product.model.vo.Product" %>
+<%@ page import="java.util.List, com.product.model.vo.Product, java.text.NumberFormat" %>
 <%
 	String category=(String)request.getAttribute("category");
 	List<Product> products=(List<Product>)request.getAttribute("products");
@@ -13,6 +13,7 @@
 	if(loginUser!=null){
 		userId=loginUser.getUserId();
 	}
+	NumberFormat nf = NumberFormat.getInstance();
 %>
 
 <section>
@@ -49,7 +50,7 @@
 				                        </div>
 				                    </a>
 				                    <div class="pPrice">
-				                        <p1 class="pb"><%=p.getPrice() %>원</p1>
+				                        <p1 class="pb"><%=nf.format(p.getPrice()) %>원</p1>
 				                    </div>
 				                </div>
 				                <div class="pro_btn">

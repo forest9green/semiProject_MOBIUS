@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.coupon.model.vo.Coupon" %>
+<%@ page import="java.util.List, com.coupon.model.vo.Coupon, java.text.NumberFormat" %>
 <%
 	List<Coupon> coupons=(List<Coupon>)request.getAttribute("coupons");
 	String pageBar=(String)request.getAttribute("pageBar");
+	NumberFormat nf = NumberFormat.getInstance();
 %>
 <%@ include file="/views/common/header.jsp"%>
 
@@ -27,7 +28,7 @@
                     		<tr>
                     			<td><%=c.getcNo().substring(1) %></td>
                     			<td><%=c.getcName() %></td>
-                    			<td><%=c.getcLimit() %></td>
+                    			<td><%=nf.format(c.getcLimit()) %>원</td>
                     			<td><%=(int)(c.getcDiscount()*100)+"%" %></td>
                     			<td><%=c.getcIssueDate()+" ~ "+c.getcFinishDate() %></td>
                     		</tr>

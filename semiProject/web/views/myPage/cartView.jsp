@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, com.cart.model.vo.CartProduct, java.text.NumberFormat" %>
+<%
+	List<CartProduct> carts=(List<CartProduct>)request.getAttribute("carts");
+	int totalPrice=0;
+	int totalDeliveryFee=10000;
+	if(!carts.isEmpty()) {
+		for(CartProduct cp:carts){
+			totalPrice+=cp.getPrice()*cp.getAmount();
+		}
+		for(CartProduct cp:carts){
+			if(cp.getDeliveryFee()==59000){
+				totalDeliveryFee=59000;
+			}
+		}
+	}
+	NumberFormat nf = NumberFormat.getInstance();
+%>
     
 <%@ include file="/views/common/header.jsp"%>
 
@@ -10,7 +27,7 @@
                 <table id="cart_table" class="pa" border=1>
                     <thead>
                         <tr>
-                            <th width=50><input type="checkbox"></th>
+                            <th width=40><input type="checkbox" id="checkall"></th>
                             <th width=145>이미지</th>
                             <th>상품명</th>
                             <th width=85>가격</th>
@@ -22,31 +39,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!--
-                            값이 없으면 <tr>보유하고 계신 위시리스트 내역이 없습니다.</tr> 추가
-                            값이 있으면 tr 추가하며 출력
-                        -->
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <form action="">
-                                    <input type="number" max="100" min="1" step="1" value=""><br>
-                                    <input class="whitebtn" type="submit" value=전송><!--데이터는 String으로 넘어감-->
-                                </form>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <ul id="cart_detail_btn">
-                                    <li><button>주문하기</button></li>
-                                    <li><button>삭제</button></li>
-                                </ul>
-                            </td>
-                        </tr>
+                        <%if(!carts.isEmpty()) {
+                        	for(CartProduct cp:carts){%>
+		                        <tr>
+		                            <td><input type="checkbox" name="chk" value=""></td>
+		                            <td><img src="<%=request.getContextPath() %>/images/product/<%=cp.getpCode().substring(0,2)%>/<%=cp.getpCode()%>-1.jpg"></td>
+		                            <td><%=cp.getpName() %></td>
+		                            <td><%=nf.format(cp.getPrice()) %>원</td>
+		                            <td>
+		                                <input type="number" class="amount" max="100" min="1" step="1" style="width:33px" value="<%=cp.getAmount()%>"><br>
+		                                <button class="whitebtn changeAmount" value="<%=cp.getpCode() %>">변경</button>
+		                            </td>
+		                            <td><%=nf.format((int)(cp.getPrice()*cp.getAmount()*0.01)) %>원</td>
+		                            <td><%=nf.format(cp.getDeliveryFee()) %>원</td>
+		                            <td><%=nf.format(cp.getPrice()*cp.getAmount()+cp.getDeliveryFee()) %>원</td>
+		                            <td>
+		                                <ul id="cart_detail_btn">
+		                                    <li><button>주문하기</button></li>
+		                                    <li><button value="">삭제</button></li>
+		                                </ul>
+		                            </td>
+		                        </tr>
+	                        <%}
+                       	}%>
                     </tbody>
                 </table>
             </div>
@@ -61,9 +76,9 @@
                         <th>결제 예정 금액</th>
                     </tr>
                     <tr>
-                        <td>000,000원</td>
-                        <td>+ 00,000원</td>
-                        <td>000,000원</td>
+                        <td><%=nf.format(totalPrice) %>원</td>
+                        <td>+ <%=nf.format(totalDeliveryFee) %>원</td>
+                        <td><%=nf.format(totalPrice+totalDeliveryFee) %>원</td>
                     </tr>
                 </table>
             </div>
@@ -73,6 +88,37 @@
             </div>
     </div>
 </section>
+
+<script>
+	$(document).ready(function(){
+	    $("#checkall").click(function(){
+	        //상단의 체크박스 클릭 여부에 따라 전체체크/해제 로직
+	        if($("#checkall").prop("checked")){
+	            $("input[name=chk]").prop("checked",true);
+	        }else{
+	            $("input[name=chk]").prop("checked",false);
+	        }
+	    })
+	});
+	
+	$(".changeAmount").click((e)=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/myPage/changeAmount",
+			data:{
+				"userId":'<%=loginUser.getUserId()%>',
+				"pCode":$(e.target).val(),
+				"amount":$(e.target).prev().prev().val()
+			},
+			success:data=>{
+				if(data>0){
+					alert("변경되었습니다.");
+				}else{
+					alert("변경에 실패했습니다.");
+				}
+			}
+		})
+	})
+</script>
 
 <style>
     #cart_box{
@@ -93,6 +139,12 @@
     }
     #cart_table tr{
         height:40px;
+    }
+    #cart_table tr>td>img{
+    	width:100px;
+		height:80px;
+		object-fit:cover;
+		vertical-align:middle;
     }
     #cart_detail_btn{
         list-style-type: none;
@@ -132,7 +184,7 @@
     #price_table{
         margin:30px 0 10px 0;
         width:1000px;
-        height:140px;
+        height:100px;
         text-align: center;
         border-collapse: collapse;
         margin-bottom: 10px;
@@ -146,8 +198,9 @@
     #cart_box>p+h2{
         font-size: 30px;
     }
+    button:hover{
+    	cursor:pointer;
+    }
 </style>
-
-<script></script>
 
 <%@ include file="/views/common/footer.jsp"%>

@@ -13,7 +13,6 @@
 			}
 		}
 	}
-
 %>    
 <!DOCTYPE html>
 <head>
@@ -55,8 +54,13 @@
                      <%}else{ %>
                      	<li class="pa"><a href="<%=request.getContextPath() %>/views/member/updateMember.jsp">Modify</a></li>
                      <%} %>  
-                        <li class="pa"><a href="">Order</a></li>
-                        <li class="pa"><a href="">Cart</a></li>
+                     <%if(loginUser==null){ %>
+                        <li class="pa"><a href="<%=request.getContextPath()%>/views/member/loginPage.jsp">Order</a></li>
+                        <li class="pa"><a href="<%=request.getContextPath()%>/views/member/loginPage.jsp">Cart</a></li>
+                     <%}else{ %>
+                     	<li class="pa"><a href="">Order</a></li>
+                        <li class="pa"><a href="<%=request.getContextPath()%>/myPage/cart?userId=<%=loginUser.getUserId()%>">Cart</a></li>
+                     <%} %>  
                     </ul>
                 </span>
             </div>

@@ -1,7 +1,6 @@
 package com.cart.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cart.model.service.CartService;
-import com.cart.model.vo.CartProduct;
+import com.cart.model.vo.Cart;
 
 /**
- * Servlet implementation class CartViewServlet
+ * Servlet implementation class ChangeAmountServlet
  */
-@WebServlet("/myPage/cart")
-public class CartViewServlet extends HttpServlet {
+@WebServlet("/myPage/changeAmount")
+public class ChangeAmountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartViewServlet() {
+    public ChangeAmountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +31,15 @@ public class CartViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId=request.getParameter("userId");
+		String pCode=request.getParameter("pCode");
+		int amount=Integer.parseInt(request.getParameter("amount"));
 		
-		List<CartProduct> list=new CartService().selectCart(userId);
+		Cart c=new Cart(userId,pCode,amount);
 		
-		request.setAttribute("carts", list);
-		request.getRequestDispatcher("/views/myPage/cartView.jsp").forward(request, response);
+		int result=new CartService().changeAmount(c);
+		
+		response.setContentType("text/csv;charset=utf-8");
+		response.getWriter().print(result);
 	}
 
 	/**

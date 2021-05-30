@@ -314,6 +314,9 @@
     #naver_id_login{
     	width: 500px;
     }
+    body{
+    	margin:0px;
+    }
 </style>
 
 <%@ include file="/views/common/footer.jsp"%>

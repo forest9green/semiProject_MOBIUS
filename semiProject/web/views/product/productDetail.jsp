@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.product.model.vo.Product" %>
+<%@ page import="com.product.model.vo.Product, java.text.NumberFormat" %>
 <%
 	Product p=(Product)request.getAttribute("product");
 	String category=(String)request.getAttribute("category");
 %>
 <%@ include file="/views/common/header.jsp"%>
+<%
+	String userId="";
+	if(loginUser!=null){
+		userId=loginUser.getUserId();
+	}
+	NumberFormat nf = NumberFormat.getInstance();
+%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <section>
     <div class="box">
@@ -21,16 +28,16 @@
                 </div>
                 <div class="top_info">
                     <div class="pe" style="font-size:20px;"><%=p.getpName() %></div>
-                    <div class="pd" style="font-size:25px;"><%=p.getPrice() %>원</div><br><br><hr>
+                    <div class="pd" style="font-size:25px;"><%=nf.format(p.getPrice()) %>원</div><br><br><hr>
                     <div class="pc" style="font-size:16px;float:left;">크기</div>
                     <div class="pc" style="font-size:16px;margin-left:100px;margin-bottom:10px"><%=p.getSize() %></div>
                     <div class="pc" style="font-size:16px;float:left;">배송비</div>
-                    <div class="pc" style="font-size:16px;margin-left:100px;"><%=p.getDeliveryFee() %>원</div>
+                    <div class="pc" style="font-size:16px;margin-left:100px;"><%=nf.format(p.getDeliveryFee()) %>원</div>
                     <div class="pb" style="font-size:13px;">조건에 따라 추가비용 발생 가능 (상품 상세 정보 참고)</div><hr>
                     <div>
-                        <button class="pc" style="width:130px;">위시리스트에 추가</button>
-                        <button class="pc" style="width:120px;">장바구니에 담기</button>
-                        <button class="buy_now pc" style="width:125px;">바로 구매</button>
+                        <button class="pc wish" style="width:130px;" title="<%=p.getpCode()%>">위시리스트에 추가</button>
+                        <button class="pc cart" style="width:120px;" title="<%=p.getpCode()%>">장바구니에 담기</button>
+                        <button class="buy_now pc" style="width:125px;" title="<%=p.getpCode()%>">바로 구매</button>
                     </div>
                 </div>
             </div>
@@ -126,6 +133,54 @@
     </div>
 </section>
 
+<script>
+	$(".wish").click((e)=>{
+		if(<%=loginUser==null%>){
+			location.assign("<%=request.getContextPath()%>/views/member/loginPage.jsp");
+			
+		}else{
+		   	$.ajax({
+		    	url:"<%=request.getContextPath()%>/myPage/addWishList",
+		    	data:{
+		    		"userId":'<%=userId%>',
+		    		"pCode":$($(e.target)[0]).attr("title")
+		    		},
+		  			success:data=>{
+		  				if(data>0){
+			  				if(confirm("위시리스트에 추가되었습니다. 위시리스트로 이동하시겠습니까?")){
+			  					location.assign("<%=request.getContextPath()%>/myPage/wishList?userId=<%=userId%>");
+			  				}
+		  				}else{
+		  					alert("이미 위시리스트에 추가된 상품입니다.");
+		  				}
+		  			}
+		   	})
+		}
+	});
+	
+	$(".cart").click((e)=>{
+		if(<%=loginUser==null%>){
+			location.assign("<%=request.getContextPath()%>/views/member/loginPage.jsp");
+			
+		}else{
+		   	$.ajax({
+		    	url:"<%=request.getContextPath()%>/myPage/addCart",
+		    	data:{
+		    		"userId":'<%=userId%>',
+		    		"pCode":$($(e.target)[0]).attr("title")
+		    		},
+		  			success:data=>{
+		  				if(data>0){
+			  				if(confirm("장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?")){
+			  					location.assign("<%=request.getContextPath()%>/myPage/cart?userId=<%=userId%>");
+			  				}
+		  				}
+		  			}
+		   	})
+		}
+	});
+</script>
+
 <style>
     .box{
         width:1000px;
@@ -172,7 +227,7 @@
         text-decoration: underline;
     }
     .word6{
-    	width:285.42px;
+    	width:316.66px;
     }
     .img_div>img{
         width:450px;
@@ -219,6 +274,9 @@
     }
     .on_answer{
         color:white; background-color: lightseagreen;
+    }
+    button:hover{
+    	cursor:pointer;
     }
 
     /* 별 디자인 */

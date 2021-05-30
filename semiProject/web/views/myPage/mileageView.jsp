@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.mileage.model.vo.Mileage" %>
+<%@ page import="java.util.List, com.mileage.model.vo.Mileage, java.text.NumberFormat" %>
 <%
 	List<Mileage> mileages=(List<Mileage>)request.getAttribute("mileages");
 	String pageBar=(String)request.getAttribute("pageBar");
+	NumberFormat nf = NumberFormat.getInstance();
 %>
 <%@ include file="/views/common/header.jsp"%>
 
@@ -33,9 +34,9 @@
                     			<td><%=m.getOrderNo() %></td>
                     			<td><%=m.getOrderNo().substring(0,m.getOrderNo().indexOf('-')) %></td>
                     			<%if(m.getmPlus()!=0) {%>
-                    				<td><%="+"+m.getmPlus() %></td>
+                    				<td><%="+"+nf.format(m.getmPlus()) %></td>
                     			<%}else{%>
-                    				<td><%="-"+m.getmMinus() %></td>
+                    				<td><%="-"+nf.format(m.getmMinus()) %></td>
                     			<%} %>
                     			<td><%=m.getmContent() %></td>
                     		</tr>
