@@ -29,6 +29,14 @@ public class AdminNoticeService {
 		close(conn);
 		return result;
 	}
+	
+	public Notice selectNotice(String NOTICE_NO) {
+		Connection conn=getConnection();
+		Notice n=dao.selectNotice(conn, NOTICE_NO);
+		close(conn);
+		return n;
+		
+	}
 
 	public int insertNotice(Notice n) {
 		Connection conn=getConnection();
@@ -41,6 +49,22 @@ public class AdminNoticeService {
 		return result;
 	}
 	
+	public int modifyNotice(Notice n) {
+		Connection conn=getConnection();
+		int result=dao.modifyNotice(conn, n);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	
+	public int deleteNotice(String noticeNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteNotice(conn,noticeNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	
 }

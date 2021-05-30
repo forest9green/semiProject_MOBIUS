@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.admin.user.model.service.AdminUserService;
-import com.coupon.model.vo.Coupon;
+import com.admin.user.model.vo.AdminOrder;
 
 /**
- * Servlet implementation class AdminUserCouponServlet
+ * Servlet implementation class AdminOrderListServlet
  */
-@WebServlet("/admin/user/coupon")
-public class AdminUserCouponServlet extends HttpServlet {
+@WebServlet("/admin/user/order")
+public class AdminOrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminUserCouponServlet() {
+    public AdminOrderListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,12 +33,13 @@ public class AdminUserCouponServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userId = request.getParameter("userId");
-		
-		List<Coupon> clist = new AdminUserService().CouponList(userId);
+		List<AdminOrder> list = new AdminUserService().orderList(userId);
+
+		request.setAttribute("list", list);
 		request.setAttribute("userId", userId);
-		request.setAttribute("clist", clist);
-		request.getRequestDispatcher("/views/admin/user/manageUserCoupon.jsp")
+		request.getRequestDispatcher("/views/admin/user/manageUserOrder.jsp")
 		.forward(request, response);
+		
 	}
 
 	/**

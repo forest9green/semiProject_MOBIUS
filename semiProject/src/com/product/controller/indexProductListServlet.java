@@ -1,4 +1,4 @@
-package com.admin.user.controller;
+package com.product.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.admin.user.model.service.AdminUserService;
-import com.coupon.model.vo.Coupon;
+import com.google.gson.Gson;
+import com.product.model.service.ProductService;
+import com.product.model.vo.Product;
 
 /**
- * Servlet implementation class AdminUserCouponServlet
+ * Servlet implementation class insertProductListServlet
  */
-@WebServlet("/admin/user/coupon")
-public class AdminUserCouponServlet extends HttpServlet {
+@WebServlet("/index/product/list")
+public class indexProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminUserCouponServlet() {
+    public indexProductListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +33,13 @@ public class AdminUserCouponServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userId = request.getParameter("userId");
 		
-		List<Coupon> clist = new AdminUserService().CouponList(userId);
-		request.setAttribute("userId", userId);
-		request.setAttribute("clist", clist);
-		request.getRequestDispatcher("/views/admin/user/manageUserCoupon.jsp")
-		.forward(request, response);
+		List<Product> plist = new ProductService().productList();
+		
+		
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(plist,response.getWriter());
+		
 	}
 
 	/**

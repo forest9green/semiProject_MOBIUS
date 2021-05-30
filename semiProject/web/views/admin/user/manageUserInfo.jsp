@@ -30,8 +30,8 @@
                     <div id="user_btn">
                         <button type="button" class="choice2">회원 정보</button>
                         <button type="button" id="fn_move_coupon">쿠폰</button>
-                        <button type="button">적립금</button>
-                        <button type="button">구매내역</button>
+                        <button type="button" id="fn_move_mileage">적립금</button>
+                        <button type="button" id="fn_move_order">구매내역</button>
                     </div>
                     <div id="user_content" class="pb">
                         <div class="cBox1">
@@ -64,10 +64,23 @@
 <form action="<%=request.getContextPath() %>/admin/user/coupon" method="post" id="moveCoupon">
 	<input type="hidden" name="userId" value="<%=info.getUserId()%>">
 </form>	
+<form action="<%=request.getContextPath() %>/admin/user/mileage" method="post" id="moveMileage">
+	<input type="hidden" name="userId" value="<%=info.getUserId()%>">
+</form>
+<form action="<%=request.getContextPath() %>/admin/user/order" method="post" id="moveOrder">
+	<input type="hidden" name="userId" value="<%=info.getUserId()%>">
+</form>
 	
 		<script>
 		$("#fn_move_coupon").click(function(){
 			$("#moveCoupon").submit();
+		})
+		
+		$("#fn_move_mileage").click(function(){
+			$("#moveMileage").submit();
+		})
+		$("#fn_move_order").click(function(){
+			$("#moveOrder").submit();
 		})
 		</script>
 

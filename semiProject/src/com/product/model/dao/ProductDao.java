@@ -225,6 +225,39 @@ public class ProductDao {
 		return category;
 	}
 	
+	public List<Product> productList(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Product> plist = new ArrayList();
+		try{
+			pstmt = conn.prepareStatement(prop.getProperty("AllProductList"));
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Product p = new Product();
+				p.setpCode(rs.getString("p_code"));
+				p.setCateCode(rs.getString("cate_code"));
+				p.setPrice(rs.getInt("price"));
+				p.setStock(rs.getInt("price"));
+				p.setpEnrollDate(rs.getDate("p_enroll_date"));
+				p.setDeliveryFee(rs.getInt("delivery_fee"));
+				p.setSize(rs.getString("size"));
+				p.setpName(rs.getString("p_name"));
+				plist.add(p);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return plist;
+	}
+	
+	
+	
+	
 }
 
 

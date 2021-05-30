@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.notice.model.vo.Notice" %>
+<%
+	Notice n=(Notice)request.getAttribute("notice");
+%>    
+    
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -25,17 +30,23 @@
                 <div class="main"> 
                     <h3 class="pd greenright">공지사항 관리</h3>
                     <div id="user_content">
-                        <form action="">
+                        <form action="<%=request.getContextPath()%>/admin/notice/modifyNotice" method="post" enctype="multipart/form-data">
                             <div class="pb">
                                 <span class="pb">제목</span><!--이전 제목 출력-->
-                                <input type="text" width="500px"><br>
+                                <input type="text" width="500px" value=<%=n.getnoticeNo() %>><br>
                                 <h3>내용</h3>
-                                <textarea name="" id="" cols="118" rows="10"></textarea><br><!--이전 내용 출력-->
+                                <textarea name="" id="" cols="118" rows="10"><%=n.getnContent() %></textarea><br><!--이전 내용 출력-->
                                 <span class="pb">썸네일</span>
-                                <input type="file"><!--원래 있던 파일이 출력되도록 함-->
+                                <%if(n.getnImgPath()!=null){ %>
+                                <input type="file" name="upfile"><!--원래 있던 파일이 출력되도록 함-->
+                                <input type="hidden" name="oriFile" value="<%=n.getnImgPath()%>">
+                                <span id="fname"><%=n.getnImgPath() %></span>
+                            	<%} else{%>
+                            	<input type="file" name="upfile">
+                            	<%} %>
                             </div>
                             <div id="btn">
-                                <input type="reset" class="blackbtn" value="취소">
+                                <input type="reset" class="blackbtn" value="취소"><request.getContextPath() %>/admin/notice/manageNotice
                                 <input type="submit" class="blackbtn" value="수정">
                             </div>
                         </form>

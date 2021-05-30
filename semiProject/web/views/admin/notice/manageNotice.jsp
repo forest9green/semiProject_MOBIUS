@@ -6,7 +6,7 @@
 <%
 	List<Notice> list=(List<Notice>)request.getAttribute("notice");
 	String pageBar=(String)request.getAttribute("pageBar");
-
+	String nKeyword=(String)request.getParameter("nKeyword");
 %>
 
 
@@ -16,7 +16,7 @@
             <h2 class="pe title">관리자 페이지</h2> 
             <div class="content" style="display:flex">
                 <div class="category">
-                    <ul class="pd"><a href="<%=request.getContextPath() %>/views/admin/adminMain" class="black">메인</a></ul><br>
+                    <ul class="pd"><a href="<%=request.getContextPath() %>/admin/adminMain" class="black">메인</a></ul><br>
                     <ul class="pd">회원
                         <li><a href="<%=request.getContextPath() %>/views/admin/user/manageUserMain" class="pc black">- 회원 관리</a></li>
                         <li><a href="<%=request.getContextPath() %>/views/admin/order/manageOrderInfoDetail" class="pc black">- 주문 관리</a></li>
@@ -35,8 +35,7 @@
                     <h3 class="pd greenright">공지사항 관리</h3>
                     <div id="user_content">
                         <form id="searchPay" action="" method="post">
-                            <input type="text" name="search" placeholder="제목">
-                            <!--포함된 단어가 있으면 출력되도록 sql짜기-->
+                            <input type="text" name="nKeyword" placeholder="제목">
                             <input type="submit" class="whitebtn" value="검색">
                         </form>
                         <table id="output_table" class="pa" border=1>
@@ -54,13 +53,13 @@
                                     <td><input type="checkbox" name="chk"></td>
                                     <td><a href="<%= request.getContextPath()%>/notice/noticeView?noticeNo=<%=n.getnoticeNo()%>"><%=n.getnTitle() %></a></td>
                                     <td><%=n.getnDate() %></td>
-                                    <td><button class="whitebtn">수정</button></td>
+                                    <td><a href="<%= request.getContextPath()%>/admin/notice/modifyNotice?noticeNo=<%=n.getnoticeNo()%>"><button class="whitebtn">수정</button></a></td>
                                 </tr> 
                             </tbody>
                             <%} %>
                         </table>
                         <div id="btn">
-                            <button type="button" class="pb" style="background-color: white;">선택 삭제</button>
+                            <a href="<%= request.getContextPath()%>/admin/notice/deleteNotice"><button type="button" class="pb" style="background-color: white;">선택 삭제</button></a>
                             <a href="<%= request.getContextPath()%>/admin/notice/writeNotice"><button type="button" class="pb blackbtn" >글쓰기</button></a>
                             <!--open()으로 작은 window창 열어서 등록 처리-->
                         </div>
@@ -84,6 +83,24 @@
                     }
                 })
             })
+            const fn_delete_notice=()=>{
+			if(confirm("정말로 삭제하시겠습니까?")){
+				<%-- location.replace("<%=request.getContextPath()%>/admin/notice/deleteNotice?noticeNo=<%=n.getnoticeNo()%>");  --%>
+			}
+			
+			$("#searchTitle").change((e)=>{
+				$("#searchTitle").attr("action","<%=request.getContextPath()%>/admin/notice/manageNotice");
+				$("#searchTitle").append($("<input>").attr({
+					type:"hidden",name:"cPage",value:"<%=request.getParameter("cPage")%>"
+				}));
+				$("#searchTitle").append($("<input>").attr({
+					type:"hidden",name:"nKeyword",value:"<%=nKeyword %>"
+				}));
+				$("#searchTitle").submit();
+			});
+			
+          }
+            
         </script>
 
         <style>
