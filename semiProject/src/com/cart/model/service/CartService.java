@@ -59,5 +59,14 @@ public class CartService {
 		else rollback(conn);
 		return result;
 	}
+	
+	
+	public int deleteCart(WishList c) {
+		Connection conn=getConnection();
+		int result=dao.deleteCart(conn,c);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 
 }
