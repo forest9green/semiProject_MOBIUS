@@ -3,6 +3,7 @@
 <%@ page import="java.util.List,com.coupon.model.vo.Coupon" %>
 <%
 	List<Coupon> clist = (List<Coupon>)request.getAttribute("clist");
+	String userId = (String)request.getAttribute("userId");
 %>
 <%@ include file="/views/common/header.jsp"%>
 
@@ -28,7 +29,7 @@
                 <div class="main"> 
                     <h3 class="pd greenright">회원 관리</h3>
                     <div id="user_btn">
-                        <button type="button">회원 정보</button>
+                        <button type="button" id="fn_move_userInfo">회원 정보</button>
                         <button type="button" class="choice2">쿠폰</button>
                         <button type="button">적립금</button>
                         <button type="button">구매내역</button>
@@ -54,10 +55,9 @@
                             		</tr>
                                <%}else{ %>
 	                                <%for(Coupon c : clist){ %>
+		                              <form action="<%=request.getContextPath() %>/admin/user/deletecoupon" method="post" id="deleteCoupon">  
 		                                <tr>
-		                                    <form action="" name="insertCoupon">
-												<input text="hidden" name="userId" value="<%=c.getcName()%>">
-											</form>
+		                                   	<input type="hidden" name="cNo" value="<%=c.getcNo()%>">
 		                                    <td><input type="checkbox" name="chk"></td>
 		                                    <td><%=c.getcName() %></td>
 		                                    <td><%=c.getcDiscount() %></td>
@@ -69,12 +69,13 @@
 		                                		<td>미사용</td>
 		                                	<%} %>
 		                                </tr>
+		                               </form> 
 	                                <%} %>
                                 <%} %>
                             </tbody>
                         </table>
                         <div id="btn">
-                            <button type="button" class="pb" style="background-color: white;">선택 삭제</button>
+                            <button type="button" class="pb" style="background-color: white;" id="selectDelete">선택 삭제</button>
                             <button type="button" class="pb blackbtn" onclick="fn_insert_coupon();">등록</button>
                             <!--open()으로 작은 window창 열어서 등록 처리-->
                         </div>
@@ -87,6 +88,12 @@
             </div>    
         </section>
         
+        <form action="" name="insertCoupon">
+			<input type="hidden" name="userId" value="<%=userId%>">
+		</form>
+		<form action="<%=request.getContextPath()%>/admin/member/info" id="moveInfo">
+			<input type="hidden" value="<%=userId %>" name="userId">
+		</form>
         
         <script>
             $(document).ready(function(){
@@ -101,18 +108,29 @@
             })
             
             const fn_insert_coupon=()=>{
-            	const url="<%=request.getContextPath()%>/admin/user/insertCoupon.jsp";
+            	const userId=$("input[name=userId]").val();
+            	console.log(userId);
+            	const url="<%=request.getContextPath()%>/admin/user/couponPage";
             	const title = "insertCoupon";
             	const status = "left=500px,top=100px,width=500px,height=400px";
             	
             	open("",title,status);
             	
+            	insertCoupon.userId.value=userId;
             	insertCoupon.method="post";
             	insertCoupon.action=url;
             	insertCoupon.target=title;
             	
-            	insertCouopon.submit();
+            	insertCoupon.submit();
             }
+            
+            $("#fn_move_userInfo").click(function(){
+            	$("#moveInfo").submit();
+            })
+            
+            $("#selectDelete").click(function(){
+            	$("#deleteCoupon").submit();
+            })
         </script>
 
 

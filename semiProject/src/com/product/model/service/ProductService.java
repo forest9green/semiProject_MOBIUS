@@ -69,4 +69,11 @@ public class ProductService {
 		return category;
 	}
 
+	public List<Product> productList(){
+		Connection conn = getConnection();
+		List<Product> plist = dao.productList(conn);
+		close(conn);
+		return plist;
+	}
+	
 }

@@ -16,6 +16,8 @@ import com.admin.user.model.vo.AdminUserInfo;
 import com.admin.user.model.vo.TotalInfo;
 import com.coupon.model.vo.Coupon;
 
+import oracle.net.aso.e;
+
 public class AdminUserDao {
 
 private Properties prop=new Properties();
@@ -148,6 +150,26 @@ private Properties prop=new Properties();
 
 	}
 	
-	
+	public int insertCoupon(Connection conn,String userId,String cName, double cDiscount,int cFinishDate,int cLimit) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertCoupon"));
+			pstmt.setString(1, userId);
+			pstmt.setString(2, cName);
+			pstmt.setDouble(3, cDiscount);
+			pstmt.setInt(4, cFinishDate);
+			pstmt.setInt(5, cLimit);
+			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
 	
 }
