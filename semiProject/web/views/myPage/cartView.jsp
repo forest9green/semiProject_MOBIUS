@@ -56,7 +56,7 @@
 		                            <td>
 		                                <ul id="cart_detail_btn">
 		                                    <li><button>주문하기</button></li>
-		                                    <li><button value="">삭제</button></li>
+		                                    <li><button class="deleteCart" value="">삭제</button></li>
 		                                </ul>
 		                            </td>
 		                        </tr>
@@ -117,6 +117,10 @@
 				}
 			}
 		})
+	})
+	
+	$(".deleteCart").click((e)=>{
+		
 	})
 </script>
 
