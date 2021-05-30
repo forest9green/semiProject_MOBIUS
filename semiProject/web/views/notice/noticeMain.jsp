@@ -4,7 +4,7 @@
 <%@ page import="java.util.List,com.notice.model.vo.Notice" %>
 <%
 	List<Notice> list=(List<Notice>)request.getAttribute("notice");
-
+	
 %>
 
 
