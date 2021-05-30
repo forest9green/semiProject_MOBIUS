@@ -70,6 +70,30 @@ private Properties prop=new Properties();
 		}return result;
 	}
 	
+	public Notice selectNotice(Connection conn, String noticeNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Notice n=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectNotice"));
+			pstmt.setString(1, noticeNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				n=new Notice();
+				n.setnoticeNo(rs.getString("NOTICE_NO"));
+				n.setnTitle(rs.getString("N_TITLE"));
+				n.setnContent(rs.getString("N_CONTENT"));
+				n.setnDate(rs.getDate("N_DATE"));
+				n.setnImgPath(rs.getString("N_IMGPATH"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return n;
+	}
+	
 	public int insertNotice(Connection conn, Notice n) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -96,6 +120,7 @@ private Properties prop=new Properties();
 			pstmt.setString(2, n.getnContent());
 			pstmt.setString(3, n.getnImgPath());
 //			pstmt.setDate(4, n.getnDate());
+			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

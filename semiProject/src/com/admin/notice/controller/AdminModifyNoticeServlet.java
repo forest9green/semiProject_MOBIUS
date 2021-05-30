@@ -30,13 +30,18 @@ public class AdminModifyNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		Notice n=new AdminNoticeService().modifyNotice(request.getParameter("NOTICE_NO"));
-//		
-//		request.setAttribute("notice", n);
-//		
-//		request.getRequestDispatcher("/views/admin/notice/modifyNotice.jsp")
-//		.forward(request, response);
-//		
+		
+		String noticeNo=request.getParameter("NOTICE_NO");
+		
+		AdminNoticeService AdminNoticeService=new AdminNoticeService();
+		
+		Notice n=new AdminNoticeService().selectNotice(request.getParameter("NOTICE_NO"));
+		
+		request.setAttribute("notice", n);
+		
+		request.getRequestDispatcher("/views/admin/notice/modifyNotice.jsp")
+		.forward(request, response);
+		
 		
 		
 	}

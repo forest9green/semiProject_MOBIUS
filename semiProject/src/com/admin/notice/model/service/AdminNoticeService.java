@@ -29,6 +29,14 @@ public class AdminNoticeService {
 		close(conn);
 		return result;
 	}
+	
+	public Notice selectNotice(String NOTICE_NO) {
+		Connection conn=getConnection();
+		Notice n=dao.selectNotice(conn, NOTICE_NO);
+		close(conn);
+		return n;
+		
+	}
 
 	public int insertNotice(Notice n) {
 		Connection conn=getConnection();
