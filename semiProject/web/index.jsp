@@ -88,7 +88,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                                 </a>
                                             </div>
                                             <div class="item_money_box pc">
-                                                <strong class="item_price">
+                                                <strong class="item_price pc">
                                                     <br><span id="pro3P"></span>
                                                 </strong>
                                             </div>
@@ -111,7 +111,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                                 </a>
                                             </div>
                                             <div class="item_money_box pc">
-                                                <strong class="item_price" >
+                                                <strong class="item_price pc" >
                                                     <br><span id="pro4P"></span>
                                                 </strong>
                                             </div>
@@ -783,8 +783,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                 width: 220px;
             }
             .item_cont{
-                padding: 0px 5px 0 5px;
-                border: 1px solid #dbdbdbdb;
+
                 width: 250px;
                 height: 372px;
             }
