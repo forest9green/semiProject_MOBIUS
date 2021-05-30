@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp"%>
-<script src="js/bootstrap.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/boots
 
 trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+
 
 <section>   
             <div id="contents">
@@ -24,30 +25,48 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                         <img src="https://data2.1freewallpapers.com/detail/furniture-sofa-white.jpg" alt="" width="1000" height="500">
                     </div>
                     <div class="middle_tit pe">
-                        <p style="margin-top: 70px;">세일</p>
+                        <p style="margin-top: 70px;">추천</p>
                     </div>
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
                         <div class="carousel-inner">
                           <div class="carousel-item active">
                             <div class="row">
                                 <div class="col">
+                                    <div class="item_cont" id="contDiv">
+                                        <div class="item_photo_box">
+                                                <img src="<%=request.getContextPath()%>/images/product/C1/C1P1-1.jpg">
+                                        </div>
+                                        <div class="item_info_cont">
+                                            <div class="item_tit">
+                                                    <strong class="item_name pc" id="pro1">   
+                                                    </strong>
+                                            </div>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc" >
+                                                    <br><span id="pro1P"></span>
+                                                </strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVMXcvfQfct2GxB3QKHkAaUgK1Xh-hjIYNq3uC5VL8HFtWOkbIMY_6wPMoSxL4XsmO-TGgOZI&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C1/C1P5-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
-                                                <a href="<%=request.getContextPath()%>/product/productList">
-                                                    <strong class="item_name pc">
-                                                        리너셀렉트 바이브<br> 멀티케어 3인용 소파 
+                                                <a href="">
+                                                    <strong class="item_name pc" id="pro2">
+
                                                     </strong>
                                                 </a>
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span>720,000원</span>
+                                                    <br><span id="pro2P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -57,44 +76,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAG5elc86euJBAxUT9wBFls9dadicX_s4d1bn35zTvifuyolpgK0kVZ_PTFdNyIo31JPUPUXSd&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C2/C2P9-1.jpg ">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       토토 비취 체어
-                                                    </strong>
-                                                </a>
-                                            </div>
-                                            <div class="item_money_box">
-                                                <strong class="item_price pc">
-                                                    <span><Br>90,000원</span>
-                                                </strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item_cont">
-                                        <div class="item_photo_box">
-                                            <a href="">
-                                                <img src="https://gagu-store.com/web/product/big/201705/1536_shop1_790434.png" alt="" class="middle">
-                                            </a>
-                                        </div>
-                                        <div class="item_info_cont">
-                                            <div class="item_tit">
-                                                <a href="">
-                                                    <strong class="item_name pc">
-                                                       멜론 책상 수입<br>
-                                                       D800사무실 책상 
+                                                    <strong class="item_name pc" id="pro3">
+                                                      
                                                     </strong>
                                                 </a>
                                             </div>
                                             <div class="item_money_box pc">
                                                 <strong class="item_price">
-                                                    <span>129,000원</span>
+                                                    <br><span id="pro3P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -104,20 +99,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="http://th3.tmon.kr/thumbs/image/a5f/86b/ddd/a6297a650_700x700_95_FIT.jpg" alt="" class="middle">
+                                               <img src="<%=request.getContextPath()%>/images/product/C5/C5P25-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       폴킨스 LPM 수납장 
+                                                    <strong class="item_name pc" id="pro4">
+
                                                     </strong>
                                                 </a>
                                             </div>
                                             <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span><br>249,000원</span>
+                                                <strong class="item_price" >
+                                                    <br><span id="pro4P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -131,20 +126,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVMXcvfQfct2GxB3QKHkAaUgK1Xh-hjIYNq3uC5VL8HFtWOkbIMY_6wPMoSxL4XsmO-TGgOZI&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C1/C1P6-2.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                        리너셀렉트 바이브<br> 멀티케어 3인용 소파 
+                                                    <strong class="item_name pc" id="pro5">
+
                                                     </strong>
                                                 </a>
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span>720,000원</span>
+                                                    <br><span id="pro5P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -154,20 +149,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAG5elc86euJBAxUT9wBFls9dadicX_s4d1bn35zTvifuyolpgK0kVZ_PTFdNyIo31JPUPUXSd&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C3/C3P18-2.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       토토 비취 체어
+                                                    <strong class="item_name pc" id="pro6">
+
                                                     </strong>
                                                 </a>
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span><Br>90,000원</span>
+                                                   <br><span id="pro6P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -177,21 +172,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://gagu-store.com/web/product/big/201705/1536_shop1_790434.png" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C4/C4P20-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       멜론 책상 수입<br>
-                                                       D800사무실 책상 
+                                                    <strong class="item_name pc" id="pro7">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>129,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                    <br><span id="pro7P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -201,20 +195,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="http://th3.tmon.kr/thumbs/image/a5f/86b/ddd/a6297a650_700x700_95_FIT.jpg" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C3/C3P14-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       폴킨스 LPM 수납장 
+                                                    <strong class="item_name pc" id="pro8">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span><br>249,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                    <br><span id="pro8P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -244,20 +238,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjGd-TvzpPRDGQqKCBvXm_mY07wu2ajxeNMASYtAQgZuIww5ySg_o51DC0y-rsN45g__a_tog&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C1/C1P3-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                        동서가구 유로밍 803<br> 편백쿠션 가죽의자 
+                                                    <strong class="item_name pc" id="pro9">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>129,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                    <br><span id="pro9P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -267,21 +261,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://www.costco.co.kr/medias/sys_master/images/h2f/hda/9867851104286.jpg" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C4/C4P24-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       필란디아 스마트<br> 
-                                                       조합형 책상 
+                                                    <strong class="item_name pc" id="pro10">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>90,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                    <br><span id="pro10P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -291,20 +284,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBctklIdIiKXNsOMUPg53myvJsLLKOhTPSqb_ksT2DLFFzD9lL6TaTGQxJtH5O0FHzBg6tbajW&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C1/C1P2-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       크렌시아 소놉스 LED<br> 일반형 침대
+                                                    <strong class="item_name pc" id="pro11">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>134,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                    <br><span id="pro11P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -314,21 +307,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL1I0tyueRA0XkFiTx-rJugTV5TBHvBKfc4ZO5AMvGsuQElsqhrU82ZQwIwhONxIK4ubw3K77d&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C2/C2P10-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       노하우 델루나 <br>
-                                                       800 서랍옷장 
+                                                    <strong class="item_name pc" id="pro12">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box" pc>
-                                                <strong class="item_price">
-                                                    <span>119,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                   <br> <span id="pro12P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -340,22 +332,22 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                             <div class="row">
                                 <div class="col">
                                     <div class="item_cont">
-                                        <div class="item_photo_box">
+                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjGd-TvzpPRDGQqKCBvXm_mY07wu2ajxeNMASYtAQgZuIww5ySg_o51DC0y-rsN45g__a_tog&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C2/C2P8-2.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                        동서가구 유로밍 803<br> 편백쿠션 가죽의자 
+                                                    <strong class="item_name pc" id="pro13">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>129,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                   <br> <span id="pro13P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -363,23 +355,22 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                 </div>
                                 <div class="col">
                                     <div class="item_cont">
-                                        <div class="item_photo_box">
+                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://www.costco.co.kr/medias/sys_master/images/h2f/hda/9867851104286.jpg" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C4/C4P19-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       필란디아 스마트<br> 
-                                                       조합형 책상 
+                                                    <strong class="item_name pc" id="pro14">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>90,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                   <br> <span id="pro14P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -387,22 +378,22 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                 </div>
                                 <div class="col">
                                     <div class="item_cont">
-                                        <div class="item_photo_box">
+                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBctklIdIiKXNsOMUPg53myvJsLLKOhTPSqb_ksT2DLFFzD9lL6TaTGQxJtH5O0FHzBg6tbajW&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C6/C6P35-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       크렌시아 소놉스 LED<br> 일반형 침대
+                                                    <strong class="item_name pc" id="pro15">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>134,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                    <br><span id="pro15P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -410,23 +401,22 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                 </div>
                                 <div class="col">
                                     <div class="item_cont">
-                                        <div class="item_photo_box">
+                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL1I0tyueRA0XkFiTx-rJugTV5TBHvBKfc4ZO5AMvGsuQElsqhrU82ZQwIwhONxIK4ubw3K77d&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C2/C2P12-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       노하우 델루나 <br>
-                                                       800 서랍옷장 
+                                                    <strong class="item_name pc" id="pro16">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box" pc>
-                                                <strong class="item_price">
-                                                    <span>119,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                   <br> <span id="pro16P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -456,20 +446,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkuineTP21xtQRtYuSM6cr7ucJbPLqb8UL1aOMCwZK42-RQai3v3BgF_7vu7HqcjUnglXv8il7&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C5/C5P26-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                        라킹 흔들의자
+                                                    <strong class="item_name pc" id="pro17">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span><Br>300,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                   <br> <span id="pro17P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -479,21 +469,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8q4FMkb63NJRHSk_ZBaJR_aCVtMppFdhZLlpKQ8s5o5ZvdgIYWz1Z-TM1jqjezIY9iGxnPX49&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C3/C3P16-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       폴로까사 쟈스민 4인용<br>4인용 아쿠아텍스 소파
-    
+                                                    <strong class="item_name pc" id="pro18">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>300,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                   <br> <span id="pro18P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -503,20 +492,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF9CNE2t2PqcPHrK_Kj9m5Pa08bnP6fpTokQ&usqp=CAU" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C5/C5P29-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                        BLMG 블루밍홈 유럽식<br>책상 1000*1200
+                                                    <strong class="item_name pc" id="pro19">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>129,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                    <br><span id="pro19P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -526,21 +515,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_up24FLsj2l9Js--ffXCdNTeuEEUBC3Ng1Q&usqp=CAU" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C3/C3P17-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       국산 철제 시스템<br>
-                                                       옷장 드레스룸용
+                                                    <strong class="item_name pc" id="pro20">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>50,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                  <br>  <span id="pro20P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -552,22 +540,45 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                             <div class="row">
                                 <div class="col">
                                     <div class="item_cont">
-                                        <div class="item_photo_box">
+                                       <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkuineTP21xtQRtYuSM6cr7ucJbPLqb8UL1aOMCwZK42-RQai3v3BgF_7vu7HqcjUnglXv8il7&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C6/C6P32-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                        라킹 흔들의자
+                                                    <strong class="item_name pc" id="pro21">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span><Br>300,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                   <br> <span id="pro21P"></span>
+                                                </strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="item_cont">
+                                       <div class="item_photo_box">
+                                            <a href="">
+                                                <img src="<%=request.getContextPath()%>/images/product/C5/C5P27-1.jpg">
+                                            </a>
+                                        </div>
+                                        <div class="item_info_cont">
+                                            <div class="item_tit">
+                                                <a href="">
+                                                    <strong class="item_name pc" id="pro22">
+
+                                                    </strong>
+                                                </a>
+                                            </div>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                   <br> <span id="pro22P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -577,21 +588,20 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                     <div class="item_cont">
                                         <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8q4FMkb63NJRHSk_ZBaJR_aCVtMppFdhZLlpKQ8s5o5ZvdgIYWz1Z-TM1jqjezIY9iGxnPX49&usqp=CAc" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C5/C5P30-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                       폴로까사 쟈스민 4인용<br>4인용 아쿠아텍스 소파
-    
+                                                    <strong class="item_name pc" id="pro23">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>300,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                  <br> <span id="pro23P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -599,46 +609,22 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                 </div>
                                 <div class="col">
                                     <div class="item_cont">
-                                        <div class="item_photo_box">
+                                       <div class="item_photo_box">
                                             <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF9CNE2t2PqcPHrK_Kj9m5Pa08bnP6fpTokQ&usqp=CAU" alt="" class="middle">
+                                                <img src="<%=request.getContextPath()%>/images/product/C3/C3P15-1.jpg">
                                             </a>
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
                                                 <a href="">
-                                                    <strong class="item_name pc">
-                                                        BLMG 블루밍홈 유럽식<br>책상 1000*1200
+                                                    <strong class="item_name pc" id="pro24">
+
                                                     </strong>
                                                 </a>
                                             </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>129,000원</span>
-                                                </strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item_cont">
-                                        <div class="item_photo_box">
-                                            <a href="">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_up24FLsj2l9Js--ffXCdNTeuEEUBC3Ng1Q&usqp=CAU" alt="" class="middle">
-                                            </a>
-                                        </div>
-                                        <div class="item_info_cont">
-                                            <div class="item_tit">
-                                                <a href="">
-                                                    <strong class="item_name pc">
-                                                       국산 철제 시스템<br>
-                                                       옷장 드레스룸용
-                                                    </strong>
-                                                </a>
-                                            </div>
-                                            <div class="item_money_box pc">
-                                                <strong class="item_price">
-                                                    <span>50,000원</span>
+                                            <div class="item_money_box">
+                                                <strong class="item_price pc">
+                                                   <br> <span id="pro24P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -670,6 +656,93 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
         </section>    
 
        
+       
+       <script>
+	$(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/index/product/list",
+			success:data=>{
+				
+				for(let i=0; i<data.length;i++){
+					let pCode = data[i]["pCode"];
+					let price = data[i]["price"];
+					let pName = data[i]["pName"];
+				
+				}
+				$("#pro1").append(data[0]["pName"]);
+				$("#pro1P").append(data[0]["price"]);	
+				
+				$("#pro2").append(data[1]["pName"]);
+				$("#pro2P").append(data[1]["price"]);
+				$("#pro3").append(data[4]["pName"]);
+				$("#pro3P").append(data[4]["price"]);
+				$("#pro4").append(data[3]["pName"]);
+				$("#pro4P").append(data[3]["price"]);
+				$("#pro5").append(data[2]["pName"]);
+				$("#pro5P").append(data[2]["price"]);
+				$("#pro6").append(data[15]["pName"]);
+				$("#pro6P").append(data[15]["price"]);
+				$("#pro7").append(data[6]["pName"]);
+				$("#pro7P").append(data[6]["price"]);
+				$("#pro8").append(data[14]["pName"]);
+				$("#pro8P").append(data[14]["price"]);
+				$("#pro9").append(data[7]["pName"]);
+				$("#pro9P").append(data[7]["price"]);
+				$("#pro10").append(data[13]["pName"]);
+				$("#pro10P").append(data[13]["price"]);
+				$("#pro11").append(data[8]["pName"]);
+				$("#pro11P").append(data[8]["price"]);
+				$("#pro12").append(data[11]["pName"]);
+				$("#pro12P").append(data[11]["price"]);
+				$("#pro13").append(data[9]["pName"]);
+				$("#pro13P").append(data[9]["price"]);
+				$("#pro14").append(data[10]["pName"]);
+				$("#pro14P").append(data[10]["price"]);
+				$("#pro15").append(data[26]["pName"]);
+				$("#pro15P").append(data[26]["price"]);
+				$("#pro16").append(data[16]["pName"]);
+				$("#pro16P").append(data[16]["price"]);
+				$("#pro17").append(data[25]["pName"]);
+				$("#pro17P").append(data[25]["price"]);
+				$("#pro18").append(data[17]["pName"]);
+				$("#pro18P").append(data[17]["price"]);
+				$("#pro19").append(data[24]["pName"]);
+				$("#pro19P").append(data[24]["price"]);
+				$("#pro20").append(data[18]["pName"]);
+				$("#pro20P").append(data[18]["price"]);
+				$("#pro21").append(data[23]["pName"]);
+				$("#pro21P").append(data[23]["price"]);
+				$("#pro22").append(data[19]["pName"]);
+				$("#pro22P").append(data[19]["price"]);
+				$("#pro23").append(data[22]["pName"]);
+				$("#pro23P").append(data[22]["price"]);
+				$("#pro24").append(data[20]["pName"]);
+				$("#pro24P").append(data[20]["price"]);
+			
+				const fn_move_proDetail=()=>{
+					console.log(data[0]["pCode"]);	
+				}
+			}
+			
+		});
+		
+	})
+	
+</script>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
 
 
 
@@ -678,9 +751,15 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
             background-color: black;
             opacity: 0.4;
         } */
-        .carousel-control-prev-icon{
-            color: black;
+        .carousel-control-prev{
+            height:100px;
+            margin-top:150px;
         }
+        .carousel-control-next{
+            height:100px;
+            margin-top:150px;
+        }
+        
         .location_cont em{
                 text-align: right;
             }

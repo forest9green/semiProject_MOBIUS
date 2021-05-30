@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.admin.user.model.vo.AdminMileage;
+import com.admin.user.model.vo.AdminOrder;
 import com.admin.user.model.vo.AdminUserInfo;
 import com.admin.user.model.vo.TotalInfo;
 import com.coupon.model.vo.Coupon;
@@ -147,6 +149,88 @@ private Properties prop=new Properties();
 		return clist;
 
 	}
+	
+	public int insertCoupon(Connection conn,String userId,String cName, double cDiscount,int cFinishDate,int cLimit) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertCoupon"));
+			pstmt.setString(1, userId);
+			pstmt.setString(2, cName);
+			pstmt.setDouble(3, cDiscount);
+			pstmt.setInt(4, cFinishDate);
+			pstmt.setInt(5, cLimit);
+			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	
+	public List<AdminMileage> AdminMileageList(Connection conn, String userId){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<AdminMileage> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("mileageList"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				AdminMileage m = new AdminMileage();
+				m.setOrderDate(rs.getDate("order_date"));
+				m.setUserId(rs.getString("user_id"));
+				m.setmContent(rs.getString("m_content"));
+				m.setmPlus(rs.getInt("m_plus"));
+				m.setmMinus(rs.getInt("m_minus"));
+				list.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
+		return list;
+		
+	}
+	
+	public List<AdminOrder> orderList(Connection conn, String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		List<AdminOrder> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("orderList"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				AdminOrder a = new AdminOrder();
+				a.setOrderNo(rs.getString("order_no"));
+				a.setUserId(rs.getString("user_id"));
+				a.setOrderDate(rs.getDate("order_date"));
+				a.setPrice(rs.getInt("price"));
+				a.setoState(rs.getString("o_state"));
+				list.add(a);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

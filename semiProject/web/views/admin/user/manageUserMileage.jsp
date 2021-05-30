@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List,com.admin.user.model.vo.AdminMileage" %>
+<%
+	List<AdminMileage> list = (List<AdminMileage>)request.getAttribute("list");
+	String userId = (String)request.getAttribute("userId");
+%>
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -25,10 +30,10 @@
                 <div class="main"> 
                     <h3 class="pd greenright">회원 관리</h3>
                     <div id="user_btn">
-                        <button type="button">회원 정보</button>
-                        <button type="button">쿠폰</button>
+                        <button type="button" id="fn_move_userInfo">회원 정보</button>
+                        <button type="button" id="fn_move_coupon">쿠폰</button>
                         <button type="button" class="choice2">적립금</button>
-                        <button type="button">구매내역</button>
+                        <button type="button" id="fn_move_order">구매내역</button>
                     </div>
                     <div id="user_content">
                         <table id="output_table" class="pa" border=1>
@@ -42,17 +47,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--
-                                    값이 없으면 <tr>적립 내역이 없습니다.</tr> 추가
-                                    값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 처리해야 함
-                                -->
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                              <%if(list.isEmpty()){ %>
+                               		<tr>
+                            		<td colspan="9" align="center">
+                            			검색결과가 없습니다.
+                            		</td>
+                            		</tr>
+                               <%}else{ %>
+                               		<%for(AdminMileage m : list){ %>
+		                                <tr>
+		                                    <td><%=m.getOrderDate() %></td>
+		                                    <td><%=m.getmContent() %></td>
+		                                    <td><%=m.getmPlus() %></td>
+		                                    <td><%=m.getmMinus() %></td>
+		                                    <td></td>
+		                                </tr>
+		                             <%} %>
+                                <%} %>
                             </tbody>
                         </table>
                     </div>
@@ -63,6 +74,30 @@
                 </div>
             </div>    
         </section>
+
+
+<form action="<%=request.getContextPath()%>/admin/member/info" id="moveInfo">
+	<input type="hidden" value="<%=userId %>" name="userId">
+</form>
+<form action="<%=request.getContextPath() %>/admin/user/coupon" method="post" id="moveCoupon">
+	<input type="hidden" name="userId" value="<%=userId%>">
+</form>	
+<form action="<%=request.getContextPath() %>/admin/user/order" method="post" id="moveOrder">
+	<input type="hidden" name="userId" value="<%=userId%>">
+</form>
+
+		<script>
+			$("#fn_move_coupon").click(function(){
+				$("#moveCoupon").submit();
+			})
+			 $("#fn_move_userInfo").click(function(){
+            	$("#moveInfo").submit();
+            })
+            $("#fn_move_order").click(function(){
+			$("#moveOrder").submit();
+		})
+		</script>
+
 
 
         <style>

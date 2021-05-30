@@ -31,6 +31,8 @@ public class AdminDeleteNoticeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String noticeNo = request.getParameter("NOTICE_NO");
+		
+		AdminNoticeService AdminNoticeService = new AdminNoticeService();
 		int result = new AdminNoticeService().deleteNotice(noticeNo);
 		
 		String msg = "";
@@ -38,10 +40,10 @@ public class AdminDeleteNoticeServlet extends HttpServlet {
 		
 		if(result>0) {
 			msg = "삭제가 완료되었습니다.";
-			loc = "/index.jsp";
+			loc = "/admin/notice/manageNotice";
 		}else {
 			msg = "삭제에 실패했습니다.";
-			loc = "/views/admin/notice/manageNotice.jsp";
+			loc = "/admin/notice/manageNotice";
 		}
 		
 		request.setAttribute("msg", msg);

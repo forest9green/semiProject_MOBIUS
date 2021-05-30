@@ -1,12 +1,16 @@
 package com.admin.user.model.service;
 
 import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
 import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.admin.user.model.dao.AdminUserDao;
+import com.admin.user.model.vo.AdminMileage;
+import com.admin.user.model.vo.AdminOrder;
 import com.admin.user.model.vo.AdminUserInfo;
 import com.admin.user.model.vo.TotalInfo;
 import com.coupon.model.vo.Coupon;
@@ -46,6 +50,33 @@ public class AdminUserService {
 		close(conn);
 		return clist;
 	}
+	
+	public int insertCoupon(String userId, String cName,double cDiscount,int cFinishDate,int cLimit) {
+		Connection conn = getConnection();
+		int result = dao.insertCoupon(conn,userId,cName,cDiscount,cFinishDate,cLimit);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
+	
+	public List<AdminMileage> AdminMileageList(String userId){
+		Connection conn = getConnection();
+		List<AdminMileage> list = dao.AdminMileageList(conn,userId);
+		close(conn);
+		return list;
+	}
+	
+	public List<AdminOrder> orderList(String userId){
+		Connection conn = getConnection();
+		List<AdminOrder> list = dao.orderList(conn,userId);
+		close(conn);
+		return list;
+	}
+	
+	
+	
 	
 	
 	

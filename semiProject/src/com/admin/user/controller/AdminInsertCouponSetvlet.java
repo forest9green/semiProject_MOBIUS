@@ -1,7 +1,6 @@
 package com.admin.user.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.admin.user.model.service.AdminUserService;
-import com.coupon.model.vo.Coupon;
 
 /**
- * Servlet implementation class AdminUserCouponServlet
+ * Servlet implementation class AdminInsertCouponSetvlet
  */
-@WebServlet("/admin/user/coupon")
-public class AdminUserCouponServlet extends HttpServlet {
+@WebServlet("/admin/user/insertCoupon")
+public class AdminInsertCouponSetvlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminUserCouponServlet() {
+    public AdminInsertCouponSetvlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +30,36 @@ public class AdminUserCouponServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userId = request.getParameter("userId");
 		
-		List<Coupon> clist = new AdminUserService().CouponList(userId);
-		request.setAttribute("userId", userId);
-		request.setAttribute("clist", clist);
-		request.getRequestDispatcher("/views/admin/user/manageUserCoupon.jsp")
+		String userId = request.getParameter("userId");
+		String cName = request.getParameter("cName");
+		double cDiscount = Double.parseDouble(request.getParameter("cDiscount"));
+		int cFinishDate = Integer.parseInt(request.getParameter("cFinishDate"));
+		int cLimit = Integer.parseInt(request.getParameter("cLimit"));
+	
+		System.out.println(userId);
+		System.out.println(cName);
+		System.out.println(cDiscount);
+		System.out.println(cFinishDate);
+		System.out.println(cLimit);
+		int result = new AdminUserService().insertCoupon(userId,cName,cDiscount,cFinishDate,cLimit);
+		
+		String msg = "";
+		String loc = "";
+		if(result>0) {
+			msg="쿠폰등록 성공!";
+			loc="/views/admin/user/insertCoupon.jsp";
+		}else {
+			msg="쿠폰등록 실패!";
+			loc="/views/admin/user/manageUserCoupon.jsp";
+		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp")
 		.forward(request, response);
+	
+	
 	}
 
 	/**
