@@ -6,6 +6,7 @@
 <%
 	List<Notice> list=(List<Notice>)request.getAttribute("notice");
 	String pageBar=(String)request.getAttribute("pageBar");
+	
 
 %>
 
@@ -24,7 +25,7 @@
                         <li><a href="<%=request.getContextPath() %>/views/admin/board/manageBoard" class="pc black">- 문의사항 관리</a></li>
                     </ul><br>
                     <ul class="pd">상품
-                        <li><a href="<%=request.getContextPath() %>/views/admin/product/manageProduct" class="pc black">- 상품 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/manageProductMain" class="pc black">- 상품 관리</a></li>
                     </ul><br>
                     <ul class="pd">설정
                         <li><a href="<%=request.getContextPath() %>/admin/notice/manageNotice" class="choice" class="pc black">- 공지사항 관리</a></li>
@@ -54,13 +55,13 @@
                                     <td><input type="checkbox" name="chk"></td>
                                     <td><a href="<%= request.getContextPath()%>/notice/noticeView?noticeNo=<%=n.getnoticeNo()%>"><%=n.getnTitle() %></a></td>
                                     <td><%=n.getnDate() %></td>
-                                    <td><button class="whitebtn">수정</button></td>
+                                    <td><a href="<%= request.getContextPath()%>/admin/notice/modifyNotice?noticeNo=<%=n.getnoticeNo()%>"><button class="whitebtn">수정</button></a></td>
                                 </tr> 
                             </tbody>
                             <%} %>
                         </table>
                         <div id="btn">
-                            <button type="button" class="pb" style="background-color: white;">선택 삭제</button>
+                            <a href="<%= request.getContextPath()%>/admin/notice/deleteNotice"><button type="button" class="pb" style="background-color: white;">선택 삭제</button></a>
                             <a href="<%= request.getContextPath()%>/admin/notice/writeNotice"><button type="button" class="pb blackbtn" >글쓰기</button></a>
                             <!--open()으로 작은 window창 열어서 등록 처리-->
                         </div>
@@ -84,6 +85,13 @@
                     }
                 })
             })
+            const fn_delete_notice=()=>{
+			if(confirm("정말로 삭제하시겠습니까?")){
+				<%-- location.replace("<%=request.getContextPath()%>/admin/notice/deleteNotice?noticeNo=<%=n.getnoticeNo()%>"); --%>
+				
+			}
+          }
+            
         </script>
 
         <style>

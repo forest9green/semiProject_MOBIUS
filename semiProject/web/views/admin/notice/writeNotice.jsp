@@ -18,7 +18,7 @@
                         <li><a href="" class="pc black">- 문의사항 관리</a></li>
                     </ul><br>
                     <ul class="pd">상품
-                        <li><a href="" class="pc black">- 상품 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/manageProductMain" class="pc black">- 상품 관리</a></li>
                     </ul><br>
                     <ul class="pd">설정
                         <li><a href="" class="pc choice">- 공지사항 관리</a></li>

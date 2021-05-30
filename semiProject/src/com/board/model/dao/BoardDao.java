@@ -151,7 +151,20 @@ public class BoardDao {
 			close(pstmt);
 		}return result;
 	}
-	
+	public int deleteBoard(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		int result=0;		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateBoard"));
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }
+
 
 

@@ -37,7 +37,7 @@
                 <div id="bo_v_top">
                     <div class="bo_v_left">
                         <a class="boabtn btn-light sujeong" href="javascript:void(0);" onclick="fn_updateBoard();" >수정완료</a>
-                        <a class="boabtn btn-light sakje" href="" >삭제</a>     
+                        <!-- <a class="boabtn btn-light sakje" href="" >삭제</a>      -->
                     </div>
                     <div class="bo_v_right">
                         <a class="boabtn btn-secondary" href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">목록</a>

@@ -87,5 +87,38 @@ private Properties prop=new Properties();
 		}return result;
 	}
 	
+	public int modifyNotice(Connection conn, Notice n) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("modifyNotice"));
+			pstmt.setString(1, n.getnTitle());
+			pstmt.setString(2, n.getnContent());
+			pstmt.setString(3, n.getnImgPath());
+//			pstmt.setDate(4, n.getnDate());
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int deleteNotice(Connection conn, String noticeNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("deleteNotice"));
+			pstmt.setString(1, noticeNo);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return result;
+		
+	}
 	
 }

@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.admin.notice.model.service.AdminNoticeService;
-import com.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class AdminModifyNoticeServlet
+ * Servlet implementation class AdminDeleteNoticeServlet
  */
-@WebServlet("/admin/notice/modifyNotice")
-public class AdminModifyNoticeServlet extends HttpServlet {
+@WebServlet("/admin/notice/deleteNotice")
+public class AdminDeleteNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminModifyNoticeServlet() {
+    public AdminDeleteNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +29,32 @@ public class AdminModifyNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		Notice n=new AdminNoticeService().modifyNotice(request.getParameter("NOTICE_NO"));
-//		
-//		request.setAttribute("notice", n);
-//		
-//		request.getRequestDispatcher("/views/admin/notice/modifyNotice.jsp")
-//		.forward(request, response);
-//		
 		
+		String noticeNo = request.getParameter("NOTICE_NO");
+		int result = new AdminNoticeService().deleteNotice(noticeNo);
 		
+		String msg = "";
+		String loc = "";
+		
+		if(result>0) {
+			msg = "삭제가 완료되었습니다.";
+			loc = "/index.jsp";
+		}else {
+			msg = "삭제에 실패했습니다.";
+			loc = "/views/admin/notice/manageNotice.jsp";
+		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+	
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request, response);
+	
 	}
+
+		
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
