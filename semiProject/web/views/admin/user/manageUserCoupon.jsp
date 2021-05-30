@@ -31,8 +31,8 @@
                     <div id="user_btn">
                         <button type="button" id="fn_move_userInfo">회원 정보</button>
                         <button type="button" class="choice2">쿠폰</button>
-                        <button type="button">적립금</button>
-                        <button type="button">구매내역</button>
+                        <button type="button" id="fn_move_mileage">적립금</button>
+                        <button type="button" id="fn_move_order">구매내역</button>
                     </div>
                     <div id="user_content">
                         <table id="output_table" class="pa" border=1>
@@ -60,7 +60,7 @@
 		                                   	<input type="hidden" name="cNo" value="<%=c.getcNo()%>">
 		                                    <td><input type="checkbox" name="chk"></td>
 		                                    <td><%=c.getcName() %></td>
-		                                    <td><%=c.getcDiscount() %></td>
+		                                    <td><%=c.getcDiscount()*100%>%</td>
 											<td><%=c.getcIssueDate() %></td>
 											<td><%=c.getcFinishDate() %></td>
 											<%if(c.getcUse()==1){ %>
@@ -91,9 +91,18 @@
         <form action="" name="insertCoupon">
 			<input type="hidden" name="userId" value="<%=userId%>">
 		</form>
+		
 		<form action="<%=request.getContextPath()%>/admin/member/info" id="moveInfo">
 			<input type="hidden" value="<%=userId %>" name="userId">
 		</form>
+		
+		<form action="<%=request.getContextPath()%>/admin/user/mileage" id="moveMileage">
+			<input type="hidden" value="<%=userId%>" name="userId">
+		</form>
+		<form action="<%=request.getContextPath()%>/admin/user/order" id="moveOrder">
+			<input type="hidden" value="<%=userId %>" name="userId">
+		</form>
+		
         
         <script>
             $(document).ready(function(){
@@ -109,7 +118,6 @@
             
             const fn_insert_coupon=()=>{
             	const userId=$("input[name=userId]").val();
-            	console.log(userId);
             	const url="<%=request.getContextPath()%>/admin/user/couponPage";
             	const title = "insertCoupon";
             	const status = "left=500px,top=100px,width=500px,height=400px";
@@ -128,8 +136,15 @@
             	$("#moveInfo").submit();
             })
             
-            $("#selectDelete").click(function(){
+            /* $("#selectDelete").click(function(){
             	$("#deleteCoupon").submit();
+            }) */
+            
+            $("#fn_move_mileage").click(function(){
+            	$("#moveMileage").submit();
+            })
+            $("#fn_move_order").click(function(){
+            	$("#moveOrder").submit();
             })
         </script>
 

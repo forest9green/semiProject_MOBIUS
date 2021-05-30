@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/views/common/header.jsp"%>
-<script src="js/bootstrap.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/boots
 
@@ -33,23 +32,18 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                           <div class="carousel-item active">
                             <div class="row">
                                 <div class="col">
-                                    <div class="item_cont" onclick="fn_move_proDetail">
+                                    <div class="item_cont" id="contDiv">
                                         <div class="item_photo_box">
                                                 <img src="<%=request.getContextPath()%>/images/product/C1/C1P1-1.jpg">
                                         </div>
                                         <div class="item_info_cont">
                                             <div class="item_tit">
-                                              
-                                                    <strong class="item_name pc" id="pro1">
-                                                        
+                                                    <strong class="item_name pc" id="pro1">   
                                                     </strong>
-      												<form action="<%=request.getContextPath()%>/product/productDetail" method="post">
-      													<input type="hidden" id="hiddenValue" value="">
-      												</form>
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc" >
-                                                    <span id="pro1P"></span>
+                                                    <br><span id="pro1P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -72,7 +66,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro2P"></span>
+                                                    <br><span id="pro2P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -95,7 +89,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box pc">
                                                 <strong class="item_price">
-                                                    <span id="pro3P"></span>
+                                                    <br><span id="pro3P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -118,7 +112,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box pc">
                                                 <strong class="item_price" >
-                                                    <span id="pro4P"></span>
+                                                    <br><span id="pro4P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -145,7 +139,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro5P"></span>
+                                                    <br><span id="pro5P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -168,7 +162,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro6P"></span>
+                                                   <br><span id="pro6P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -191,7 +185,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro7P"></span>
+                                                    <br><span id="pro7P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -214,7 +208,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro8P"></span>
+                                                    <br><span id="pro8P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -257,7 +251,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro9P"></span>
+                                                    <br><span id="pro9P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -280,7 +274,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro10P"></span>
+                                                    <br><span id="pro10P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -303,7 +297,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro11P"></span>
+                                                    <br><span id="pro11P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -326,7 +320,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro12P"></span>
+                                                   <br> <span id="pro12P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -353,7 +347,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro13P"></span>
+                                                   <br> <span id="pro13P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -376,7 +370,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro14P"></span>
+                                                   <br> <span id="pro14P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -399,7 +393,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro15P"></span>
+                                                    <br><span id="pro15P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -422,7 +416,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro16P"></span>
+                                                   <br> <span id="pro16P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -465,7 +459,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro17P"></span>
+                                                   <br> <span id="pro17P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -488,7 +482,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro18P"></span>
+                                                   <br> <span id="pro18P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -511,7 +505,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro19P"></span>
+                                                    <br><span id="pro19P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -534,7 +528,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro20P"></span>
+                                                  <br>  <span id="pro20P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -561,7 +555,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro21P"></span>
+                                                   <br> <span id="pro21P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -584,7 +578,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro22P"></span>
+                                                   <br> <span id="pro22P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -607,7 +601,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro23P"></span>
+                                                  <br> <span id="pro23P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -630,7 +624,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
                                             </div>
                                             <div class="item_money_box">
                                                 <strong class="item_price pc">
-                                                    <span id="pro24P"></span>
+                                                   <br> <span id="pro24P"></span>
                                                 </strong>
                                             </div>
                                         </div>
@@ -673,10 +667,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
 					let pCode = data[i]["pCode"];
 					let price = data[i]["price"];
 					let pName = data[i]["pName"];
-					console.log(pCode);
-					console.log(price);
-					console.log(pName);
-					
+				
 				}
 				$("#pro1").append(data[0]["pName"]);
 				$("#pro1P").append(data[0]["price"]);	
@@ -729,7 +720,7 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
 				$("#pro24P").append(data[20]["price"]);
 			
 				const fn_move_proDetail=()=>{
-					
+					console.log(data[0]["pCode"]);	
 				}
 			}
 			

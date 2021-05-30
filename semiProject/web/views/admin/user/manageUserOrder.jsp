@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>  
+<%@ page import="java.util.List,com.admin.user.model.vo.AdminOrder" %>
+<%
+	List<AdminOrder> list = (List<AdminOrder>)request.getAttribute("list");
+	String userId = (String)request.getAttribute("userId");
+%>
+
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -25,9 +31,9 @@
                 <div class="main"> 
                     <h3 class="pd greenright">회원 관리</h3>
                     <div id="user_btn">
-                        <button type="button">회원 정보</button>
-                        <button type="button">쿠폰</button>
-                        <button type="button">적립금</button>
+                        <button type="button" id="fn_move_userInfo">회원 정보</button>
+                        <button type="button" id="fn_move_coupon">쿠폰</button>
+                        <button type="button" id="fn_move_mileage">적립금</button>
                         <button type="button" class="choice2">구매내역</button>
                     </div>
                     <div id="user_content">
@@ -42,17 +48,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--
-                                    값이 없으면 <tr>구매 내역이 없습니다.</tr> 추가
-                                    값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 처리해야 함
-                                -->
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td><!--주문 내역 상세 테이블의 주문상태 출력-->
-                                    <td><button class="whitebtn">자세히 보기</button></td><!--클릭 시 주문관리-주문접수내역의 주문서로 이동-->
-                                </tr>
+                                <%if(list.isEmpty()){ %>
+                                	<tr>
+                            		<td colspan="9" align="center">
+                            			검색결과가 없습니다.
+                            		</td>
+                            		</tr>
+                                <%}else{ %>
+		                            <%for(AdminOrder ao : list){ %>    
+		                                <tr>
+		                                    <td><%=ao.getOrderDate() %></td>
+		                                    <td><%=ao.getOrderNo() %></td>
+		                                    <td><%=ao.getPrice() %></td>
+		                                    <td><%=ao.getoState() %></td><!--주문 내역 상세 테이블의 주문상태 출력-->
+		                                    <td><button class="whitebtn" id="fn_move_orderDetail">자세히 보기</button></td><!--클릭 시 주문관리-주문접수내역의 주문서로 이동-->
+		                                	<form action="<%=request.getContextPath() %>/admin/order/" method="post" id="moveOrderDetail">
+												<input type="hidden" name="orderNo" value="<%=ao.getOrderNo()%>">
+											</form>
+		                                </tr>
+		                             <%} %>
+	                             <%} %>
                             </tbody>
                         </table>
                     </div>
@@ -63,6 +78,30 @@
                 </div>
             </div>    
         </section>
+
+<form action="<%=request.getContextPath() %>/admin/user/info" method="post" id="moveUserInfo">
+	<input type="hidden" name="userId" value="<%=userId%>">
+</form>
+<form action="<%=request.getContextPath() %>/admin/user/coupon" method="post" id="moveCoupon">
+	<input type="hidden" name="userId" value="<%=userId%>">
+</form>
+<form action="<%=request.getContextPath() %>/admin/user/mileage" method="post" id="moveMileage">
+	<input type="hidden" name="userId" value="<%=userId%>">
+</form>
+
+
+	 	<script>
+	 		$("#fn_move_userInfo").click(function(){
+	 			$("#moveUserInfo").submit();
+	 		})
+	 		$("#fn_move_coupon").click(function(){
+	 			$("#moveCoupon").submit();
+	 		})
+	 		$("#fn_move_mileage").click(function(){
+	 			$("#moveMileage").submit();
+	 		})
+	 	</script>
+
 
 
         <style>
