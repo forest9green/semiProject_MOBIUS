@@ -33,7 +33,10 @@
         <div id="bo_v_top">
             <div class="bo_v_left">
                 <a class="boabtn btn-light sujeong" onclick="location.assign('<%=request.getContextPath() %>/myPage/board/boardupdate?bNo=<%=b.getbNo()%>')">수정</a>
-                <a class="boabtn btn-light sakje" href="" onclick="">삭제</a>     
+                <form name="deleteFrm" action="/myPage/board/delete" method="post">
+                	<a class="boabtn btn-light sakje" >삭제</a>
+                	<input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+                </form>     
             </div>
             <div class="bo_v_right">
                 <a class="boabtn btn-secondary" href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">목록</a>
@@ -50,6 +53,9 @@
 </section>
 
 <style>
+	.bo_v_left{
+		display:flex;
+	}
     #bo_title{
         font-family: "Noto Sans KR";
         font-weight: 400;

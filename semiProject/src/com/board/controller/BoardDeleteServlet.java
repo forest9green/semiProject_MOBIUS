@@ -35,8 +35,6 @@ public class BoardDeleteServlet extends HttpServlet {
 	
 		String userId=request.getParameter("userId");
 	
-		
-	
 		BoardService boardService = new BoardService();		
 		int result=boardService.deleteBoard(userId);
 		
@@ -44,7 +42,7 @@ public class BoardDeleteServlet extends HttpServlet {
 		String loc = "";
 		if(result>0) {
 			msg = "삭제가 완료되었습니다.";
-			loc = "";
+			loc = "/views/board/boardList.jsp";
 		}
 		
 		request.setAttribute("msg", msg);
