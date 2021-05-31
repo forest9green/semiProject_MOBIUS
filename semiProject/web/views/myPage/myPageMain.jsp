@@ -13,7 +13,7 @@
                 <td><%=loginUser.getMileage() %>원</td>
                 <td style="text-align: start"><input type="button" class="inquiry_btn pb" value="조회" onclick="fn_moveMileageView();"></td>
                 <td>쿠폰</td>
-                <td>0개</td>
+                <td id="CountCoupon"></td>
                 <td style="text-align: start"><input type="button" class="inquiry_btn pb" value="조회" onclick="fn_moveCouponView();"
                 style="margin-left: 10px;"></td>
             </tr>
@@ -56,7 +56,7 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="">
+                    <a href="<%=request.getContextPath()%>/myPage/wishList?userId=<%=loginUser.getUserId()%>">
                         <h3><strong>WISH LIST</strong></h3>
                         <p style="font-size: 90%;">관심 상품으로 등록하신<br>상품의 목록을 보여드립니다.</p>
                     </a>
@@ -130,6 +130,16 @@
 	const fn_moveCouponView=()=>{
 		location.assign('<%=request.getContextPath()%>/myPage/couponList?userId=<%=loginUser.getUserId() %>');
 	}
+	
+	$(function(){
+		$.ajax({
+			url:'<%=request.getContextPath()%>/myPage/couponCount',
+			data:{"userId":'<%=loginUser.getUserId()%>'},
+			success:data=>{
+				alert("실행됨");
+			}
+		})
+	})
 </script>
 
 <style>
@@ -204,6 +214,5 @@
     	margin:0px;
     }
 </style>
-<script></script>
 
 <%@ include file="/views/common/footer.jsp"%>

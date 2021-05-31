@@ -146,8 +146,7 @@
 <style>
     #addr_box{
         width:1000px;
-        height:800px;
-        margin:50px auto;
+        margin:0px auto;
     }
     #addr_table_box{
         min-height: 200px;
@@ -189,6 +188,7 @@
     }
     #addr_box>p+h2{
         font-size: 30px;
+        margin-top:0px;
     }
     #addr_warn{
         width:945px;

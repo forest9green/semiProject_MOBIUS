@@ -1,4 +1,4 @@
-package com.wish.controller;
+package com.admin.board.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,21 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.coupon.model.service.CouponService;
-import com.wish.model.service.WishListService;
-import com.wish.model.vo.WishProduct;
+import com.admin.board.model.service.AdminBoardService;
+import com.admin.board.model.vo.AdminBoard;
+import com.admin.notice.model.service.AdminNoticeService;
+import com.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class WishListViewServlet
+ * Servlet implementation class AdminBoardServlet
  */
-@WebServlet("/myPage/wishList")
-public class WishListViewServlet extends HttpServlet {
+@WebServlet("/admin/manageboard")
+public class AdminManageBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WishListViewServlet() {
+    public AdminManageBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,38 +33,42 @@ public class WishListViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId=request.getParameter("userId");
-		
 		int cPage;
-		int numPerPage=10;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
 		
-		List<WishProduct> list=new WishListService().selectWish(userId,cPage,numPerPage);
+		int numPerpage=10;
 		
-		int totalData=new WishListService().selectWishCount(userId);
-		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
+		
+		List<AdminBoard> list=new AdminBoardService().selectAdminBoardList(cPage,numPerpage);
+		
+		int totalData=new AdminBoardService().selectAdminBoardCount();
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
 		int pageBarSize=10;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
-		
 		String pageBar="";
+		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/myPage/wishList?userId="+userId+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()
+				+"/admin/manageboard?cPage="+pageNo+
+				"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
-
-		request.setAttribute("wishs", list);
-		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/views/myPage/wishListView.jsp").forward(request, response);
+		
+		request.setAttribute("adminboard",list);
+		request.setAttribute("pageBar",pageBar);
+		
+		request.getRequestDispatcher("/views/admin/board/manageBoard.jsp")
+		.forward(request, response);
 	}
 
 	/**
