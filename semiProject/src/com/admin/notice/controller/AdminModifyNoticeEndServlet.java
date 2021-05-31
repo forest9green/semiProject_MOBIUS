@@ -52,8 +52,8 @@ public class AdminModifyNoticeEndServlet extends HttpServlet {
 		
 		Notice n=new Notice();
 		n.setnoticeNo(mr.getParameter("NOTICE_NO"));
-		n.setnTitle(mr.getParameter("N_TITLE"));
-		n.setnContent(mr.getParameter("N_CONTENT"));
+		n.setnTitle(mr.getParameter("n_Title"));
+		n.setnContent(mr.getParameter("n_Content"));
 		n.setnImgPath(mr.getFilesystemName("upfile"));
 		
 		String filePath=mr.getFilesystemName("upfile");

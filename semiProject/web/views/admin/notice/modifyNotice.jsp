@@ -12,30 +12,30 @@
             <h2 class="pe title">관리자 페이지</h2> 
             <div class="content" style="display:flex">
                 <div class="category">
-                    <ul class="pd"><a href="<%=request.getContextPath() %>/views/admin/adminMain.jsp" class="black">메인</a></ul><br>
+                    <ul class="pd"><a href="<%=request.getContextPath() %>/admin/adminMain" class="black">메인</a></ul><br>
                     <ul class="pd">회원
-                        <li><a href="<%=request.getContextPath() %>/views/admin/user/manageUserMain.jsp" class="pc black">- 회원 관리</a></li>
-                        <li><a href="<%=request.getContextPath() %>/views/admin/order/manageOrderInfoDetail.jsp" class="pc black">- 주문 관리</a></li>
-                        <li><a href="<%=request.getContextPath() %>/views/admin/cer/manageCERcancel.jsp" class="pc black">- 취소/교환/환불 처리</a></li>
-                        <li><a href="<%=request.getContextPath() %>/views/admin/board/manageBoard.jsp" class="pc black">- 문의사항 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/user/manageUserMain" class="pc black">- 회원 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/order/manageOrderInfoDetail" class="pc black">- 주문 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/cer/manageCERcancel" class="pc black">- 취소/교환/환불 처리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/board/manageBoard" class="pc black">- 문의사항 관리</a></li>
                     </ul><br>
                     <ul class="pd">상품
                         <li><a href="<%=request.getContextPath() %>/admin/manageProductMain" class="pc black">- 상품 관리</a></li>
                     </ul><br>
                     <ul class="pd">설정
-                        <li><a href="<%=request.getContextPath() %>/views/admin/notice/manageNotice.jsp" class="choice pc">- 공지사항 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/notice/manageNotice" class="choice pc">- 공지사항 관리</a></li>
                     </ul>
                 </div>
 
                 <div class="main"> 
                     <h3 class="pd greenright">공지사항 관리</h3>
                     <div id="user_content">
-                        <form action="<%=request.getContextPath()%>/admin/notice/modifyNotice" method="post" enctype="multipart/form-data">
+                        <form action="<%=request.getContextPath()%>/admin/notice/modifyNoticeEnd" method="post" enctype="multipart/form-data">
                             <div class="pb">
                                 <span class="pb">제목</span><!--이전 제목 출력-->
-                                <input type="text" width="500px" value=<%=n.getnoticeNo() %>><br>
+                                <input type="text" width="500px" name="n_Title" id="n_Title" value="<%=n.getnTitle() %>" required><br>
                                 <h3>내용</h3>
-                                <textarea name="" id="" cols="118" rows="10"><%=n.getnContent() %></textarea><br><!--이전 내용 출력-->
+                                <textarea name="n_Content" id="n_Content" cols="118" rows="10"><%=n.getnContent() %></textarea><br><!--이전 내용 출력-->
                                 <span class="pb">썸네일</span>
                                 <%if(n.getnImgPath()!=null){ %>
                                 <input type="file" name="upfile"><!--원래 있던 파일이 출력되도록 함-->
@@ -46,7 +46,7 @@
                             	<%} %>
                             </div>
                             <div id="btn">
-                                <input type="reset" class="blackbtn" value="취소"><request.getContextPath() %>/admin/notice/manageNotice
+                            <a href="<%= request.getContextPath()%>/admin/notice/manageNotice"><button type="button" class="pb blackbtn" >취소</button></a>
                                 <input type="submit" class="blackbtn" value="수정">
                             </div>
                         </form>
@@ -133,13 +133,25 @@
                 color:white;
                 height: 35px;
                 width:60px;
+                
             }
             body{
 				margin:0px;
 			}
         </style>
 
-
+	<script>
+	$(function(){
+		$("input[name=upfile]").change(e => {
+			if($(e.target).val()==""){
+				$("#fname").show();
+			}else{
+				$("#fname").hide();
+			}
+		});
+	});
+	
+	</script>
 
 
 
