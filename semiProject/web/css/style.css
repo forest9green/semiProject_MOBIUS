@@ -27,7 +27,7 @@
 }
 
 /*header,footer 및 메인 디자인*/
-#container{
+div#container{
     width: 1200px;
     margin:0 auto;
 }

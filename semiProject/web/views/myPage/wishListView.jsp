@@ -3,6 +3,7 @@
 <%@ page import="java.util.List, com.wish.model.vo.WishProduct, java.text.NumberFormat" %>
 <%
 	List<WishProduct> wishs=(List<WishProduct>)request.getAttribute("wishs");
+	String pageBar=(String)request.getAttribute("pageBar");
 	NumberFormat nf = NumberFormat.getInstance();
 %>
 <%@ include file="/views/common/header.jsp"%>
@@ -22,30 +23,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!--
-                            값이 없으면 <tr>보유하고 계신 위시리스트 내역이 없습니다.</tr> 추가
-                            값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 처리해야 함
-                        -->c
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <ul id="wish_detail_btn">
-                                    <li><button>주문하기</button></li>
-                                    <li><button>장바구니 담기</button></li>
-                                    <li><button>삭제</button></li>
-                                </ul>
-                            </td>
-                        </tr>
+                        <%if(!wishs.isEmpty()) {
+                        	for(WishProduct wp:wishs) {%>
+		                        <tr>
+		                            <td><input type="checkbox" name="chk"></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td>
+		                                <ul id="wish_detail_btn">
+		                                    <li><button>주문하기</button></li>
+		                                    <li><button>장바구니 담기</button></li>
+		                                    <li><button>삭제</button></li>
+		                                </ul>
+		                            </td>
+		                        </tr>
+	                        <%}
+                       	}%>
                     </tbody>
                 </table>
             </div>
             <div id="w_pagebar" class="pagebar">
-                <span>1</span>
-                <!--페이징 처리 할지말지 고민-->
-                <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
+                <%=pageBar %>
             </div>
             <div id="wish_btn">
                 <button type="button" class="pb">삭제</button>
