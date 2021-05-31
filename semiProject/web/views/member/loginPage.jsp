@@ -96,7 +96,9 @@
 		
 		}
 		
-		
+		$(function(){
+			$("#userId").focus();
+		})
 		
 		
 	</script>

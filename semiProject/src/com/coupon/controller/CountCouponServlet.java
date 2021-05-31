@@ -1,11 +1,14 @@
 package com.coupon.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.coupon.model.service.CouponService;
 
 /**
  * Servlet implementation class CountCouponServlet
@@ -27,7 +30,11 @@ public class CountCouponServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId=request.getParameter("userId");
-		System.out.println(userId);
+		
+		int result=new CouponService().selectCouponCount(userId);
+		
+		response.setContentType("text/csv;charset=utf-8");
+		response.getWriter().print(result);
 	}
 
 	/**

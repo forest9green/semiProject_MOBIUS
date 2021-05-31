@@ -136,7 +136,7 @@
 			url:'<%=request.getContextPath()%>/myPage/couponCount',
 			data:{"userId":'<%=loginUser.getUserId()%>'},
 			success:data=>{
-				alert("실행됨");
+				$("#CountCoupon").append(data+"개");
 			}
 		})
 	})

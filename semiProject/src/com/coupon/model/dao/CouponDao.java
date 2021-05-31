@@ -73,6 +73,7 @@ private Properties prop=new Properties();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectCouponCount"));
 			pstmt.setString(1, userId);
+
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);
 			
