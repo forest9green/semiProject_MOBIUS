@@ -26,30 +26,36 @@
                         <%if(!wishs.isEmpty()) {
                         	for(WishProduct wp:wishs) {%>
 		                        <tr>
-		                            <td><input type="checkbox" name="chk"></td>
-		                            <td></td>
-		                            <td></td>
-		                            <td></td>
+		                            <td><input type="checkbox" name="chk" value="<%=wp.getpCode()%>"></td>
+		                            <td><img src="<%=request.getContextPath() %>/images/product/<%=wp.getpCode().substring(0,2)%>/<%=wp.getpCode()%>-1.jpg"></td>
+		                            <td><%=wp.getpName() %></td>
+		                            <td><%=nf.format(wp.getPrice()) %></td>
 		                            <td>
 		                                <ul id="wish_detail_btn">
 		                                    <li><button>주문하기</button></li>
-		                                    <li><button>장바구니 담기</button></li>
-		                                    <li><button>삭제</button></li>
+		                                    <li><button class="cart" title="<%=wp.getpCode()%>">장바구니 담기</button></li>
+		                                    <li><button class="deleteWish" value="<%=wp.getpCode()%>">삭제</button></li>
 		                                </ul>
 		                            </td>
 		                        </tr>
 	                        <%}
-                       	}%>
+                       	} else {%>
+                       		<tr>
+                       			<td colspan="5">위시리스트 내역이 없습니다.</td>
+                       		</tr>
+                       	<%} %>
                     </tbody>
                 </table>
             </div>
-            <div id="w_pagebar" class="pagebar">
-                <%=pageBar %>
+            <div>
             </div>
             <div id="wish_btn">
-                <button type="button" class="pb">삭제</button>
+                <button type="button" id="deletebtn" class="pb">삭제</button>
                 <button type="button" class="pb blackbtn">선택 상품 주문</button>
                 <button type="button" class="pb blackbtn">전체 상품 주문</button>
+            </div>
+            <div id="w_pagebar" class="pagebar">
+                <%=pageBar %>
             </div>
     </div>
 </section>
@@ -65,13 +71,43 @@
 	        }
 	    })
 	});
+	
+	$(".cart").click((e)=>{
+    	$.ajax({
+	    	url:"<%=request.getContextPath()%>/myPage/addCart",
+	    	data:{
+	    		"userId":'<%=loginUser.getUserId()%>',
+	    		"pCode":$($(e.target)[0]).attr("title")
+	    		},
+	  			success:data=>{
+	  				if(data>0){
+		  				if(confirm("장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?")){
+		  					location.assign("<%=request.getContextPath()%>/myPage/cart?userId=<%=loginUser.getUserId()%>");
+		  				}
+	  				}
+	  			}
+	   	})
+    });
+	
+	$(".deleteWish").click((e)=>{
+		const pCode=$(e.target).val();
+		location.replace('<%=request.getContextPath()%>/myPage/deleteWish?userId=<%=loginUser.getUserId()%>&pCode='+pCode);
+	})
+	
+	$("#deletebtn").click((e)=>{
+		const checkValue = $("input[name=chk]:checked").length;
+	    let checkPCodes = new Array(checkValue);
+	    for(let i=0; i<checkValue; i++){                          
+	    	checkPCodes[i] = $("input[name=chk]:checked")[i].value;
+	    }
+	    location.replace('<%=request.getContextPath()%>/myPage/deleteWish?userId=<%=loginUser.getUserId()%>&pCodes='+checkPCodes);
+	})
 </script>
 
 <style>
     #wish_box{
         width:1000px;
-        height:800px;
-        margin:50px auto;
+        margin:0px auto;
     }
     #wish_box>p+h2{
         font-size: 30px;
@@ -90,6 +126,12 @@
     #wish_table tr{
         height:40px;
     }
+    #wish_table tr>td>img{
+    	width:200px;
+		height:160px;
+		object-fit:cover;
+		vertical-align:middle;
+	}
     #wish_detail_btn{
         list-style-type: none;
         padding:0;
@@ -144,6 +186,9 @@
     }
     body{
 		margin:0px;
+	}
+	button:hover{
+		cursor:pointer;
 	}
 </style>
 

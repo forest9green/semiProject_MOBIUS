@@ -10,7 +10,7 @@
 <%@ include file="/views/common/header.jsp"%>
 
 <section>
-    <h1 class="pe" style="font-size: 35px;"> SHOWROOM - <%=srMenu %> </h1>
+    <h1 class="pe" style="font-size: 35px;margin-top:0px;"> SHOWROOM - <%=srMenu %> </h1>
     <div id="show_box">
 		<%if(!showrooms.isEmpty()) {
 			for(ShowRoomDetail s:showrooms) {

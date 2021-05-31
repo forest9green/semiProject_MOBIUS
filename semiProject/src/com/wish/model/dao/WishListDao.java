@@ -51,7 +51,7 @@ public class WishListDao {
 	}
 	
 	
-	public List<WishProduct> selectWish(Connection conn, String userId){
+	public List<WishProduct> selectWish(Connection conn, String userId, int cPage, int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<WishProduct> list=new ArrayList<>();
@@ -59,6 +59,8 @@ public class WishListDao {
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectWish"));
 			pstmt.setString(1, userId);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
 			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -67,7 +69,7 @@ public class WishListDao {
 				wp.setpCode(rs.getString("p_code"));
 				wp.setpName(rs.getString("p_name"));
 				wp.setPrice(rs.getInt("price"));
-				
+
 				list.add(wp);
 			}
 			
@@ -98,6 +100,27 @@ public class WishListDao {
 			e.printStackTrace();
 		}finally {
 			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int deleteWish(Connection conn, WishList w) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteWish"));
+			pstmt.setString(1, w.getUserId());
+			pstmt.setString(2, w.getpCode());
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		

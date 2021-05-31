@@ -42,7 +42,7 @@ public class WishListViewServlet extends HttpServlet {
 			cPage=1;
 		}
 		
-		List<WishProduct> list=new WishListService().selectWish(userId);
+		List<WishProduct> list=new WishListService().selectWish(userId,cPage,numPerPage);
 		
 		int totalData=new WishListService().selectWishCount(userId);
 		int totalPage=(int)Math.ceil((double)totalData/numPerPage);

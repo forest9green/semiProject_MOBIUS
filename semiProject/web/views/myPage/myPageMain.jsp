@@ -56,7 +56,7 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="">
+                    <a href="<%=request.getContextPath()%>/myPage/wishList?userId=<%=loginUser.getUserId()%>">
                         <h3><strong>WISH LIST</strong></h3>
                         <p style="font-size: 90%;">관심 상품으로 등록하신<br>상품의 목록을 보여드립니다.</p>
                     </a>
