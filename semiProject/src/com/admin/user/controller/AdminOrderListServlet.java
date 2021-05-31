@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.admin.user.model.service.AdminUserService;
 import com.admin.user.model.vo.AdminOrder;
+import com.board.model.service.BoardService;
+import com.board.model.vo.Board;
 
 /**
  * Servlet implementation class AdminOrderListServlet
@@ -33,8 +35,45 @@ public class AdminOrderListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userId = request.getParameter("userId");
-		List<AdminOrder> list = new AdminUserService().orderList(userId);
+		
 
+		int cPage;
+		int numPerpage=10;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		
+		List<AdminOrder> list = new AdminUserService().orderList(cPage,numPerpage ,userId);
+		
+		
+		int totalData=new AdminUserService().selectOrderCount(userId);
+		
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		
+		int pageBarSize=10;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		String pageBar="";		
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+				pageBar+="<a href='"+request.getContextPath()
+				+"/board/boardList?userId"+userId+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		
+		
+		
+		
+		
+		
+		
+		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("list", list);
 		request.setAttribute("userId", userId);
 		request.getRequestDispatcher("/views/admin/user/manageUserOrder.jsp")

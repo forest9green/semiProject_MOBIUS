@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     
 <%@ include file="/views/common/header.jsp"%>
  	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<meta name ="google-signin-client_id" content="323356811623-vstddj93n1j846mj6tseqm6pifja5dgp.apps.googleusercontent.com">
+	
 <section>
     <div>    
         <div id="contents">
@@ -40,20 +43,19 @@
                         </form>    
                         <div class="member_sns_login">
                                 <ul>
-                                        <li onclick="kakaoLogin();">
-                                            <a href="javascript:void(0)">
-                                                <span>카카오 로그인</span>
-                                            </a>
-                                        </li>
+                                       <!--  <li onclick="kakaoLogin();">
+									      <a href="javascript:void(0)">
+									          <span>카카오 로그인</span>
+									      </a>
+										</li> -->
                                         <li>
                                         	<div id="naver_id_login"></div>
                                         </li>
-                                        <li>
-                                        	<a class="btn_google-login" href="">
-			                                    <img src="" alt="구글 아이디 로그인">
-			                                </a>
-                                        
-                                        </li>
+                                        <li id="GgCustomLogin">
+										  <a href="javascript:void(0)">
+										   <span>구글 로그인</span>
+										  </a>
+										 </li>
                                     </ul>
                                	
                      	</div>    
@@ -100,8 +102,8 @@
 	</script>
 
 
-	<script>
-            Kakao.init('8890a67c089173194979845f9389950d');
+	<script src="https://developers.kakao.com/sdk/js/kakao.js">
+            Kakao.init('9cc0f57624cb30b7399ffa3aa1114e94');
             console.log(Kakao.isInitialized());
             function kakaoLogin() {
                 Kakao.Auth.login({
@@ -120,11 +122,26 @@
                     console.log(error)
                 },
                 })
+                
+                function kakaoLogout() {
+                    if (Kakao.Auth.getAccessToken()) {
+                      Kakao.API.request({
+                        url: '/v1/user/unlink',
+                        success: function (response) {
+                        	console.log(response)
+                        },
+                        fail: function (error) {
+                          console.log(error)
+                        },
+                      })
+                      Kakao.Auth.setAccessToken(undefined)
+                    }
+                  }  
             }
         </script>
 
 		<script type="text/javascript">
-		  	var naver_id_login = new naver_id_login("HA68oZmhIBwSBeLwVPpA", "http://localhost:9090/semiProject/views/member/loginPage.jsp");
+		  	var naver_id_login = new naver_id_login("yYSzxUmZK7XCoK773w8D", "http://localhost:9090/semiProject/");
 		  	var state = naver_id_login.getUniqState();
 		  	naver_id_login.setButton("white", 2,40);
 		  	naver_id_login.setDomain("http://localhost:9090/semiProject/views/member/loginPage.jsp");
@@ -132,8 +149,42 @@
 		  	naver_id_login.setPopup();
 		  	naver_id_login.init_naver_id_login();
 		 </script>
-
-
+		<script>
+			function init(){
+				gapi.load('auth2', function() {
+					gapi.auth2.init();
+					options = new gapi.auth2.SigninOptionsBuilder();
+					options.setPrompt('select_account');
+			        // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
+					options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
+			        // 인스턴스의 함수 호출 - element에 로그인 기능 추가
+			        // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
+					gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
+				})
+			}
+			function onSignIn(googleUser) {
+				var access_token = googleUser.getAuthResponse().access_token
+				$.ajax({
+			    	// people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
+					url: 'https://people.googleapis.com/v1/people/me'
+			        // key에 자신의 API 키를 넣습니다.
+					, data: {personFields:'birthdays', key:'AIzaSyAM0StZxdtcoG_meBMW9dGnu2f5Aizn90M', 'access_token': access_token}
+					, method:'GET'
+				})
+				.done(function(e){
+			        //프로필을 가져온다.
+					var profile = googleUser.getBasicProfile();
+					console.log(profile)
+				})
+				.fail(function(e){
+					console.log(e);
+				})
+			}
+			function onSignInFailure(t){		
+				console.log(t);
+			}
+		</script>
+		<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 
 
 <style>
