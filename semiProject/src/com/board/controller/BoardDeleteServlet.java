@@ -32,22 +32,22 @@ public class BoardDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
 		String userId=request.getParameter("userId");
-	
+		String bNo=request.getParameter("bNo");
 		BoardService boardService = new BoardService();		
-		int result=boardService.deleteBoard(userId);
+		int result=boardService.deleteBoard(bNo);
 		
+		Board b=new Board();
+		b.getUserId();
 		String msg = "";
 		String loc = "";
 		if(result>0) {
 			msg = "삭제가 완료되었습니다.";
-			loc = "/views/board/boardList.jsp";
+			loc = "/myPage/board/boardlist?userId="+userId;
 		}
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-	
 		request.getRequestDispatcher("/views/common/msg.jsp")
 		.forward(request, response);
 		
