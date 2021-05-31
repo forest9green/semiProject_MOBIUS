@@ -27,7 +27,7 @@ public class AdminSearchNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String noticeNo = request.getParameter("NOTICE_NO");
+		String noticeNo = request.getParameter("noticeNo");
 	}
 
 	/**

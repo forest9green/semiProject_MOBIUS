@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.text.NumberFormat" %>
 <%@ include file="/views/common/header.jsp"%>
-<%
-	NumberFormat nf = NumberFormat.getInstance();
-%>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/boots
 

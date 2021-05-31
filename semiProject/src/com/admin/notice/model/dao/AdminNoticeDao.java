@@ -135,12 +135,11 @@ private Properties prop=new Properties();
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("deleteNotice"));
 			pstmt.setString(1, noticeNo);
-			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(conn);
+			close(pstmt);
 		}
 		return result;
 		

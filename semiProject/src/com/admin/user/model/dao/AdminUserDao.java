@@ -201,13 +201,15 @@ private Properties prop=new Properties();
 		
 	}
 	
-	public List<AdminOrder> orderList(Connection conn, String userId){
+	public List<AdminOrder> orderList(Connection conn,int cPage,int numPerpage, String userId){
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		List<AdminOrder> list = new ArrayList();
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("orderList"));
 			pstmt.setString(1, userId);
+			pstmt.setInt(2, cPage);
+			pstmt.setInt(3, numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				AdminOrder a = new AdminOrder();
@@ -229,7 +231,24 @@ private Properties prop=new Properties();
 	
 	
 	
-	
+	public int selectOrderCount(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt= conn.prepareStatement(prop.getProperty("selectOrdercount"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

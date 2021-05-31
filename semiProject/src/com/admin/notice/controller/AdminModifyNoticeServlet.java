@@ -31,11 +31,7 @@ public class AdminModifyNoticeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String noticeNo=request.getParameter("NOTICE_NO");
-		
-		AdminNoticeService AdminNoticeService=new AdminNoticeService();
-		
-		Notice n=new AdminNoticeService().selectNotice(request.getParameter("NOTICE_NO"));
+		Notice n=new AdminNoticeService().selectNotice(request.getParameter("noticeNo"));
 		
 		request.setAttribute("notice", n);
 		

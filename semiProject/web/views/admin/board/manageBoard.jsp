@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import= "java.util.List, com.admin.board.model.vo.AdminBoard"  %>    
+<%
+	List<AdminBoard> adminboards=(List<AdminBoard>)request.getAttribute("adminboards");
+	String pageBar=(String)request.getAttribute("pageBar");
+%>
 <%@ include file="/views/common/header.jsp"%>
-    
     <section>
             <h2 class="pe title">관리자 페이지</h2> 
             <div class="content" style="display:flex">
@@ -47,24 +50,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--
-                                    값이 없으면 <tr>문의사항 내역이 없습니다.</tr> 추가
-                                    값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 처리해야 함
-                                -->
+<%--                              	<% if(!adminboards.isEmpty()){
+                             	for (AdminBoard a:adminboards){%>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><%=a.getbTitle() %></td>
+                                    <td><%=a.getUserId() %></td>
+                                    <td><%=a.getbWriteDate() %></td>
                                     <td></td>
                                     <td></td>
                                     <td><button class="whitebtn">답변하기</button></td>
                                 </tr>
-                            </tbody>
+                            <%} 
+                            }%> --%>
+                            </tbody>                           
                         </table>
                     </div>
-                    <div id="admin_pagebar" class="pagebar">
-                        <span><a href="">1</a></span>
-                        <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
+                    <div id="pageBar" class="">
+                        <%=request.getAttribute("pageBar") %>
                     </div>
                 </div>
             </div>    
