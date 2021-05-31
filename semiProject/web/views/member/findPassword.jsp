@@ -22,30 +22,30 @@
                 <h2 class="pf">비밀번호 찾기</h2>
             </div>
             <div class="member_cont">
-                <form action="<%=request.getContextPath() %>/user/updatePassword" id=changePw method="post" >
                     <div class="box6">
+                     <form action="<%=request.getContextPath() %>/user/updatePassword" id="changePw" method="post">
                         <dl class="n_id pd">
                             <dt >내 아이디 : </dt>
                             <p id="userId"><%=userId %></p>
                         </dl>
                         <div class="input_box pd">
                             <input type="hidden" name="userId" value="<%=userId %>">
-                            <label id="lb_new_pw" for="neww_pw">새 비밀번호</label>
-                            <input type="password" id="new_pw" name="password" class="input_txt" >
+                            <label id="lb_new_pw" for="new_pw">새 비밀번호</label>
+                            <input type="password" id="new_pw" name="password" class="input_txt" required>
                         </div>
+                      </form>  
                         <div id="idv_new_conf_pw" class="input_box pd">
                             <label for="new_conf_pw" id="lb_new_conf_pw" class="input_txt">새 비밀번호 확인</label>
-                            <input type="password" id="new_conf_pw" name="password_new">
+                            <input type="password" id="new_conf_pw" name="password_new" required>
                         </div>
                         <div class="ip_chk pd">
                             <input type="checkbox" id="chkBlockIp" name="chkBlockIp" class="input_chk">
                             <label for="chkBlockIp">정말로 비밀번호를 변경하시겠습니까?</label>
                         </div>
-                    </div>
+                    </div>  
                     <div class="btn_area pf">
                         <button type="button" id="btn_submit" class="btn_confirm pd"  >확인</button>
                     </div>
-                </form>
             </div>
         </div>           
     </div>    
@@ -59,16 +59,19 @@
     		const password = $("#new_pw").val();
     		const password_new = $("#new_conf_pw").val();
     		const check = $("#chkBlockIp").val();
-    		const changePw=$("#changePw");
-    		if(password==password_new){
-    			if(check!=null){
-    				changePw.submit();
-    			}else{
-    				alert("비밀번호를 변경하려면 체크해주세요");
-    			}
-    		}else{
-    			alert("비밀번호가 일치하지않습니다.");
-    		}
+	    	if(password.trim().length>3){	
+    			if(password==password_new){
+	    			if(check!=null){
+	    				$("#changePw").submit();
+	    			}else{
+	    				alert("비밀번호를 변경하려면 체크해주세요");
+	    			}
+	    		}else{
+	    			alert("비밀번호가 일치하지않습니다.");
+	    		}
+	    	}else{
+	    		alert("비밀번호는 4글자이상 입력해주세요");
+	    	}	
     	});
     </script>
     

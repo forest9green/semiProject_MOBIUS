@@ -48,14 +48,14 @@
 									          <span>카카오 로그인</span>
 									      </a>
 										</li> -->
-                                        <li>
+                                      <!--   <li>
                                         	<div id="naver_id_login"></div>
                                         </li>
                                         <li id="GgCustomLogin">
 										  <a href="javascript:void(0)">
 										   <span>구글 로그인</span>
 										  </a>
-										 </li>
+										 </li> -->
                                     </ul>
                                	
                      	</div>    
@@ -102,7 +102,7 @@
 	</script>
 
 
-	<script src="https://developers.kakao.com/sdk/js/kakao.js">
+	<!-- <script src="https://developers.kakao.com/sdk/js/kakao.js">
             Kakao.init('9cc0f57624cb30b7399ffa3aa1114e94');
             console.log(Kakao.isInitialized());
             function kakaoLogin() {
@@ -185,7 +185,7 @@
 			}
 		</script>
 		<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-
+ -->
 
 <style>
     #contents{
@@ -229,11 +229,12 @@
         display: block;
     }
     .member_cont{
-        padding: 70px 60px;
+        padding: 70px 60px 0 60px;
+
         border: 1px solid #dbdbdb;
         display: block;
         width: 500px;
-        height: 300px;
+        height: 250px;
     }
     #formLogin{
         display: block;
