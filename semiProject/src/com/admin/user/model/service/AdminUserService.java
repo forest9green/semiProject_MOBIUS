@@ -11,6 +11,7 @@ import java.util.List;
 import com.admin.user.model.dao.AdminUserDao;
 import com.admin.user.model.vo.AdminMileage;
 import com.admin.user.model.vo.AdminOrder;
+import com.admin.user.model.vo.AdminOrderInfo;
 import com.admin.user.model.vo.AdminUserInfo;
 import com.admin.user.model.vo.TotalInfo;
 import com.coupon.model.vo.Coupon;
@@ -82,7 +83,13 @@ public class AdminUserService {
 		return result;
 	}
 	
-	
+	public AdminOrderInfo adminOrderInfo(String orderNo) {
+		Connection conn = getConnection();
+		AdminOrderInfo aoi = dao.adminOrderInfo(conn,orderNo);
+		close(conn);
+		return aoi;
+		
+	}
 	
 	
 }

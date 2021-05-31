@@ -46,7 +46,7 @@ public class AdminOrderListServlet extends HttpServlet {
 		}
 		
 		List<AdminOrder> list = new AdminUserService().orderList(cPage,numPerpage ,userId);
-		
+		System.out.println(list);
 		
 		int totalData=new AdminUserService().selectOrderCount(userId);
 		
