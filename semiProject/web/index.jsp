@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="java.text.NumberFormat" %>
 <%@ include file="/views/common/header.jsp"%>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/boots
@@ -670,54 +670,54 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
 				
 				}
 				$("#pro1").append(data[0]["pName"]);
-				$("#pro1P").append(data[0]["price"]);	
+				$("#pro1P").append(data[0]["price"]+'원');	
 				
 				$("#pro2").append(data[1]["pName"]);
-				$("#pro2P").append(data[1]["price"]);
+				$("#pro2P").append(data[1]["price"]+'원');
 				$("#pro3").append(data[4]["pName"]);
-				$("#pro3P").append(data[4]["price"]);
+				$("#pro3P").append(data[4]["price"]+'원');
 				$("#pro4").append(data[3]["pName"]);
-				$("#pro4P").append(data[3]["price"]);
+				$("#pro4P").append(data[3]["price"]+'원');
 				$("#pro5").append(data[2]["pName"]);
-				$("#pro5P").append(data[2]["price"]);
+				$("#pro5P").append(data[2]["price"]+'원');
 				$("#pro6").append(data[15]["pName"]);
-				$("#pro6P").append(data[15]["price"]);
+				$("#pro6P").append(data[15]["price"]+'원');
 				$("#pro7").append(data[6]["pName"]);
-				$("#pro7P").append(data[6]["price"]);
+				$("#pro7P").append(data[6]["price"]+'원');
 				$("#pro8").append(data[14]["pName"]);
-				$("#pro8P").append(data[14]["price"]);
+				$("#pro8P").append(data[14]["price"]+'원');
 				$("#pro9").append(data[7]["pName"]);
-				$("#pro9P").append(data[7]["price"]);
+				$("#pro9P").append(data[7]["price"]+'원');
 				$("#pro10").append(data[13]["pName"]);
-				$("#pro10P").append(data[13]["price"]);
+				$("#pro10P").append(data[13]["price"]+'원');
 				$("#pro11").append(data[8]["pName"]);
-				$("#pro11P").append(data[8]["price"]);
+				$("#pro11P").append(data[8]["price"]+'원');
 				$("#pro12").append(data[11]["pName"]);
-				$("#pro12P").append(data[11]["price"]);
+				$("#pro12P").append(data[11]["price"]+'원');
 				$("#pro13").append(data[9]["pName"]);
-				$("#pro13P").append(data[9]["price"]);
+				$("#pro13P").append(data[9]["price"]+'원');
 				$("#pro14").append(data[10]["pName"]);
-				$("#pro14P").append(data[10]["price"]);
+				$("#pro14P").append(data[10]["price"]+'원');
 				$("#pro15").append(data[26]["pName"]);
-				$("#pro15P").append(data[26]["price"]);
+				$("#pro15P").append(data[26]["price"]+'원');
 				$("#pro16").append(data[16]["pName"]);
-				$("#pro16P").append(data[16]["price"]);
+				$("#pro16P").append(data[16]["price"]+'원');
 				$("#pro17").append(data[25]["pName"]);
-				$("#pro17P").append(data[25]["price"]);
+				$("#pro17P").append(data[25]["price"]+'원');
 				$("#pro18").append(data[17]["pName"]);
-				$("#pro18P").append(data[17]["price"]);
+				$("#pro18P").append(data[17]["price"]+'원');
 				$("#pro19").append(data[24]["pName"]);
-				$("#pro19P").append(data[24]["price"]);
+				$("#pro19P").append(data[24]["price"]+'원');
 				$("#pro20").append(data[18]["pName"]);
-				$("#pro20P").append(data[18]["price"]);
+				$("#pro20P").append(data[18]["price"]+'원');
 				$("#pro21").append(data[23]["pName"]);
-				$("#pro21P").append(data[23]["price"]);
+				$("#pro21P").append(data[23]["price"]+'원');
 				$("#pro22").append(data[19]["pName"]);
-				$("#pro22P").append(data[19]["price"]);
+				$("#pro22P").append(data[19]["price"]+'원');
 				$("#pro23").append(data[22]["pName"]);
-				$("#pro23P").append(data[22]["price"]);
+				$("#pro23P").append(data[22]["price"]+'원');
 				$("#pro24").append(data[20]["pName"]);
-				$("#pro24P").append(data[20]["price"]);
+				$("#pro24P").append(data[20]["price"]+'원');
 			
 				const fn_move_proDetail=()=>{
 					console.log(data[0]["pCode"]);	

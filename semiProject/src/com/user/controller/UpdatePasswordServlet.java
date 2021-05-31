@@ -32,9 +32,12 @@ public class UpdatePasswordServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		
+		
 		int result = new UserService().updatePassword(userId, password);
-			String msg="";
+			
+		String msg="";
 			String loc = "";
+			
 		if(result>0) {
 			msg = "비밀번호 변경이 완료되었습니다.";
 			loc = "/views/member/loginPage.jsp";
@@ -56,7 +59,7 @@ public class UpdatePasswordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		
+		doGet(request,response);
 	}
 
 }

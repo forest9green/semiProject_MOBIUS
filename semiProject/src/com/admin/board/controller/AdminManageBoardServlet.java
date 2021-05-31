@@ -1,4 +1,4 @@
-package com.admin.user.controller;
+package com.admin.board.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.admin.user.model.service.AdminUserService;
-import com.admin.user.model.vo.AdminOrder;
-import com.board.model.service.BoardService;
-import com.board.model.vo.Board;
+import com.admin.board.model.service.AdminBoardService;
+import com.admin.board.model.vo.AdminBoard;
+import com.admin.notice.model.service.AdminNoticeService;
+import com.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class AdminOrderListServlet
+ * Servlet implementation class AdminBoardServlet
  */
-@WebServlet("/admin/user/order")
-public class AdminOrderListServlet extends HttpServlet {
+@WebServlet("/admin/manageboard")
+public class AdminManageBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminOrderListServlet() {
+    public AdminManageBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,52 +33,42 @@ public class AdminOrderListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String userId = request.getParameter("userId");
-		
-
 		int cPage;
-		int numPerpage=10;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
 		
-		List<AdminOrder> list = new AdminUserService().orderList(cPage,numPerpage ,userId);
+		int numPerpage=10;
 		
 		
-		int totalData=new AdminUserService().selectOrderCount(userId);
+		List<AdminBoard> list=new AdminBoardService().selectAdminBoardList(cPage,numPerpage);
 		
+		int totalData=new AdminBoardService().selectAdminBoardCount();
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
 		int pageBarSize=10;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
+		String pageBar="";
 		
-		String pageBar="";		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/board/boardList?userId"+userId+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+				+"/admin/manageboard?cPage="+pageNo+
+				"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		
+		request.setAttribute("adminboard",list);
+		request.setAttribute("pageBar",pageBar);
 		
-		
-		
-		
-		
-		
-		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("list", list);
-		request.setAttribute("userId", userId);
-		request.getRequestDispatcher("/views/admin/user/manageUserOrder.jsp")
+		request.getRequestDispatcher("/views/admin/board/manageBoard.jsp")
 		.forward(request, response);
-		
 	}
 
 	/**

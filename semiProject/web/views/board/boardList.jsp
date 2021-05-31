@@ -24,7 +24,7 @@
         </table>
             
             <div class="ql_v_right">
-               <a href="<%=request.getContextPath()%>/myPage/board/boardform?userId=<%=loginUser.getUserId()%>" style="text-decoration:none;">문의하기</a> 
+               <a href="<%=request.getContextPath()%>/myPage/board/boardform?userId=<%=loginUser.getUserId()%>" style="text-decoration:none; color:black">문의하기</a> 
             </div>
     </div>    
     <table class="qlv_list" border="1" height="50px">
@@ -43,7 +43,7 @@
             <tr>   
                 <td><%=b.getbNo()%><!-- 1 --></td>
                 <td style="padding:5px;">
-                	<a href="<%= request.getContextPath()%>/board/boardview?bNo=<%=b.getbNo()%>" style="text-decoration-line: blink; text-decoration: none; color:black;">
+                	<a href="<%= request.getContextPath()%>/board/boardview?userId=<%=b.getUserId()%>&bNo=<%=b.getbNo()%>" style="text-decoration-line: blink; text-decoration: none; color:black;">
                 	<%=b.getbTitle()%>
                 	</a>
                 </td>

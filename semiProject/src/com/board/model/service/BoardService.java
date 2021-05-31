@@ -54,9 +54,9 @@ public class BoardService {
 		return result;
 	}
 
-	public int deleteBoard(String userId) {
+	public int deleteBoard(String bNo) {
 		Connection conn=getConnection();
-		int result=dao.deleteBoard(conn, userId);
+		int result=dao.deleteBoard(conn, bNo);
 		if(result>0) commit(conn);
 		close(conn);
 		return result;

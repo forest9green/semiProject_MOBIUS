@@ -4,6 +4,7 @@
 <%
 	List<AdminOrder> list = (List<AdminOrder>)request.getAttribute("list");
 	String userId = (String)request.getAttribute("userId");
+	String pageBar = (String)request.getAttribute("pageBar");
 %>
 
 
@@ -72,7 +73,7 @@
                         </table>
                     </div>
                     <div id="admin_pagebar" class="pagebar">
-                        <span><a href="">1</a></span>
+                        <%=pageBar %>
                         <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
                     </div>
                 </div>

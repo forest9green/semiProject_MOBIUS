@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 	String userId = (String)request.getParameter("userId");
+	String userName = (String)request.getParameter("userName");
+	String email = (String)request.getParameter("email");
 %>
 <%@ include file="/views/common/header.jsp"%>
 
@@ -43,9 +45,15 @@
     </div>
 </section>
     
+<form action="<%=request.getContextPath()%>/views/member/findMember.jsp" method="post" id="moveFindPassword">
+	
+</form>    
+    
+     
+    
     <script>
     	$("#btn_find_member").click(function(){
-    		location.replace("<%=request.getContextPath()%>/views/member/findPassword.jsp");
+    		$("#moveFindPassword").submit();
     	});
     
     	$("#btn_member_login").click(function(){

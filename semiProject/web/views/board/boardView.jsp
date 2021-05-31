@@ -32,11 +32,8 @@
     <hr class="silsun">
         <div id="bo_v_top">
             <div class="bo_v_left">
-                <a class="boabtn btn-light sujeong" onclick="location.assign('<%=request.getContextPath() %>/myPage/board/boardupdate?bNo=<%=b.getbNo()%>')">수정</a>
-                <form name="deleteFrm" action="/myPage/board/delete" method="post">
-                	<a class="boabtn btn-light sakje" >삭제</a>
-                	<input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
-                </form>     
+                <a class="boabtn btn-light sujeong" onclick="location.assign('<%=request.getContextPath() %>/myPage/board/boardupdate?userId=<%=b.getUserId()%>&bNo=<%=b.getbNo()%>')">수정</a>
+                <a class="boabtn btn-light sakje"  onclick="location.assign('<%=request.getContextPath() %>/myPage/board/delete?userId<%=b.getUserId()%>&bNo=<%=b.getbNo()%>')">삭제</a>
             </div>
             <div class="bo_v_right">
                 <a class="boabtn btn-secondary" href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">목록</a>
@@ -49,9 +46,11 @@
              <div class="container reply">
                 <p> 양호준님 안녕하세요! 해당상품 2~3주내에 수령하실수 있습니다.</p>
              </div>   
-        </div>
+        
 </section>
-
+<script>
+	
+</script>
 <style>
 	.bo_v_left{
 		display:flex;
