@@ -670,7 +670,9 @@ trap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcv
 				
 				}
 				$("#pro1").append(data[0]["pName"]);
-				$("#pro1P").append(data[0]["price"]);	
+				$("#pro1P").append(data[0]["price"]);
+				console.log(data[0]["price"]);
+				console.log(data[0]["pName"]);
 				
 				$("#pro2").append(data[1]["pName"]);
 				$("#pro2P").append(data[1]["price"]);

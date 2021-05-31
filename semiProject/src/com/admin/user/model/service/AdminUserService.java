@@ -68,14 +68,19 @@ public class AdminUserService {
 		return list;
 	}
 	
-	public List<AdminOrder> orderList(String userId){
+	public List<AdminOrder> orderList(int cPage, int numPerpage, String userId){
 		Connection conn = getConnection();
-		List<AdminOrder> list = dao.orderList(conn,userId);
+		List<AdminOrder> list = dao.orderList(conn,cPage,numPerpage,userId);
 		close(conn);
 		return list;
 	}
 	
-	
+	public int selectOrderCount(String userId) {
+		Connection conn = getConnection();
+		int result = dao.selectOrderCount(conn,userId);
+		close(conn);
+		return result;
+	}
 	
 	
 	

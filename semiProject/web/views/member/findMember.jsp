@@ -86,9 +86,13 @@
 </section>
 <form method="post" id="userIdForm" action="<%=request.getContextPath() %>/views/member/findId.jsp"> 
 	<input type="hidden" name="userId" value="<%=u!=null&&u.getUserId()!=null?u.getUserId():"" %>"> 
+	<input type="hidden" name="userName" value="<%=u!=null&&u.getUserName()!=null?u.getUserName():"" %>">
+	<input type="hidden" name="email" value="<%=u!=null&&u.getEmail()!=null?u.getEmail():"" %>">
 </form>  
 <form method="post" id="userPwForm" action="<%=request.getContextPath() %>/views/member/findPassword.jsp"> 
 	<input type="hidden" name="userId" value="<%=u2!=null&&u2.getUserId()!=null?u2.getUserId():"" %>"> 
+	<input type="hidden" name="userName" value="<%=u!=null&&u.getUserName()!=null?u.getUserName():"" %>">
+	<input type="hidden" name="email" value="<%=u!=null&&u.getEmail()!=null?u.getEmail():"" %>">
 </form>
 
 

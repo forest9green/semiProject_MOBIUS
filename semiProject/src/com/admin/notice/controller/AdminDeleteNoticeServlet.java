@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.admin.notice.model.service.AdminNoticeService;
+import com.notice.model.vo.Notice;
 
 /**
  * Servlet implementation class AdminDeleteNoticeServlet
@@ -30,22 +31,22 @@ public class AdminDeleteNoticeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String noticeNo = request.getParameter("NOTICE_NO");
+		String noticeNo = request.getParameter("noticeNo");
 		
-		AdminNoticeService AdminNoticeService = new AdminNoticeService();
-		int result = new AdminNoticeService().deleteNotice(noticeNo);
+		int result =new AdminNoticeService().deleteNotice(noticeNo);
+		
 		
 		String msg = "";
 		String loc = "";
 		
 		if(result>0) {
-			msg = "삭제가 완료되었습니다.";
-			loc = "/admin/notice/manageNotice";
-		}else {
-			msg = "삭제에 실패했습니다.";
+			msg = "삭제가 완료되었습니다.";	
 			loc = "/admin/notice/manageNotice";
 		}
-		
+		else {
+			msg = "삭제에 실패하였습니다.";
+			loc = "/admin/notice/manageNotice";
+		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 	
