@@ -64,7 +64,7 @@
             </li>
             <li>
                 <div class="box">
-                    <a href="">
+                    <a href="<%=request.getContextPath()%>/myPage/cart?userId=<%=loginUser.getUserId()%>">
                         <h3><strong>CART</strong></h3>
                         <p style="font-size: 90%;">고객님의 장바구니를<br>확인할 수 있습니다.</p>
                     </a>
@@ -199,6 +199,9 @@
     }
     .inquiry_btn>a{
         text-decoration: none;
+    }
+    body{
+    	margin:0px;
     }
 </style>
 <script></script>

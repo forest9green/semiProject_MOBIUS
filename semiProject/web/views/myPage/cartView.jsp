@@ -61,7 +61,11 @@
 		                            </td>
 		                        </tr>
 	                        <%}
-                       	}%>
+                       	} else {%>
+                       		<tr>
+	                    		<td colspan="8">장바구니가 비어 있습니다.</td>
+	                    	</tr>
+	                    <%} %>
                     </tbody>
                 </table>
             </div>
