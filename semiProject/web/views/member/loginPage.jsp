@@ -95,12 +95,6 @@
 			}
 		
 		}
-		
-		$(function(){
-			$("#userId").focus();
-		})
-		
-		
 	</script>
 
 

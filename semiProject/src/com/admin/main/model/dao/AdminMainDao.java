@@ -80,7 +80,7 @@ public class AdminMainDao {
 				Order o = new Order();
 				o.setOrderNo(rs.getString("order_no"));
 				o.setUserId(rs.getString("user_id"));
-				o.setAddrNo(rs.getInt("addr_no"));
+				o.setAddrNo(rs.getString("addr_no"));
 				o.setOrderMemo(rs.getString("order_memo"));
 				o.setoTotal(rs.getInt("o_total"));
 				o.setoDelivery(rs.getInt("o_delivery"));
