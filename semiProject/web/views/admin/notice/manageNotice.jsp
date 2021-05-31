@@ -6,7 +6,7 @@
 <%
 	List<Notice> list=(List<Notice>)request.getAttribute("notice");
 	String pageBar=(String)request.getAttribute("pageBar");
-	String nKeyword=(String)request.getParameter("nKeyword");
+	
 %>
 
 
@@ -18,10 +18,10 @@
                 <div class="category">
                     <ul class="pd"><a href="<%=request.getContextPath() %>/admin/adminMain" class="black">메인</a></ul><br>
                     <ul class="pd">회원
-                        <li><a href="<%=request.getContextPath() %>/views/admin/user/manageUserMain" class="pc black">- 회원 관리</a></li>
-                        <li><a href="<%=request.getContextPath() %>/views/admin/order/manageOrderInfoDetail" class="pc black">- 주문 관리</a></li>
-                        <li><a href="<%=request.getContextPath() %>/views/admin/cer/manageCERcancel" class="pc black">- 취소/교환/환불 처리</a></li>
-                        <li><a href="<%=request.getContextPath() %>/views/admin/board/manageBoard" class="pc black">- 문의사항 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/user/manageUserMain" class="pc black">- 회원 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/order/manageOrderInfoDetail" class="pc black">- 주문 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/cer/manageCERcancel" class="pc black">- 취소/교환/환불 처리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/board/manageBoard" class="pc black">- 문의사항 관리</a></li>
                     </ul><br>
                     <ul class="pd">상품
                         <li><a href="<%=request.getContextPath() %>/admin/manageProductMain" class="pc black">- 상품 관리</a></li>
@@ -34,14 +34,14 @@
                 <div class="main"> 
                     <h3 class="pd greenright">공지사항 관리</h3>
                     <div id="user_content">
-                        <form id="searchPay" action="" method="post">
+                        <!-- <form id="searchPay" action="" method="post">
                             <input type="text" name="nKeyword" placeholder="제목">
                             <input type="submit" class="whitebtn" value="검색">
-                        </form>
+                        </form> -->
                         <table id="output_table" class="pa" border=1>
                             <thead>
                                 <tr>
-                                    <th width=20><input type="checkbox" id="checkall"></th>
+                                    <!-- <th width=20><input type="checkbox" id="checkall"></th> -->
                                     <th width=250>제목</th>
                                     <th width=100>작성일</th>
                                     <th width=50>정보</th>
@@ -50,16 +50,17 @@
                             	<% for(Notice n : list){%>
                             <tbody>
                                 <tr>
-                                    <td><input type="checkbox" name="chk"></td>
+                                    <!-- <td><input type="checkbox" name="chk"></td> -->
                                     <td><a href="<%= request.getContextPath()%>/notice/noticeView?noticeNo=<%=n.getnoticeNo()%>"><%=n.getnTitle() %></a></td>
                                     <td><%=n.getnDate() %></td>
-                                    <td><a href="<%= request.getContextPath()%>/admin/notice/modifyNotice?noticeNo=<%=n.getnoticeNo()%>"><button class="whitebtn">수정</button></a></td>
+                                    <td><a href="<%= request.getContextPath()%>/admin/notice/modifyNotice?noticeNo=<%=n.getnoticeNo()%>"><button class="whitebtn">수정</button></a>
+                                    <a href="<%= request.getContextPath()%>/admin/notice/deleteNotice?noticeNo=<%=n.getnoticeNo()%>"><button class="whitebtn">삭제</button></a></td>
                                 </tr> 
                             </tbody>
                             <%} %>
                         </table>
                         <div id="btn">
-                            <a href="<%= request.getContextPath()%>/admin/notice/deleteNotice"><button type="button" class="pb" style="background-color: white;">선택 삭제</button></a>
+                            <%-- <a href="<%= request.getContextPath()%>/admin/notice/deleteNotice"><button type="button" class="pb" style="background-color: white;">선택 삭제</button></a> --%>
                             <a href="<%= request.getContextPath()%>/admin/notice/writeNotice"><button type="button" class="pb blackbtn" >글쓰기</button></a>
                             <!--open()으로 작은 window창 열어서 등록 처리-->
                         </div>
@@ -73,33 +74,17 @@
         </section>
 
         <script>
-            $(document).ready(function(){
-                $("#checkall").click(function(){
-                    //상단의 체크박스 클릭 여부에 따라 전체체크/해제 로직
-                    if($("#checkall").prop("checked")){
-                        $("input[name=chk]").prop("checked",true);
-                    }else{
-                        $("input[name=chk]").prop("checked",false);
-                    }
-                })
+        /* $(document).ready(function(){
+            $("#checkall").click(function(){
+                //상단의 체크박스 클릭 여부에 따라 전체체크/해제 로직
+                if($("#checkall").prop("checked")){
+                    $("input[name=chk]").prop("checked",true);
+                }else{
+                    $("input[name=chk]").prop("checked",false);
+                }
             })
-            const fn_delete_notice=()=>{
-			if(confirm("정말로 삭제하시겠습니까?")){
-				<%-- location.replace("<%=request.getContextPath()%>/admin/notice/deleteNotice?noticeNo=<%=n.getnoticeNo()%>");  --%>
-			}
-			
-			$("#searchTitle").change((e)=>{
-				$("#searchTitle").attr("action","<%=request.getContextPath()%>/admin/notice/manageNotice");
-				$("#searchTitle").append($("<input>").attr({
-					type:"hidden",name:"cPage",value:"<%=request.getParameter("cPage")%>"
-				}));
-				$("#searchTitle").append($("<input>").attr({
-					type:"hidden",name:"nKeyword",value:"<%=nKeyword %>"
-				}));
-				$("#searchTitle").submit();
-			});
-			
-          }
+        }) */
+                       
             
         </script>
 
@@ -189,6 +174,7 @@
                 left:734px;
                 background-color:black;
                 color:white;
+                margin-left:90px;
             }
             .pagebar{
                 width: 100px;

@@ -38,7 +38,7 @@
                                 <input type="file" name="upfile">
                             </div>
                             <div id="btn">
-                                <input type="reset" class="blackbtn" value="취소">
+                                <a href="<%= request.getContextPath()%>/admin/notice/manageNotice"><button type="button" class="pb blackbtn" >취소</button></a>
                                 <input type="submit" class="blackbtn" value="확인">
                             </div>
                         </form>
