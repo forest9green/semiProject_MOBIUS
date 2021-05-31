@@ -38,8 +38,17 @@ public class ChangeAmountServlet extends HttpServlet {
 		
 		int result=new CartService().changeAmount(c);
 		
-		response.setContentType("text/csv;charset=utf-8");
-		response.getWriter().print(result);
+		String msg="";
+		if(result>0) {
+			msg="변경되었습니다.";
+		}else {
+			msg="변경에 실패했습니다.";
+		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/myPage/cart");
+		request.setAttribute("queryString", "?userId="+userId);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

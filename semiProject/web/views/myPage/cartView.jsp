@@ -106,21 +106,9 @@
 	});
 	
 	$(".changeAmount").click((e)=>{
-		$.ajax({
-			url:"<%=request.getContextPath()%>/myPage/changeAmount",
-			data:{
-				"userId":'<%=loginUser.getUserId()%>',
-				"pCode":$(e.target).val(),
-				"amount":$(e.target).prev().prev().val()
-			},
-			success:data=>{
-				if(data>0){
-					alert("변경되었습니다.");
-				}else{
-					alert("변경에 실패했습니다.");
-				}
-			}
-		})
+		const pCode=$(e.target).val();
+		const amount=$(e.target).prev().prev().val();
+		location.replace('<%=request.getContextPath()%>/myPage/changeAmount?userId=<%=loginUser.getUserId()%>&pCode='+pCode+'&amount='+amount);
 	})
 	
 	$(".deleteCart").click((e)=>{
