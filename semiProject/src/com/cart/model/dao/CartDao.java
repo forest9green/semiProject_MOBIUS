@@ -155,5 +155,26 @@ public class CartDao {
 		
 		return result;
 	}
+	
+	
+	public int deleteCart(Connection conn, WishList c) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteCart"));
+			pstmt.setString(1, c.getUserId());
+			pstmt.setString(2, c.getpCode());
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

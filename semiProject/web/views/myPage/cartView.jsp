@@ -30,8 +30,8 @@
                             <th width=40><input type="checkbox" id="checkall"></th>
                             <th width=145>이미지</th>
                             <th>상품명</th>
-                            <th width=85>가격</th>
                             <th width=80>수량</th>
+                            <th width=85>가격</th>
                             <th width=85>적립금</th>
                             <th width=85>배송비</th>
                             <th width=85>합계</th><!--가격+배송비-->
@@ -42,31 +42,35 @@
                         <%if(!carts.isEmpty()) {
                         	for(CartProduct cp:carts){%>
 		                        <tr>
-		                            <td><input type="checkbox" name="chk" value=""></td>
+		                            <td><input type="checkbox" name="chk" value="<%=cp.getpCode()%>"></td>
 		                            <td><img src="<%=request.getContextPath() %>/images/product/<%=cp.getpCode().substring(0,2)%>/<%=cp.getpCode()%>-1.jpg"></td>
 		                            <td><%=cp.getpName() %></td>
-		                            <td><%=nf.format(cp.getPrice()) %>원</td>
 		                            <td>
 		                                <input type="number" class="amount" max="100" min="1" step="1" style="width:33px" value="<%=cp.getAmount()%>"><br>
 		                                <button class="whitebtn changeAmount" value="<%=cp.getpCode() %>">변경</button>
 		                            </td>
+		                            <td><%=nf.format(cp.getPrice()*cp.getAmount()) %>원</td>
 		                            <td><%=nf.format((int)(cp.getPrice()*cp.getAmount()*0.01)) %>원</td>
 		                            <td><%=nf.format(cp.getDeliveryFee()) %>원</td>
 		                            <td><%=nf.format(cp.getPrice()*cp.getAmount()+cp.getDeliveryFee()) %>원</td>
 		                            <td>
 		                                <ul id="cart_detail_btn">
 		                                    <li><button>주문하기</button></li>
-		                                    <li><button class="deleteCart" value="">삭제</button></li>
+		                                    <li><button class="deleteCart" value="<%=cp.getpCode() %>">삭제</button></li>
 		                                </ul>
 		                            </td>
 		                        </tr>
 	                        <%}
-                       	}%>
+                       	} else {%>
+                       		<tr>
+	                    		<td colspan="8">장바구니가 비어 있습니다.</td>
+	                    	</tr>
+	                    <%} %>
                     </tbody>
                 </table>
             </div>
             <div id="cart_btn1">
-                <button type="button" class="pb">삭제</button>
+                <button type="button" id="deletebtn" class="pb">삭제</button>
             </div>
             <div id="price_box">
                 <table id="price_table" class="pa" border>
@@ -120,7 +124,17 @@
 	})
 	
 	$(".deleteCart").click((e)=>{
-		
+		const pCode=$(e.target).val();
+		location.replace('<%=request.getContextPath()%>/myPage/deleteCart?userId=<%=loginUser.getUserId()%>&pCode='+pCode);
+	})
+	
+	$("#deletebtn").click((e)=>{
+		const checkValue = $("input[name=chk]:checked").length;
+	    let checkPCodes = new Array(checkValue);
+	    for(let i=0; i<checkValue; i++){                          
+	    	checkPCodes[i] = $("input[name=chk]:checked")[i].value;
+	    }
+	    location.replace('<%=request.getContextPath()%>/myPage/deleteCart?userId=<%=loginUser.getUserId()%>&pCodes='+checkPCodes);
 	})
 </script>
 

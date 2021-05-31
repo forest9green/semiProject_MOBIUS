@@ -27,14 +27,11 @@
 }
 
 /*header,footer 및 메인 디자인*/
-#container{
-    border:1px red solid;
+div#container{
     width: 1200px;
     margin:0 auto;
 }
 section{
-    border: 1px blue solid;
-    /* height:940px; */
     margin:50px 20px 80px 20px;
     padding:20px;
 }

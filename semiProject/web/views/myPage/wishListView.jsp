@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="java.util.List, com.wish.model.vo.WishProduct, java.text.NumberFormat" %>
+<%
+	List<WishProduct> wishs=(List<WishProduct>)request.getAttribute("wishs");
+	String pageBar=(String)request.getAttribute("pageBar");
+	NumberFormat nf = NumberFormat.getInstance();
+%>
 <%@ include file="/views/common/header.jsp"%>
 
 <section>
@@ -10,38 +15,36 @@
                 <table id="wish_table" class="pa" border=1>
                     <thead>
                         <tr>
-                            <th width=50><input type="checkbox"></th>
+                            <th width=50><input type="checkbox" id="checkall"></th>
                             <th width=250>이미지</th>
                             <th width=400>상품명</th>
-                            <th width=120>판매가</th>
+                            <th width=120>가격</th>
                             <th width=170>선택</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!--
-                            값이 없으면 <tr>보유하고 계신 위시리스트 내역이 없습니다.</tr> 추가
-                            값이 있으면 출력하되, 튜플이 10개 이상일 경우 페이징처리 되도록 처리해야 함
-                        -->
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <ul id="wish_detail_btn">
-                                    <li><button>주문하기</button></li>
-                                    <li><button>장바구니 담기</button></li>
-                                    <li><button>삭제</button></li>
-                                </ul>
-                            </td>
-                        </tr>
+                        <%if(!wishs.isEmpty()) {
+                        	for(WishProduct wp:wishs) {%>
+		                        <tr>
+		                            <td><input type="checkbox" name="chk"></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td>
+		                                <ul id="wish_detail_btn">
+		                                    <li><button>주문하기</button></li>
+		                                    <li><button>장바구니 담기</button></li>
+		                                    <li><button>삭제</button></li>
+		                                </ul>
+		                            </td>
+		                        </tr>
+	                        <%}
+                       	}%>
                     </tbody>
                 </table>
             </div>
             <div id="w_pagebar" class="pagebar">
-                <span><a href="">1</a></span>
-                <!--페이징 처리 할지말지 고민-->
-                <!--출력할 데이터 개수에 따라 페이지가 추가되도록 함-->
+                <%=pageBar %>
             </div>
             <div id="wish_btn">
                 <button type="button" class="pb">삭제</button>
@@ -50,6 +53,19 @@
             </div>
     </div>
 </section>
+
+<script>
+	$(document).ready(function(){
+	    $("#checkall").click(function(){
+	        //상단의 체크박스 클릭 여부에 따라 전체체크/해제 로직
+	        if($("#checkall").prop("checked")){
+	            $("input[name=chk]").prop("checked",true);
+	        }else{
+	            $("input[name=chk]").prop("checked",false);
+	        }
+	    })
+	});
+</script>
 
 <style>
     #wish_box{
@@ -107,22 +123,28 @@
     #wish_box>p+h2{
         font-size: 30px;
     }
+    /*pageBar 디자인*/
     .pagebar{
-        width: 100px;
-        margin: 10px auto;
+        margin: 50px auto;
+        display:flex;
+        justify-content: center;
     }
-    .pagebar>span{
+    .pagebar>span, .pagebar>a{
         margin:0 6px 0 6px;
     }
-    .pagebar>span a{
+    .pagebar>a{
         text-decoration: none;
+        color:black;
     }
-    .pagebar span>a:hover{
-        color:rgba(123, 209, 159, 0.856);
-        
+    .pagebar>span{
+        color:rgba(123, 209, 159);
     }
+    .pagebar>a:hover{
+        color:rgba(123, 209, 159);
+    }
+    body{
+		margin:0px;
+	}
 </style>
-
-<script></script>
 
 <%@ include file="/views/common/footer.jsp"%>
