@@ -21,7 +21,7 @@
             </tr>
         </table>
     </div>
-    <div id="recent_pd">
+    <!-- <div id="recent_pd">
         <h2 class="pe">최근 조회한 상품</h2>
         <ul style="padding:0">
             <li>
@@ -45,7 +45,7 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </div> -->
     <div id="my_menu">
         <ul class="pb" style="padding:0">
             <li>
