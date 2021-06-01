@@ -114,7 +114,7 @@
                                         </th>
                                         <td>
                                             <div class="member_warning">
-                                                <input type="text" name="newUserName" id="newUserName" maxlength="30" required>
+                                                <input type="text" name="newUserName" id="newUserName" maxlength="30" value="<%=loginUser.getUserName()%>" required>
                                             </div>
                                         </td>
                                     </tr>
@@ -148,7 +148,7 @@
                                         </th>
                                         <td class="member_address">
                                             <div class="addresss_postcode">
-                                                <input type="text" id="newCellPhone" name="newCellPhone" maxlength="12" placeholder="- 없이 입력하세요." required>
+                                                <input type="text" id="newCellPhone" name="newCellPhone" maxlength="12" value="<%=loginUser.getCellPhone() %>" required>
                                             </div>
                                             <div class="form_element">
                                                 <input type="checkbox" id="smsFl" name="smsFl"  >
@@ -162,7 +162,7 @@
                                         </th>
                                         <td>
                                             <div>
-                                                <input type="text" id="newPhone" name="newPhone" maxlength="12" placeholder="- 없이 입력하세요.">
+                                                <input type="text" id="newPhone" name="newPhone" maxlength="12" value="<%=loginUser.getPhone()%>">
                                             </div>
                                         </td>
                                     </tr>
