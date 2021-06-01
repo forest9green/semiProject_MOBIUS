@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.admin.user.model.vo.AdminMileage;
 import com.admin.user.model.vo.AdminOrder;
+import com.admin.user.model.vo.AdminOrderInfo;
 import com.admin.user.model.vo.AdminUserInfo;
 import com.admin.user.model.vo.TotalInfo;
 import com.coupon.model.vo.Coupon;
@@ -250,6 +251,59 @@ private Properties prop=new Properties();
 		return result;
 	}
 	
+	public AdminOrderInfo adminOrderInfo(Connection conn, String orderNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		AdminOrderInfo aoi = null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("adminOrderInfo"));
+			pstmt.setString(1, orderNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				aoi = new AdminOrderInfo();
+				aoi.setOrderNo(rs.getString("order_no"));
+				aoi.setOrderDate(rs.getDate("order_date"));
+				aoi.setUserId(rs.getString("user_id"));
+				aoi.setoState(rs.getString("o_state"));
+				aoi.setpCode(rs.getString("p_code"));
+				aoi.setpName(rs.getString("p_name"));
+				aoi.setOrderMemo(rs.getString("order_memo"));
+				aoi.setoAmount(rs.getInt("o_amount"));
+				aoi.setReceiverName(rs.getString("receiver_name"));
+				aoi.setAddCellphone(rs.getString("add_cellphone"));
+				aoi.setAddPhone(rs.getString("add_phone"));
+				aoi.setPostCode(rs.getString("postcode"));
+				aoi.setAddr(rs.getString("addr"));
+				
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return aoi;
+		
+	}
+	
+	
+	public int updateOstate(Connection conn, String orderNo, String oState) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("updateOstate"));
+			pstmt.setString(1, oState);
+			pstmt.setString(2, orderNo);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

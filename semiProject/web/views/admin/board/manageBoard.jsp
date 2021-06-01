@@ -22,6 +22,7 @@
                     </ul><br>
                     <ul class="pd">설정
                         <li><a href="" class="pc black">- 공지사항 관리</a></li>
+                        <li><a href="<%= request.getContextPath()%>/admin/notice/manageNotice" class="pc black">- 공지사항 관리</a></li>
                     </ul>
                 </div>
 

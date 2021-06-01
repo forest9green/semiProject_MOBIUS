@@ -30,9 +30,9 @@ public class AdminNoticeService {
 		return result;
 	}
 	
-	public Notice selectNotice(String NOTICE_NO) {
+	public Notice selectNotice(String noticeNo) {
 		Connection conn=getConnection();
-		Notice n=dao.selectNotice(conn, NOTICE_NO);
+		Notice n=dao.selectNotice(conn, noticeNo);
 		close(conn);
 		return n;
 		

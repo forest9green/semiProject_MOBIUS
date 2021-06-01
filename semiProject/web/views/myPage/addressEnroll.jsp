@@ -118,10 +118,11 @@
 <style>
     #addrEnroll_box{
         width:1000px;
-        margin:50px auto;
+        margin:0px auto;
     }
     .mgbt0{
         margin-bottom: 0;
+        margin-top:0px;
     }
     #span2{
         font-size: 15px;

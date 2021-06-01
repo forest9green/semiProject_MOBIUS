@@ -27,9 +27,9 @@ public class WishListService {
 	}
 	
 	
-	public List<WishProduct> selectWish(String userId){
+	public List<WishProduct> selectWish(String userId, int cPage, int numPerPage){
 		Connection conn=getConnection();
-		List<WishProduct> list=dao.selectWish(conn, userId);
+		List<WishProduct> list=dao.selectWish(conn, userId, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
@@ -41,6 +41,15 @@ public class WishListService {
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
+		return result;
+	}
+	
+	
+	public int deleteWish(WishList w) {
+		Connection conn=getConnection();
+		int result=dao.deleteWish(conn,w);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		return result;
 	}
 
