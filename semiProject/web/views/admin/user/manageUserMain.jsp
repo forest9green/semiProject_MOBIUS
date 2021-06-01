@@ -31,10 +31,10 @@
 
                 <div class="main"> 
                     <h3 class="pd greenright">회원 관리</h3>
-                    <%-- <form id="searchId" action="<%=request.getContextPath() %>/admin/user/searchId" method="post">
+                    <form id="searchId" action="<%=request.getContextPath() %>/admin/user/searchId" method="post">
                         <input type="search" name="searchId" placeholder="아이디">
                         <input type="submit" class="whitebtn" value="검색">
-                    </form> --%>
+                    </form>
                     <table id="output_table" class="pa" border=1>
                         <thead>
                             <tr>
