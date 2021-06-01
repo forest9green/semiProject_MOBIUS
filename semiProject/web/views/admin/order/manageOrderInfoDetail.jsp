@@ -54,7 +54,7 @@
                                        		<li>일반전화 : </li>
                                        	<%}%>
                                         <li>우편번호 : <%=aoi.getPostCode() %></li>
-                                        <li>주소 : <%=aoi.getAddr() %></li>
+                                        <li>주소 : <%=aoi.getAddr().replace("-"," ") %></li>
                                         <%if(aoi.getOrderMemo()!=null){ %>
                                         	<li>배송 시 요청사항 : <%=aoi.getOrderMemo() %></li>
                                        	<%}else{ %>
@@ -77,17 +77,19 @@
                                 </div>
                                 <div class="cBox3" id="stateDiv">
                                     <button id="changebtn" class="whitebtn">결제 상태 변경</button>
-                                    <form id="stateChange" class="disnone margint" action=""><!--db에 있는 주문상태의 컬럼값에 따라 checked가 유지되어 있어야 함-->
-                                        <label><input type="radio">입금대기</label>
-                                        <label><input type="radio">배송준비</label>
-                                        <label><input type="radio">배송중</label>
-                                        <label><input type="radio">배송완료</label><br>
-                                        <label><input type="radio">취소</label>
-                                        <label><input type="radio">교환</label>
-                                        <label><input type="radio">환불</label>
+                                    <form id="stateChange" class="disnone margint" action="<%=request.getContextPath() %>/user/orderUpdate" method="post"><!--db에 있는 주문상태의 컬럼값에 따라 checked가 유지되어 있어야 함-->
+                                        <input type="hidden" name="orderNo" value="<%=aoi.getOrderNo()%>">
+                                        <input type="hidden" name="userId" value="<%=aoi.getUserId()%>">
+                                        <label><input type="radio" name="oState" value="임금대기">입금대기</label>
+                                        <label><input type="radio" name="oState" value="배송준비">배송준비</label>
+                                        <label><input type="radio" name="oState" value="배송중">배송중</label>
+                                        <label><input type="radio" name="oState" value="배송완료">배송완료</label><br>
+                                        <label><input type="radio" name="oState" value="취소">취소</label>
+                                        <label><input type="radio" name="oState" value="교환">교환</label>
+                                        <label><input type="radio" name="oState" value="환불">환불</label>
                                         <div class="margint" style=" float:right;margin-top:25px;">
                                             <input type="reset" class="blackbtn" value="취소" onclick="cancelChange();">
-                                            <input type="submit" class="blackbtn" value="완료">
+                                            <input type="submit" id="updateState" class="blackbtn" value="완료">
                                         </div>
                                     </form>
                                 </div>
@@ -104,6 +106,8 @@
             const cancelChange=()=>{
                 $("#stateChange").addClass("disnone");
             }
+            $("#updateState").click(function(){
+            })
         </script>
 
 

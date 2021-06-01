@@ -92,4 +92,16 @@ public class AdminUserService {
 	}
 	
 	
+	public int updateOstate(String orderNo, String oState) {
+		Connection conn = getConnection();
+		int result = dao.updateOstate(conn,orderNo,oState);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	
 }

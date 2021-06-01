@@ -289,7 +289,21 @@ private Properties prop=new Properties();
 	}
 	
 	
-	
+	public int updateOstate(Connection conn, String orderNo, String oState) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("updateOstate"));
+			pstmt.setString(1, oState);
+			pstmt.setString(2, orderNo);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
