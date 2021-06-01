@@ -107,7 +107,7 @@
                 $("#stateChange").addClass("disnone");
             }
             $("#updateState").click(function(){
-            	console.log($("input[name=oState]").val());
+            	console.log($("input[name=oState]").is(':checked'));
             	if($("input[name=oState]").val()!=null){
             		alert("가면안되는데");
             		/* console.log($("input[name=oState]").val()); */

@@ -14,7 +14,7 @@
     <h2 class="pe title">관리자 페이지</h2> 
     <div class="content" style="display:flex">
         <div class="category">
-            <ul class="pd"><a href="<%=request.getContextPath() %>/admin/adminMain" class="choice">메인</a></ul><br>
+            <ul class="pd"><a href="<%=request.getContextPath() %>/admin/adminMain" class="black">메인</a></ul><br>
             <ul class="pd">회원
                 <li><a href="<%=request.getContextPath() %>/admin/user/memberList"  class="pc black">- 회원 관리</a></li>
                 <li><a href="<%=request.getContextPath() %>/admin/order/manageOrderInfoDetail.jsp" class="pc black">- 주문 관리</a></li>
