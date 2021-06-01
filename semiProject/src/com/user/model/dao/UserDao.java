@@ -281,7 +281,25 @@ public class UserDao {
 	}
 	
 	
-	
-	
+	public int updateMileage(Connection conn, String userId, int plusM, int minusM) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateMileage"));
+			pstmt.setInt(1, plusM);
+			pstmt.setInt(2, minusM);
+			pstmt.setString(3, userId);
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

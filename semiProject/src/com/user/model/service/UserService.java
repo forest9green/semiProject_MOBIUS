@@ -94,4 +94,14 @@ public class UserService {
 		return result;
 	}
 	
+	
+	public int updateMileage(String userId, int plusM, int minusM) {
+		Connection conn = getConnection();
+		int result = dao.updateMileage(conn,userId,plusM,minusM);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 }

@@ -10,18 +10,26 @@
             <h2 class="pe title">관리자 페이지</h2> 
             <div class="content" style="display:flex">
                 <div class="category">
+
+                    <ul class="pd"><a href="<%=request.getContextPath() %>/admin/adminMain" class="pc black">메인</a></ul><br>
+
                   <ul class="pd"><a href="<%=request.getContextPath() %>/admin/adminMain" class="choice">메인</a></ul><br>
+
                     <ul class="pd">회원
-                         <li><a href="<%=request.getContextPath() %>/admin/user/memberList"  class="pc black">- 회원 관리</a></li>
+
+                        <li><a href="<%=request.getContextPath() %>/admin/user/memberList" class="pc black" class="pc black">- 회원 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/order/manageOrderInfoDetail" class="pc black" class="pc black">- 주문 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/cer/manageCERcancel" class="pc black" class="pc black">- 취소/교환/환불 처리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/board/manageBoard" class="choice">- 문의사항 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/user/memberList"  class="pc black">- 회원 관리</a></li>
                         <li><a href="" class="pc black">- 주문 관리</a></li>
                         <li><a href="" class="pc black">- 취소/교환/환불 처리</a></li>
                         <li><a href="">- 문의사항 관리</a></li>
                     </ul><br>
                     <ul class="pd">상품
-                        <li><a href="" class="pc black">- 상품 관리</a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/manageProductMain" class="pc black">- 상품 관리</a></li>
                     </ul><br>
                     <ul class="pd">설정
-                        <li><a href="" class="pc black">- 공지사항 관리</a></li>
                         <li><a href="<%= request.getContextPath()%>/admin/notice/manageNotice" class="pc black">- 공지사항 관리</a></li>
                     </ul>
                 </div>
@@ -57,7 +65,7 @@
                                     <td><%=a.getbTitle() %></td>
                                     <td><%=a.getUserId() %></td>
                                     <td><%=a.getbWriteDate() %></td>
-                                    <td></td>
+                                    <td>처리중</td>
                                     <td></td>
                                     <td><button class="whitebtn">답변하기</button></td>
                                 </tr>
@@ -66,7 +74,7 @@
                             </tbody>                           
                         </table>
                     </div>
-                    <div id="pageBar" class="pageBar">
+                    <div id="pageBar" class="pageBar" style="text-align:center;">
                         <%=request.getAttribute("pageBar") %>
                     </div>
                 </div>
@@ -75,6 +83,25 @@
 
 
         <style>
+        	/*pageBar 디자인*/
+		    .pageBar{
+		        margin: 50px auto;
+		        display:flex;
+		        justify-content: center;
+		    }
+		    .pageBarr>span, .pagebar>a{
+		        margin:0 6px 0 6px;
+		    }
+		    .pageBar>a{
+		        text-decoration: none;
+		        color:black;
+		    }
+		    .pageBar>span{
+		        color:rgba(123, 209, 159);
+		    }
+		    .pageBar>a:hover{
+		        color:rgba(123, 209, 159);
+		    }
             .choice{
                 color:green;
                 text-decoration: underline;
@@ -144,20 +171,6 @@
             #output_table tr{
                 height:40px;
             }
-            .pagebar{
-                width: 100px;
-                margin: 20px auto;
-            }
-            .pagebar>span{
-                margin:0 6px 0 6px;
-            }
-            .pagebar>span a{
-                text-decoration: none;
-            }
-            .pagebar span>a:hover{
-                color:rgba(123, 209, 159, 0.856);
-            } 
-
 			body{
 				margin:0px;
 			}
