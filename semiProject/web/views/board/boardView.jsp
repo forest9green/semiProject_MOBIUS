@@ -40,12 +40,12 @@
              </div>
         </div>    
 
-             <h3>답변</h3>
+<!--              <h3>답변</h3>
         
 
              <div class="container reply">
                 <p> 양호준님 안녕하세요! 해당상품 2~3주내에 수령하실수 있습니다.</p>
-             </div>   
+             </div>    -->
         
 </section>
 <script>
