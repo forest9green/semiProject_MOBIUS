@@ -16,10 +16,11 @@
                 <thead>
                     <tr>
                         <th>번호</th>
-                        <th width=450>쿠폰명</th>
+                        <th width=400>쿠폰명</th>
                         <th>구매금액(이상)</th>
                         <th>할인율</th>
                         <th>유효기간</th>
+                        <th>사용여부</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,11 @@
                     			<td><%=nf.format(c.getcLimit()) %>원</td>
                     			<td><%=(int)(c.getcDiscount()*100)+"%" %></td>
                     			<td><%=c.getcIssueDate()+" ~ "+c.getcFinishDate() %></td>
+                    			<%if(c.getcUse()==1) {%>
+                    				<td>사용</td>
+                    			<%} else { %>
+                    				<td>미사용</td>
+                    			<%} %>
                     		</tr>
                     	<%}
                     } else {%>

@@ -153,5 +153,25 @@ private Properties prop=new Properties();
 		
 		return result;
 	}
+	
+	
+	public int updateCouponUse(Connection conn, String cNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateCouponUse"));
+			pstmt.setString(1, cNo);
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

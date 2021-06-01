@@ -1,7 +1,9 @@
 package com.coupon.model.service;
 
 import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
 import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -41,6 +43,16 @@ private CouponDao dao=new CouponDao();
 	public int selectCouponCount(String userId) {
 		Connection conn=getConnection();
 		int result=dao.selectCouponCount(conn,userId);
+		close(conn);
+		return result;
+	}
+	
+	
+	public int updateCouponUse(String cNo) {
+		Connection conn=getConnection();
+		int result=dao.updateCouponUse(conn,cNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}

@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="com.order.model.vo.NoBookPay, java.text.NumberFormat" %>
+<%
+	NoBookPay nbp=(NoBookPay)request.getAttribute("noBookPay");
+	int totalPay=(int)request.getAttribute("totalPay");
+	NumberFormat nf = NumberFormat.getInstance();
+%>
 <%@ include file="/views/common/header.jsp"%>
 
 <section style="font-family: 'Noto Sans KR';">
@@ -10,27 +15,24 @@
             </div>
             <div class="pyc_center">
                 <h4>
-                    주문번호 :
+                    주문번호 : <%=nbp.getOrderNo() %>
                 </h4>
                 <h4>
-                    주문상품 :
+                    입금자명 : <%=nbp.getNbpName() %>
                 </h4>
                 <h4>
-                    입금자명 :
+                    계좌번호(예금주) : 012345-67-521436(장혜린)
                 </h4>
                 <h4>
-                    계좌번호(예금주) :
+                    입금액 : <%=nf.format(totalPay) %>원
                 </h4>
                 <h4>
-                    결제금액 :
-                </h4>
-                <h4>
-                    입금기한:
+                    입금기한: ~ <%=nbp.getNbpPayDate() %>까지
                 </h4>
             </div>
     </div>
         <div>
-            <a href="" style="text-decoration:none; color:black;">
+            <a href="<%=request.getContextPath() %>/" style="text-decoration:none; color:black;">
                 <h4 class="pycompbut">홈으로</h4>
             </a>
         </div>

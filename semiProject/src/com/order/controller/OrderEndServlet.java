@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.coupon.model.service.CouponService;
 import com.mileage.model.service.MileageService;
+import com.newAddress.model.service.NewAddressService;
+import com.newAddress.model.vo.NewAddress;
 import com.order.model.service.OrderService;
 import com.order.model.vo.Order;
 import com.user.model.service.UserService;
@@ -47,7 +50,8 @@ public class OrderEndServlet extends HttpServlet {
 		String addr="";
 		String deliveryCellPhone="";
 		String deliveryPhone="";
-		if(selectAdd==null) {
+		if(selectAdd.equals("null")) {
+			selectAdd=null;
 			receiverName=request.getParameter("receiverName");
 			postCode=request.getParameter("zonecode");
 			addr=request.getParameter("address")+"-"+request.getParameter("addressSub");
@@ -73,6 +77,10 @@ public class OrderEndServlet extends HttpServlet {
 		//네이버페이,카카오페이,신용카드 api를 연결하지 않았기 때문에, 분기처리하지 않고 그냥 무통장입금으로만 받음
 		String payWay=request.getParameter("payWay");
 		
+		
+		String msg="주문 실패";
+		String loc="/";
+		String queryString=null;
 		
 		//1. 주문내역 테이블에 데이터 삽입
 		Order o=new Order(null,userId,selectAdd,orderMemo,oPPrice,oDeliveryFee,oDC,oTotalPrice,payWay,null,null);
@@ -105,11 +113,49 @@ public class OrderEndServlet extends HttpServlet {
 				////3-3 회원 테이블 적립금 컬럼 수정
 				result3=new UserService().updateMileage(userId,(int)(oPPrice*0.01),useMileage);
 				
+				
+				if(result3>0) {
+					//4. 신규 배송지일 경우 신규배송지 테이블에 데이터 삽입
+					int result4=0;
+					if(selectAdd==null) {
+						NewAddress na=new NewAddress(orderNo,receiverName,postCode,addr,deliveryCellPhone,deliveryPhone);
+						result4=new NewAddressService().insertNewAddr(na);
+					}else {
+						result4=1;
+					}
+					
+					if(result4>0) {
+						int result5=0;
+						
+						//5. 사용한 쿠폰이 있을 경우 사용여부를 사용(1)로 update
+						if(!useCoupon.equals("null")) {
+							result5=new CouponService().updateCouponUse(useCoupon);
+						}else {
+							result5=1;
+						}
+						System.out.println("result5"+result5);
+						if(result5>0) {
+							//6. 무통장 결제일 경우 무통장결제 테이블에 데이터 삽입
+							System.out.println(payWay.equals("무통장입금"));
+							if(payWay.equals("무통장입금")) {
+								int result6=new OrderService().insertNoBookPay(orderNo,orderName);
+								
+								if(result6>0) {
+									msg="주문이 완료되었습니다.";
+									loc="/myPage/completePayNoBook";
+									queryString="?orderNo="+orderNo;
+								}
+							}//무통장 결제 이외의 결제방법 처리(api 적용한 후 가능함)
+						}
+					}
+				}
 			}
 		}
-		//4. 신규 배송지일 경우 신규배송지 테이블에 데이터 삽입
-		//5. 사용한 쿠폰이 있을 경우 사용여부를 사용(1)로 update(쿠폰 view 서블릿에서 사용한 쿠폰은 회색 글씨로 나오도록 수정)
-		//6. 무통장 결제했기 때문에 무통장결제 테이블에 데이터 삽입
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.setAttribute("queryString", queryString);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

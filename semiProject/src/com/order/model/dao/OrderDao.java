@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Properties;
 
+import com.order.model.vo.NoBookPay;
 import com.order.model.vo.Order;
 
 public class OrderDao {
@@ -90,12 +91,91 @@ public class OrderDao {
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertOrderDetail"));
 			pstmt.setString(1, orderNo);
+			pstmt.setString(2, pCode);
+			pstmt.setInt(3, amount);
+			
+			result=pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;
+	}
+	
+	
+	public int insertNoBookPay(Connection conn, String orderNo, String orderName) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertNoBookPay"));
+			pstmt.setString(1, orderNo);
+			pstmt.setString(2, orderName);
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public NoBookPay selectNBP(Connection conn, String orderNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		NoBookPay nbp=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectNBP"));
+			pstmt.setString(1, orderNo);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				nbp=new NoBookPay();
+				nbp.setOrderNo(rs.getString("order_no"));
+				nbp.setNbpName(rs.getString("nbp_name"));
+				nbp.setNbpPayDate(rs.getDate("nbp_paydate"));
+				nbp.setNbpPay(rs.getInt("nbp_pay"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return nbp;
+	}
+	
+	
+	public int selectTotalPay(Connection conn, String orderNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalPay=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectTotalPay"));
+			pstmt.setString(1, orderNo);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) totalPay=rs.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return totalPay;
 	}
 
 }
