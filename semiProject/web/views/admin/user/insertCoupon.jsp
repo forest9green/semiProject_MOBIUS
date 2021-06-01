@@ -19,7 +19,7 @@
 				<form action="<%=request.getContextPath()%>/admin/user/insertCoupon" method="post">
 					<input type="hidden" value="<%=userId %>" name="userId">
 					쿠폰명 <input type="text" name="cName" id="cName" required><br>
-					한일율 <input type="text" name="cDiscount" id="cDiscount" placeholder="0.00" required><br>
+					할인율 <input type="text" name="cDiscount" id="cDiscount" placeholder="0.00" required><br>
 					종료일 <input type="text" name="cFinishDate" id="cFinishDate" placeholder="몇일간 유효한지" required><br>
 					제한금액<input type=text name="cLimit" id= cLimit required><br>
 					<input type="submit" value="등록" id="closebox">
