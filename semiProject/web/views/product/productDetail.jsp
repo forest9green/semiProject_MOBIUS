@@ -37,7 +37,7 @@
                     <div>
                         <button class="pc wish" style="width:130px;" title="<%=p.getpCode()%>">위시리스트에 추가</button>
                         <button class="pc cart" style="width:120px;" title="<%=p.getpCode()%>">장바구니에 담기</button>
-                        <button class="buy_now pc" style="width:125px;" title="<%=p.getpCode()%>">바로 구매</button>
+                        <button class="pc orderOne" style="width:125px;" value="<%=p.getpCode() %>">바로 구매</button>
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                                 <option value="기타">기타</option>
                             </select>
                         </form>
-                        <button class="buy_now pd" style="width:80px;height:30px;">문의하기</button>
+                        <button class="pd" style="width:80px;height:30px;">문의하기</button>
                     </div>
                     <table class="sub_news" border="1" cellspacing="0">
                         <thead>
@@ -179,6 +179,11 @@
 		   	})
 		}
 	});
+	
+	$(".orderOne").click((e)=>{
+		const pCode=$(e.target).val();
+		location.assign('<%=request.getContextPath()%>/myPage/order?userId=<%=userId%>&pCode='+pCode);
+	})
 </script>
 
 <style>

@@ -68,7 +68,6 @@ public class ProductListServlet extends HttpServlet {
 			request.setAttribute("category", "전체");
 			list=new ProductService().selectProductList(orderBy,cPage,numPerPage);
 			totalData=new ProductService().selectProductCount();
-			System.out.println("totalData"+totalData);
 		}
 
 		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
