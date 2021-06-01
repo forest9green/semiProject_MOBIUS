@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.admin.user.model.vo.AdminOrderInfo" %>
+<%
+	AdminOrderInfo aoi = (AdminOrderInfo)request.getAttribute("aoi");
+%>
 
 <%@ include file="/views/common/header.jsp"%>
 
@@ -34,20 +38,28 @@
                             <div class="cBox1">
                                 <div class="cBox2" style="margin-bottom:10px">
                                     <ul>
-                                        <li>주문번호 : </li>
-                                        <li>주문날짜 : </li>
-                                        <li>주문자아이디 : </li>
-                                        <li>주문상태 : </li>
+                                        <li>주문번호 : <%=aoi.getOrderNo() %> </li>
+                                        <li>주문날짜 : <%=aoi.getOrderDate() %> </li>
+                                        <li>주문자아이디 : <%=aoi.getUserId() %> </li>
+                                        <li>주문상태 : <%=aoi.getoState() %> </li>
                                     </ul>
                                 </div>
                                 <div class="cBox2">
                                     <ul><h4>- 배송지 정보 -</h4>
-                                        <li>받는 사람 : </li>
-                                        <li>휴대폰번호 : </li>
-                                        <li>일반전화번호 : </li>
-                                        <li>우편번호 : </li>
-                                        <li>주소 : </li>
-                                        <li>배송 시 요청사항 : </li>
+                                        <li>받는 사람 : <%=aoi.getReceiverName() %></li>
+                                        <li>휴대폰번호 : <%=aoi.getAddCellphone() %> </li>
+                                       <%if(aoi.getAddPhone()!=null){ %>
+                                        	<li>배송 시 요청사항 : <%=aoi.getAddPhone() %></li>
+                                       	<%}else{ %>
+                                       		<li>일반전화 : </li>
+                                       	<%}%>
+                                        <li>우편번호 : <%=aoi.getPostCode() %></li>
+                                        <li>주소 : <%=aoi.getAddr() %></li>
+                                        <%if(aoi.getOrderMemo()!=null){ %>
+                                        	<li>배송 시 요청사항 : <%=aoi.getOrderMemo() %></li>
+                                       	<%}else{ %>
+                                       		<li>요청사항 : </li>
+                                       	<%}%>
                                     </ul>
                                 </div>
                             </div>
@@ -57,9 +69,9 @@
                                     <div><!--해당 주문번호에 대한 상품에 대한 정보를 list에 받아와서 for문으로 해당 div를 계속해서 추가하도록 함, 꼭 hr까지-->
                                         <hr>
                                         <ul>
-                                            <li>상품코드 : </li>
-                                            <li>상품명 :</li>
-                                            <li>수량 : </li>
+                                            <li>상품코드 : <%=aoi.getpCode() %></li>
+                                            <li>상품명 : <%=aoi.getpName() %></li>
+                                            <li>수량 : <%=aoi.getoAmount() %></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -73,7 +85,7 @@
                                         <label><input type="radio">취소</label>
                                         <label><input type="radio">교환</label>
                                         <label><input type="radio">환불</label>
-                                        <div class="margint" style="float:right;margin-top:25px;">
+                                        <div class="margint" style=" float:right;margin-top:25px;">
                                             <input type="reset" class="blackbtn" value="취소" onclick="cancelChange();">
                                             <input type="submit" class="blackbtn" value="완료">
                                         </div>

@@ -64,8 +64,9 @@
 		                                    <td><%=ao.getOrderNo() %></td>
 		                                    <td><%=ao.getPrice() %></td>
 		                                    <td><%=ao.getoState() %></td><!--주문 내역 상세 테이블의 주문상태 출력-->
+		                                 <td><button class="whitebtn" name="fn_move_orderDetail">자세히 보기</button></td>
 		                                 </form>
-											<td><button class="whitebtn" name="fn_move_orderDetail">자세히 보기</button></td>
+											
 		                                </tr>
 		                             <%} %>
 	                             <%} %>

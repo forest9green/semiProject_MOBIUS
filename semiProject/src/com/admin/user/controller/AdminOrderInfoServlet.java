@@ -33,11 +33,12 @@ public class AdminOrderInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 	
 		String orderNo = request.getParameter("orderNo");
-		System.out.println(orderNo);
+		
 		AdminOrderInfo aoi = new AdminUserService().adminOrderInfo(orderNo);
 
-		
-		
+		request.setAttribute("aoi", aoi);
+		request.getRequestDispatcher("/views/admin/order/manageOrderInfoDetail.jsp")
+		.forward(request, response);
 		
 		
 		
