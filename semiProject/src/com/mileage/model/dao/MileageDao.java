@@ -82,5 +82,51 @@ public class MileageDao {
 		
 		return result;
 	}
+	
+	
+	public int insertPlus (Connection conn, String orderNo, String userId, int mileage) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertPlus"));
+			pstmt.setString(1, orderNo);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, "구매에 대한 적립금");
+			pstmt.setInt(4, mileage);
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int insertMinus (Connection conn, String orderNo, String userId, int useMileage) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertMinus"));
+			pstmt.setString(1, orderNo);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, "구매 시 적립금 사용");
+			pstmt.setInt(4, useMileage);
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

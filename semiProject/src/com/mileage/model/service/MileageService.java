@@ -1,7 +1,9 @@
 package com.mileage.model.service;
 
 import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
 import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -28,6 +30,25 @@ public class MileageService {
 		close(conn);
 		return result;
 	}
-
+	
+	
+	public int insertPlus(String orderNo, String userId, int mileage) {
+		Connection conn=getConnection();
+		int result=dao.insertPlus(conn,orderNo,userId,mileage);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
+	public int insertMinus(String orderNo, String userId, int useMileage) {
+		Connection conn=getConnection();
+		int result=dao.insertMinus(conn,orderNo,userId,useMileage);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	
 }
