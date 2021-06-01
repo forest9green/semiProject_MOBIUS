@@ -19,7 +19,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 /**
  * Servlet implementation class AdminModifyNoticeEndServlet
  */
-@WebServlet("/admin/notice/noticeModifyEnd")
+@WebServlet("/admin/notice/modifyNoticeEnd")
 public class AdminModifyNoticeEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,7 +39,7 @@ public class AdminModifyNoticeEndServlet extends HttpServlet {
 		
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			request.setAttribute("msg",  "잘못된 접근입니다");
-			request.setAttribute("loc",  "admin/notice/modifyNotice?no="+request.getParameter("noticeNo"));
+			request.setAttribute("loc",  "/admin/notice/modifyNotice?no="+request.getParameter("noticeNo"));
 			request.getRequestDispatcher("/views/common/msg.jsp")
 			.forward(request, response);
 			return;
@@ -52,9 +52,9 @@ public class AdminModifyNoticeEndServlet extends HttpServlet {
 		
 		Notice n=new Notice();
 		n.setnoticeNo(mr.getParameter("NOTICE_NO"));
-		n.setnTitle(mr.getParameter("n_Title"));
-		n.setnContent(mr.getParameter("n_Content"));
-		n.setnImgPath(mr.getFilesystemName("upfile"));
+		n.setnTitle(mr.getParameter("N_TITLE"));
+		n.setnContent(mr.getParameter("N_CONTENT"));
+		n.setnImgPath(mr.getFilesystemName("N_IMGPATH"));
 		
 		String filePath=mr.getFilesystemName("upfile");
 		
@@ -66,8 +66,9 @@ public class AdminModifyNoticeEndServlet extends HttpServlet {
 		}else {
 			filePath=mr.getParameter("oriFile");
 		}
+		
 		n.setnImgPath(filePath);
-		n.setnoticeNo(mr.getParameter("noticeNo"));
+		n.setnoticeNo(mr.getParameter("NOTICE_NO"));
 		
 		int result=new AdminNoticeService().modifyNotice(n);
 		String msg="";

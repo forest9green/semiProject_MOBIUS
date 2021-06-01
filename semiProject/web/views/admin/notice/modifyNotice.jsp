@@ -47,7 +47,7 @@
                             </div>
                             <div id="btn">
                             <a href="<%= request.getContextPath()%>/admin/notice/manageNotice"><button type="button" class="pb blackbtn" >취소</button></a>
-                                <input type="submit" class="blackbtn" value="수정">
+                                <input type="submit" class="blackbtn" value="수정" onclick="fn_modifyNotice();">
                             </div>
                         </form>
                     </div>
@@ -150,6 +150,11 @@
 			}
 		});
 	});
+	
+	function fn_modifyNotice(){
+  		document.updateFrm.submit();
+  	}
+	
 	
 	</script>
 

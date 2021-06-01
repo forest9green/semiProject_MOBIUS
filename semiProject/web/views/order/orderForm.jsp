@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ page import="java.util.List, com.cart.model.vo.CartProduct, java.text.NumberFormat, com.address.model.vo.Address, com.coupon.model.vo.Coupon" %>
 <%
 	List<CartProduct> cartProducts=(List<CartProduct>)request.getAttribute("cartProducts");
@@ -404,5 +405,6 @@
     	cursor:pointer;
     }
 </style>
+
 
 <%@ include file="/views/common/footer.jsp"%>

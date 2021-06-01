@@ -1,23 +1,27 @@
 package com.admin.user.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.admin.user.model.service.AdminUserService;
+import com.admin.user.model.vo.AdminOrderInfo;
+
 /**
- * Servlet implementation class MoveInsertJspServlet
+ * Servlet implementation class AdminOrderInfoServlet
  */
-@WebServlet("/admin/user/couponPage")
-public class MoveInsertJspServlet extends HttpServlet {
+@WebServlet("/admin/order")
+public class AdminOrderInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MoveInsertJspServlet() {
+    public AdminOrderInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,13 +31,15 @@ public class MoveInsertJspServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	
+		String orderNo = request.getParameter("orderNo");
 		
-		String userId = request.getParameter("userId");
-		System.out.println(userId);
-		  
-		request.setAttribute("userId", userId);
-		request.getRequestDispatcher("/views/admin/user/insertCoupon.jsp")
+		AdminOrderInfo aoi = new AdminUserService().adminOrderInfo(orderNo);
+
+		request.setAttribute("aoi", aoi);
+		request.getRequestDispatcher("/views/admin/order/manageOrderInfoDetail.jsp")
 		.forward(request, response);
+		
 		
 		
 	}

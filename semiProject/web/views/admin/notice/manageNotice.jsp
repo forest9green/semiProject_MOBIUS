@@ -51,10 +51,9 @@
                             <tbody>
                                 <tr>
                                     <!-- <td><input type="checkbox" name="chk"></td> -->
-                                    <td><a href="<%= request.getContextPath()%>/notice/noticeView?noticeNo=<%=n.getnoticeNo()%>"><%=n.getnTitle() %></a></td>
+                                    <td><a href="<%= request.getContextPath()%>/admin/notice/modifyNotice?noticeNo=<%=n.getnoticeNo()%>"><%=n.getnTitle() %></a></td>
                                     <td><%=n.getnDate() %></td>
-                                    <td><a href="<%= request.getContextPath()%>/admin/notice/modifyNotice?noticeNo=<%=n.getnoticeNo()%>"><button class="whitebtn">수정</button></a>
-                                    <a href="<%= request.getContextPath()%>/admin/notice/deleteNotice?noticeNo=<%=n.getnoticeNo()%>"><button class="whitebtn">삭제</button></a></td>
+                                    <td><a href="<%= request.getContextPath()%>/admin/notice/deleteNotice?noticeNo=<%=n.getnoticeNo()%>"><button class="whitebtn">삭제</button></a></td>
                                 </tr> 
                             </tbody>
                             <%} %>

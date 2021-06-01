@@ -17,7 +17,7 @@ import com.notice.model.vo.Notice;
 /**
  * Servlet implementation class AdminBoardServlet
  */
-@WebServlet("/admin/manageboard")
+@WebServlet("/admin/board/manageBoard")
 public class AdminManageBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -64,7 +64,7 @@ public class AdminManageBoardServlet extends HttpServlet {
 			pageNo++;
 		}
 		
-		request.setAttribute("adminboard",list);
+		request.setAttribute("adminboards",list);
 		request.setAttribute("pageBar",pageBar);
 		
 		request.getRequestDispatcher("/views/admin/board/manageBoard.jsp")

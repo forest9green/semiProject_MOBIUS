@@ -15,12 +15,11 @@
     <div class="ql_v_top">
         <table class="qlv_ct" border="1" style="border-collapse:collapse">
             <tr>
-                <th style="padding:7px; cursor:pointer; width:50px;">전체</th>
-                <th style="padding:7px; cursor:pointer; width:100px;">교환환불</th>
+<!--                 <th style="padding:7px; cursor:pointer; width:50px;">전체</th>
+               <th style="padding:7px; cursor:pointer; width:100px;">교환환불</th>
                 <th style="padding:7px; cursor:pointer; width: 50px;">상품</th>
                 <th style="padding:7px; cursor:pointer; width: 50px;">배송</th>
-                <th style="padding:7px; cursor:pointer; width:100px;">기타문의</th>
-            </tr>
+                <th style="padding:7px; cursor:pointer; width:100px;">기타문의</th> -->
         </table>
             
             <div class="ql_v_right">
@@ -49,7 +48,7 @@
                 </td>
                 <td><%=b.getUserId()%></td>
                 <td><%=b.getbWriteDate()%></td>
-                <td>답변완료</td>
+                <td>진행중</td>
             </tr> 
 <%--             <tr>
                 <td><%=b.getbNo()%><!-- 2 --></td>

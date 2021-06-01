@@ -43,13 +43,13 @@
                         <a class="boabtn btn-secondary" href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">목록</a>
                      </div>
                 </div>    
-                     <h3>답변</h3>
+<%--                      <h3>답변</h3>
                 
 
                      <div class="container reply">
                         <p> <%=b.getUserId() %>님 안녕하세요! 해당상품 2~3주내에 수령하실수 있습니다.</p>
                      </div>   
-                       
+                        --%>
       </section>
       <script>
       	function fn_updateBoard(){

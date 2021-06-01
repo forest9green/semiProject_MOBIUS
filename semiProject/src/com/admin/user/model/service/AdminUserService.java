@@ -11,6 +11,7 @@ import java.util.List;
 import com.admin.user.model.dao.AdminUserDao;
 import com.admin.user.model.vo.AdminMileage;
 import com.admin.user.model.vo.AdminOrder;
+import com.admin.user.model.vo.AdminOrderInfo;
 import com.admin.user.model.vo.AdminUserInfo;
 import com.admin.user.model.vo.TotalInfo;
 import com.coupon.model.vo.Coupon;
@@ -78,6 +79,24 @@ public class AdminUserService {
 	public int selectOrderCount(String userId) {
 		Connection conn = getConnection();
 		int result = dao.selectOrderCount(conn,userId);
+		close(conn);
+		return result;
+	}
+	
+	public AdminOrderInfo adminOrderInfo(String orderNo) {
+		Connection conn = getConnection();
+		AdminOrderInfo aoi = dao.adminOrderInfo(conn,orderNo);
+		close(conn);
+		return aoi;
+		
+	}
+	
+	
+	public int updateOstate(String orderNo, String oState) {
+		Connection conn = getConnection();
+		int result = dao.updateOstate(conn,orderNo,oState);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}

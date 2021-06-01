@@ -58,14 +58,15 @@
                                 <%}else{ %>
 		                            <%for(AdminOrder ao : list){ %>    
 		                                <tr>
+		                                 <form action="<%=request.getContextPath() %>/admin/order" method="post" name="moveOrderDetail">
+											<input type="hidden" name="orderNo" value="<%=ao.getOrderNo()%>">
 		                                    <td><%=ao.getOrderDate() %></td>
 		                                    <td><%=ao.getOrderNo() %></td>
 		                                    <td><%=ao.getPrice() %></td>
 		                                    <td><%=ao.getoState() %></td><!--주문 내역 상세 테이블의 주문상태 출력-->
-		                                    <td><button class="whitebtn" id="fn_move_orderDetail">자세히 보기</button></td><!--클릭 시 주문관리-주문접수내역의 주문서로 이동-->
-		                                	<form action="<%=request.getContextPath() %>/admin/order/" method="post" id="moveOrderDetail">
-												<input type="hidden" name="orderNo" value="<%=ao.getOrderNo()%>">
-											</form>
+		                                 <td><button class="whitebtn" name="fn_move_orderDetail">자세히 보기</button></td>
+		                                 </form>
+											
 		                                </tr>
 		                             <%} %>
 	                             <%} %>
@@ -80,7 +81,7 @@
             </div>    
         </section>
 
-<form action="<%=request.getContextPath() %>/admin/user/info" method="post" id="moveUserInfo">
+<form action="<%=request.getContextPath() %>/admin/member/info" method="post" id="moveUserInfo">
 	<input type="hidden" name="userId" value="<%=userId%>">
 </form>
 <form action="<%=request.getContextPath() %>/admin/user/coupon" method="post" id="moveCoupon">
@@ -100,6 +101,9 @@
 	 		})
 	 		$("#fn_move_mileage").click(function(){
 	 			$("#moveMileage").submit();
+	 		})
+	 		$("button[name=fn_move_orderDetail]").click(function(){
+	 			$("form[name=moveOrderDetail]").submit();
 	 		})
 	 	</script>
 
