@@ -135,6 +135,38 @@ public class CartDao {
 	}
 	
 	
+	public CartProduct selectCart(Connection conn, String userId, String pCode){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		CartProduct cp=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectCartOne"));
+			pstmt.setString(1, userId);
+			pstmt.setString(2, pCode);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				cp=new CartProduct();
+				cp.setUserId(rs.getString("user_id"));
+				cp.setpCode(rs.getString("p_code"));
+				cp.setAmount(rs.getInt("amount"));
+				cp.setpName(rs.getString("p_name"));
+				cp.setPrice(rs.getInt("price"));
+				cp.setDeliveryFee(rs.getInt("delivery_fee"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return cp;
+	}
+	
+	
 	public int changeAmount(Connection conn, Cart c) {
 		PreparedStatement pstmt=null;
 		int result=0;

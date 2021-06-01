@@ -95,6 +95,10 @@
 			}
 		
 		}
+		
+		$(function(){
+			$("#userId").focus();
+		})
 	</script>
 
 

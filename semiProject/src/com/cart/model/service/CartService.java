@@ -52,6 +52,14 @@ public class CartService {
 	}
 	
 	
+	public CartProduct selectCart(String userId, String pCode){
+		Connection conn=getConnection();
+		CartProduct cp=dao.selectCart(conn,userId,pCode);
+		close(conn);
+		return cp;
+	}
+	
+	
 	public int changeAmount(Cart c) {
 		Connection conn=getConnection();
 		int result=dao.changeAmount(conn,c);

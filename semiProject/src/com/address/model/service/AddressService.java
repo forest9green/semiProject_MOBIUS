@@ -36,6 +36,14 @@ public class AddressService {
 	}
 	
 	
+	public List<Address> selectAddress(String userId){
+		Connection conn=getConnection();
+		List<Address> list=dao.selectAddress(conn,userId);
+		close(conn);
+		return list;
+	}
+	
+	
 	public int selectAddressCount(String userId) {
 		Connection conn=getConnection();
 		int result=dao.selectAddressCount(conn,userId);

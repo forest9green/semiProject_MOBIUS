@@ -22,6 +22,22 @@ private CouponDao dao=new CouponDao();
 	}
 	
 	
+	public List<Coupon> selectCouponList(String userId){
+		Connection conn=getConnection();
+		List<Coupon> list=dao.selectCouponList(conn,userId);
+		close(conn);
+		return list;
+	}
+	
+	
+	public Coupon selectCoupon(String cNo){
+		Connection conn=getConnection();
+		Coupon c=dao.selectCoupon(conn,cNo);
+		close(conn);
+		return c;
+	}
+	
+	
 	public int selectCouponCount(String userId) {
 		Connection conn=getConnection();
 		int result=dao.selectCouponCount(conn,userId);

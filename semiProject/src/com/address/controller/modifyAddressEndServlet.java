@@ -34,7 +34,7 @@ public class modifyAddressEndServlet extends HttpServlet {
 		String addName=request.getParameter("addName");
 		String receiverName=request.getParameter("receiverName");
 		String postCode=request.getParameter("zonecode");
-		String addr=request.getParameter("address")+" "+request.getParameter("addressSub");
+		String addr=request.getParameter("address")+"-"+request.getParameter("addressSub");
 		String addCellPhone=request.getParameter("addCellPhone");
 		String addPhone=request.getParameter("addPhone");
 		

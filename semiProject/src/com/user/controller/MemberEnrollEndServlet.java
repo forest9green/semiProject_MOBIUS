@@ -59,7 +59,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		if(result>0) {
 	
 			String postCode = request.getParameter("zonecode");
-			String addr = request.getParameter("address")+" "+request.getParameter("addressSub");
+			String addr = request.getParameter("address")+"-"+request.getParameter("addressSub");
 			int defaultAddr = 0;
 			if(request.getParameter("saveAdd")!=null) {
 				defaultAddr=1;

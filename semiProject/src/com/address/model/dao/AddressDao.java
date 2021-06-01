@@ -91,6 +91,41 @@ public class AddressDao {
 	}
 	
 	
+	public List<Address> selectAddress(Connection conn, String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Address> list=new ArrayList<>();
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectAddressAll"));
+			pstmt.setString(1, userId);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Address a=new Address();
+				a.setAddrNo(rs.getString("addr_no"));
+				a.setUserId(rs.getString("user_id"));
+				a.setAddName(rs.getString("add_name"));
+				a.setReceiverName(rs.getString("receiver_name"));
+				a.setPostCode(rs.getString("postcode"));
+				a.setAddr(rs.getString("addr"));
+				a.setDefaultAddr(rs.getInt("default_addr"));
+				a.setAddCellPhone(rs.getString("add_cellphone"));
+				a.setAddPhone(rs.getString("add_phone"));
+				list.add(a);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
+	}
+	
+	
 	public int selectAddressCount(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

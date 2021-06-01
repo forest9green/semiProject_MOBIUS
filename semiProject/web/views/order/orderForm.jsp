@@ -1,7 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="java.util.List, com.cart.model.vo.CartProduct, java.text.NumberFormat, com.address.model.vo.Address, com.coupon.model.vo.Coupon" %>
+<%
+	List<CartProduct> cartProducts=(List<CartProduct>)request.getAttribute("cartProducts");
+	int totalPrice=0;
+	int totalDeliveryFee=10000;
+	if(!cartProducts.isEmpty()) {
+		for(CartProduct cp:cartProducts){
+			totalPrice+=cp.getPrice()*cp.getAmount();
+		}
+		for(CartProduct cp:cartProducts){
+			if(cp.getDeliveryFee()==59000){
+				totalDeliveryFee=59000;
+			}
+		}
+	}
+	NumberFormat nf = NumberFormat.getInstance();
+	int num=0;
+	List<Address> addresses=(List<Address>)request.getAttribute("addresses");
+	List<Coupon> coupons=(List<Coupon>)request.getAttribute("coupons");
+	String path=(String)request.getAttribute("path");
+%>
 <%@ include file="/views/common/header.jsp"%>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <section>
     <div id="order_box">
@@ -12,26 +33,31 @@
                 <tr>
                     <th width=50>번호</th>
                     <th width=130>이미지</th>
-                    <th widht=200>상품명</th>
+                    <th width=200>상품명</th>
                     <th width=50>수량</th>
                     <th width=130>상품금액</th>
                     <th width=130>배송비</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>  
-                    <td><!-- 넘버링 --></td>                           
-                    <td>
-                        <img class="pImg" src="">   
-                    </td>
-                    <td></td>
-                    <td>1</td>
-                    <td>100,000</td>
-                    <td>1,000</td>
-                </tr>
+            	<% if(!cartProducts.isEmpty()) {
+            		for(CartProduct cp:cartProducts) {
+            			++num;%>
+		                <tr>  
+		                    <td><%=num %></td>                           
+		                    <td>
+		                        <img class="pImg" src="<%=request.getContextPath() %>/images/product/<%=cp.getpCode().substring(0,2)%>/<%=cp.getpCode()%>-1.jpg">   
+		                    </td>
+		                    <td><%=cp.getpName() %></td>
+		                    <td><%=cp.getAmount() %></td>
+		                    <td><%=nf.format(cp.getPrice()*cp.getAmount()) %>원</td>
+		                    <td><%=nf.format(cp.getDeliveryFee()) %>원</td>
+		                </tr>
+	                <%}
+            	}%>
             </tbody>    
         </table> 
-        <form>
+        <form method="post" action="<%=request.getContextPath()%>/myPage/orderEnd">
             <div id="orderDelivery">
                 <div>
                     <!--주문자-->
@@ -60,10 +86,13 @@
                         <tr>
                             <td>배송지 선택</td>
                             <td>
-                                <select class="selectAdd">
-                                    <option selected>배송지 선택</option>
-                                    <option>배송지1</option>
-                                    <option>배송지2</option>
+                                <select class="selectAdd po" name="selectAdd">
+                                    <option value=null>배송지 선택</option>
+                                    <%if(!addresses.isEmpty()) {
+                                    	for(Address a:addresses) {%>
+                                    		<option value="<%=a.getAddrNo()%>"><%=a.getAddName() %></option>
+                                    	<%}
+                                   	}%>
                                 </select>
                             </td>
                             <!--배송지 선택했을 경우 수령인, 주소, 일반전화, 휴대전화 값이 자동으로 입력되게 함-->
@@ -77,7 +106,7 @@
                             <td>
                                 <div class="address_postcode">
                                     <input type="text" name="zonecode" id="sample6_postcode" placeholder="우편번호" readonly>
-                                    <input type="button" id="btnPostcode" class="btn_post_search pointer" value="우편번호 찾기" onclick="sample6_execDaumPostcode()">
+                                    <input type="button" id="btnPostcode" class="btn_post_search po" value="우편번호 찾기" onclick="sample6_execDaumPostcode()">
                                 </div>
                                 <div class="address_input">
                                     <input type="text" name="address" id="sample6_address" size=40 placeholder="주소" readonly><br>
@@ -87,7 +116,7 @@
                         </tr>
                         <tr>
                             <td>휴대전화 <span style="color:red;">*</span></td>
-                            <td><input type="text" name="addCellPhone" required size=40 placeholder="'-' 제외" maxlength="11"></td>
+                            <td><input type="text" name="delieveryCellPhone" required size=40 placeholder="'-' 제외" maxlength="11"></td>
                         </tr>
                         <tr>
                             <td>일반전화</td>
@@ -99,6 +128,10 @@
             <div class="payInfo">
                 <span class="pb"><h3>결제 정보</h3></span>
                 <table id="payTable"  class="pb" border="1">
+                	<input type="hidden" name="oPPrice" value="<%=totalPrice %>">
+                	<input type="hidden" name="oDeliveryFee" value="<%=totalDeliveryFee %>">
+                	<input type="hidden" name="oDC">
+                	<input type="hidden" name="oTotalPrice">
                     <thead>
                         <tr style="height:35px">
                             <th>상품 금액</th>
@@ -109,31 +142,35 @@
                     </thead>
                     <tbody>
                         <tr style="height:55px">
-                            <td>00</td>
-                            <td>00</td>
-                            <td>00</td>
-                            <td>00</td>
+                            <td><%=nf.format(totalPrice) %>원</td>
+                            <td>+ <%=nf.format(totalDeliveryFee) %>원</td>
+                            <td id="discount">- 0원</td>
+                            <td id="totalPay">= <%=nf.format(totalPrice+totalDeliveryFee) %>원</td>
                         </tr>
                         <tr>
                             <td colspan="4">
                                 <table id="discountTable">
                                     <tr>
                                         <td>적립 예정 금액</td>
-                                        <td>00</td>
+                                        <td><%=nf.format(totalPrice*0.01)원 %></td>
                                     </tr>
                                     <tr>
-                                        <td>적립금</td>
+                                        <td>적립금 사용</td>
                                         <td>
-                                            <input type="number" id="mileage"> <span style="font-size: small;margin-left: 10px;">(총 사용 가능한 적립금 :<b>0000</b>원)</span>
+                                            <input type="number" id="mileage" name="useMileage" max="<%=loginUser.getMileage() %>"> 
+                                            <span style="font-size: small;margin-left: 10px;">(총 사용 가능한 적립금: <b><%=loginUser.getMileage() %></b>원)</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>쿠폰</td>
                                         <td>
-                                            <select class="selectCoupon">
-                                                <option selected>쿠폰 선택</option>
-                                                <option>쿠폰1</option>
-                                                <option>쿠폰2</option>
+                                            <select class="selectCoupon po" name="useCoupon">
+                                                <option value=null>쿠폰 선택</option>
+                                                <%if(!coupons.isEmpty()) {
+			                                    	for(Coupon c:coupons) {%>
+			                                    		<option value="<%=c.getcNo()%>"><%=c.getcName() %></option>
+			                                    	<%}
+			                                   	}%>
                                             </select>
                                         </td>
                                     </tr>
@@ -147,23 +184,117 @@
                 <span class="pb"><h3>결제 수단</h3></span>
                 <table id="paymentTable"  class="pb">
                     <tr>
-                        <td><label><input type="radio">무통장 입금</label></td>
-                        <td><label><input type="radio" disabled>네이버 페이</label></td>
-                        <td><label><input type="radio" disabled>카카오 페이</label></td>
-                        <td><label><input type="radio" disabled>신용카드</label></td>
+                        <td><label class="po"><input type="radio" name="payWay" class="po" required>무통장 입금</label></td>
+                        <td><label><input type="radio" name="payWay" disabled>네이버 페이</label></td>
+                        <td><label><input type="radio" name="payWay" disabled>카카오 페이</label></td>
+                        <td><label><input type="radio" name="payWay" disabled>신용카드</label></td>
                     </tr>
                 </table>
             </div>
             <div id="orderBtn">
                 <div>
-                    <input type="submit" value="결제하기" class="pc">
-                    <input type="reset" value="취소" class="pc">
+                    <input type="submit" value="결제하기" class="pc po">
+                    <input type="button" class="returnPage" value="취소" class="pc po">
                 </div>
             </div>
         </form>
     </div>
 </section>
-<!--section에 적용될 style, script 내용 넣어주세요-->
+
+<script>
+	function sample6_execDaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	
+	            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	            var addr = ''; // 주소 변수
+	            var extraAddr = ''; // 참고항목 변수
+	
+	            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                addr = data.roadAddress;
+	            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                addr = data.jibunAddress;
+	            }
+	
+	            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	            if(data.userSelectedType === 'R'){
+	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                    extraAddr += data.bname;
+	                }
+	                // 건물명이 있고, 공동주택일 경우 추가한다.
+	                if(data.buildingName !== '' && data.apartment === 'Y'){
+	                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	   
+	                // 조합된 참고항목을 해당 필드에 넣는다.
+	            }
+	
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	            document.getElementById('sample6_postcode').value = data.zonecode;
+	            document.getElementById("sample6_address").value = addr;
+	            // 커서를 상세주소 필드로 이동한다.
+	            document.getElementById("sample6_detailAddress").focus();
+	        }
+	    }).open();
+	}
+	
+	$(".selectAdd").change((e)=>{
+		const addrNo=$(e.target).val();
+		$.ajax({
+			url:'<%=request.getContextPath()%>/myPage/searchAddressAjax',
+			data:{"addrNo":addrNo},
+			success:data=>{
+				$("input[name=receiverName]").val(data["receiverName"]);
+				$("#sample6_postcode").val(data["postCode"]);
+				$("#sample6_address").val(data["addr"].substring(0,data["addr"].indexOf("-")));
+				$("#sample6_detailAddress").val(data["addr"].substring(data["addr"].indexOf("-")+1));
+				$("input[name=delieveryCellPhone]").val(data["addCellPhone"]);
+				$("input[name=delieveryPhone]").val(data["addPhone"]);
+			}
+		})
+	})
+	
+	let mileage=0;
+	let couponDC=0;
+	const totalPrice=<%=totalPrice%>;
+	const pad=<%=totalPrice+totalDeliveryFee%>;
+	let totalDC=0;
+	$("#mileage").change((e)=>{
+		mileage=$(e.target).val();
+		totalDC=Number(mileage)+totalPrice*couponDC;
+		$("#discount").html(- totalDC+"원");
+		$("#totalPay").html("= "+(pad-totalDC)+"원");
+		$("input[name=oDC]").val(totalDC);
+		$("input[name=oTotalPrice]").val(pad-totalDC);
+	})
+	
+	$(".selectCoupon").change((e)=>{
+		const cNo=$(e.target).val();
+		$.ajax({
+			url:'<%=request.getContextPath()%>/myPage/searchCouponAjax',
+			data:{"cNo":cNo},
+			success:data=>{
+				couponDC=data["cDiscount"];
+				totalDC=Number(mileage)+totalPrice*couponDC;
+				$("#discount").html(- totalDC+"원");
+				$("#totalPay").html("= "+(pad-totalDC)+"원");
+				$("input[name=oDC]").val(totalDC);
+				$("input[name=oTotalPrice]").val(pad-totalDC);
+			}
+		})
+	})
+	
+	$(".returnPage").click((e)=>{
+		location.replace("<%=request.getContextPath()+path%>");
+	})
+</script>
+
 <style>
     #order_box{
         width:1000px;
@@ -230,7 +361,7 @@
         height:80px;
     }
     .selectCoupon{
-        height:20px;
+        height:22px;
         width:200px;
     }
     #paymentTable{
@@ -258,7 +389,7 @@
         font-size: 17px;
         margin-right:15px
     }
-    #orderBtn>div>input[type=reset]{
+    #orderBtn>div>input[type=button]{
         border: 1px gray solid;
         width:160px;
         height:50px;
@@ -268,6 +399,9 @@
     }
     body{
         margin:0px;
+    }
+    .po{
+    	cursor:pointer;
     }
 </style>
 

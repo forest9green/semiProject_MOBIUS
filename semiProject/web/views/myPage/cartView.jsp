@@ -55,7 +55,7 @@
 		                            <td><%=nf.format(cp.getPrice()*cp.getAmount()+cp.getDeliveryFee()) %>원</td>
 		                            <td>
 		                                <ul id="cart_detail_btn">
-		                                    <li><button>주문하기</button></li>
+		                                    <li><button class="orderOne" value="<%=cp.getpCode() %>">주문하기</button></li>
 		                                    <li><button class="deleteCart" value="<%=cp.getpCode() %>">삭제</button></li>
 		                                </ul>
 		                            </td>
@@ -87,8 +87,8 @@
                 </table>
             </div>
             <div id="cart_btn2">
-                <button type="button" class="pb blackbtn">선택 상품 주문</button>
-                <button type="button" class="pb blackbtn">전체 상품 주문</button>
+                <button type="button" id="choiceOrder" class="pb blackbtn">선택 상품 주문</button>
+                <button type="button" id="allOrder" class="pb blackbtn">전체 상품 주문</button>
             </div>
     </div>
 </section>
@@ -123,6 +123,24 @@
 	    	checkPCodes[i] = $("input[name=chk]:checked")[i].value;
 	    }
 	    location.replace('<%=request.getContextPath()%>/myPage/deleteCart?userId=<%=loginUser.getUserId()%>&pCodes='+checkPCodes);
+	})
+	
+	$(".orderOne").click((e)=>{
+		const pCode=$(e.target).val();
+		location.assign('<%=request.getContextPath()%>/myPage/order?userId=<%=loginUser.getUserId()%>&pCode='+pCode);
+	})
+	
+	$("#choiceOrder").click((e)=>{
+		const checkValue = $("input[name=chk]:checked").length;
+	    let checkPCodes = new Array(checkValue);
+	    for(let i=0; i<checkValue; i++){                          
+	    	checkPCodes[i] = $("input[name=chk]:checked")[i].value;
+	    }
+	    location.assign('<%=request.getContextPath()%>/myPage/order?userId=<%=loginUser.getUserId()%>&pCodes='+checkPCodes);
+	})
+	
+	$("#allOrder").click((e)=>{
+		location.assign('<%=request.getContextPath()%>/myPage/order?userId=<%=loginUser.getUserId()%>');
 	})
 </script>
 
@@ -206,6 +224,9 @@
     }
     button:hover{
     	cursor:pointer;
+    }
+    body{
+    	margin:0px;
     }
 </style>
 

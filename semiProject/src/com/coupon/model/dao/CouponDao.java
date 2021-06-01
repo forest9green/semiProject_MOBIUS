@@ -65,6 +65,73 @@ private Properties prop=new Properties();
 	}
 	
 	
+	public List<Coupon> selectCouponList(Connection conn, String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Coupon> list=new ArrayList<>();
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectCouponAll"));
+			pstmt.setString(1, userId);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Coupon c=new Coupon();
+				c.setcNo(rs.getString("c_no"));
+				c.setUserId(rs.getString("user_id"));
+				c.setcName(rs.getString("c_name"));
+				c.setcDiscount(rs.getDouble("c_discount"));
+				c.setcIssueDate(rs.getDate("c_issue_date"));
+				c.setcFinishDate(rs.getDate("c_finish_date"));
+				c.setcLimit(rs.getInt("c_limit"));
+				c.setcUse(rs.getInt("c_use"));
+				list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
+	}
+	
+	
+	public Coupon selectCoupon(Connection conn, String cNo){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Coupon c=null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectCoupon"));
+			pstmt.setString(1, cNo);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				c=new Coupon();
+				c.setcNo(rs.getString("c_no"));
+				c.setUserId(rs.getString("user_id"));
+				c.setcName(rs.getString("c_name"));
+				c.setcDiscount(rs.getDouble("c_discount"));
+				c.setcIssueDate(rs.getDate("c_issue_date"));
+				c.setcFinishDate(rs.getDate("c_finish_date"));
+				c.setcLimit(rs.getInt("c_limit"));
+				c.setcUse(rs.getInt("c_use"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return c;
+	}
+	
+	
 	public int selectCouponCount(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

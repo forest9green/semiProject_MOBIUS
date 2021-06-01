@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="java.text.NumberFormat" %>
 <%@ include file="/views/common/header.jsp"%>
-
+<%
+	NumberFormat nf = NumberFormat.getInstance();
+%>
 <section>
     <div id="my_profile">
         <span><h2 class="pe">안녕하세요, <%=loginUser.getUserName() %>님!</h2></span>
@@ -10,7 +12,7 @@
         <table id="cou_mile" class="pc">
             <tr>
                 <td style="text-align: end;">적립금</td>
-                <td><%=loginUser.getMileage() %>원</td>
+                <td><%=nf.format(loginUser.getMileage()) %>원</td>
                 <td style="text-align: start"><input type="button" class="inquiry_btn pb" value="조회" onclick="fn_moveMileageView();"></td>
                 <td>쿠폰</td>
                 <td id="CountCoupon"></td>
