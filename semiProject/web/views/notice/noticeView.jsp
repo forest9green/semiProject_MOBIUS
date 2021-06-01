@@ -12,7 +12,7 @@
 	<h1 class="pe" style="font-size: 35px; padding-left:5%;padding-bottom:2%; padding-right:5%;" > NOTICE </h1>
         
 	<div class="pd" class="notice_title" style="font-size: 30px; padding-top:5%; padding-left:5%;"><%=n.getnTitle() %>
-		<div class="pc" class="notice_date" style="font-size : 18px; padding-left:52%;display:inline-flex" ><%=n.getnDate() %></div>
+		<div class="pc" class="notice_date" style="font-size : 18px; padding-left:500px;display:inline-flex" ><%=n.getnDate() %></div>
         <hr class=hr_right style="margin-right:5%">
     </div>
         
