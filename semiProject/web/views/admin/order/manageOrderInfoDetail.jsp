@@ -89,7 +89,7 @@
                                         <label><input type="radio" name="oState" value="환불">환불</label>
                                         <div class="margint" style=" float:right;margin-top:25px;">
                                             <input type="reset" class="blackbtn" value="취소" onclick="cancelChange();">
-                                            <input type="submit" id="updateState" class="blackbtn" value="완료">
+                                            <input type="button" id="updateState" class="blackbtn" value="완료">
                                         </div>
                                     </form>
                                 </div>
@@ -107,7 +107,16 @@
                 $("#stateChange").addClass("disnone");
             }
             $("#updateState").click(function(){
+            	console.log($("input[name=oState]").val());
+            	if($("input[name=oState]").val()!=null){
+            		alert("가면안되는데");
+            		/* console.log($("input[name=oState]").val()); */
+            		/* $("#stateChange").submit(); */
+            	}else{
+            		alert("최소하나는 체크해야합니다.");
+            	}
             })
+           
         </script>
 
 
