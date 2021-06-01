@@ -29,8 +29,7 @@ public class MoveInsertJspServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String userId = request.getParameter("userId");
-		System.out.println(userId);
-		  
+	  
 		request.setAttribute("userId", userId);
 		request.getRequestDispatcher("/views/admin/user/insertCoupon.jsp")
 		.forward(request, response);

@@ -37,11 +37,6 @@ public class AdminInsertCouponSetvlet extends HttpServlet {
 		int cFinishDate = Integer.parseInt(request.getParameter("cFinishDate"));
 		int cLimit = Integer.parseInt(request.getParameter("cLimit"));
 	
-		System.out.println(userId);
-		System.out.println(cName);
-		System.out.println(cDiscount);
-		System.out.println(cFinishDate);
-		System.out.println(cLimit);
 		int result = new AdminUserService().insertCoupon(userId,cName,cDiscount,cFinishDate,cLimit);
 		
 		String msg = "";

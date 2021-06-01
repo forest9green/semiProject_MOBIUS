@@ -40,7 +40,7 @@ public class AdminUpdateOstate extends HttpServlet {
 			loc = "/admin/adminMain";
 		}else {
 			msg = "결제상태 변경에 실패했습니다. 서비스업체에 문의주세요";
-			loc = "/views/admin/order/manageOrderInfoDetail.jsp";
+			loc = "/admin/adminMain";
 		}
 		
 		request.setAttribute("msg", msg);
