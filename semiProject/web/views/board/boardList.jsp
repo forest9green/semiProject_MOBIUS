@@ -74,17 +74,31 @@
             <input type="submit" id="submitql" value="검색">
         </form>
     </div>
-    	<div id="pageBar">
+    	<div id="pageBar" class="pageBar">
     		<%=request.getAttribute("pageBar") %>
     	</div>
 </section>    
 
 <style>
-	#pageBar{
-		display: flex;
-    	justify-content: center;
-    	margin-top:20px;
-	}
+/*pageBar 디자인*/
+    .pageBar{
+        margin: 50px auto;
+        display:flex;
+        justify-content: center;
+    }
+    .pageBar>span, .pagebar>a{
+        margin:0 6px 0 6px;
+    }
+    .pageBar>a{
+        text-decoration: none;
+        color:black;
+    }
+    .pageBar>span{
+        color:rgba(123, 209, 159);
+    }
+    .pageBar>a:hover{
+        color:rgba(123, 209, 159);
+    }
     .qlv_ct{
         margin-left: 56px;
     }

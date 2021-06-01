@@ -35,14 +35,15 @@
 	        <div class="btn-box">
 	            <ul>
 	                <li>          
-	                    <div class="cancel-btn pb" id="cancel">
-	                        <a href="<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>">취소</a>
-	                    </div> 
+	                    <div class="" id="cancel">
+	                    	<button class="btn-bf-cancel" onclick="location.assign('<%=request.getContextPath()%>/myPage/board/boardlist?userId=<%=loginUser.getUserId()%>')">
+	                    	취소</button>
+             			</div> 
 	                </li>
 	                <li>    
-	                    <div class="complete-btn pb" id="complete">
-	                        <button class="btn-bf-submit" onclick="fn_insertBoard()">작성완료</button>
-	                    </div>
+	                    <div class="" id="complete" >
+                       	<button class="btn-bf-submit" onclick="fn_insertBoard()">작성완료</button>
+                       	</div>
 	                </li>
 	            </ul>
         	</div>
@@ -54,7 +55,11 @@
 	}
 </script>
 <style>
+	.btn-bf-cancel{
+		font-size:15px;
+	}
 	.btn-bf-submit{
+		font-size:15px;
 	}
     .form-group{
         font-family: "Noto Sans KR";

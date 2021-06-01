@@ -153,7 +153,7 @@
                                 <table id="discountTable">
                                     <tr>
                                         <td>적립 예정 금액</td>
-                                        <td><%=nf.format(totalPrice*0.01)원 %></td>
+                                        <td><%=nf.format(totalPrice*0.01) %>원</td>
                                     </tr>
                                     <tr>
                                         <td>적립금 사용</td>
