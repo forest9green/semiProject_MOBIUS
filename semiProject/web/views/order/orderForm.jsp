@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.cart.model.vo.CartProduct, java.text.NumberFormat, com.address.model.vo.Address, com.coupon.model.vo.Coupon" %>
+<%@ page import="java.util.List, java.util.Map, com.cart.model.vo.CartProduct, java.text.NumberFormat, com.address.model.vo.Address, com.coupon.model.vo.Coupon" %>
 <%
 	List<CartProduct> cartProducts=(List<CartProduct>)request.getAttribute("cartProducts");
 	int totalPrice=0;
@@ -28,39 +28,40 @@
     <div id="order_box">
         <h2 class="pe mgbt0" style="font-size:30px;" >ORDER FORM</h2><br>
         <span class="pb"><h3>주문 상품</h3></span>
-        <table id="pTable" class="pb" border="1">
-            <thead>
-                <tr>
-                    <th width=50>번호</th>
-                    <th width=130>이미지</th>
-                    <th width=200>상품명</th>
-                    <th width=50>수량</th>
-                    <th width=130>상품금액</th>
-                    <th width=130>배송비</th>
-                </tr>
-            </thead>
-            <tbody>
-            	<% if(!cartProducts.isEmpty()) {
-            		for(CartProduct cp:cartProducts) {
-            			++num;%>
-		                <tr>  
-		                    <td><%=num %></td>                           
-		                    <td>
-		                        <img class="pImg" src="<%=request.getContextPath() %>/images/product/<%=cp.getpCode().substring(0,2)%>/<%=cp.getpCode()%>-1.jpg">   
-		                    </td>
-		                    <td><%=cp.getpName() %></td>
-		                    <td><%=cp.getAmount() %></td>
-		                    <td><%=nf.format(cp.getPrice()*cp.getAmount()) %>원</td>
-		                    <td><%=nf.format(cp.getDeliveryFee()) %>원</td>
-		                </tr>
-	                <%}
-            	}%>
-            </tbody>    
-        </table> 
-        <form method="post" action="<%=request.getContextPath()%>/myPage/orderEnd">
+        <form method="post" action="<%=request.getContextPath()%>/myPage/orderEnd?userId=<%=loginUser.getUserId()%>">
+	        <table id="pTable" class="pb" border="1">
+	            <thead>
+	                <tr>
+	                    <th width=50>번호</th>
+	                    <th width=130>이미지</th>
+	                    <th width=200>상품명</th>
+	                    <th width=50>수량</th>
+	                    <th width=130>상품금액</th>
+	                    <th width=130>배송비</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	            	<% if(!cartProducts.isEmpty()) {
+	            		for(CartProduct cp:cartProducts) {
+	            			++num;%>
+			                <tr>  
+			                    <td><%=num %></td>                           
+			                    <td>
+			                        <img class="pImg" src="<%=request.getContextPath() %>/images/product/<%=cp.getpCode().substring(0,2)%>/<%=cp.getpCode()%>-1.jpg">   
+			                    </td>
+			                    <td><%=cp.getpName() %></td>
+			                    <input type="hidden" name="pCode" value="<%=cp.getpCode() %>">
+			                    <td><%=cp.getAmount() %></td>
+			                    <input type="hidden" name="amount" value="<%=cp.getAmount() %>">
+			                    <td><%=nf.format(cp.getPrice()*cp.getAmount()) %>원</td>
+			                    <td><%=nf.format(cp.getDeliveryFee()) %>원</td>
+			                </tr>
+		                <%}
+	            	}%>
+	            </tbody>    
+	        </table> 
             <div id="orderDelivery">
                 <div>
-                    <!--주문자-->
                     <span class="pb"><h3>주문 정보</h3></span>
                     <span class="pa" id="span2">* 필수 입력 사항입니다.</span>
                     <table id="orderTable" class="pc">
@@ -79,7 +80,6 @@
                     </table>
                 </div>
                 <div>
-                    <!--배송지 정보-->
                     <span class="pb"><h3>배송 정보</h3></span>
                     <span class="pa" id="span2">* 필수 입력 사항입니다.</span>
                     <table id="DeliveryTable" class="pc">
@@ -116,11 +116,15 @@
                         </tr>
                         <tr>
                             <td>휴대전화 <span style="color:red;">*</span></td>
-                            <td><input type="text" name="delieveryCellPhone" required size=40 placeholder="'-' 제외" maxlength="11"></td>
+                            <td><input type="text" name="deliveryCellPhone" required size=40 placeholder="'-' 제외" maxlength="11"></td>
                         </tr>
                         <tr>
                             <td>일반전화</td>
-                            <td><input type="text" name="delieveryPhone" size=40 placeholder="'-' 제외"></td>
+                            <td><input type="text" name="deliveryPhone" size=40 placeholder="'-' 제외"></td>
+                        </tr>
+                        <tr>
+                        	<td>배송 요청 사항</td>
+                        	<td><input type="text" name="orderMemo" size=40></td>
                         </tr>
                     </table>
                 </div>
@@ -131,7 +135,6 @@
                 	<input type="hidden" name="oPPrice" value="<%=totalPrice %>">
                 	<input type="hidden" name="oDeliveryFee" value="<%=totalDeliveryFee %>">
                 	<input type="hidden" name="oDC">
-                	<input type="hidden" name="oTotalPrice">
                     <thead>
                         <tr style="height:35px">
                             <th>상품 금액</th>
@@ -158,7 +161,7 @@
                                         <td>적립금 사용</td>
                                         <td>
                                             <input type="number" id="mileage" name="useMileage" min="0" max="<%=loginUser.getMileage() %>"> 
-                                            <span style="font-size: small;margin-left: 10px;">(총 사용 가능한 적립금: <b><%=loginUser.getMileage() %></b>원)</span>
+                                            <span style="font-size: small;margin-left: 10px;">(총 사용 가능한 적립금: <b><%=nf.format(loginUser.getMileage()) %></b>원)</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -184,10 +187,10 @@
                 <span class="pb"><h3>결제 수단</h3></span>
                 <table id="paymentTable"  class="pb">
                     <tr>
-                        <td><label class="po"><input type="radio" name="payWay" class="po" required>무통장 입금</label></td>
-                        <td><label><input type="radio" name="payWay" disabled>네이버 페이</label></td>
-                        <td><label><input type="radio" name="payWay" disabled>카카오 페이</label></td>
-                        <td><label><input type="radio" name="payWay" disabled>신용카드</label></td>
+                        <td><label class="po"><input type="radio" name="payWay" value="무통장입금" class="po" required> 무통장 입금</label></td>
+                        <td><label><input type="radio" name="payWay" value="네이버페이" disabled> 네이버 페이</label></td>
+                        <td><label><input type="radio" name="payWay" value="카카오페이" disabled> 카카오 페이</label></td>
+                        <td><label><input type="radio" name="payWay" value="무통장입금" disabled> 신용카드</label></td>
                     </tr>
                 </table>
             </div>
@@ -254,8 +257,15 @@
 				$("#sample6_postcode").val(data["postCode"]);
 				$("#sample6_address").val(data["addr"].substring(0,data["addr"].indexOf("-")));
 				$("#sample6_detailAddress").val(data["addr"].substring(data["addr"].indexOf("-")+1));
-				$("input[name=delieveryCellPhone]").val(data["addCellPhone"]);
-				$("input[name=delieveryPhone]").val(data["addPhone"]);
+				$("input[name=deliveryCellPhone]").val(data["addCellPhone"]);
+				$("input[name=deliveryPhone]").val(data["addPhone"]);
+				$("input[name=receiverName]").attr("readonly",true);
+				$("#sample6_postcode").attr("readonly",true);
+				$("#sample6_address").attr("readonly",true);
+				$("#sample6_detailAddress").attr("readonly",true);
+				$("input[name=deliveryCellPhone]").attr("readonly",true);
+				$("input[name=deliveryPhone]").attr("readonly",true);
+				$("#btnPostcode").attr("disabled",true);
 			}
 		})
 	})
@@ -329,7 +339,7 @@
         margin-top: 80px;
     }
     #orderDelivery table>tbody>tr>td:first-child{
-        width:100px;
+        width:130px;
     }
     #orderDelivery input{
         margin-top:10px;
@@ -367,9 +377,6 @@
     #paymentTable{
         width:700px;
         margin-bottom: 70px;
-    }
-    #addrEnroll_table input:not(input[type=button]){
-        height:20px;
     }
     #orderBtn{
         display:flex;
