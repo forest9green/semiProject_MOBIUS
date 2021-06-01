@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 <%@ page import="java.util.List, com.cart.model.vo.CartProduct, java.text.NumberFormat, com.address.model.vo.Address, com.coupon.model.vo.Coupon" %>
 <%
 	List<CartProduct> cartProducts=(List<CartProduct>)request.getAttribute("cartProducts");
@@ -153,12 +152,12 @@
                                 <table id="discountTable">
                                     <tr>
                                         <td>적립 예정 금액</td>
-                                        <td><%=nf.format(totalPrice*0.01)원 %></td>
+                                        <td><%=nf.format(totalPrice*0.01) %>원</td>
                                     </tr>
                                     <tr>
                                         <td>적립금 사용</td>
                                         <td>
-                                            <input type="number" id="mileage" name="useMileage" max="<%=loginUser.getMileage() %>"> 
+                                            <input type="number" id="mileage" name="useMileage" min="0" max="<%=loginUser.getMileage() %>"> 
                                             <span style="font-size: small;margin-left: 10px;">(총 사용 가능한 적립금: <b><%=loginUser.getMileage() %></b>원)</span>
                                         </td>
                                     </tr>
