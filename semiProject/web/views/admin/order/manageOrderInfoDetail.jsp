@@ -108,10 +108,8 @@
             }
             $("#updateState").click(function(){
             	console.log($("input[name=oState]").is(':checked'));
-            	if($("input[name=oState]").val()!=null){
-            		alert("가면안되는데");
-            		/* console.log($("input[name=oState]").val()); */
-            		/* $("#stateChange").submit(); */
+            	if($("input[name=oState]").is(":checked")==true){
+            		 $("#stateChange").submit();
             	}else{
             		alert("최소하나는 체크해야합니다.");
             	}
